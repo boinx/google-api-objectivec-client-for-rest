@@ -1,14 +1,14 @@
 [submodule "Deps/gtm-oauth2"]
 	path = Deps/gtm-oauth2
-	url = https://github.com/google/gtm-oauth2.git
+	url = https://github.com/boinx/gtm-oauth2.git
 	branch = master
 [submodule "Deps/gtm-session-fetcher"]
 	path = Deps/gtm-session-fetcher
-	url = https://github.com/google/gtm-session-fetcher.git
+	url = https://github.com/boinx/gtm-session-fetcher.git
 	branch = master
 [submodule "Deps/AppAuth"]
 	path = Deps/AppAuth
-	url = https://github.com/openid/AppAuth-iOS.git
+	url = https://github.com/boinx/AppAuth-iOS.git
 [submodule "Deps/GTMAppAuth"]
 	path = Deps/GTMAppAuth
-	url = https://github.com/google/GTMAppAuth.git
+	url = https://github.com/boinx/GTMAppAuth.git
