@@ -627,7 +627,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
  *
  *  A BOOL value should be specified.
  */
-@property(atomic) NSNumber *shouldFetchNextPages;
+@property(atomic,retain) NSNumber *shouldFetchNextPages;
 
 /**
  *  Override the service's property @c shouldFetchNextPages for enabling automatic retries.
@@ -636,7 +636,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
  *
  *  Retry is also enabled if the retryBlock is not nil
  */
-@property(atomic, getter=isRetryEnabled) NSNumber *retryEnabled;
+@property(atomic,retain, getter=isRetryEnabled) NSNumber *retryEnabled;
 
 /**
  *  Override the service's property @c retryBlock for customizing automatic retries.
@@ -648,7 +648,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
  *
  *  A NSTimeInterval (double) value should be specified.
  */
-@property(atomic) NSNumber *maxRetryInterval;
+@property(atomic,retain) NSNumber *maxRetryInterval;
 
 /**
  *  Override the service's property @c uploadProgressBlock for monitoring upload progress.
