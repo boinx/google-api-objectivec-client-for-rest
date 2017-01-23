@@ -1543,7 +1543,6 @@
 				LastUpgradeCheck = 0800;
 				TargetAttributes = {
 					4F38F6A50B66E91D00B24B81 = {
-						DevelopmentTeam = 6372P8EH2J;
 						ProvisioningStyle = Automatic;
 					};
 					F4368F711B8233BF00E17643 = {
@@ -2218,7 +2217,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 6372P8EH2J;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -2239,7 +2238,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 6372P8EH2J;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
