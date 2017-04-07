@@ -67,6 +67,7 @@
 @class GTLRSheets_DeleteFilterViewRequest;
 @class GTLRSheets_DeleteNamedRangeRequest;
 @class GTLRSheets_DeleteProtectedRangeRequest;
+@class GTLRSheets_DeleteRangeRequest;
 @class GTLRSheets_DeleteSheetRequest;
 @class GTLRSheets_DimensionProperties;
 @class GTLRSheets_DimensionRange;
@@ -90,7 +91,9 @@
 @class GTLRSheets_GridProperties;
 @class GTLRSheets_GridRange;
 @class GTLRSheets_InsertDimensionRequest;
+@class GTLRSheets_InsertRangeRequest;
 @class GTLRSheets_InterpolationPoint;
+@class GTLRSheets_IterativeCalculationSettings;
 @class GTLRSheets_MergeCellsRequest;
 @class GTLRSheets_MoveDimensionRequest;
 @class GTLRSheets_NamedRange;
@@ -122,6 +125,7 @@
 @class GTLRSheets_SpreadsheetProperties;
 @class GTLRSheets_TextFormat;
 @class GTLRSheets_TextFormatRun;
+@class GTLRSheets_TextRotation;
 @class GTLRSheets_TextToColumnsRequest;
 @class GTLRSheets_UnmergeCellsRequest;
 @class GTLRSheets_UpdateBandingRequest;
@@ -382,11 +386,13 @@ GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTi
 /**
  *  Instructs date, time, datetime, and duration fields to be output
  *  as doubles in "serial number" format, as popularized by Lotus 1-2-3.
- *  Days are counted from December 31st 1899 and are incremented by 1,
- *  and times are fractions of a day. For example, January 1st 1900 at noon
- *  would be 1.5, 1 because it's 1 day offset from December 31st 1899,
- *  and .5 because noon is half a day. February 1st 1900 at 3pm would
- *  be 32.625. This correctly treats the year 1900 as not a leap year.
+ *  The whole number portion of the value (left of the decimal) counts
+ *  the days since December 30th 1899. The fractional portion (right of
+ *  the decimal) counts the time as a fraction of the day. For example,
+ *  January 1st 1900 at noon would be 2.5, 2 because it's 2 days after
+ *  December 30st 1899, and .5 because noon is half a day. February 1st
+ *  1900 at 3pm would be 33.625. This correctly treats the year 1900 as
+ *  not a leap year.
  *
  *  Value: "SERIAL_NUMBER"
  */
@@ -1089,6 +1095,28 @@ GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteNormal;
 GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteValues;
 
 // ----------------------------------------------------------------------------
+// GTLRSheets_DeleteRangeRequest.shiftDimension
+
+/**
+ *  Operates on the columns of a sheet.
+ *
+ *  Value: "COLUMNS"
+ */
+GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Columns;
+/**
+ *  The default value, do not use.
+ *
+ *  Value: "DIMENSION_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_DimensionUnspecified;
+/**
+ *  Operates on the rows of a sheet.
+ *
+ *  Value: "ROWS"
+ */
+GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Rows;
+
+// ----------------------------------------------------------------------------
 // GTLRSheets_DimensionRange.dimension
 
 /**
@@ -1173,6 +1201,28 @@ GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Ref;
  *  Value: "VALUE"
  */
 GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Value;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_InsertRangeRequest.shiftDimension
+
+/**
+ *  Operates on the columns of a sheet.
+ *
+ *  Value: "COLUMNS"
+ */
+GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Columns;
+/**
+ *  The default value, do not use.
+ *
+ *  Value: "DIMENSION_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_DimensionUnspecified;
+/**
+ *  Operates on the rows of a sheet.
+ *
+ *  Value: "ROWS"
+ */
+GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Rows;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_InterpolationPoint.type
@@ -2465,13 +2515,13 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_SerialNumber
  *        Instructs date, time, datetime, and duration fields to be output
  *        as doubles in "serial number" format, as popularized by Lotus 1-2-3.
- *        Days are counted from December 31st 1899 and are incremented by 1,
- *        and times are fractions of a day. For example, January 1st 1900 at
- *        noon
- *        would be 1.5, 1 because it's 1 day offset from December 31st 1899,
- *        and .5 because noon is half a day. February 1st 1900 at 3pm would
- *        be 32.625. This correctly treats the year 1900 as not a leap year.
- *        (Value: "SERIAL_NUMBER")
+ *        The whole number portion of the value (left of the decimal) counts
+ *        the days since December 30th 1899. The fractional portion (right of
+ *        the decimal) counts the time as a fraction of the day. For example,
+ *        January 1st 1900 at noon would be 2.5, 2 because it's 2 days after
+ *        December 30st 1899, and .5 because noon is half a day. February 1st
+ *        1900 at 3pm would be 33.625. This correctly treats the year 1900 as
+ *        not a leap year. (Value: "SERIAL_NUMBER")
  */
 @property(nonatomic, copy, nullable) NSString *responseDateTimeRenderOption;
 
@@ -2950,6 +3000,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** The format of the text in the cell (unless overridden by a format run). */
 @property(nonatomic, strong, nullable) GTLRSheets_TextFormat *textFormat;
+
+/** The rotation applied to text in a cell */
+@property(nonatomic, strong, nullable) GTLRSheets_TextRotation *textRotation;
 
 /**
  *  The vertical alignment of the value in the cell.
@@ -3579,6 +3632,33 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *protectedRangeId;
+
+@end
+
+
+/**
+ *  Deletes a range of cells, shifting other cells into the deleted area.
+ */
+@interface GTLRSheets_DeleteRangeRequest : GTLRObject
+
+/** The range of cells to delete. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
+
+/**
+ *  The dimension from which deleted cells will be replaced with.
+ *  If ROWS, existing cells will be shifted upward to
+ *  replace the deleted cells. If COLUMNS, existing cells
+ *  will be shifted left to replace the deleted cells.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DeleteRangeRequest_ShiftDimension_Columns Operates on
+ *        the columns of a sheet. (Value: "COLUMNS")
+ *    @arg @c kGTLRSheets_DeleteRangeRequest_ShiftDimension_DimensionUnspecified
+ *        The default value, do not use. (Value: "DIMENSION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DeleteRangeRequest_ShiftDimension_Rows Operates on the
+ *        rows of a sheet. (Value: "ROWS")
+ */
+@property(nonatomic, copy, nullable) NSString *shiftDimension;
 
 @end
 
@@ -4317,6 +4397,32 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  Inserts cells into a range, shifting the existing cells over or down.
+ */
+@interface GTLRSheets_InsertRangeRequest : GTLRObject
+
+/** The range to insert new cells into. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
+
+/**
+ *  The dimension which will be shifted when inserting cells.
+ *  If ROWS, existing cells will be shifted down.
+ *  If COLUMNS, existing cells will be shifted right.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_InsertRangeRequest_ShiftDimension_Columns Operates on
+ *        the columns of a sheet. (Value: "COLUMNS")
+ *    @arg @c kGTLRSheets_InsertRangeRequest_ShiftDimension_DimensionUnspecified
+ *        The default value, do not use. (Value: "DIMENSION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_InsertRangeRequest_ShiftDimension_Rows Operates on the
+ *        rows of a sheet. (Value: "ROWS")
+ */
+@property(nonatomic, copy, nullable) NSString *shiftDimension;
+
+@end
+
+
+/**
  *  A single interpolation point on a gradient conditional format.
  *  These pin the gradient color scale according to the color,
  *  type and value chosen.
@@ -4366,6 +4472,31 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  MAX.
  */
 @property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
+ *  Settings to control how circular dependencies are resolved with iterative
+ *  calculation.
+ */
+@interface GTLRSheets_IterativeCalculationSettings : GTLRObject
+
+/**
+ *  When iterative calculation is enabled and successive results differ by
+ *  less than this threshold value, the calculation rounds stop.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *convergenceThreshold;
+
+/**
+ *  When iterative calculation is enabled, the maximum number of calculation
+ *  rounds to perform.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maxIterations;
 
 @end
 
@@ -4447,7 +4578,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /**
  *  Pattern string used for formatting. If not set, a default pattern based on
  *  the user's locale will be used if necessary for the given type.
- *  See the [Date and Number Formats guide](/sheets/guides/formats) for more
+ *  See the [Date and Number Formats guide](/sheets/api/guides/formats) for more
  *  information about the supported patterns.
  */
 @property(nonatomic, copy, nullable) NSString *pattern;
@@ -5078,6 +5209,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Deletes a protected range. */
 @property(nonatomic, strong, nullable) GTLRSheets_DeleteProtectedRangeRequest *deleteProtectedRange;
 
+/** Deletes a range of cells from a sheet, shifting the remaining cells. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteRangeRequest *deleteRange;
+
 /** Deletes a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_DeleteSheetRequest *deleteSheet;
 
@@ -5092,6 +5226,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** Inserts new rows or columns in a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_InsertDimensionRequest *insertDimension;
+
+/** Inserts new cells in a sheet, shifting the existing cells. */
+@property(nonatomic, strong, nullable) GTLRSheets_InsertRangeRequest *insertRange;
 
 /** Merges cells together. */
 @property(nonatomic, strong, nullable) GTLRSheets_MergeCellsRequest *mergeCells;
@@ -5500,6 +5637,13 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_CellFormat *defaultFormat;
 
 /**
+ *  Determines whether and how circular references are resolved with iterative
+ *  calculation. Absence of this field means that circular references will
+ *  result in calculation errors.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_IterativeCalculationSettings *iterativeCalculationSettings;
+
+/**
  *  The locale of the spreadsheet in one of the following formats:
  *  * an ISO 639-1 language code such as `en`
  *  * an ISO 639-2 language code such as `fil`, if no 639-1 code exists
@@ -5587,6 +5731,42 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *startIndex;
+
+@end
+
+
+/**
+ *  The rotation applied to text in a cell.
+ */
+@interface GTLRSheets_TextRotation : GTLRObject
+
+/**
+ *  The angle between the standard orientation and the desired orientation.
+ *  Measured in degrees. Valid values are between -90 and 90. Positive
+ *  angles are angled upwards, negative are angled downwards.
+ *  Note: For LTR text direction positive angles are in the counterclockwise
+ *  direction, whereas for RTL they are in the clockwise direction
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *angle;
+
+/**
+ *  If true, text reads top to bottom, but the orientation of individual
+ *  characters is unchanged.
+ *  For example:
+ *  | V |
+ *  | e |
+ *  | r |
+ *  | t |
+ *  | i |
+ *  | c |
+ *  | a |
+ *  | l |
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *vertical;
 
 @end
 

@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Apps Activity API (appsactivity/v1)
+//   G Suite Activity API (appsactivity/v1)
 // Description:
 //   Provides a historical view of activity.
 // Documentation:
@@ -24,51 +24,51 @@ NS_ASSUME_NONNULL_BEGIN
 // Authorization scopes
 
 /**
- *  Authorization scope: View the activity history of your Google Apps
+ *  Authorization scope: View the activity history of your Google apps
  *
  *  Value "https://www.googleapis.com/auth/activity"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeAppsActivityActivity;
+GTLR_EXTERN NSString * const kGTLRAuthScopeAppsactivityActivity;
 /**
  *  Authorization scope: View and manage the files in your Google Drive
  *
  *  Value "https://www.googleapis.com/auth/drive"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeAppsActivityDrive;
+GTLR_EXTERN NSString * const kGTLRAuthScopeAppsactivityDrive;
 /**
  *  Authorization scope: View and manage metadata of files in your Google Drive
  *
  *  Value "https://www.googleapis.com/auth/drive.metadata"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeAppsActivityDriveMetadata;
+GTLR_EXTERN NSString * const kGTLRAuthScopeAppsactivityDriveMetadata;
 /**
  *  Authorization scope: View metadata for files in your Google Drive
  *
  *  Value "https://www.googleapis.com/auth/drive.metadata.readonly"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeAppsActivityDriveMetadataReadonly;
+GTLR_EXTERN NSString * const kGTLRAuthScopeAppsactivityDriveMetadataReadonly;
 /**
  *  Authorization scope: View the files in your Google Drive
  *
  *  Value "https://www.googleapis.com/auth/drive.readonly"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeAppsActivityDriveReadonly;
+GTLR_EXTERN NSString * const kGTLRAuthScopeAppsactivityDriveReadonly;
 
 // ----------------------------------------------------------------------------
-//   GTLRAppsActivityService
+//   GTLRAppsactivityService
 //
 
 /**
- *  Service for executing Google Apps Activity API queries.
+ *  Service for executing G Suite Activity API queries.
  *
  *  Provides a historical view of activity.
  */
-@interface GTLRAppsActivityService : GTLRService
+@interface GTLRAppsactivityService : GTLRService
 
 // No new methods
 
 // Clients should create a standard query with any of the class methods in
-// GTLRAppsActivityQuery.h. The query can the be sent with GTLRService's execute
+// GTLRAppsactivityQuery.h. The query can the be sent with GTLRService's execute
 // methods,
 //
 //   - (GTLRServiceTicket *)executeQuery:(GTLRQuery *)query

@@ -387,13 +387,13 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
  *  returns entries in order of increasing values of LogEntry.timestamp (oldest
  *  first), and the second option returns entries in order of decreasing
  *  timestamps (newest first). Entries with equal timestamps are returned in
- *  order of LogEntry.insertId.
+ *  order of their insert_id values.
  */
 @property(nonatomic, copy, nullable) NSString *orderBy;
 
 /**
  *  Optional. The maximum number of results to return from this request.
- *  Non-positive values are ignored. The presence of nextPageToken in the
+ *  Non-positive values are ignored. The presence of next_page_token in the
  *  response indicates that more results might be available.
  *
  *  Uses NSNumber of intValue.
@@ -402,9 +402,9 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
 
 /**
  *  Optional. If present, then retrieve the next batch of results from the
- *  preceding call to this method. pageToken must be the value of nextPageToken
- *  from the previous response. The values of other method parameters should be
- *  identical to those in the previous call.
+ *  preceding call to this method. page_token must be the value of
+ *  next_page_token from the previous response. The values of other method
+ *  parameters should be identical to those in the previous call.
  */
 @property(nonatomic, copy, nullable) NSString *pageToken;
 
@@ -417,9 +417,12 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
 @property(nonatomic, strong, nullable) NSArray<NSString *> *projectIds;
 
 /**
- *  Required. Names of one or more resources from which to retrieve log entries:
+ *  Required. Names of one or more parent resources from which to retrieve log
+ *  entries:
  *  "projects/[PROJECT_ID]"
  *  "organizations/[ORGANIZATION_ID]"
+ *  "billingAccounts/[BILLING_ACCOUNT_ID]"
+ *  "folders/[FOLDER_ID]"
  *  Projects listed in the project_ids field are added to this list.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *resourceNames;
@@ -578,10 +581,12 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
 @property(nonatomic, strong, nullable) GTLRLogging_HttpRequest *httpRequest;
 
 /**
- *  Optional. A unique ID for the log entry. If you provide this field, the
- *  logging service considers other log entries in the same project with the
- *  same ID as duplicates which can be removed. If omitted, Stackdriver Logging
- *  will generate a unique ID for this log entry.
+ *  Optional. A unique identifier for the log entry. If you provide a value,
+ *  then Stackdriver Logging considers other log entries in the same project,
+ *  with the same timestamp, and with the same insert_id to be duplicates which
+ *  can be removed. If omitted in new log entries, then Stackdriver Logging will
+ *  insert its own unique identifier. The insert_id is used to order log entries
+ *  that have the same timestamp value.
  */
 @property(nonatomic, copy, nullable) NSString *insertId;
 
@@ -601,6 +606,8 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
  *  Required. The resource name of the log to which this log entry belongs:
  *  "projects/[PROJECT_ID]/logs/[LOG_ID]"
  *  "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+ *  "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+ *  "folders/[FOLDER_ID]/logs/[LOG_ID]"
  *  [LOG_ID] must be URL-encoded within log_name. Example:
  *  "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
  *  [LOG_ID] must be less than 512 characters long and can only include the
@@ -670,8 +677,11 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
 @property(nonatomic, copy, nullable) NSString *textPayload;
 
 /**
- *  Optional. The time the event described by the log entry occurred. If
- *  omitted, Stackdriver Logging will use the time the log entry is received.
+ *  Optional. The time the event described by the log entry occurred. If omitted
+ *  in a new log entry, Stackdriver Logging will insert the time the log entry
+ *  is received. Stackdriver Logging might reject log entries whose time stamps
+ *  are more than a couple of hours in the future. Log entries with time stamps
+ *  in the past are accepted.
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *timestamp;
 
@@ -893,7 +903,8 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
  *  Describes a sink used to export log entries to one of the following
  *  destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or
  *  a Cloud Pub/Sub topic. A logs filter controls which log entries are
- *  exported. The sink must be created within a project or organization.
+ *  exported. The sink must be created within a project, organization, billing
+ *  account, or folder.
  */
 @interface GTLRLogging_LogSink : GTLRObject
 
@@ -1293,8 +1304,12 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
 
 /**
  *  Required. The log entries to write. Values supplied for the fields log_name,
- *  resource, and labels in this entries.write request are added to those log
- *  entries that do not provide their own values for the fields.To improve
+ *  resource, and labels in this entries.write request are inserted into those
+ *  log entries in this list that do not provide their own values.Stackdriver
+ *  Logging also creates and inserts values for timestamp and insert_id if the
+ *  entries do not provide them. The created insert_id for the N'th entry in
+ *  this list will be greater than earlier entries and less than later entries.
+ *  Otherwise, the order of log entries in this list does not matter.To improve
  *  throughput and to avoid exceeding the quota limit for calls to
  *  entries.write, you should write multiple log entries at once rather than
  *  calling this method for each individual log entry.
@@ -1314,6 +1329,8 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
  *  entries that do not specify a value for log_name:
  *  "projects/[PROJECT_ID]/logs/[LOG_ID]"
  *  "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+ *  "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+ *  "folders/[FOLDER_ID]/logs/[LOG_ID]"
  *  [LOG_ID] must be URL-encoded. For example,
  *  "projects/my-project-id/logs/syslog" or
  *  "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
@@ -1324,9 +1341,9 @@ GTLR_EXTERN NSString * const kGTLRLogging_LogSink_OutputVersionFormat_VersionFor
 /**
  *  Optional. Whether valid entries should be written even if some other entries
  *  fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any entry is
- *  not written, the response status will be the error associated with one of
- *  the failed entries and include error details in the form of
- *  WriteLogEntriesPartialErrors.
+ *  not written, then the response status is the error associated with one of
+ *  the failed entries and the response includes error details keyed by the
+ *  entries' zero-based index in the entries.write method.
  *
  *  Uses NSNumber of boolValue.
  */

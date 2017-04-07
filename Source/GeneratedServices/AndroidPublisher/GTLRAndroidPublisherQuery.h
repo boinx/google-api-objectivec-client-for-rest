@@ -2813,9 +2813,10 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
 //   +[GTLQueryAndroidPublisher queryForPurchasesVoidedpurchasesListWithpackageName:]
 
 /**
- *  The end time of list window, in milliseconds since the epoch (Jan 1, 1970).
- *  If not specified, default to current time, which is also the latest accepted
- *  end time. This parameter will be ignored if pagination token is set.
+ *  The time, in milliseconds since the Epoch, of the newest voided in-app
+ *  product purchase that you want to see in the response. The value of this
+ *  parameter cannot be greater than the current time and is ignored if a
+ *  pagination token is set. Default value is current time.
  */
 @property(nonatomic, assign) long long endTime;
 
@@ -2830,10 +2831,10 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
 @property(nonatomic, assign) NSUInteger startIndex;
 
 /**
- *  The start time of list window, in milliseconds since the epoch (Jan 1,
- *  1970). If not specified, default to current time - 30 days, which is also
- *  the earlies accepted start time. This parameter will be ignored if
- *  pagination token is set.
+ *  The time, in milliseconds since the Epoch, of the oldest voided in-app
+ *  product purchase that you want to see in the response. The value of this
+ *  parameter cannot be older than 30 days and is ignored if a pagination token
+ *  is set. Default value is current time minus 30 days.
  */
 @property(nonatomic, assign) long long startTime;
 
@@ -2892,7 +2893,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
 @end
 
 /**
- *  Returns a list of reviews.
+ *  Returns a list of reviews. Only reviews from last week will be returned.
  *
  *  Method: androidpublisher.reviews.list
  *
@@ -2920,7 +2921,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
 /**
  *  Fetches a @c GTLRAndroidPublisher_ReviewsListResponse.
  *
- *  Returns a list of reviews.
+ *  Returns a list of reviews. Only reviews from last week will be returned.
  *
  *  @param packageName Unique identifier for the Android app for which we want
  *    reviews; for example, "com.spiffygame".

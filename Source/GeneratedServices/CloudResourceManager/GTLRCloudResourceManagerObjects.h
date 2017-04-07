@@ -20,7 +20,10 @@
 #endif
 
 @class GTLRCloudResourceManager_Ancestor;
+@class GTLRCloudResourceManager_AuditConfig;
+@class GTLRCloudResourceManager_AuditLogConfig;
 @class GTLRCloudResourceManager_Binding;
+@class GTLRCloudResourceManager_Lien;
 @class GTLRCloudResourceManager_Operation_Metadata;
 @class GTLRCloudResourceManager_Operation_Response;
 @class GTLRCloudResourceManager_Organization;
@@ -36,6 +39,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
 // Constants - For some of the classes' properties below.
+
+// ----------------------------------------------------------------------------
+// GTLRCloudResourceManager_AuditLogConfig.logType
+
+/**
+ *  Admin reads. Example: CloudIAM getIamPolicy
+ *
+ *  Value: "ADMIN_READ"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudResourceManager_AuditLogConfig_LogType_AdminRead;
+/**
+ *  Data reads. Example: CloudSQL Users list
+ *
+ *  Value: "DATA_READ"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudResourceManager_AuditLogConfig_LogType_DataRead;
+/**
+ *  Data writes. Example: CloudSQL Users create
+ *
+ *  Value: "DATA_WRITE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudResourceManager_AuditLogConfig_LogType_DataWrite;
+/**
+ *  Default case. Should never be this.
+ *
+ *  Value: "LOG_TYPE_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudResourceManager_AuditLogConfig_LogType_LogTypeUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRCloudResourceManager_FolderOperation.operationType
@@ -77,9 +108,9 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_FolderOperationError_Erro
 /**
  *  The attempted action would move a folder that is already being moved.
  *
- *  Value: "FOLDER_ALREADY_BEING_MOVED"
+ *  Value: "FOLDER_BEING_MOVED"
  */
-GTLR_EXTERN NSString * const kGTLRCloudResourceManager_FolderOperationError_ErrorMessageId_FolderAlreadyBeingMoved;
+GTLR_EXTERN NSString * const kGTLRCloudResourceManager_FolderOperationError_ErrorMessageId_FolderBeingMoved;
 /**
  *  The attempted action would violate the max folder depth constraint.
  *
@@ -185,6 +216,119 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
 
 
 /**
+ *  Specifies the audit configuration for a service.
+ *  The configuration determines which permission types are logged, and what
+ *  identities, if any, are exempted from logging.
+ *  An AuditConifg must have one or more AuditLogConfigs.
+ *  If there are AuditConfigs for both `allServices` and a specific service,
+ *  the union of the two AuditConfigs is used for that service: the log_types
+ *  specified in each AuditConfig are enabled, and the exempted_members in each
+ *  AuditConfig are exempted.
+ *  Example Policy with multiple AuditConfigs:
+ *  {
+ *  "audit_configs": [
+ *  {
+ *  "service": "allServices"
+ *  "audit_log_configs": [
+ *  {
+ *  "log_type": "DATA_READ",
+ *  "exempted_members": [
+ *  "user:foo\@gmail.com"
+ *  ]
+ *  },
+ *  {
+ *  "log_type": "DATA_WRITE",
+ *  },
+ *  {
+ *  "log_type": "ADMIN_READ",
+ *  }
+ *  ]
+ *  },
+ *  {
+ *  "service": "fooservice\@googleapis.com"
+ *  "audit_log_configs": [
+ *  {
+ *  "log_type": "DATA_READ",
+ *  },
+ *  {
+ *  "log_type": "DATA_WRITE",
+ *  "exempted_members": [
+ *  "user:bar\@gmail.com"
+ *  ]
+ *  }
+ *  ]
+ *  }
+ *  ]
+ *  }
+ *  For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+ *  logging. It also exempts foo\@gmail.com from DATA_READ logging, and
+ *  bar\@gmail.com from DATA_WRITE logging.
+ */
+@interface GTLRCloudResourceManager_AuditConfig : GTLRObject
+
+/**
+ *  The configuration for logging of each type of permission.
+ *  Next ID: 4
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudResourceManager_AuditLogConfig *> *auditLogConfigs;
+
+/**
+ *  Specifies a service that will be enabled for audit logging.
+ *  For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+ *  `allServices` is a special value that covers all services.
+ */
+@property(nonatomic, copy, nullable) NSString *service;
+
+@end
+
+
+/**
+ *  Provides the configuration for logging a type of permissions.
+ *  Example:
+ *  {
+ *  "audit_log_configs": [
+ *  {
+ *  "log_type": "DATA_READ",
+ *  "exempted_members": [
+ *  "user:foo\@gmail.com"
+ *  ]
+ *  },
+ *  {
+ *  "log_type": "DATA_WRITE",
+ *  }
+ *  ]
+ *  }
+ *  This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+ *  foo\@gmail.com from DATA_READ logging.
+ */
+@interface GTLRCloudResourceManager_AuditLogConfig : GTLRObject
+
+/**
+ *  Specifies the identities that do not cause logging for this type of
+ *  permission.
+ *  Follows the same format of Binding.members.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *exemptedMembers;
+
+/**
+ *  The log type that this config enables.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCloudResourceManager_AuditLogConfig_LogType_AdminRead Admin
+ *        reads. Example: CloudIAM getIamPolicy (Value: "ADMIN_READ")
+ *    @arg @c kGTLRCloudResourceManager_AuditLogConfig_LogType_DataRead Data
+ *        reads. Example: CloudSQL Users list (Value: "DATA_READ")
+ *    @arg @c kGTLRCloudResourceManager_AuditLogConfig_LogType_DataWrite Data
+ *        writes. Example: CloudSQL Users create (Value: "DATA_WRITE")
+ *    @arg @c kGTLRCloudResourceManager_AuditLogConfig_LogType_LogTypeUnspecified
+ *        Default case. Should never be this. (Value: "LOG_TYPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *logType;
+
+@end
+
+
+/**
  *  Associates `members` with a `role`.
  */
 @interface GTLRCloudResourceManager_Binding : GTLRObject
@@ -281,9 +425,9 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
  *    @arg @c kGTLRCloudResourceManager_FolderOperationError_ErrorMessageId_ErrorTypeUnspecified
  *        The error type was unrecognized or unspecified. (Value:
  *        "ERROR_TYPE_UNSPECIFIED")
- *    @arg @c kGTLRCloudResourceManager_FolderOperationError_ErrorMessageId_FolderAlreadyBeingMoved
+ *    @arg @c kGTLRCloudResourceManager_FolderOperationError_ErrorMessageId_FolderBeingMoved
  *        The attempted action would move a folder that is already being moved.
- *        (Value: "FOLDER_ALREADY_BEING_MOVED")
+ *        (Value: "FOLDER_BEING_MOVED")
  *    @arg @c kGTLRCloudResourceManager_FolderOperationError_ErrorMessageId_FolderHeightViolation
  *        The attempted action would violate the max folder depth constraint.
  *        (Value: "FOLDER_HEIGHT_VIOLATION")
@@ -335,6 +479,82 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
  *  Request message for `GetIamPolicy` method.
  */
 @interface GTLRCloudResourceManager_GetIamPolicyRequest : GTLRObject
+@end
+
+
+/**
+ *  A Lien represents an encumbrance on the actions that can be performed on a
+ *  resource.
+ */
+@interface GTLRCloudResourceManager_Lien : GTLRObject
+
+/** The creation time of this Lien. */
+@property(nonatomic, strong, nullable) GTLRDateTime *createTime;
+
+/**
+ *  A system-generated unique identifier for this Lien.
+ *  Example: `liens/1234abcd`
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  A stable, user-visible/meaningful string identifying the origin of the
+ *  Lien, intended to be inspected programmatically. Maximum length of 200
+ *  characters.
+ *  Example: 'compute.googleapis.com'
+ */
+@property(nonatomic, copy, nullable) NSString *origin;
+
+/**
+ *  A reference to the resource this Lien is attached to. The server will
+ *  validate the parent against those for which Liens are supported.
+ *  Example: `projects/1234`
+ */
+@property(nonatomic, copy, nullable) NSString *parent;
+
+/**
+ *  Concise user-visible strings indicating why an action cannot be performed
+ *  on a resource. Maximum lenth of 200 characters.
+ *  Example: 'Holds production API key'
+ */
+@property(nonatomic, copy, nullable) NSString *reason;
+
+/**
+ *  The types of operations which should be blocked as a result of this Lien.
+ *  Each value should correspond to an IAM permission. The server will
+ *  validate the permissions against those for which Liens are supported.
+ *  An empty list is meaningless and will be rejected.
+ *  Example: ['resourcemanager.projects.delete']
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *restrictions;
+
+@end
+
+
+/**
+ *  The response message for Liens.ListLiens.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "liens" property. If returned as the result of a query, it should
+ *        support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRCloudResourceManager_ListLiensResponse : GTLRCollectionObject
+
+/**
+ *  A list of Liens.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudResourceManager_Lien *> *liens;
+
+/**
+ *  Token to retrieve the next page of results, or empty if there are no more
+ *  results in the list.
+ */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
 @end
 
 
@@ -473,8 +693,8 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
 
 /**
  *  A friendly string to be used to refer to the Organization in the UI.
- *  Assigned by the server, set to the firm name of the Google For Work
- *  customer that owns this organization.
+ *  Assigned by the server, set to the primary domain of the G Suite
+ *  customer that owns the organization.
  *  \@OutputOnly
  */
 @property(nonatomic, copy, nullable) NSString *displayName;
@@ -559,6 +779,9 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
  */
 @interface GTLRCloudResourceManager_Policy : GTLRObject
 
+/** Specifies cloud audit logging configuration for this policy. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudResourceManager_AuditConfig *> *auditConfigs;
+
 /**
  *  Associates a list of `members` to a `role`.
  *  Multiple `bindings` must not be specified for the same `role`.
@@ -594,7 +817,7 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
 
 /**
  *  A Project is a high-level Google Cloud Platform entity. It is a
- *  container for ACLs, APIs, AppEngine Apps, VMs, and other
+ *  container for ACLs, APIs, App Engine Apps, VMs, and other
  *  Google Cloud Platform resources.
  */
 @interface GTLRCloudResourceManager_Project : GTLRObject
@@ -738,7 +961,7 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
 /**
  *  A container to reference an id for any resource type. A `resource` in Google
  *  Cloud Platform is a generic term for something you (a developer) may want to
- *  interact with through one of our API's. Some examples are an AppEngine app,
+ *  interact with through one of our API's. Some examples are an App Engine app,
  *  a Compute Engine instance, a Cloud SQL database, and so on.
  */
 @interface GTLRCloudResourceManager_ResourceId : GTLRObject
@@ -753,7 +976,7 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
 
 /**
  *  Required field representing the resource type this id is for.
- *  At present, the only valid type is "organization".
+ *  At present, the valid types are: "organization"
  */
 @property(nonatomic, copy, nullable) NSString *type;
 
@@ -840,6 +1063,17 @@ GTLR_EXTERN NSString * const kGTLRCloudResourceManager_Project_LifecycleState_Li
  *  might reject them.
  */
 @property(nonatomic, strong, nullable) GTLRCloudResourceManager_Policy *policy;
+
+/**
+ *  OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *  the fields in the mask will be modified. If no mask is provided, the
+ *  following default mask is used:
+ *  paths: "bindings, etag"
+ *  This field is only used by Cloud IAM.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
 
 @end
 

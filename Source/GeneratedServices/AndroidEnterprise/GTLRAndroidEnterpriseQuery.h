@@ -19,14 +19,12 @@
 #endif
 
 @class GTLRAndroidEnterprise_AdministratorWebTokenSpec;
-@class GTLRAndroidEnterprise_Collection;
 @class GTLRAndroidEnterprise_DeviceState;
 @class GTLRAndroidEnterprise_Enterprise;
 @class GTLRAndroidEnterprise_EnterpriseAccount;
 @class GTLRAndroidEnterprise_Entitlement;
 @class GTLRAndroidEnterprise_Install;
 @class GTLRAndroidEnterprise_ManagedConfiguration;
-@class GTLRAndroidEnterprise_ProductPermissions;
 @class GTLRAndroidEnterprise_ProductsApproveRequest;
 @class GTLRAndroidEnterprise_ProductSet;
 @class GTLRAndroidEnterprise_ServiceAccountKey;
@@ -67,414 +65,6 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 
 /** Selector specifying which fields to include in a partial response. */
 @property(nonatomic, copy, nullable) NSString *fields;
-
-@end
-
-/**
- *  Deletes a collection.
- *
- *  Method: androidenterprise.collections.delete
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionsDelete : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionsDeleteWithenterpriseId:collectionId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Upon successful completion, the callback's object and error parameters will
- *  be nil. This query does not fetch an object.
- *
- *  Deletes a collection.
- *
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionsDelete
- */
-+ (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
-                         collectionId:(NSString *)collectionId;
-
-@end
-
-/**
- *  Retrieves the details of a collection.
- *
- *  Method: androidenterprise.collections.get
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionsGet : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionsGetWithenterpriseId:collectionId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_Collection.
- *
- *  Retrieves the details of a collection.
- *
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionsGet
- */
-+ (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
-                         collectionId:(NSString *)collectionId;
-
-@end
-
-/**
- *  Creates a new collection.
- *
- *  Method: androidenterprise.collections.insert
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionsInsert : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionsInsertWithObject:enterpriseId:]
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_Collection.
- *
- *  Creates a new collection.
- *
- *  @param object The @c GTLRAndroidEnterprise_Collection to include in the
- *    query.
- *  @param enterpriseId The ID of the enterprise.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionsInsert
- */
-+ (instancetype)queryWithObject:(GTLRAndroidEnterprise_Collection *)object
-                   enterpriseId:(NSString *)enterpriseId;
-
-@end
-
-/**
- *  Retrieves the IDs of all the collections for an enterprise.
- *
- *  Method: androidenterprise.collections.list
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionsList : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionsListWithenterpriseId:]
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_CollectionsListResponse.
- *
- *  Retrieves the IDs of all the collections for an enterprise.
- *
- *  @param enterpriseId The ID of the enterprise.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionsList
- */
-+ (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
-
-@end
-
-/**
- *  Updates a collection. This method supports patch semantics.
- *
- *  Method: androidenterprise.collections.patch
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionsPatch : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionsPatchWithObject:enterpriseId:collectionId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_Collection.
- *
- *  Updates a collection. This method supports patch semantics.
- *
- *  @param object The @c GTLRAndroidEnterprise_Collection to include in the
- *    query.
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionsPatch
- */
-+ (instancetype)queryWithObject:(GTLRAndroidEnterprise_Collection *)object
-                   enterpriseId:(NSString *)enterpriseId
-                   collectionId:(NSString *)collectionId;
-
-@end
-
-/**
- *  Updates a collection.
- *
- *  Method: androidenterprise.collections.update
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionsUpdate : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionsUpdateWithObject:enterpriseId:collectionId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_Collection.
- *
- *  Updates a collection.
- *
- *  @param object The @c GTLRAndroidEnterprise_Collection to include in the
- *    query.
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionsUpdate
- */
-+ (instancetype)queryWithObject:(GTLRAndroidEnterprise_Collection *)object
-                   enterpriseId:(NSString *)enterpriseId
-                   collectionId:(NSString *)collectionId;
-
-@end
-
-/**
- *  Removes the user from the list of those specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  such users will see the collection.
- *
- *  Method: androidenterprise.collectionviewers.delete
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionviewersDelete : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionviewersDeleteWithenterpriseId:collectionId:userId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/** The ID of the user. */
-@property(nonatomic, copy, nullable) NSString *userId;
-
-/**
- *  Upon successful completion, the callback's object and error parameters will
- *  be nil. This query does not fetch an object.
- *
- *  Removes the user from the list of those specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  such users will see the collection.
- *
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *  @param userId The ID of the user.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionviewersDelete
- */
-+ (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
-                         collectionId:(NSString *)collectionId
-                               userId:(NSString *)userId;
-
-@end
-
-/**
- *  Retrieves the ID of the user if they have been specifically allowed to see
- *  the collection. If the collection's visibility is set to viewersOnly then
- *  only these users will see the collection.
- *
- *  Method: androidenterprise.collectionviewers.get
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionviewersGet : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionviewersGetWithenterpriseId:collectionId:userId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/** The ID of the user. */
-@property(nonatomic, copy, nullable) NSString *userId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_User.
- *
- *  Retrieves the ID of the user if they have been specifically allowed to see
- *  the collection. If the collection's visibility is set to viewersOnly then
- *  only these users will see the collection.
- *
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *  @param userId The ID of the user.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionviewersGet
- */
-+ (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
-                         collectionId:(NSString *)collectionId
-                               userId:(NSString *)userId;
-
-@end
-
-/**
- *  Retrieves the IDs of the users who have been specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  these users will see the collection.
- *
- *  Method: androidenterprise.collectionviewers.list
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionviewersList : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionviewersListWithenterpriseId:collectionId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_CollectionViewersListResponse.
- *
- *  Retrieves the IDs of the users who have been specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  these users will see the collection.
- *
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionviewersList
- */
-+ (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
-                         collectionId:(NSString *)collectionId;
-
-@end
-
-/**
- *  Adds the user to the list of those specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  such users will see the collection. This method supports patch semantics.
- *
- *  Method: androidenterprise.collectionviewers.patch
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionviewersPatch : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionviewersPatchWithObject:enterpriseId:collectionId:userId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/** The ID of the user. */
-@property(nonatomic, copy, nullable) NSString *userId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_User.
- *
- *  Adds the user to the list of those specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  such users will see the collection. This method supports patch semantics.
- *
- *  @param object The @c GTLRAndroidEnterprise_User to include in the query.
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *  @param userId The ID of the user.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionviewersPatch
- */
-+ (instancetype)queryWithObject:(GTLRAndroidEnterprise_User *)object
-                   enterpriseId:(NSString *)enterpriseId
-                   collectionId:(NSString *)collectionId
-                         userId:(NSString *)userId;
-
-@end
-
-/**
- *  Adds the user to the list of those specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  such users will see the collection.
- *
- *  Method: androidenterprise.collectionviewers.update
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_CollectionviewersUpdate : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForCollectionviewersUpdateWithObject:enterpriseId:collectionId:userId:]
-
-/** The ID of the collection. */
-@property(nonatomic, copy, nullable) NSString *collectionId;
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/** The ID of the user. */
-@property(nonatomic, copy, nullable) NSString *userId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_User.
- *
- *  Adds the user to the list of those specifically allowed to see the
- *  collection. If the collection's visibility is set to viewersOnly then only
- *  such users will see the collection.
- *
- *  @param object The @c GTLRAndroidEnterprise_User to include in the query.
- *  @param enterpriseId The ID of the enterprise.
- *  @param collectionId The ID of the collection.
- *  @param userId The ID of the user.
- *
- *  @returns GTLRAndroidEnterpriseQuery_CollectionviewersUpdate
- */
-+ (instancetype)queryWithObject:(GTLRAndroidEnterprise_User *)object
-                   enterpriseId:(NSString *)enterpriseId
-                   collectionId:(NSString *)collectionId
-                         userId:(NSString *)userId;
 
 @end
 
@@ -749,9 +339,9 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 @end
 
 /**
- *  Deletes the binding between the EMM and enterprise. This is now deprecated;
- *  use this to unenroll customers that were previously enrolled with the
- *  'insert' call, then enroll them again with the 'enroll' call.
+ *  Deletes the binding between the EMM and enterprise. This is now deprecated.
+ *  Use this method only to unenroll customers that were previously enrolled
+ *  with the insert call, then enroll them again with the enroll call.
  *
  *  Method: androidenterprise.enterprises.delete
  *
@@ -769,9 +359,9 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  Upon successful completion, the callback's object and error parameters will
  *  be nil. This query does not fetch an object.
  *
- *  Deletes the binding between the EMM and enterprise. This is now deprecated;
- *  use this to unenroll customers that were previously enrolled with the
- *  'insert' call, then enroll them again with the 'enroll' call.
+ *  Deletes the binding between the EMM and enterprise. This is now deprecated.
+ *  Use this method only to unenroll customers that were previously enrolled
+ *  with the insert call, then enroll them again with the enroll call.
  *
  *  @param enterpriseId The ID of the enterprise.
  *
@@ -1038,7 +628,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  service account authenticated for the request. The notification set may be
  *  empty if no notification are pending.
  *  A notification set returned needs to be acknowledged within 20 seconds by
- *  calling Enterprises .AcknowledgeNotificationSet, unless the notification set
+ *  calling Enterprises.AcknowledgeNotificationSet, unless the notification set
  *  is empty.
  *  Notifications that are not acknowledged within the 20 seconds will
  *  eventually be included again in the response to another PullNotificationSet
@@ -1084,7 +674,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  service account authenticated for the request. The notification set may be
  *  empty if no notification are pending.
  *  A notification set returned needs to be acknowledged within 20 seconds by
- *  calling Enterprises .AcknowledgeNotificationSet, unless the notification set
+ *  calling Enterprises.AcknowledgeNotificationSet, unless the notification set
  *  is empty.
  *  Notifications that are not acknowledged within the 20 seconds will
  *  eventually be included again in the response to another PullNotificationSet
@@ -1135,7 +725,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 @end
 
 /**
- *  Set the account that will be used to authenticate to the API as the
+ *  Sets the account that will be used to authenticate to the API as the
  *  enterprise.
  *
  *  Method: androidenterprise.enterprises.setAccount
@@ -1153,7 +743,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 /**
  *  Fetches a @c GTLRAndroidEnterprise_EnterpriseAccount.
  *
- *  Set the account that will be used to authenticate to the API as the
+ *  Sets the account that will be used to authenticate to the API as the
  *  enterprise.
  *
  *  @param object The @c GTLRAndroidEnterprise_EnterpriseAccount to include in
@@ -1240,7 +830,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 @end
 
 /**
- *  Removes an entitlement to an app for a user and uninstalls it.
+ *  Removes an entitlement to an app for a user.
  *
  *  Method: androidenterprise.entitlements.delete
  *
@@ -1266,7 +856,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  Upon successful completion, the callback's object and error parameters will
  *  be nil. This query does not fetch an object.
  *
- *  Removes an entitlement to an app for a user and uninstalls it.
+ *  Removes an entitlement to an app for a user.
  *
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
@@ -1323,7 +913,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 @end
 
 /**
- *  List of all entitlements for the specified user. Only the ID is set.
+ *  Lists all entitlements for the specified user. Only the ID is set.
  *
  *  Method: androidenterprise.entitlements.list
  *
@@ -1343,7 +933,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 /**
  *  Fetches a @c GTLRAndroidEnterprise_EntitlementsListResponse.
  *
- *  List of all entitlements for the specified user. Only the ID is set.
+ *  Lists all entitlements for the specified user. Only the ID is set.
  *
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
@@ -1702,7 +1292,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 
 /**
  *  Requests to install the latest version of an app to a device. If the app is
- *  already installed then it is updated to the latest version if necessary.
+ *  already installed, then it is updated to the latest version if necessary.
  *  This method supports patch semantics.
  *
  *  Method: androidenterprise.installs.patch
@@ -1733,7 +1323,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  Fetches a @c GTLRAndroidEnterprise_Install.
  *
  *  Requests to install the latest version of an app to a device. If the app is
- *  already installed then it is updated to the latest version if necessary.
+ *  already installed, then it is updated to the latest version if necessary.
  *  This method supports patch semantics.
  *
  *  @param object The @c GTLRAndroidEnterprise_Install to include in the query.
@@ -1755,7 +1345,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 
 /**
  *  Requests to install the latest version of an app to a device. If the app is
- *  already installed then it is updated to the latest version if necessary.
+ *  already installed, then it is updated to the latest version if necessary.
  *
  *  Method: androidenterprise.installs.update
  *
@@ -1785,7 +1375,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  Fetches a @c GTLRAndroidEnterprise_Install.
  *
  *  Requests to install the latest version of an app to a device. If the app is
- *  already installed then it is updated to the latest version if necessary.
+ *  already installed, then it is updated to the latest version if necessary.
  *
  *  @param object The @c GTLRAndroidEnterprise_Install to include in the query.
  *  @param enterpriseId The ID of the enterprise.
@@ -2554,7 +2144,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
 @property(nonatomic, copy, nullable) NSString *query;
 
 /**
- *  A pagination token is contained in a requests response when there are more
+ *  A pagination token is contained in a request''s response when there are more
  *  products. The token can be used in a subsequent request to obtain more
  *  products, and so forth. This parameter cannot be used in the initial
  *  request.
@@ -2606,52 +2196,6 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
-
-@end
-
-/**
- *  This method has been deprecated. To programmatically approve applications,
- *  you must use the iframe mechanism via the generateApprovalUrl and approve
- *  methods of the Products resource. For more information, see the Play EMM API
- *  usage requirements.
- *  The updatePermissions method (deprecated) updates the set of Android app
- *  permissions for this app that have been accepted by the enterprise.
- *
- *  Method: androidenterprise.products.updatePermissions
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidEnterprise
- */
-@interface GTLRAndroidEnterpriseQuery_ProductsUpdatePermissions : GTLRAndroidEnterpriseQuery
-// Previous library name was
-//   +[GTLQueryAndroidEnterprise queryForProductsUpdatePermissionsWithObject:enterpriseId:productId:]
-
-/** The ID of the enterprise. */
-@property(nonatomic, copy, nullable) NSString *enterpriseId;
-
-/** The ID of the product. */
-@property(nonatomic, copy, nullable) NSString *productId;
-
-/**
- *  Fetches a @c GTLRAndroidEnterprise_ProductPermissions.
- *
- *  This method has been deprecated. To programmatically approve applications,
- *  you must use the iframe mechanism via the generateApprovalUrl and approve
- *  methods of the Products resource. For more information, see the Play EMM API
- *  usage requirements.
- *  The updatePermissions method (deprecated) updates the set of Android app
- *  permissions for this app that have been accepted by the enterprise.
- *
- *  @param object The @c GTLRAndroidEnterprise_ProductPermissions to include in
- *    the query.
- *  @param enterpriseId The ID of the enterprise.
- *  @param productId The ID of the product.
- *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsUpdatePermissions
- */
-+ (instancetype)queryWithObject:(GTLRAndroidEnterprise_ProductPermissions *)object
-                   enterpriseId:(NSString *)enterpriseId
-                      productId:(NSString *)productId;
 
 @end
 
@@ -3529,7 +3073,10 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
 @end
 
 /**
- *  Modifies the set of products a user is entitled to access.
+ *  Modifies the set of products that a user is entitled to access (referred to
+ *  as whitelisted products). Only products that are approved or products that
+ *  were previously approved (products with revoked approval) can be
+ *  whitelisted.
  *
  *  Method: androidenterprise.users.setAvailableProductSet
  *
@@ -3549,7 +3096,10 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
 /**
  *  Fetches a @c GTLRAndroidEnterprise_ProductSet.
  *
- *  Modifies the set of products a user is entitled to access.
+ *  Modifies the set of products that a user is entitled to access (referred to
+ *  as whitelisted products). Only products that are approved or products that
+ *  were previously approved (products with revoked approval) can be
+ *  whitelisted.
  *
  *  @param object The @c GTLRAndroidEnterprise_ProductSet to include in the
  *    query.

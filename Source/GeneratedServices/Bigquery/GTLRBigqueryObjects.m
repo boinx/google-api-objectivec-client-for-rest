@@ -203,7 +203,7 @@
 
 @implementation GTLRBigquery_ExplainQueryStage
 @dynamic computeRatioAvg, computeRatioMax, identifier, name, readRatioAvg,
-         readRatioMax, recordsRead, recordsWritten, steps, waitRatioAvg,
+         readRatioMax, recordsRead, recordsWritten, status, steps, waitRatioAvg,
          waitRatioMax, writeRatioAvg, writeRatioMax;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
@@ -971,7 +971,7 @@
 //
 
 @implementation GTLRBigquery_TableList_Tables_Item
-@dynamic friendlyName, identifier, kind, labels, tableReference, type;
+@dynamic friendlyName, identifier, kind, labels, tableReference, type, view;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"identifier" : @"id" };
@@ -991,6 +991,16 @@
   return [NSString class];
 }
 
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRBigquery_TableList_Tables_Item_View
+//
+
+@implementation GTLRBigquery_TableList_Tables_Item_View
+@dynamic useLegacySql;
 @end
 
 

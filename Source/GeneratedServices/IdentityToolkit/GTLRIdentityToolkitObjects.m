@@ -134,7 +134,9 @@
 //
 
 @implementation GTLRIdentityToolkit_Relyingparty
-@dynamic captchaResp, challenge, email, idToken, kind, newEmail, requestType,
+@dynamic androidInstallApp, androidMinimumVersion, androidPackageName,
+         canHandleCodeInApp, captchaResp, challenge, continueUrl, email,
+         idToken, iOSAppStoreId, iOSBundleId, kind, newEmail, requestType,
          userIp;
 @end
 
@@ -338,7 +340,7 @@
 
 @implementation GTLRIdentityToolkit_RelyingpartySignupNewUserRequest
 @dynamic captchaChallenge, captchaResponse, disabled, displayName, email,
-         emailVerified, idToken, instanceId, password, photoUrl;
+         emailVerified, idToken, instanceId, localId, password, photoUrl;
 @end
 
 
@@ -367,9 +369,9 @@
 //
 
 @implementation GTLRIdentityToolkit_RelyingpartyVerifyAssertionRequest
-@dynamic delegatedProjectNumber, idToken, instanceId, pendingIdToken, postBody,
-         requestUri, returnIdpCredential, returnRefreshToken, returnSecureToken,
-         sessionId;
+@dynamic autoCreate, delegatedProjectNumber, idToken, instanceId,
+         pendingIdToken, postBody, requestUri, returnIdpCredential,
+         returnRefreshToken, returnSecureToken, sessionId;
 @end
 
 
@@ -410,8 +412,8 @@
 //
 
 @implementation GTLRIdentityToolkit_SetAccountInfoResponse
-@dynamic displayName, email, expiresIn, idToken, kind, localId, newEmail,
-         passwordHash, photoUrl, providerUserInfo, refreshToken;
+@dynamic displayName, email, emailVerified, expiresIn, idToken, kind, localId,
+         newEmail, passwordHash, photoUrl, providerUserInfo, refreshToken;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
@@ -510,12 +512,12 @@
 @implementation GTLRIdentityToolkit_VerifyAssertionResponse
 @dynamic action, appInstallationUrl, appScheme, context, dateOfBirth,
          displayName, email, emailRecycled, emailVerified, errorMessage,
-         expiresIn, federatedId, firstName, fullName, idToken, inputEmail, kind,
-         language, lastName, localId, needConfirmation, needEmail, nickName,
-         oauthAccessToken, oauthAuthorizationCode, oauthExpireIn, oauthIdToken,
-         oauthRequestToken, oauthScope, oauthTokenSecret, originalEmail,
-         photoUrl, providerId, rawUserInfo, refreshToken, screenName, timeZone,
-         verifiedProvider;
+         expiresIn, federatedId, firstName, fullName, idToken, inputEmail,
+         isNewUser, kind, language, lastName, localId, needConfirmation,
+         needEmail, nickName, oauthAccessToken, oauthAuthorizationCode,
+         oauthExpireIn, oauthIdToken, oauthRequestToken, oauthScope,
+         oauthTokenSecret, originalEmail, photoUrl, providerId, rawUserInfo,
+         refreshToken, screenName, timeZone, verifiedProvider;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{

@@ -58,8 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy is being requested.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -72,8 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param resource REQUIRED: The resource for which the policy is being
  *    requested.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsSnapshotsGetIamPolicy
  */
@@ -97,8 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy is being specified.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -111,8 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRPubsub_SetIamPolicyRequest to include in the query.
  *  @param resource REQUIRED: The resource for which the policy is being
  *    specified.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsSnapshotsSetIamPolicy
  */
@@ -125,6 +121,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns permissions that a caller has on the specified resource.
  *  If the resource does not exist, this will return an empty set of
  *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
  *
  *  Method: pubsub.projects.snapshots.testIamPermissions
  *
@@ -138,8 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy detail is being requested.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -149,13 +147,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns permissions that a caller has on the specified resource.
  *  If the resource does not exist, this will return an empty set of
  *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
  *
  *  @param object The @c GTLRPubsub_TestIamPermissionsRequest to include in the
  *    query.
  *  @param resource REQUIRED: The resource for which the policy detail is being
  *    requested.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsSnapshotsTestIamPermissions
  */
@@ -359,8 +359,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy is being requested.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -373,8 +372,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param resource REQUIRED: The resource for which the policy is being
  *    requested.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsSubscriptionsGetIamPolicy
  */
@@ -574,8 +572,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy is being specified.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -588,8 +585,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRPubsub_SetIamPolicyRequest to include in the query.
  *  @param resource REQUIRED: The resource for which the policy is being
  *    specified.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsSubscriptionsSetIamPolicy
  */
@@ -602,6 +598,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns permissions that a caller has on the specified resource.
  *  If the resource does not exist, this will return an empty set of
  *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
  *
  *  Method: pubsub.projects.subscriptions.testIamPermissions
  *
@@ -615,8 +614,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy detail is being requested.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -626,13 +624,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns permissions that a caller has on the specified resource.
  *  If the resource does not exist, this will return an empty set of
  *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
  *
  *  @param object The @c GTLRPubsub_TestIamPermissionsRequest to include in the
  *    query.
  *  @param resource REQUIRED: The resource for which the policy detail is being
  *    requested.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsSubscriptionsTestIamPermissions
  */
@@ -775,8 +775,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy is being requested.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -789,8 +788,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param resource REQUIRED: The resource for which the policy is being
  *    requested.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsTopicsGetIamPolicy
  */
@@ -900,8 +898,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy is being specified.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -914,8 +911,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRPubsub_SetIamPolicyRequest to include in the query.
  *  @param resource REQUIRED: The resource for which the policy is being
  *    specified.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsTopicsSetIamPolicy
  */
@@ -971,6 +967,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns permissions that a caller has on the specified resource.
  *  If the resource does not exist, this will return an empty set of
  *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
  *
  *  Method: pubsub.projects.topics.testIamPermissions
  *
@@ -984,8 +983,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  REQUIRED: The resource for which the policy detail is being requested.
- *  `resource` is usually specified as a path. For example, a Project
- *  resource is specified as `projects/{project}`.
+ *  See the operation documentation for the appropriate value for this field.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
 
@@ -995,13 +993,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns permissions that a caller has on the specified resource.
  *  If the resource does not exist, this will return an empty set of
  *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
  *
  *  @param object The @c GTLRPubsub_TestIamPermissionsRequest to include in the
  *    query.
  *  @param resource REQUIRED: The resource for which the policy detail is being
  *    requested.
- *    `resource` is usually specified as a path. For example, a Project
- *    resource is specified as `projects/{project}`.
+ *    See the operation documentation for the appropriate value for this field.
  *
  *  @returns GTLRPubsubQuery_ProjectsTopicsTestIamPermissions
  */

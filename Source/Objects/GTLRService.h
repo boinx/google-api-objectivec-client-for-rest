@@ -27,17 +27,9 @@
 #import "GTLRObject.h"
 #import "GTLRQuery.h"
 
-#if !defined(GTLR_USE_FRAMEWORK_IMPORTS)
-  #define GTLR_USE_FRAMEWORK_IMPORTS 0
-#endif
-
-#if GTLR_USE_FRAMEWORK_IMPORTS
-  #import <GTMSessionFetcher/GTMSessionFetcher.h>
-  #import <GTMSessionFetcher/GTMSessionFetcherService.h>
-#else
-  #import "GTMSessionFetcher.h"
-  #import "GTMSessionFetcherService.h"
-#endif  // GTLR_USE_FRAMEWORK_IMPORTS
+@class GTMSessionFetcher;
+@class GTMSessionFetcherService;
+@protocol GTMFetcherAuthorizationProtocol;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -627,7 +619,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
  *
  *  A BOOL value should be specified.
  */
-@property(atomic,retain) NSNumber *shouldFetchNextPages;
+@property(atomic, strong, nullable) NSNumber *shouldFetchNextPages;
 
 /**
  *  Override the service's property @c shouldFetchNextPages for enabling automatic retries.
@@ -636,7 +628,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
  *
  *  Retry is also enabled if the retryBlock is not nil
  */
-@property(atomic,retain, getter=isRetryEnabled) NSNumber *retryEnabled;
+@property(atomic, strong, nullable, getter=isRetryEnabled) NSNumber *retryEnabled;
 
 /**
  *  Override the service's property @c retryBlock for customizing automatic retries.
@@ -648,7 +640,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
  *
  *  A NSTimeInterval (double) value should be specified.
  */
-@property(atomic,retain) NSNumber *maxRetryInterval;
+@property(atomic, strong, nullable) NSNumber *maxRetryInterval;
 
 /**
  *  Override the service's property @c uploadProgressBlock for monitoring upload progress.
@@ -670,7 +662,7 @@ typedef void (^GTLRServiceTestBlock)(GTLRServiceTicket *testTicket,
 /**
  *  Override the service's property @c objectClassResolver for controlling object class selection.
  */
-@property(atomic, strong) id<GTLRObjectClassResolver> objectClassResolver;
+@property(atomic, strong, nullable) id<GTLRObjectClassResolver> objectClassResolver;
 
 /**
  *  The ticket's properties are the service properties, with the execution parameter's

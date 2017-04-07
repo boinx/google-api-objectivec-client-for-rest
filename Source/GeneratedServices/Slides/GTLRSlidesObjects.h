@@ -40,6 +40,7 @@
 @class GTLRSlides_CreateVideoResponse;
 @class GTLRSlides_CropProperties;
 @class GTLRSlides_DeleteObjectRequest;
+@class GTLRSlides_DeleteParagraphBulletsRequest;
 @class GTLRSlides_DeleteTableColumnRequest;
 @class GTLRSlides_DeleteTableRowRequest;
 @class GTLRSlides_DeleteTextRequest;
@@ -53,6 +54,7 @@
 @class GTLRSlides_InsertTableColumnsRequest;
 @class GTLRSlides_InsertTableRowsRequest;
 @class GTLRSlides_InsertTextRequest;
+@class GTLRSlides_LayoutPlaceholderIdMapping;
 @class GTLRSlides_LayoutProperties;
 @class GTLRSlides_LayoutReference;
 @class GTLRSlides_Line;
@@ -62,6 +64,7 @@
 @class GTLRSlides_List;
 @class GTLRSlides_List_NestingLevel;
 @class GTLRSlides_NestingLevel;
+@class GTLRSlides_NotesProperties;
 @class GTLRSlides_OpaqueColor;
 @class GTLRSlides_OptionalColor;
 @class GTLRSlides_Outline;
@@ -79,6 +82,8 @@
 @class GTLRSlides_RefreshSheetsChartRequest;
 @class GTLRSlides_ReplaceAllShapesWithImageRequest;
 @class GTLRSlides_ReplaceAllShapesWithImageResponse;
+@class GTLRSlides_ReplaceAllShapesWithSheetsChartRequest;
+@class GTLRSlides_ReplaceAllShapesWithSheetsChartResponse;
 @class GTLRSlides_ReplaceAllTextRequest;
 @class GTLRSlides_ReplaceAllTextResponse;
 @class GTLRSlides_Request;
@@ -113,6 +118,7 @@
 @class GTLRSlides_UpdateLinePropertiesRequest;
 @class GTLRSlides_UpdatePageElementTransformRequest;
 @class GTLRSlides_UpdatePagePropertiesRequest;
+@class GTLRSlides_UpdateParagraphStyleRequest;
 @class GTLRSlides_UpdateShapePropertiesRequest;
 @class GTLRSlides_UpdateSlidesPositionRequest;
 @class GTLRSlides_UpdateTableCellPropertiesRequest;
@@ -120,7 +126,9 @@
 @class GTLRSlides_UpdateVideoPropertiesRequest;
 @class GTLRSlides_Video;
 @class GTLRSlides_VideoProperties;
+@class GTLRSlides_WeightedFontFamily;
 @class GTLRSlides_WordArt;
+@class GTLRSlides_WriteControl;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -1856,6 +1864,18 @@ GTLR_EXTERN NSString * const kGTLRSlides_Page_PageType_Layout;
  */
 GTLR_EXTERN NSString * const kGTLRSlides_Page_PageType_Master;
 /**
+ *  A notes page.
+ *
+ *  Value: "NOTES"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Page_PageType_Notes;
+/**
+ *  A notes master page.
+ *
+ *  Value: "NOTES_MASTER"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Page_PageType_NotesMaster;
+/**
  *  A slide page.
  *
  *  Value: "SLIDE"
@@ -2114,6 +2134,181 @@ GTLR_EXTERN NSString * const kGTLRSlides_Range_Type_FromStartIndex;
 GTLR_EXTERN NSString * const kGTLRSlides_Range_Type_RangeTypeUnspecified;
 
 // ----------------------------------------------------------------------------
+// GTLRSlides_Recolor.name
+
+/**
+ *  Custom recolor effect. Refer to `recolor_stops` for the concrete
+ *  gradient.
+ *
+ *  Value: "CUSTOM"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Custom;
+/**
+ *  A recolor effect that darkens the image using the page's first available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK1"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark1;
+/**
+ *  A recolor effect that darkens the image using the page's tenth available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK10"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark10;
+/**
+ *  A recolor effect that darkens the image using the page's second available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK2"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark2;
+/**
+ *  A recolor effect that darkens the image using the page's third available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK3"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark3;
+/**
+ *  A recolor effect that darkens the image using the page's fourth available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK4"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark4;
+/**
+ *  A recolor effect that darkens the image using the page's fifth available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK5"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark5;
+/**
+ *  A recolor effect that darkens the image using the page's sixth available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK6"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark6;
+/**
+ *  A recolor effect that darkens the image using the page's seventh
+ *  available color from its color scheme.
+ *
+ *  Value: "DARK7"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark7;
+/**
+ *  A recolor effect that darkens the image using the page's eighth available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK8"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark8;
+/**
+ *  A recolor effect that darkens the image using the page's ninth available
+ *  color from its color scheme.
+ *
+ *  Value: "DARK9"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Dark9;
+/**
+ *  A recolor effect that recolors the image to grayscale.
+ *
+ *  Value: "GRAYSCALE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Grayscale;
+/**
+ *  A recolor effect that lightens the image using the page's first available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT1"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light1;
+/**
+ *  A recolor effect that lightens the image using the page's tenth available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT10"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light10;
+/**
+ *  A recolor effect that lightens the image using the page's second
+ *  available color from its color scheme.
+ *
+ *  Value: "LIGHT2"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light2;
+/**
+ *  A recolor effect that lightens the image using the page's third available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT3"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light3;
+/**
+ *  A recolor effect that lightens the image using the page's forth available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT4"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light4;
+/**
+ *  A recolor effect that lightens the image using the page's fifth available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT5"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light5;
+/**
+ *  A recolor effect that lightens the image using the page's sixth available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT6"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light6;
+/**
+ *  A recolor effect that lightens the image using the page's seventh
+ *  available color from its color scheme.e.
+ *
+ *  Value: "LIGHT7"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light7;
+/**
+ *  A recolor effect that lightens the image using the page's eighth
+ *  available color from its color scheme.
+ *
+ *  Value: "LIGHT8"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light8;
+/**
+ *  A recolor effect that lightens the image using the page's ninth available
+ *  color from its color scheme.
+ *
+ *  Value: "LIGHT9"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Light9;
+/**
+ *  A recolor effect that recolors the image to negative grayscale.
+ *
+ *  Value: "NEGATIVE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Negative;
+/**
+ *  No recolor effect. The default value.
+ *
+ *  Value: "NONE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_None;
+/**
+ *  A recolor effect that recolors the image using the sepia color.
+ *
+ *  Value: "SEPIA"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Sepia;
+
+// ----------------------------------------------------------------------------
 // GTLRSlides_ReplaceAllShapesWithImageRequest.replaceMethod
 
 /**
@@ -2133,6 +2328,24 @@ GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithImageRequest_Replac
  *  Value: "CENTER_INSIDE"
  */
 GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithImageRequest_ReplaceMethod_CenterInside;
+
+// ----------------------------------------------------------------------------
+// GTLRSlides_ReplaceAllShapesWithSheetsChartRequest.linkingMode
+
+/**
+ *  Linking the chart allows it to be updated, and other collaborators will
+ *  see a link to the spreadsheet.
+ *
+ *  Value: "LINKED"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithSheetsChartRequest_LinkingMode_Linked;
+/**
+ *  The chart is not associated with the source spreadsheet and cannot be
+ *  updated. A chart that is not linked will be inserted as an image.
+ *
+ *  Value: "NOT_LINKED_IMAGE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NotLinkedImage;
 
 // ----------------------------------------------------------------------------
 // GTLRSlides_Shadow.alignment
@@ -3513,6 +3726,12 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** A list of updates to apply to the presentation. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSlides_Request *> *requests;
 
+/**
+ *  Provides control over how write requests are executed, such as
+ *  conditionally updating the presentation.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_WriteControl *writeControl;
+
 @end
 
 
@@ -4318,6 +4537,14 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @property(nonatomic, copy, nullable) NSString *objectId;
 
 /**
+ *  An optional list of object ID mappings from the placeholder(s) on the layout
+ *  to the placeholder(s)
+ *  that will be created on the new slide from that specified layout. Can only
+ *  be used when `slide_layout_reference` is specified.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSlides_LayoutPlaceholderIdMapping *> *placeholderIdMappings;
+
+/**
  *  Layout reference of the slide to be inserted, based on the *current
  *  master*, which is one of the following:
  *  - The master of the previous slide index.
@@ -4536,6 +4763,32 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *  also deleted.
  */
 @property(nonatomic, copy, nullable) NSString *objectId;
+
+@end
+
+
+/**
+ *  Deletes bullets from all of the paragraphs that overlap with the given text
+ *  index range.
+ *  The nesting level of each paragraph will be visually preserved by adding
+ *  indent to the start of the corresponding paragraph.
+ */
+@interface GTLRSlides_DeleteParagraphBulletsRequest : GTLRObject
+
+/**
+ *  The optional table cell location if the text to be modified is in a table
+ *  cell. If present, the object_id must refer to a table.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_TableCellLocation *cellLocation;
+
+/**
+ *  The object ID of the shape or table containing the text to delete bullets
+ *  from.
+ */
+@property(nonatomic, copy, nullable) NSString *objectId;
+
+/** The range of text to delete bullets from, based on TextElement indexes. */
+@property(nonatomic, strong, nullable) GTLRSlides_Range *textRange;
 
 @end
 
@@ -4923,6 +5176,42 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  The user-specified ID mapping for a placeholder that will be created on a
+ *  slide from a specified layout.
+ */
+@interface GTLRSlides_LayoutPlaceholderIdMapping : GTLRObject
+
+/**
+ *  The placeholder on a layout that will be applied to a slide. Only type and
+ *  index are needed. For example, a
+ *  predefined `TITLE_AND_BODY` layout may usually have a TITLE placeholder
+ *  with index 0 and a BODY placeholder with index 0.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_Placeholder *layoutPlaceholder;
+
+/**
+ *  The object ID of the placeholder on a layout that will be applied
+ *  to a slide.
+ */
+@property(nonatomic, copy, nullable) NSString *layoutPlaceholderObjectId;
+
+/**
+ *  A user-supplied object ID for the placeholder identified above that to be
+ *  created onto a slide.
+ *  If you specify an ID, it must be unique among all pages and page elements
+ *  in the presentation. The ID must start with an alphanumeric character or an
+ *  underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+ *  may include those as well as a hyphen or colon (matches regex
+ *  `[a-zA-Z0-9_-:]`).
+ *  The length of the ID must not be less than 5 or greater than 50.
+ *  If you don't specify an ID, a unique one is generated.
+ */
+@property(nonatomic, copy, nullable) NSString *objectId;
+
+@end
+
+
+/**
  *  The properties of Page are only
  *  relevant for pages with page_type LAYOUT.
  */
@@ -5248,6 +5537,25 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  The properties of Page that are only
+ *  relevant for pages with page_type NOTES.
+ */
+@interface GTLRSlides_NotesProperties : GTLRObject
+
+/**
+ *  The object ID of the shape on this notes page that contains the speaker
+ *  notes for the corresponding slide.
+ *  The actual shape may not always exist on the notes page. Inserting text
+ *  using this object ID will automatically create the shape. In this case, the
+ *  actual shape may have different object ID. The `GetPresentation` or
+ *  `GetPage` action will always return the latest object ID.
+ */
+@property(nonatomic, copy, nullable) NSString *speakerNotesObjectId;
+
+@end
+
+
+/**
  *  A themeable solid color value.
  */
 @interface GTLRSlides_OpaqueColor : GTLRObject
@@ -5413,6 +5721,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** Layout specific properties. Only set if page_type = LAYOUT. */
 @property(nonatomic, strong, nullable) GTLRSlides_LayoutProperties *layoutProperties;
 
+/** Notes specific properties. Only set if page_type = NOTES. */
+@property(nonatomic, strong, nullable) GTLRSlides_NotesProperties *notesProperties;
+
 /**
  *  The object ID for this page. Object IDs used by
  *  Page and
@@ -5433,9 +5744,25 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *    @arg @c kGTLRSlides_Page_PageType_Layout A layout page. (Value: "LAYOUT")
  *    @arg @c kGTLRSlides_Page_PageType_Master A master slide page. (Value:
  *        "MASTER")
+ *    @arg @c kGTLRSlides_Page_PageType_Notes A notes page. (Value: "NOTES")
+ *    @arg @c kGTLRSlides_Page_PageType_NotesMaster A notes master page. (Value:
+ *        "NOTES_MASTER")
  *    @arg @c kGTLRSlides_Page_PageType_Slide A slide page. (Value: "SLIDE")
  */
 @property(nonatomic, copy, nullable) NSString *pageType;
+
+/**
+ *  The revision ID of the presentation containing this page. Can be used in
+ *  update requests to assert that the presentation revision hasn't changed
+ *  since the last read operation. Only populated if the user has edit access
+ *  to the presentation.
+ *  The format of the revision ID may change over time, so it should be treated
+ *  opaquely. A returned revision ID is only guaranteed to be valid for 24
+ *  hours after it has been returned and cannot be shared across
+ *  users. Callers can assume that if two revision IDs are equal then the
+ *  presentation has not changed.
+ */
+@property(nonatomic, copy, nullable) NSString *revisionId;
 
 /** Slide specific properties. Only set if page_type = SLIDE. */
 @property(nonatomic, strong, nullable) GTLRSlides_SlideProperties *slideProperties;
@@ -5636,7 +5963,7 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @interface GTLRSlides_ParagraphStyle : GTLRObject
 
 /**
- *  The text alignment for this paragraph. This property is read-only.
+ *  The text alignment for this paragraph.
  *
  *  Likely values:
  *    @arg @c kGTLRSlides_ParagraphStyle_Alignment_AlignmentUnspecified The
@@ -5656,7 +5983,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @property(nonatomic, copy, nullable) NSString *alignment;
 
 /**
- *  The text direction of this paragraph. This property is read-only.
+ *  The text direction of this paragraph. If unset, the value defaults to
+ *  LEFT_TO_RIGHT
+ *  since text direction is not inherited.
  *
  *  Likely values:
  *    @arg @c kGTLRSlides_ParagraphStyle_Direction_LeftToRight The text goes
@@ -5672,28 +6001,26 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /**
  *  The amount indentation for the paragraph on the side that corresponds to
  *  the end of the text, based on the current text direction. If unset, the
- *  value is inherited from the parent. This property is read-only.
+ *  value is inherited from the parent.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_Dimension *indentEnd;
 
 /**
  *  The amount of indentation for the start of the first line of the paragraph.
- *  If unset, the value is inherited from the parent. This property is
- *  read-only.
+ *  If unset, the value is inherited from the parent.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_Dimension *indentFirstLine;
 
 /**
  *  The amount indentation for the paragraph on the side that corresponds to
  *  the start of the text, based on the current text direction. If unset, the
- *  value is inherited from the parent. This property is read-only.
+ *  value is inherited from the parent.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_Dimension *indentStart;
 
 /**
  *  The amount of space between lines, as a percentage of normal, where normal
  *  is represented as 100.0. If unset, the value is inherited from the parent.
- *  This property is read-only.
  *
  *  Uses NSNumber of floatValue.
  */
@@ -5701,18 +6028,18 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /**
  *  The amount of extra space above the paragraph. If unset, the value is
- *  inherited from the parent. This property is read-only.
+ *  inherited from the parent.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_Dimension *spaceAbove;
 
 /**
  *  The amount of extra space above the paragraph. If unset, the value is
- *  inherited from the parent. This property is read-only.
+ *  inherited from the parent.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_Dimension *spaceBelow;
 
 /**
- *  The spacing mode for the paragraph. This property is read-only.
+ *  The spacing mode for the paragraph.
  *
  *  Likely values:
  *    @arg @c kGTLRSlides_ParagraphStyle_SpacingMode_CollapseLists Paragraph
@@ -5812,11 +6139,37 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSlides_Page *> *masters;
 
+/**
+ *  The notes master in the presentation. It serves three purposes:
+ *  - Placeholder shapes on a notes master contain the default text styles and
+ *  shape properties of all placeholder shapes on notes pages. Specifically,
+ *  a `SLIDE_IMAGE` placeholder shape contains the slide thumbnail, and a
+ *  `BODY` placeholder shape contains the speaker notes.
+ *  - The notes master page properties define the common page properties
+ *  inherited by all notes pages.
+ *  - Any other shapes on the notes master will appear on all notes pages.
+ *  The notes master is read-only.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_Page *notesMaster;
+
 /** The size of pages in the presentation. */
 @property(nonatomic, strong, nullable) GTLRSlides_Size *pageSize;
 
 /** The ID of the presentation. */
 @property(nonatomic, copy, nullable) NSString *presentationId;
+
+/**
+ *  The revision ID of the presentation. Can be used in update requests
+ *  to assert that the presentation revision hasn't changed since the last
+ *  read operation. Only populated if the user has edit access to the
+ *  presentation.
+ *  The format of the revision ID may change over time, so it should be treated
+ *  opaquely. A returned revision ID is only guaranteed to be valid for 24
+ *  hours after it has been returned and cannot be shared across users. Callers
+ *  can assume that if two revision IDs are equal then the presentation has not
+ *  changed.
+ */
+@property(nonatomic, copy, nullable) NSString *revisionId;
 
 /**
  *  The slides in the presentation.
@@ -5881,8 +6234,92 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @interface GTLRSlides_Recolor : GTLRObject
 
 /**
+ *  The name of the recolor effect.
+ *  The name is determined from the `recolor_stops` by matching the gradient
+ *  against the colors in the page's current color scheme. This property is
+ *  read-only.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSlides_Recolor_Name_Custom Custom recolor effect. Refer to
+ *        `recolor_stops` for the concrete
+ *        gradient. (Value: "CUSTOM")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark1 A recolor effect that darkens the
+ *        image using the page's first available
+ *        color from its color scheme. (Value: "DARK1")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark10 A recolor effect that darkens the
+ *        image using the page's tenth available
+ *        color from its color scheme. (Value: "DARK10")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark2 A recolor effect that darkens the
+ *        image using the page's second available
+ *        color from its color scheme. (Value: "DARK2")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark3 A recolor effect that darkens the
+ *        image using the page's third available
+ *        color from its color scheme. (Value: "DARK3")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark4 A recolor effect that darkens the
+ *        image using the page's fourth available
+ *        color from its color scheme. (Value: "DARK4")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark5 A recolor effect that darkens the
+ *        image using the page's fifth available
+ *        color from its color scheme. (Value: "DARK5")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark6 A recolor effect that darkens the
+ *        image using the page's sixth available
+ *        color from its color scheme. (Value: "DARK6")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark7 A recolor effect that darkens the
+ *        image using the page's seventh
+ *        available color from its color scheme. (Value: "DARK7")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark8 A recolor effect that darkens the
+ *        image using the page's eighth available
+ *        color from its color scheme. (Value: "DARK8")
+ *    @arg @c kGTLRSlides_Recolor_Name_Dark9 A recolor effect that darkens the
+ *        image using the page's ninth available
+ *        color from its color scheme. (Value: "DARK9")
+ *    @arg @c kGTLRSlides_Recolor_Name_Grayscale A recolor effect that recolors
+ *        the image to grayscale. (Value: "GRAYSCALE")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light1 A recolor effect that lightens the
+ *        image using the page's first available
+ *        color from its color scheme. (Value: "LIGHT1")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light10 A recolor effect that lightens
+ *        the image using the page's tenth available
+ *        color from its color scheme. (Value: "LIGHT10")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light2 A recolor effect that lightens the
+ *        image using the page's second
+ *        available color from its color scheme. (Value: "LIGHT2")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light3 A recolor effect that lightens the
+ *        image using the page's third available
+ *        color from its color scheme. (Value: "LIGHT3")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light4 A recolor effect that lightens the
+ *        image using the page's forth available
+ *        color from its color scheme. (Value: "LIGHT4")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light5 A recolor effect that lightens the
+ *        image using the page's fifth available
+ *        color from its color scheme. (Value: "LIGHT5")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light6 A recolor effect that lightens the
+ *        image using the page's sixth available
+ *        color from its color scheme. (Value: "LIGHT6")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light7 A recolor effect that lightens the
+ *        image using the page's seventh
+ *        available color from its color scheme.e. (Value: "LIGHT7")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light8 A recolor effect that lightens the
+ *        image using the page's eighth
+ *        available color from its color scheme. (Value: "LIGHT8")
+ *    @arg @c kGTLRSlides_Recolor_Name_Light9 A recolor effect that lightens the
+ *        image using the page's ninth available
+ *        color from its color scheme. (Value: "LIGHT9")
+ *    @arg @c kGTLRSlides_Recolor_Name_Negative A recolor effect that recolors
+ *        the image to negative grayscale. (Value: "NEGATIVE")
+ *    @arg @c kGTLRSlides_Recolor_Name_None No recolor effect. The default
+ *        value. (Value: "NONE")
+ *    @arg @c kGTLRSlides_Recolor_Name_Sepia A recolor effect that recolors the
+ *        image using the sepia color. (Value: "SEPIA")
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
  *  The recolor effect is represented by a gradient, which is a list of color
- *  stops. This property is read-only.
+ *  stops.
+ *  The colors in the gradient will replace the corresponding colors at
+ *  the same position in the color palette and apply to the image. This
+ *  property is read-only.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSlides_ColorStop *> *recolorStops;
 
@@ -5960,6 +6397,65 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  Replaces all shapes that match the given criteria with the provided Google
+ *  Sheets chart. The chart will be scaled and centered to fit within the bounds
+ *  of the original shape.
+ *  NOTE: Replacing shapes with a chart requires at least one of the
+ *  spreadsheets.readonly, spreadsheets, drive.readonly, or drive OAuth scopes.
+ */
+@interface GTLRSlides_ReplaceAllShapesWithSheetsChartRequest : GTLRObject
+
+/**
+ *  The ID of the specific chart in the Google Sheets spreadsheet.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *chartId;
+
+/**
+ *  The criteria that the shapes must match in order to be replaced. The
+ *  request will replace all of the shapes that contain the given text.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_SubstringMatchCriteria *containsText;
+
+/**
+ *  The mode with which the chart is linked to the source spreadsheet. When
+ *  not specified, the chart will be an image that is not linked.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSlides_ReplaceAllShapesWithSheetsChartRequest_LinkingMode_Linked
+ *        Linking the chart allows it to be updated, and other collaborators
+ *        will
+ *        see a link to the spreadsheet. (Value: "LINKED")
+ *    @arg @c kGTLRSlides_ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NotLinkedImage
+ *        The chart is not associated with the source spreadsheet and cannot be
+ *        updated. A chart that is not linked will be inserted as an image.
+ *        (Value: "NOT_LINKED_IMAGE")
+ */
+@property(nonatomic, copy, nullable) NSString *linkingMode;
+
+/** The ID of the Google Sheets spreadsheet that contains the chart. */
+@property(nonatomic, copy, nullable) NSString *spreadsheetId;
+
+@end
+
+
+/**
+ *  The result of replacing shapes with a Google Sheets chart.
+ */
+@interface GTLRSlides_ReplaceAllShapesWithSheetsChartResponse : GTLRObject
+
+/**
+ *  The number of shapes replaced with charts.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *occurrencesChanged;
+
+@end
+
+
+/**
  *  Replaces all instances of text matching a criteria with replace text.
  */
 @interface GTLRSlides_ReplaceAllTextRequest : GTLRObject
@@ -6020,6 +6516,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** Deletes a page or page element from the presentation. */
 @property(nonatomic, strong, nullable) GTLRSlides_DeleteObjectRequest *deleteObject;
 
+/** Deletes bullets from paragraphs. */
+@property(nonatomic, strong, nullable) GTLRSlides_DeleteParagraphBulletsRequest *deleteParagraphBullets;
+
 /** Deletes a column from a table. */
 @property(nonatomic, strong, nullable) GTLRSlides_DeleteTableColumnRequest *deleteTableColumn;
 
@@ -6047,6 +6546,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** Replaces all shapes matching some criteria with an image. */
 @property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllShapesWithImageRequest *replaceAllShapesWithImage;
 
+/** Replaces all shapes matching some criteria with a Google Sheets chart. */
+@property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllShapesWithSheetsChartRequest *replaceAllShapesWithSheetsChart;
+
 /** Replaces all instances of specified text. */
 @property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllTextRequest *replaceAllText;
 
@@ -6061,6 +6563,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /** Updates the properties of a Page. */
 @property(nonatomic, strong, nullable) GTLRSlides_UpdatePagePropertiesRequest *updatePageProperties;
+
+/** Updates the styling of paragraphs within a Shape or Table. */
+@property(nonatomic, strong, nullable) GTLRSlides_UpdateParagraphStyleRequest *updateParagraphStyle;
 
 /** Updates the properties of a Shape. */
 @property(nonatomic, strong, nullable) GTLRSlides_UpdateShapePropertiesRequest *updateShapeProperties;
@@ -6114,6 +6619,12 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *  image.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllShapesWithImageResponse *replaceAllShapesWithImage;
+
+/**
+ *  The result of replacing all shapes matching some criteria with a Google
+ *  Sheets chart.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllShapesWithSheetsChartResponse *replaceAllShapesWithSheetsChart;
 
 /** The result of replacing text. */
 @property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllTextResponse *replaceAllText;
@@ -6817,6 +7328,19 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** The object ID of the master that this slide is based on. */
 @property(nonatomic, copy, nullable) NSString *masterObjectId;
 
+/**
+ *  The notes page that this slide is associated with. It defines the visual
+ *  appearance of a notes page when printing or exporting slides with speaker
+ *  notes. A notes page inherits properties from the
+ *  notes master.
+ *  The placeholder shape with type BODY on the notes page contains the speaker
+ *  notes for this slide. The ID of this shape is identified by the
+ *  speakerNotesObjectId field.
+ *  The notes page is read-only except for the text content and styles of the
+ *  speaker notes shape.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_Page *notesPage;
+
 @end
 
 
@@ -7245,7 +7769,7 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @property(nonatomic, copy, nullable) NSString *baselineOffset;
 
 /**
- *  Whether or not the text is bold.
+ *  Whether or not the text is rendered as bold.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -7324,6 +7848,16 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  */
 @property(nonatomic, strong, nullable) NSNumber *underline;
 
+/**
+ *  The font family and rendered weight of the text. This property is
+ *  read-only.
+ *  This field is an extension of `font_family` meant to support explicit font
+ *  weights without breaking backwards compatibility. As such, when reading the
+ *  style of a range of text, the value of `weighted_font_family.font_family`
+ *  will always be equal to that of `font_family`.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_WeightedFontFamily *weightedFontFamily;
+
 @end
 
 
@@ -7376,6 +7910,39 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *        "THEME_COLOR_TYPE_UNSPECIFIED")
  */
 @property(nonatomic, copy, nullable) NSString *type;
+
+@end
+
+
+/**
+ *  The thumbnail of a page.
+ */
+@interface GTLRSlides_Thumbnail : GTLRObject
+
+/**
+ *  The content URL of the thumbnail image.
+ *  The URL to the image has a default lifetime of 30 minutes.
+ *  This URL is tagged with the account of the requester. Anyone with the URL
+ *  effectively accesses the image as the original requester. Access to the
+ *  image may be lost if the presentation's sharing settings change.
+ *  The mime type of the thumbnail image is the same as specified in the
+ *  `GetPageThumbnailRequest`.
+ */
+@property(nonatomic, copy, nullable) NSString *contentUrl;
+
+/**
+ *  The positive height in pixels of the thumbnail image.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *height;
+
+/**
+ *  The positive width in pixels of the thumbnail image.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *width;
 
 @end
 
@@ -7495,6 +8062,45 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  Updates the styling for all of the paragraphs within a Shape or Table that
+ *  overlap with the given text index range.
+ */
+@interface GTLRSlides_UpdateParagraphStyleRequest : GTLRObject
+
+/**
+ *  The location of the cell in the table containing the paragraph(s) to
+ *  style. If `object_id` refers to a table, `cell_location` must have a value.
+ *  Otherwise, it must not.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_TableCellLocation *cellLocation;
+
+/**
+ *  The fields that should be updated.
+ *  At least one field must be specified. The root `style` is implied and
+ *  should not be specified. A single `"*"` can be used as short-hand for
+ *  listing every field.
+ *  For example, to update the paragraph alignment, set `fields` to
+ *  `"alignment"`.
+ *  To reset a property to its default value, include its field name in the
+ *  field mask but leave the field itself unset.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *fields;
+
+/** The object ID of the shape or table with the text to be styled. */
+@property(nonatomic, copy, nullable) NSString *objectId;
+
+/** The paragraph's style. */
+@property(nonatomic, strong, nullable) GTLRSlides_ParagraphStyle *style;
+
+/** The range of text containing the paragraph(s) to style. */
+@property(nonatomic, strong, nullable) GTLRSlides_Range *textRange;
+
+@end
+
+
+/**
  *  Update the properties of a Shape.
  */
 @interface GTLRSlides_UpdateShapePropertiesRequest : GTLRObject
@@ -7588,8 +8194,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @interface GTLRSlides_UpdateTextStyleRequest : GTLRObject
 
 /**
- *  The optional table cell location if the text to be styled is in a table
- *  cell. If present, the object_id must refer to a table.
+ *  The location of the cell in the table containing the text to style. If
+ *  `object_id` refers to a table, `cell_location` must have a value.
+ *  Otherwise, it must not.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_TableCellLocation *cellLocation;
 
@@ -7598,9 +8205,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *  At least one field must be specified. The root `style` is implied and
  *  should not be specified. A single `"*"` can be used as short-hand for
  *  listing every field.
- *  For example to update the text style to bold, set `fields` to `"bold"`.
- *  To reset a property to its default value,
- *  include its field name in the field mask but leave the field itself unset.
+ *  For example, to update the text style to bold, set `fields` to `"bold"`.
+ *  To reset a property to its default value, include its field name in the
+ *  field mask but leave the field itself unset.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -7709,6 +8316,36 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  Represents a font family and weight used to style a TextRun.
+ */
+@interface GTLRSlides_WeightedFontFamily : GTLRObject
+
+/**
+ *  The font family of the text.
+ *  The font family can be any font from the Font menu in Slides or from
+ *  [Google Fonts] (https://fonts.google.com/). If the font name is
+ *  unrecognized, the text is rendered in `Arial`.
+ */
+@property(nonatomic, copy, nullable) NSString *fontFamily;
+
+/**
+ *  The rendered weight of the text. This field can have any value that is a
+ *  multiple of 100 between 100 and 900, inclusive. This range corresponds to
+ *  only the numerical values described in the "Cascading Style Sheets Level
+ *  2 Revision 1 (CSS 2.1) Specification",
+ *  [section 15.6](https://www.w3.org/TR/CSS21/fonts.html#font-boldness). The
+ *  non-numerical values in the specification are disallowed. Weights greater
+ *  than or equal to 700 are considered bold, and weights less than 700 are
+ *  not bold. The default value is `400` ("normal").
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *weight;
+
+@end
+
+
+/**
  *  A PageElement kind representing
  *  word art.
  */
@@ -7716,6 +8353,22 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /** The text rendered as word art. */
 @property(nonatomic, copy, nullable) NSString *renderedText;
+
+@end
+
+
+/**
+ *  Provides control over how write requests are executed.
+ */
+@interface GTLRSlides_WriteControl : GTLRObject
+
+/**
+ *  The revision ID of the presentation required for the write request. If
+ *  specified and the `required_revision_id` doesn't exactly match the
+ *  presentation's current `revision_id`, the request will not be processed and
+ *  will return a 400 bad request error.
+ */
+@property(nonatomic, copy, nullable) NSString *requiredRevisionId;
 
 @end
 

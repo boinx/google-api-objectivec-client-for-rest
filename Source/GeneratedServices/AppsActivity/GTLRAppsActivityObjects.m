@@ -2,66 +2,66 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Apps Activity API (appsactivity/v1)
+//   G Suite Activity API (appsactivity/v1)
 // Description:
 //   Provides a historical view of activity.
 // Documentation:
 //   https://developers.google.com/google-apps/activity/
 
-#import "GTLRAppsActivityObjects.h"
+#import "GTLRAppsactivityObjects.h"
 
 // ----------------------------------------------------------------------------
 // Constants
 
-// GTLRAppsActivity_Event.additionalEventTypes
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Comment = @"comment";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Create = @"create";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Edit = @"edit";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_EmptyTrash = @"emptyTrash";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Move = @"move";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_PermissionChange = @"permissionChange";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Rename = @"rename";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Trash = @"trash";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Unknown = @"unknown";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Untrash = @"untrash";
-NSString * const kGTLRAppsActivity_Event_AdditionalEventTypes_Upload = @"upload";
+// GTLRAppsactivity_Event.additionalEventTypes
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Comment = @"comment";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Create = @"create";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Edit = @"edit";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_EmptyTrash = @"emptyTrash";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Move = @"move";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_PermissionChange = @"permissionChange";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Rename = @"rename";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Trash = @"trash";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Unknown = @"unknown";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Untrash = @"untrash";
+NSString * const kGTLRAppsactivity_Event_AdditionalEventTypes_Upload = @"upload";
 
-// GTLRAppsActivity_Event.primaryEventType
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Comment = @"comment";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Create = @"create";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Edit = @"edit";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_EmptyTrash = @"emptyTrash";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Move = @"move";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_PermissionChange = @"permissionChange";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Rename = @"rename";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Trash = @"trash";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Unknown = @"unknown";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Untrash = @"untrash";
-NSString * const kGTLRAppsActivity_Event_PrimaryEventType_Upload = @"upload";
+// GTLRAppsactivity_Event.primaryEventType
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Comment = @"comment";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Create = @"create";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Edit = @"edit";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_EmptyTrash = @"emptyTrash";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Move = @"move";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_PermissionChange = @"permissionChange";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Rename = @"rename";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Trash = @"trash";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Unknown = @"unknown";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Untrash = @"untrash";
+NSString * const kGTLRAppsactivity_Event_PrimaryEventType_Upload = @"upload";
 
-// GTLRAppsActivity_Permission.role
-NSString * const kGTLRAppsActivity_Permission_Role_Commenter = @"commenter";
-NSString * const kGTLRAppsActivity_Permission_Role_Owner     = @"owner";
-NSString * const kGTLRAppsActivity_Permission_Role_Reader    = @"reader";
-NSString * const kGTLRAppsActivity_Permission_Role_Writer    = @"writer";
+// GTLRAppsactivity_Permission.role
+NSString * const kGTLRAppsactivity_Permission_Role_Commenter = @"commenter";
+NSString * const kGTLRAppsactivity_Permission_Role_Owner     = @"owner";
+NSString * const kGTLRAppsactivity_Permission_Role_Reader    = @"reader";
+NSString * const kGTLRAppsactivity_Permission_Role_Writer    = @"writer";
 
-// GTLRAppsActivity_Permission.type
-NSString * const kGTLRAppsActivity_Permission_Type_Anyone = @"anyone";
-NSString * const kGTLRAppsActivity_Permission_Type_Domain = @"domain";
-NSString * const kGTLRAppsActivity_Permission_Type_Group  = @"group";
-NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
+// GTLRAppsactivity_Permission.type
+NSString * const kGTLRAppsactivity_Permission_Type_Anyone = @"anyone";
+NSString * const kGTLRAppsactivity_Permission_Type_Domain = @"domain";
+NSString * const kGTLRAppsactivity_Permission_Type_Group  = @"group";
+NSString * const kGTLRAppsactivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Activity
+//   GTLRAppsactivity_Activity
 //
 
-@implementation GTLRAppsActivity_Activity
+@implementation GTLRAppsactivity_Activity
 @dynamic combinedEvent, singleEvents;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
-    @"singleEvents" : [GTLRAppsActivity_Event class]
+    @"singleEvents" : [GTLRAppsactivity_Event class]
   };
   return map;
 }
@@ -71,17 +71,17 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Event
+//   GTLRAppsactivity_Event
 //
 
-@implementation GTLRAppsActivity_Event
+@implementation GTLRAppsactivity_Event
 @dynamic additionalEventTypes, eventTimeMillis, fromUserDeletion, move,
          permissionChanges, primaryEventType, rename, target, user;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
     @"additionalEventTypes" : [NSString class],
-    @"permissionChanges" : [GTLRAppsActivity_PermissionChange class]
+    @"permissionChanges" : [GTLRAppsactivity_PermissionChange class]
   };
   return map;
 }
@@ -91,15 +91,15 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_ListActivitiesResponse
+//   GTLRAppsactivity_ListActivitiesResponse
 //
 
-@implementation GTLRAppsActivity_ListActivitiesResponse
+@implementation GTLRAppsactivity_ListActivitiesResponse
 @dynamic activities, nextPageToken;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
-    @"activities" : [GTLRAppsActivity_Activity class]
+    @"activities" : [GTLRAppsactivity_Activity class]
   };
   return map;
 }
@@ -113,16 +113,16 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Move
+//   GTLRAppsactivity_Move
 //
 
-@implementation GTLRAppsActivity_Move
+@implementation GTLRAppsactivity_Move
 @dynamic addedParents, removedParents;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
-    @"addedParents" : [GTLRAppsActivity_Parent class],
-    @"removedParents" : [GTLRAppsActivity_Parent class]
+    @"addedParents" : [GTLRAppsactivity_Parent class],
+    @"removedParents" : [GTLRAppsactivity_Parent class]
   };
   return map;
 }
@@ -132,10 +132,10 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Parent
+//   GTLRAppsactivity_Parent
 //
 
-@implementation GTLRAppsActivity_Parent
+@implementation GTLRAppsactivity_Parent
 @dynamic identifier, isRoot, title;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
@@ -147,26 +147,26 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Permission
+//   GTLRAppsactivity_Permission
 //
 
-@implementation GTLRAppsActivity_Permission
+@implementation GTLRAppsactivity_Permission
 @dynamic name, permissionId, role, type, user, withLink;
 @end
 
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_PermissionChange
+//   GTLRAppsactivity_PermissionChange
 //
 
-@implementation GTLRAppsActivity_PermissionChange
+@implementation GTLRAppsactivity_PermissionChange
 @dynamic addedPermissions, removedPermissions;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
-    @"addedPermissions" : [GTLRAppsActivity_Permission class],
-    @"removedPermissions" : [GTLRAppsActivity_Permission class]
+    @"addedPermissions" : [GTLRAppsactivity_Permission class],
+    @"removedPermissions" : [GTLRAppsactivity_Permission class]
   };
   return map;
 }
@@ -176,30 +176,30 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Photo
+//   GTLRAppsactivity_Photo
 //
 
-@implementation GTLRAppsActivity_Photo
+@implementation GTLRAppsactivity_Photo
 @dynamic url;
 @end
 
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Rename
+//   GTLRAppsactivity_Rename
 //
 
-@implementation GTLRAppsActivity_Rename
+@implementation GTLRAppsactivity_Rename
 @dynamic newTitle, oldTitle;
 @end
 
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_Target
+//   GTLRAppsactivity_Target
 //
 
-@implementation GTLRAppsActivity_Target
+@implementation GTLRAppsactivity_Target
 @dynamic identifier, mimeType, name;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
@@ -211,9 +211,9 @@ NSString * const kGTLRAppsActivity_Permission_Type_User   = @"user";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppsActivity_User
+//   GTLRAppsactivity_User
 //
 
-@implementation GTLRAppsActivity_User
+@implementation GTLRAppsactivity_User
 @dynamic isDeleted, isMe, name, permissionId, photo;
 @end

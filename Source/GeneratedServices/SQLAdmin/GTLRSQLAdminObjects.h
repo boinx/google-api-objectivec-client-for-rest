@@ -37,6 +37,7 @@
 @class GTLRSQLAdmin_ImportContext_CsvImportOptions;
 @class GTLRSQLAdmin_IpConfiguration;
 @class GTLRSQLAdmin_IpMapping;
+@class GTLRSQLAdmin_Labels;
 @class GTLRSQLAdmin_LocationPreference;
 @class GTLRSQLAdmin_MaintenanceWindow;
 @class GTLRSQLAdmin_MySqlReplicaConfiguration;
@@ -876,6 +877,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ *  User defined labels for Cloud SQL instances.
+ */
+@interface GTLRSQLAdmin_Labels : GTLRObject
+
+/** The key of the label. */
+@property(nonatomic, copy, nullable) NSString *key;
+
+/** The value of the label. */
+@property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
  *  Preferred location. This specifies where a Cloud SQL instance should
  *  preferably be located, either in a specific Compute Engine zone, or
  *  co-located with an App Engine application. Note that if the preferred
@@ -1228,6 +1243,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *authorizedGaeApplications;
 
+/** Reserved for future use. */
+@property(nonatomic, copy, nullable) NSString *availabilityType;
+
 /** The daily backup configuration for the instance. */
 @property(nonatomic, strong, nullable) GTLRSQLAdmin_BackupConfiguration *backupConfiguration;
 
@@ -1275,6 +1293,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** This is always sql#settings. */
 @property(nonatomic, copy, nullable) NSString *kind;
 
+/** User defined labels. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSQLAdmin_Labels *> *labels;
+
 /**
  *  The location preference settings. This allows the instance to be located as
  *  near as possible to either an App Engine app or GCE zone for better
@@ -1320,6 +1341,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *storageAutoResize;
+
+/**
+ *  The maximum size to which storage capacity can be automatically increased.
+ *  The default value is 0, which specifies that there is no limit. Applies only
+ *  to Second Generation instances.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *storageAutoResizeLimit;
 
 /**
  *  The tier of service for this instance, for example D1, D2. For more

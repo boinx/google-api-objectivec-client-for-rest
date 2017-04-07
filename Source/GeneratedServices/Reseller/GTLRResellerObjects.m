@@ -44,6 +44,34 @@
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRReseller_NotifyGetwatchdetailsResponse
+//
+
+@implementation GTLRReseller_NotifyGetwatchdetailsResponse
+@dynamic serviceAccountEmailAddresses, topicName;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"serviceAccountEmailAddresses" : [NSString class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRReseller_NotifyResource
+//
+
+@implementation GTLRReseller_NotifyResource
+@dynamic topicName;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRReseller_RenewalSettings
 //
 
@@ -70,8 +98,8 @@
 @implementation GTLRReseller_Subscription
 @dynamic billingMethod, creationTime, customerDomain, customerId, dealCode,
          kind, plan, purchaseOrderId, renewalSettings, resourceUiUrl, seats,
-         skuId, status, subscriptionId, suspensionReasons, transferInfo,
-         trialSettings;
+         skuId, skuName, status, subscriptionId, suspensionReasons,
+         transferInfo, trialSettings;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{

@@ -401,6 +401,16 @@
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRSQLAdmin_Labels
+//
+
+@implementation GTLRSQLAdmin_Labels
+@dynamic key, value;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRSQLAdmin_LocationPreference
 //
 
@@ -530,16 +540,18 @@
 //
 
 @implementation GTLRSQLAdmin_Settings
-@dynamic activationPolicy, authorizedGaeApplications, backupConfiguration,
-         crashSafeReplicationEnabled, databaseFlags, databaseReplicationEnabled,
-         dataDiskSizeGb, dataDiskType, ipConfiguration, kind,
-         locationPreference, maintenanceWindow, pricingPlan, replicationType,
-         settingsVersion, storageAutoResize, tier;
+@dynamic activationPolicy, authorizedGaeApplications, availabilityType,
+         backupConfiguration, crashSafeReplicationEnabled, databaseFlags,
+         databaseReplicationEnabled, dataDiskSizeGb, dataDiskType,
+         ipConfiguration, kind, labels, locationPreference, maintenanceWindow,
+         pricingPlan, replicationType, settingsVersion, storageAutoResize,
+         storageAutoResizeLimit, tier;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
     @"authorizedGaeApplications" : [NSString class],
-    @"databaseFlags" : [GTLRSQLAdmin_DatabaseFlags class]
+    @"databaseFlags" : [GTLRSQLAdmin_DatabaseFlags class],
+    @"labels" : [GTLRSQLAdmin_Labels class]
   };
   return map;
 }

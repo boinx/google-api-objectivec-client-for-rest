@@ -36,6 +36,7 @@
 @class GTLRCompute_AutoscalingPolicyCustomMetricUtilization;
 @class GTLRCompute_AutoscalingPolicyLoadBalancingUtilization;
 @class GTLRCompute_Backend;
+@class GTLRCompute_BackendBucket;
 @class GTLRCompute_BackendService;
 @class GTLRCompute_BackendServiceAggregatedList_Items;
 @class GTLRCompute_BackendServicesScopedList;
@@ -224,6 +225,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_AddressesScopedList_Warning_Code_NoRes
 GTLR_EXTERN NSString * const kGTLRCompute_AddressesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_AddressesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_AddressesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_AddressesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -284,6 +287,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_AutoscalersScopedList_Warning_Code_NoR
 GTLR_EXTERN NSString * const kGTLRCompute_AutoscalersScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_AutoscalersScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_AutoscalersScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_AutoscalersScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -378,6 +383,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_BackendServicesScopedList_Warning_Code
 GTLR_EXTERN NSString * const kGTLRCompute_BackendServicesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_BackendServicesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_BackendServicesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_BackendServicesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -436,6 +443,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_DisksScopedList_Warning_Code_NoResults
 GTLR_EXTERN NSString * const kGTLRCompute_DisksScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_DisksScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_DisksScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_DisksScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -472,6 +481,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_DiskTypesScopedList_Warning_Code_NoRes
 GTLR_EXTERN NSString * const kGTLRCompute_DiskTypesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_DiskTypesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_DiskTypesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_DiskTypesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -486,6 +497,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_DiskTypesScopedList_Warning_Code_Unrea
 GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRule_IPProtocol_Ah;
 /** Value: "ESP" */
 GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRule_IPProtocol_Esp;
+/** Value: "ICMP" */
+GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRule_IPProtocol_Icmp;
 /** Value: "SCTP" */
 GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRule_IPProtocol_Sctp;
 /** Value: "TCP" */
@@ -532,6 +545,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRulesScopedList_Warning_Code
 GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRulesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRulesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRulesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRulesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -658,6 +673,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupManagersScopedList_Warnin
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -702,6 +719,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupsScopedList_Warning_Code_
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupsScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupsScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceGroupsScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -738,6 +757,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_InstancesScopedList_Warning_Code_NoRes
 GTLR_EXTERN NSString * const kGTLRCompute_InstancesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_InstancesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstancesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_InstancesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -794,6 +815,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_MachineTypesScopedList_Warning_Code_No
 GTLR_EXTERN NSString * const kGTLRCompute_MachineTypesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_MachineTypesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_MachineTypesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_MachineTypesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -880,6 +903,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Operation_Warnings_Item_Code_NoResults
 GTLR_EXTERN NSString * const kGTLRCompute_Operation_Warnings_Item_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_Operation_Warnings_Item_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_Operation_Warnings_Item_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_Operation_Warnings_Item_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -916,6 +941,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_OperationsScopedList_Warning_Code_NoRe
 GTLR_EXTERN NSString * const kGTLRCompute_OperationsScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_OperationsScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_OperationsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_OperationsScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -928,10 +955,14 @@ GTLR_EXTERN NSString * const kGTLRCompute_OperationsScopedList_Warning_Code_Unre
 
 /** Value: "AUTOSCALERS" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_Autoscalers;
+/** Value: "BACKEND_BUCKETS" */
+GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_BackendBuckets;
 /** Value: "BACKEND_SERVICES" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_BackendServices;
 /** Value: "CPUS" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_Cpus;
+/** Value: "CPUS_ALL_REGIONS" */
+GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_CpusAllRegions;
 /** Value: "DISKS_TOTAL_GB" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_DisksTotalGb;
 /** Value: "FIREWALLS" */
@@ -988,8 +1019,6 @@ GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_TargetPools;
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_TargetSslProxies;
 /** Value: "TARGET_VPN_GATEWAYS" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_TargetVpnGateways;
-/** Value: "TOTAL_CPUS" */
-GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_TotalCpus;
 /** Value: "URL_MAPS" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_UrlMaps;
 /** Value: "VPN_TUNNELS" */
@@ -1040,6 +1069,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Route_Warnings_Item_Code_NoResultsOnPa
 GTLR_EXTERN NSString * const kGTLRCompute_Route_Warnings_Item_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_Route_Warnings_Item_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_Route_Warnings_Item_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_Route_Warnings_Item_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1076,6 +1107,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_RoutersScopedList_Warning_Code_NoResul
 GTLR_EXTERN NSString * const kGTLRCompute_RoutersScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_RoutersScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_RoutersScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_RoutersScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1160,6 +1193,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_SubnetworksScopedList_Warning_Code_NoR
 GTLR_EXTERN NSString * const kGTLRCompute_SubnetworksScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_SubnetworksScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SubnetworksScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_SubnetworksScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1202,6 +1237,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_TargetInstancesScopedList_Warning_Code
 GTLR_EXTERN NSString * const kGTLRCompute_TargetInstancesScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_TargetInstancesScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_TargetInstancesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_TargetInstancesScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1252,6 +1289,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_TargetPoolsScopedList_Warning_Code_NoR
 GTLR_EXTERN NSString * const kGTLRCompute_TargetPoolsScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_TargetPoolsScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_TargetPoolsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_TargetPoolsScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1316,6 +1355,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Co
 GTLR_EXTERN NSString * const kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1388,6 +1429,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_VpnTunnelsScopedList_Warning_Code_NoRe
 GTLR_EXTERN NSString * const kGTLRCompute_VpnTunnelsScopedList_Warning_Code_NotCriticalError;
 /** Value: "REQUIRED_TOS_AGREEMENT" */
 GTLR_EXTERN NSString * const kGTLRCompute_VpnTunnelsScopedList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_VpnTunnelsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning;
 /** Value: "RESOURCE_NOT_DELETED" */
 GTLR_EXTERN NSString * const kGTLRCompute_VpnTunnelsScopedList_Warning_Code_ResourceNotDeleted;
 /** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
@@ -1443,7 +1486,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  */
 @interface GTLRCompute_Address : GTLRObject
 
-/** The static external IP address represented by this resource. */
+/**
+ *  The static external IP address represented by this resource. Only IPv4 is
+ *  supported.
+ */
 @property(nonatomic, copy, nullable) NSString *address;
 
 /** [Output Only] Creation timestamp in RFC3339 text format. */
@@ -1612,6 +1658,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_AddressesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_AddressesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_AddressesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_AddressesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -2124,6 +2172,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_AutoscalersScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_AutoscalersScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_AutoscalersScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_AutoscalersScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -2412,6 +2462,98 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 
 /**
+ *  A BackendBucket resource. This resource defines a Cloud Storage bucket.
+ */
+@interface GTLRCompute_BackendBucket : GTLRObject
+
+/** Cloud Storage bucket name. */
+@property(nonatomic, copy, nullable) NSString *bucketName;
+
+/** [Output Only] Creation timestamp in RFC3339 text format. */
+@property(nonatomic, copy, nullable) NSString *creationTimestamp;
+
+/**
+ *  An optional textual description of the resource; provided by the client when
+ *  the resource is created.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/**
+ *  If true, enable Cloud CDN for this BackendBucket.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *enableCdn;
+
+/**
+ *  [Output Only] Unique identifier for the resource; defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ *
+ *  Uses NSNumber of unsignedLongLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *identifier;
+
+/** Type of the resource. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  Name of the resource. Provided by the client when the resource is created.
+ *  The name must be 1-63 characters long, and comply with RFC1035.
+ *  Specifically, the name must be 1-63 characters long and match the regular
+ *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  be a lowercase letter, and all following characters must be a dash,
+ *  lowercase letter, or digit, except the last character, which cannot be a
+ *  dash.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/** [Output Only] Server-defined URL for the resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+@end
+
+
+/**
+ *  Contains a list of BackendBucket resources.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "items" property. If returned as the result of a query, it should
+ *        support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRCompute_BackendBucketList : GTLRCollectionObject
+
+/**
+ *  [Output Only] Unique identifier for the resource; defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  A list of BackendBucket resources.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_BackendBucket *> *items;
+
+/** Type of resource. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/** [Output Only] A token used to continue a truncated list request. */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+/** [Output Only] Server-defined URL for this resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+@end
+
+
+/**
  *  A BackendService resource. This resource defines a group of backend virtual
  *  machines and their serving capacity.
  */
@@ -2531,7 +2673,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The protocol this BackendService uses to communicate with backends.
- *  Possible values are HTTP, HTTPS, HTTP2, TCP and SSL. The default is HTTP.
+ *  Possible values are HTTP, HTTPS, TCP, and SSL. The default is HTTP.
  *  For internal load balancing, the possible values are TCP and UDP, and the
  *  default is TCP.
  *
@@ -2671,7 +2813,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  */
 @property(nonatomic, copy, nullable) NSString *kind;
 
-/** [Output Only] A token used to continue a truncated list request. */
+/**
+ *  [Output Only] This token allows you to get the next page of results for list
+ *  requests. If the number of results is larger than maxResults, use the
+ *  nextPageToken as a value for the query parameter pageToken in the next list
+ *  request. Subsequent list requests will have their own nextPageToken to
+ *  continue paging through the results.
+ */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
 
 /** [Output Only] Server-defined URL for this resource. */
@@ -2734,6 +2882,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_BackendServicesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_BackendServicesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_BackendServicesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_BackendServicesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -3099,7 +3249,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *  requests. If the number of results is larger than maxResults, use the
  *  nextPageToken as a value for the query parameter pageToken in the next list
  *  request. Subsequent list requests will have their own nextPageToken to
- *  continue paging through the results.
+ *  continue paging through the results. Acceptable values are 0 to 500,
+ *  inclusive. (Default: 500)
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
 
@@ -3132,15 +3283,14 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 @interface GTLRCompute_DiskList : GTLRCollectionObject
 
 /**
- *  [Output Only] The unique identifier for the resource. This identifier is
- *  defined by the server.
+ *  [Output Only] Unique identifier for the resource; defined by the server.
  *
  *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
  */
 @property(nonatomic, copy, nullable) NSString *identifier;
 
 /**
- *  [Output Only] A list of persistent disks.
+ *  A list of Disk resources.
  *
  *  @note This property is used to support NSFastEnumeration and indexed
  *        subscripting on this class.
@@ -3153,11 +3303,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 @property(nonatomic, copy, nullable) NSString *kind;
 
 /**
- *  [Output Only] This token allows you to get the next page of results for list
- *  requests. If the number of results is larger than maxResults, use the
- *  nextPageToken as a value for the query parameter pageToken in the next list
- *  request. Subsequent list requests will have their own nextPageToken to
- *  continue paging through the results.
+ *  This token allows you to get the next page of results for list requests. If
+ *  the number of results is larger than maxResults, use the nextPageToken as a
+ *  value for the query parameter pageToken in the next list request. Subsequent
+ *  list requests will have their own nextPageToken to continue paging through
+ *  the results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
 
@@ -3263,6 +3413,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_DisksScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_DisksScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_DisksScopedList_Warning_Code_ResourceNotDeleted Value
  *        "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_DisksScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -3514,6 +3666,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_DiskTypesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_DiskTypesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_DiskTypesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_DiskTypesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -3629,7 +3783,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *  properties are set, the firewall will apply to traffic that has source IP
  *  address within sourceRanges OR the source IP that belongs to a tag listed in
  *  the sourceTags property. The connection does not need to match both
- *  properties for the firewall to apply.
+ *  properties for the firewall to apply. Only IPv4 is supported.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *sourceRanges;
 
@@ -3766,7 +3920,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The IP address that this forwarding rule is serving on behalf of.
- *  For global forwarding rules, the address must be a global IP; for regional
+ *  For global forwarding rules, the address must be a global IP. For regional
  *  forwarding rules, the address must live in the same region as the forwarding
  *  rule. By default, this field is empty and an ephemeral IP from the same
  *  scope (global or regional) will be assigned.
@@ -3774,19 +3928,20 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *  address belonging to the network/subnetwork configured for the forwarding
  *  rule. A reserved address cannot be used. If the field is empty, the IP
  *  address will be automatically allocated from the internal IP range of the
- *  subnetwork or network configured for this forwarding rule.
+ *  subnetwork or network configured for this forwarding rule. Only IPv4 is
+ *  supported.
  */
 @property(nonatomic, copy, nullable) NSString *IPAddress;
 
 /**
  *  The IP protocol to which this rule applies. Valid options are TCP, UDP, ESP,
  *  AH, SCTP or ICMP.
- *  When the load balancing scheme is INTERNAL</code, only TCP and UDP are
- *  valid.
+ *  When the load balancing scheme is INTERNAL, only TCP and UDP are valid.
  *
  *  Likely values:
  *    @arg @c kGTLRCompute_ForwardingRule_IPProtocol_Ah Value "AH"
  *    @arg @c kGTLRCompute_ForwardingRule_IPProtocol_Esp Value "ESP"
+ *    @arg @c kGTLRCompute_ForwardingRule_IPProtocol_Icmp Value "ICMP"
  *    @arg @c kGTLRCompute_ForwardingRule_IPProtocol_Sctp Value "SCTP"
  *    @arg @c kGTLRCompute_ForwardingRule_IPProtocol_Tcp Value "TCP"
  *    @arg @c kGTLRCompute_ForwardingRule_IPProtocol_Udp Value "UDP"
@@ -3801,7 +3956,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  This signifies what the ForwardingRule will be used for and can only take
- *  the following values: INTERNAL EXTERNAL The value of INTERNAL means that
+ *  the following values: INTERNAL, EXTERNAL The value of INTERNAL means that
  *  this will be used for Internal Network Load Balancing (TCP, UDP). The value
  *  of EXTERNAL means that this will be used for External Load Balancing
  *  (HTTP(S) LB, External TCP/UDP LB, SSL Proxy)
@@ -3877,10 +4032,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 /**
  *  The URL of the target resource to receive the matched traffic. For regional
  *  forwarding rules, this target must live in the same region as the forwarding
- *  rule. For global forwarding rules, this target must be a global
- *  TargetHttpProxy or TargetHttpsProxy resource. The forwarded traffic must be
- *  of a type appropriate to the target object. For example, TargetHttpProxy
- *  requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
+ *  rule. For global forwarding rules, this target must be a global load
+ *  balancing resource. The forwarded traffic must be of a type appropriate to
+ *  the target object. For example, TargetHttpProxy requires HTTP traffic, and
+ *  TargetHttpsProxy requires HTTPS traffic.
  *  This field is not used for internal load balancing.
  */
 @property(nonatomic, copy, nullable) NSString *target;
@@ -4034,6 +4189,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_ForwardingRulesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_ForwardingRulesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_ForwardingRulesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_ForwardingRulesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -4335,6 +4492,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The TCP port number for the health check request. The default value is 80.
+ *  Valid values are 1 through 65535.
  *
  *  Uses NSNumber of intValue.
  */
@@ -4625,6 +4783,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The TCP port number for the health check request. The default value is 443.
+ *  Valid values are 1 through 65535.
  *
  *  Uses NSNumber of intValue.
  */
@@ -5020,9 +5179,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  A list of service accounts, with their specified scopes, authorized for this
- *  instance. Service accounts generate access tokens that can be accessed
- *  through the metadata server and used to authenticate applications on the
- *  instance. See Service Accounts for more information.
+ *  instance. Only one service account per VM instance is supported.
+ *  Service accounts generate access tokens that can be accessed through the
+ *  metadata server and used to authenticate applications on the instance. See
+ *  Service Accounts for more information.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_ServiceAccount *> *serviceAccounts;
 
@@ -5723,6 +5883,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_InstanceGroupManagersScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -5960,6 +6122,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_InstanceGroupsScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_InstanceGroupsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_InstanceGroupsScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_InstanceGroupsScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -6237,6 +6401,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_InstancesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_InstancesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_InstancesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_InstancesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -6291,6 +6457,20 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *  zones/us-central1-f/machineTypes/n1-standard-1
  */
 @property(nonatomic, copy, nullable) NSString *machineType;
+
+@end
+
+
+/**
+ *  GTLRCompute_InstancesSetServiceAccountRequest
+ */
+@interface GTLRCompute_InstancesSetServiceAccountRequest : GTLRObject
+
+/** Email address of the service account. */
+@property(nonatomic, copy, nullable) NSString *email;
+
+/** The list of scopes to be made available for this service account. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *scopes;
 
 @end
 
@@ -6747,6 +6927,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_MachineTypesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_MachineTypesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_MachineTypesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_MachineTypesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -7107,16 +7289,25 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_AccessConfig *> *accessConfigs;
 
 /**
+ *  [Output Only] Type of the resource. Always compute#networkInterface for
+ *  network interfaces.
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
  *  [Output Only] The name of the network interface, generated by the server.
  *  For network devices, these are eth0, eth1, etc.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
 /**
- *  URL of the network resource for this instance. This is required for creating
- *  an instance but optional when creating a firewall rule. If not specified
- *  when creating a firewall rule, the default network is used:
- *  global/networks/default
+ *  URL of the network resource for this instance. When creating an instance, if
+ *  neither the network nor the subnetwork is specified, the default network
+ *  global/networks/default is used; if the network is not specified but the
+ *  subnetwork is specified, the network is inferred.
+ *  This field is optional when creating a firewall rule. If not specified when
+ *  creating a firewall rule, the default network global/networks/default is
+ *  used.
  *  If you specify this property, you can specify the network as a full or
  *  partial URL. For example, the following are all valid URLs:
  *  -
@@ -7204,7 +7395,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 /** [Output Only] Reserved for future use. */
 @property(nonatomic, copy, nullable) NSString *clientOperationId;
 
-/** [Output Only] Creation timestamp in RFC3339 text format. */
+/** [Deprecated] This field is deprecated. */
 @property(nonatomic, copy, nullable) NSString *creationTimestamp;
 
 /**
@@ -7405,6 +7596,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_Operation_Warnings_Item_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_Operation_Warnings_Item_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_Operation_Warnings_Item_Code_ResourceNotDeleted Value
  *        "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_Operation_Warnings_Item_Code_SingleInstancePropertyTemplate
@@ -7618,6 +7811,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_OperationsScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_OperationsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_OperationsScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_OperationsScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -7802,8 +7997,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *
  *  Likely values:
  *    @arg @c kGTLRCompute_Quota_Metric_Autoscalers Value "AUTOSCALERS"
+ *    @arg @c kGTLRCompute_Quota_Metric_BackendBuckets Value "BACKEND_BUCKETS"
  *    @arg @c kGTLRCompute_Quota_Metric_BackendServices Value "BACKEND_SERVICES"
  *    @arg @c kGTLRCompute_Quota_Metric_Cpus Value "CPUS"
+ *    @arg @c kGTLRCompute_Quota_Metric_CpusAllRegions Value "CPUS_ALL_REGIONS"
  *    @arg @c kGTLRCompute_Quota_Metric_DisksTotalGb Value "DISKS_TOTAL_GB"
  *    @arg @c kGTLRCompute_Quota_Metric_Firewalls Value "FIREWALLS"
  *    @arg @c kGTLRCompute_Quota_Metric_ForwardingRules Value "FORWARDING_RULES"
@@ -7841,7 +8038,6 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        "TARGET_SSL_PROXIES"
  *    @arg @c kGTLRCompute_Quota_Metric_TargetVpnGateways Value
  *        "TARGET_VPN_GATEWAYS"
- *    @arg @c kGTLRCompute_Quota_Metric_TotalCpus Value "TOTAL_CPUS"
  *    @arg @c kGTLRCompute_Quota_Metric_UrlMaps Value "URL_MAPS"
  *    @arg @c kGTLRCompute_Quota_Metric_VpnTunnels Value "VPN_TUNNELS"
  */
@@ -8292,7 +8488,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *  smallest priority value. If there is still a tie, it uses the layer three
  *  and four packet headers to select just one of the remaining matching routes.
  *  The packet is then forwarded as specified by the nextHop field of the
- *  winning route - either to another instance destination, a instance gateway
+ *  winning route - either to another instance destination, an instance gateway,
  *  or a Google Compute Engine-operated gateway.
  *  Packets that do not match any route in the sending instance's routing table
  *  are dropped.
@@ -8310,7 +8506,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  */
 @property(nonatomic, copy, nullable) NSString *descriptionProperty;
 
-/** The destination range of outgoing packets that this route applies to. */
+/**
+ *  The destination range of outgoing packets that this route applies to. Only
+ *  IPv4 is supported.
+ */
 @property(nonatomic, copy, nullable) NSString *destRange;
 
 /**
@@ -8359,6 +8558,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The network IP address of an instance that should handle matching packets.
+ *  Only IPv4 is supported.
  */
 @property(nonatomic, copy, nullable) NSString *nextHopIp;
 
@@ -8429,6 +8629,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_Route_Warnings_Item_Code_RequiredTosAgreement Value
  *        "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_Route_Warnings_Item_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_Route_Warnings_Item_Code_ResourceNotDeleted Value
  *        "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_Route_Warnings_Item_Code_SingleInstancePropertyTemplate
@@ -8664,7 +8866,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 /** Name of the interface the BGP peer is associated with. */
 @property(nonatomic, copy, nullable) NSString *interfaceName;
 
-/** IP address of the interface inside Google Cloud Platform. */
+/**
+ *  IP address of the interface inside Google Cloud Platform. Only IPv4 is
+ *  supported.
+ */
 @property(nonatomic, copy, nullable) NSString *ipAddress;
 
 /**
@@ -8681,7 +8886,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  */
 @property(nonatomic, strong, nullable) NSNumber *peerAsn;
 
-/** IP address of the BGP interface outside Google cloud. */
+/**
+ *  IP address of the BGP interface outside Google cloud. Only IPv4 is
+ *  supported.
+ */
 @property(nonatomic, copy, nullable) NSString *peerIpAddress;
 
 @end
@@ -8824,6 +9032,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_RoutersScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_RoutersScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_RoutersScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_RoutersScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -9013,10 +9223,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 @property(nonatomic, copy, nullable) NSString *selfLink;
 
 /**
- *  [Output Only] The starting byte position of the output that was returned.
- *  This should match the start parameter sent with the request. If the serial
- *  console output exceeds the size of the buffer, older output will be
- *  overwritten by newer content and the start values will be mismatched.
+ *  The starting byte position of the output that was returned. This should
+ *  match the start parameter sent with the request. If the serial console
+ *  output exceeds the size of the buffer, older output will be overwritten by
+ *  newer content and the start values will be mismatched.
  *
  *  Uses NSNumber of longLongValue.
  */
@@ -9325,6 +9535,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The TCP port number for the health check request. The default value is 443.
+ *  Valid values are 1 through 65535.
  *
  *  Uses NSNumber of intValue.
  */
@@ -9400,6 +9611,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *  The range of internal addresses that are owned by this subnetwork. Provide
  *  this property when you create the subnetwork. For example, 10.0.0.0/8 or
  *  192.168.0.0/16. Ranges must be unique and non-overlapping within a network.
+ *  Only IPv4 is supported.
  */
 @property(nonatomic, copy, nullable) NSString *ipCidrRange;
 
@@ -9600,6 +9812,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_SubnetworksScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_SubnetworksScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_SubnetworksScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_SubnetworksScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -10120,6 +10334,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_TargetInstancesScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_TargetInstancesScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_TargetInstancesScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_TargetInstancesScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -10164,8 +10380,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 
 /**
- *  A TargetPool resource. This resource defines a pool of instances, associated
- *  HttpHealthCheck resources, and the fallback target pool.
+ *  A TargetPool resource. This resource defines a pool of instances, an
+ *  associated HttpHealthCheck resource, and the fallback target pool.
  */
 @interface GTLRCompute_TargetPool : GTLRObject
 
@@ -10214,10 +10430,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 @property(nonatomic, strong, nullable) NSNumber *failoverRatio;
 
 /**
- *  A list of URLs to the HttpHealthCheck resource. A member instance in this
- *  pool is considered healthy if and only if all specified health checks pass.
- *  An empty list means all member instances will be considered healthy at all
- *  times.
+ *  The URL of the HttpHealthCheck resource. A member instance in this pool is
+ *  considered healthy if and only if the health checks pass. An empty list
+ *  means all member instances will be considered healthy at all times. Only
+ *  HttpHealthChecks are supported. Only one health check may be specified.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *healthChecks;
 
@@ -10400,7 +10616,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  */
 @interface GTLRCompute_TargetPoolsAddHealthCheckRequest : GTLRObject
 
-/** A list of HttpHealthCheck resources to add to the target pool. */
+/** The HttpHealthCheck to add to the target pool. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_HealthCheckReference *> *healthChecks;
 
 @end
@@ -10507,6 +10723,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_TargetPoolsScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_TargetPoolsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_TargetPoolsScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_TargetPoolsScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -10950,6 +11168,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_TargetVpnGatewaysScopedList_Warning_Code_SingleInstancePropertyTemplate
@@ -11000,6 +11220,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 
 /**
  *  The TCP port number for the health check request. The default value is 80.
+ *  Valid values are 1 through 65535.
  *
  *  Uses NSNumber of intValue.
  */
@@ -11326,7 +11547,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 /**
  *  Local traffic selector to use when establishing the VPN tunnel with peer VPN
  *  gateway. The value should be a CIDR formatted string, for example:
- *  192.168.0.0/16. The ranges should be disjoint.
+ *  192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *localTrafficSelector;
 
@@ -11341,7 +11562,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/** IP address of the peer VPN gateway. */
+/** IP address of the peer VPN gateway. Only IPv4 is supported. */
 @property(nonatomic, copy, nullable) NSString *peerIp;
 
 /** [Output Only] URL of the region where the VPN tunnel resides. */
@@ -11350,7 +11571,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
 /**
  *  Remote traffic selectors to use when establishing the VPN tunnel with peer
  *  VPN gateway. The value should be a CIDR formatted string, for example:
- *  192.168.0.0/16. The ranges should be disjoint.
+ *  192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *remoteTrafficSelector;
 
@@ -11552,6 +11773,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Zone_Status_Up;
  *        Value "NOT_CRITICAL_ERROR"
  *    @arg @c kGTLRCompute_VpnTunnelsScopedList_Warning_Code_RequiredTosAgreement
  *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_VpnTunnelsScopedList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
  *    @arg @c kGTLRCompute_VpnTunnelsScopedList_Warning_Code_ResourceNotDeleted
  *        Value "RESOURCE_NOT_DELETED"
  *    @arg @c kGTLRCompute_VpnTunnelsScopedList_Warning_Code_SingleInstancePropertyTemplate
