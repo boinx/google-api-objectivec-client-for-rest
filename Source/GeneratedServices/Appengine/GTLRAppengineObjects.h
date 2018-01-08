@@ -21,16 +21,22 @@
 
 @class GTLRAppengine_ApiConfigHandler;
 @class GTLRAppengine_ApiEndpointHandler;
+@class GTLRAppengine_AuthorizedCertificate;
+@class GTLRAppengine_AuthorizedDomain;
 @class GTLRAppengine_AutomaticScaling;
 @class GTLRAppengine_BasicScaling;
+@class GTLRAppengine_CertificateRawData;
 @class GTLRAppengine_ContainerInfo;
 @class GTLRAppengine_CpuUtilization;
 @class GTLRAppengine_Deployment;
 @class GTLRAppengine_Deployment_Files;
 @class GTLRAppengine_DiskUtilization;
+@class GTLRAppengine_DomainMapping;
 @class GTLRAppengine_EndpointsApiService;
 @class GTLRAppengine_ErrorHandler;
+@class GTLRAppengine_FeatureSettings;
 @class GTLRAppengine_FileInfo;
+@class GTLRAppengine_FirewallRule;
 @class GTLRAppengine_HealthCheck;
 @class GTLRAppengine_IdentityAwareProxy;
 @class GTLRAppengine_Instance;
@@ -47,9 +53,12 @@
 @class GTLRAppengine_Operation_Response;
 @class GTLRAppengine_ReadinessCheck;
 @class GTLRAppengine_RequestUtilization;
+@class GTLRAppengine_ResourceRecord;
 @class GTLRAppengine_Resources;
 @class GTLRAppengine_ScriptHandler;
 @class GTLRAppengine_Service;
+@class GTLRAppengine_SslSettings;
+@class GTLRAppengine_StandardSchedulerSettings;
 @class GTLRAppengine_StaticFilesHandler;
 @class GTLRAppengine_StaticFilesHandler_HttpHeaders;
 @class GTLRAppengine_Status;
@@ -63,6 +72,11 @@
 @class GTLRAppengine_Version_EnvVariables;
 @class GTLRAppengine_Volume;
 @class GTLRAppengine_ZipInfo;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -229,6 +243,24 @@ GTLR_EXTERN NSString * const kGTLRAppengine_ErrorHandler_ErrorCode_ErrorCodeTime
 GTLR_EXTERN NSString * const kGTLRAppengine_ErrorHandler_ErrorCode_ErrorCodeUnspecified;
 
 // ----------------------------------------------------------------------------
+// GTLRAppengine_FirewallRule.action
+
+/**
+ *  Matching requests are allowed.
+ *
+ *  Value: "ALLOW"
+ */
+GTLR_EXTERN NSString * const kGTLRAppengine_FirewallRule_Action_Allow;
+/**
+ *  Matching requests are denied.
+ *
+ *  Value: "DENY"
+ */
+GTLR_EXTERN NSString * const kGTLRAppengine_FirewallRule_Action_Deny;
+/** Value: "UNSPECIFIED_ACTION" */
+GTLR_EXTERN NSString * const kGTLRAppengine_FirewallRule_Action_UnspecifiedAction;
+
+// ----------------------------------------------------------------------------
 // GTLRAppengine_Instance.availability
 
 /** Value: "DYNAMIC" */
@@ -237,6 +269,34 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Instance_Availability_Dynamic;
 GTLR_EXTERN NSString * const kGTLRAppengine_Instance_Availability_Resident;
 /** Value: "UNSPECIFIED" */
 GTLR_EXTERN NSString * const kGTLRAppengine_Instance_Availability_Unspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRAppengine_ResourceRecord.type
+
+/**
+ *  An A resource record. Data is an IPv4 address.
+ *
+ *  Value: "A"
+ */
+GTLR_EXTERN NSString * const kGTLRAppengine_ResourceRecord_Type_A;
+/**
+ *  An AAAA resource record. Data is an IPv6 address.
+ *
+ *  Value: "AAAA"
+ */
+GTLR_EXTERN NSString * const kGTLRAppengine_ResourceRecord_Type_Aaaa;
+/**
+ *  A CNAME resource record. Data is a domain name to be aliased.
+ *
+ *  Value: "CNAME"
+ */
+GTLR_EXTERN NSString * const kGTLRAppengine_ResourceRecord_Type_Cname;
+/**
+ *  An unknown resource record.
+ *
+ *  Value: "RECORD_TYPE_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRAppengine_ResourceRecord_Type_RecordTypeUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRAppengine_TrafficSplit.shardBy
@@ -538,7 +598,7 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 
 /**
  *  An Application resource contains the top-level configuration of an App
- *  Engine application. Next tag: 19
+ *  Engine application.
  */
 @interface GTLRAppengine_Application : GTLRObject
 
@@ -576,6 +636,9 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *  dispatch rules can be supported.\@OutputOnly
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRAppengine_UrlDispatchRule *> *dispatchRules;
+
+/** The feature specific settings to be used in the application. */
+@property(nonatomic, strong, nullable) GTLRAppengine_FeatureSettings *featureSettings;
 
 /**
  *  The Google Container Registry domain used for storing managed build docker
@@ -623,6 +686,100 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *        has been disabled by the user. (Value: "USER_DISABLED")
  */
 @property(nonatomic, copy, nullable) NSString *servingStatus;
+
+@end
+
+
+/**
+ *  An SSL certificate that a user has been authorized to administer. A user is
+ *  authorized to administer any certificate that applies to one of their
+ *  authorized domains.
+ */
+@interface GTLRAppengine_AuthorizedCertificate : GTLRObject
+
+/**
+ *  The SSL certificate serving the AuthorizedCertificate resource. This must be
+ *  obtained independently from a certificate authority.
+ */
+@property(nonatomic, strong, nullable) GTLRAppengine_CertificateRawData *certificateRawData;
+
+/**
+ *  The user-specified display name of the certificate. This is not guaranteed
+ *  to be unique. Example: My Certificate.
+ */
+@property(nonatomic, copy, nullable) NSString *displayName;
+
+/**
+ *  Aggregate count of the domain mappings with this certificate mapped. This
+ *  count includes domain mappings on applications for which the user does not
+ *  have VIEWER permissions.Only returned by GET or LIST requests when
+ *  specifically requested by the view=FULL_CERTIFICATE option.\@OutputOnly
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *domainMappingsCount;
+
+/**
+ *  Topmost applicable domains of this certificate. This certificate applies to
+ *  these domains and their subdomains. Example: example.com.\@OutputOnly
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *domainNames;
+
+/**
+ *  The time when this certificate expires. To update the renewal time on this
+ *  certificate, upload an SSL certificate with a different expiration time
+ *  using AuthorizedCertificates.UpdateAuthorizedCertificate.\@OutputOnly
+ */
+@property(nonatomic, strong, nullable) GTLRDateTime *expireTime;
+
+/**
+ *  Relative name of the certificate. This is a unique value autogenerated on
+ *  AuthorizedCertificate resource creation. Example: 12345.\@OutputOnly
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  Full path to the AuthorizedCertificate resource in the API. Example:
+ *  apps/myapp/authorizedCertificates/12345.\@OutputOnly
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  The full paths to user visible Domain Mapping resources that have this
+ *  certificate mapped. Example: apps/myapp/domainMappings/example.com.This may
+ *  not represent the full list of mapped domain mappings if the user does not
+ *  have VIEWER permissions on all of the applications that have this
+ *  certificate mapped. See domain_mappings_count for a complete count.Only
+ *  returned by GET or LIST requests when specifically requested by the
+ *  view=FULL_CERTIFICATE option.\@OutputOnly
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *visibleDomainMappings;
+
+@end
+
+
+/**
+ *  A domain that a user has been authorized to administer. To authorize use of
+ *  a domain, verify ownership via Webmaster Central
+ *  (https://www.google.com/webmasters/verification/home).
+ */
+@interface GTLRAppengine_AuthorizedDomain : GTLRObject
+
+/**
+ *  Fully qualified domain name of the domain authorized for use. Example:
+ *  example.com.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  Full path to the AuthorizedDomain resource in the API. Example:
+ *  apps/myapp/authorizedDomains/example.com.\@OutputOnly
+ */
+@property(nonatomic, copy, nullable) NSString *name;
 
 @end
 
@@ -702,6 +859,9 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 /** Target scaling by request utilization. */
 @property(nonatomic, strong, nullable) GTLRAppengine_RequestUtilization *requestUtilization;
 
+/** Scheduler settings for standard environment. */
+@property(nonatomic, strong, nullable) GTLRAppengine_StandardSchedulerSettings *standardSchedulerSettings;
+
 @end
 
 
@@ -725,6 +885,53 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *maxInstances;
+
+@end
+
+
+/**
+ *  Request message for Firewall.BatchUpdateIngressRules.
+ */
+@interface GTLRAppengine_BatchUpdateIngressRulesRequest : GTLRObject
+
+/** A list of FirewallRules to replace the existing set. */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_FirewallRule *> *ingressRules;
+
+@end
+
+
+/**
+ *  Response message for Firewall.UpdateAllIngressRules.
+ */
+@interface GTLRAppengine_BatchUpdateIngressRulesResponse : GTLRObject
+
+/** The full list of ingress FirewallRules for this application. */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_FirewallRule *> *ingressRules;
+
+@end
+
+
+/**
+ *  An SSL certificate obtained from a certificate authority.
+ */
+@interface GTLRAppengine_CertificateRawData : GTLRObject
+
+/**
+ *  Unencrypted PEM encoded RSA private key. This field is set once on
+ *  certificate creation and then encrypted. The key size must be 2048 bits or
+ *  fewer. Must include the header and footer. Example: <pre> -----BEGIN RSA
+ *  PRIVATE KEY----- <unencrypted_key_value> -----END RSA PRIVATE KEY-----
+ *  </pre> \@InputOnly
+ */
+@property(nonatomic, copy, nullable) NSString *privateKey;
+
+/**
+ *  PEM encoded x.509 public key certificate. This field is set once on
+ *  certificate creation. Must include the header and footer. Example: <pre>
+ *  -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE-----
+ *  </pre>
+ */
+@property(nonatomic, copy, nullable) NSString *publicCertificate;
 
 @end
 
@@ -858,6 +1065,53 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 
 
 /**
+ *  A domain serving an App Engine application.
+ */
+@interface GTLRAppengine_DomainMapping : GTLRObject
+
+/**
+ *  Relative name of the domain serving the application. Example: example.com.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  Full path to the DomainMapping resource in the API. Example:
+ *  apps/myapp/domainMapping/example.com.\@OutputOnly
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  The resource records required to configure this domain mapping. These
+ *  records must be added to the domain's DNS configuration in order to serve
+ *  the application via this domain mapping.\@OutputOnly
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_ResourceRecord *> *resourceRecords;
+
+/**
+ *  SSL configuration for this domain. If unconfigured, this domain will not
+ *  serve with SSL.
+ */
+@property(nonatomic, strong, nullable) GTLRAppengine_SslSettings *sslSettings;
+
+@end
+
+
+/**
+ *  A generic empty message that you can re-use to avoid defining duplicated
+ *  empty messages in your APIs. A typical example is to use it as the request
+ *  or the response type of an API method. For instance:
+ *  service Foo {
+ *  rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+ *  }
+ *  The JSON representation for Empty is empty JSON object {}.
+ */
+@interface GTLRAppengine_Empty : GTLRObject
+@end
+
+
+/**
  *  Cloud Endpoints (https://cloud.google.com/endpoints) configuration. The
  *  Endpoints API Service provides tooling for serving Open API and gRPC
  *  endpoints via an NGINX proxy.The fields here refer to the name and
@@ -916,6 +1170,26 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 
 
 /**
+ *  The feature specific settings to be used in the application. These define
+ *  behaviors that are user configurable.
+ */
+@interface GTLRAppengine_FeatureSettings : GTLRObject
+
+/**
+ *  Boolean value indicating if split health checks should be used instead of
+ *  the legacy health checks. At an app.yaml level, this means defaulting to
+ *  'readiness_check' and 'liveness_check' values instead of 'health_check'
+ *  ones. Once the legacy 'health_check' behavior is deprecated, and this value
+ *  is always true, this setting can be removed.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *splitHealthChecks;
+
+@end
+
+
+/**
  *  Single source file that is part of the version to be deployed. Each source
  *  file that is deployed must be specified separately.
  */
@@ -935,6 +1209,59 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *  'http(s)://storage.googleapis.com/<bucket>/<object>'.
  */
 @property(nonatomic, copy, nullable) NSString *sourceUrl;
+
+@end
+
+
+/**
+ *  A single firewall rule that is evaluated against incoming traffic and
+ *  provides an action to take on matched requests.
+ */
+@interface GTLRAppengine_FirewallRule : GTLRObject
+
+/**
+ *  The action to take on matched requests.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRAppengine_FirewallRule_Action_Allow Matching requests are
+ *        allowed. (Value: "ALLOW")
+ *    @arg @c kGTLRAppengine_FirewallRule_Action_Deny Matching requests are
+ *        denied. (Value: "DENY")
+ *    @arg @c kGTLRAppengine_FirewallRule_Action_UnspecifiedAction Value
+ *        "UNSPECIFIED_ACTION"
+ */
+@property(nonatomic, copy, nullable) NSString *action;
+
+/**
+ *  An optional string description of this rule. This field has a maximum length
+ *  of 100 characters.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/**
+ *  A positive integer between 1, Int32.MaxValue-1 that defines the order of
+ *  rule evaluation. Rules with the lowest priority are evaluated first.A
+ *  default rule at priority Int32.MaxValue matches all IPv4 and IPv6 traffic
+ *  when no previous rule matches. Only the action of this rule can be modified
+ *  by the user.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *priority;
+
+/**
+ *  IP address or range, defined using CIDR notation, of requests that this rule
+ *  applies to. You can use the wildcard character "*" to match all IPs
+ *  equivalent to "0/0" and "::/0" together. Examples: 192.168.1.1 or
+ *  192.168.0.0/16 or 2001:db8::/32 or
+ *  2001:0db8:0000:0042:0000:8a2e:0370:7334.<p>Truncation will be silently
+ *  performed on addresses which are not properly truncated. For example,
+ *  1.2.3.4/24 is accepted as the same address as 1.2.3.0/24. Similarly, for
+ *  IPv6, 2001:db8::1/32 is accepted as the same address as 2001:db8::/32.
+ */
+@property(nonatomic, copy, nullable) NSString *sourceRange;
 
 @end
 
@@ -1145,6 +1472,102 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 
 /** Version of the library to select, or "latest". */
 @property(nonatomic, copy, nullable) NSString *version;
+
+@end
+
+
+/**
+ *  Response message for AuthorizedCertificates.ListAuthorizedCertificates.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "certificates" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRAppengine_ListAuthorizedCertificatesResponse : GTLRCollectionObject
+
+/**
+ *  The SSL certificates the user is authorized to administer.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_AuthorizedCertificate *> *certificates;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  Response message for AuthorizedDomains.ListAuthorizedDomains.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "domains" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRAppengine_ListAuthorizedDomainsResponse : GTLRCollectionObject
+
+/**
+ *  The authorized domains belonging to the user.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_AuthorizedDomain *> *domains;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  Response message for DomainMappings.ListDomainMappings.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "domainMappings" property. If returned as the result of a query,
+ *        it should support automatic pagination (when @c shouldFetchNextPages
+ *        is enabled).
+ */
+@interface GTLRAppengine_ListDomainMappingsResponse : GTLRCollectionObject
+
+/**
+ *  The domain mappings for the application.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_DomainMapping *> *domainMappings;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  Response message for Firewall.ListIngressRules.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "ingressRules" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRAppengine_ListIngressRulesResponse : GTLRCollectionObject
+
+/**
+ *  The ingress FirewallRules for this application.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAppengine_FirewallRule *> *ingressRules;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
 
 @end
 
@@ -1411,21 +1834,26 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 
 
 /**
- *  Extra network settings. Only applicable for VM runtimes.
+ *  Extra network settings. Only applicable for App Engine flexible environment
+ *  versions
  */
 @interface GTLRAppengine_Network : GTLRObject
 
 /**
  *  List of ports, or port pairs, to forward from the virtual machine to the
- *  application container.
+ *  application container. Only applicable for App Engine flexible environment
+ *  versions.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *forwardedPorts;
 
-/** Tag to apply to the VM instance during creation. */
+/**
+ *  Tag to apply to the VM instance during creation. Only applicable for for App
+ *  Engine flexible environment versions.
+ */
 @property(nonatomic, copy, nullable) NSString *instanceTag;
 
 /**
- *  Google Cloud Platform network where the virtual machines are created.
+ *  Google Compute Engine network where the virtual machines are created.
  *  Specify the short name, not the resource path.Defaults to default.
  */
 @property(nonatomic, copy, nullable) NSString *name;
@@ -1444,7 +1872,8 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *  If the network the VM instance is being created in is a custom Subnet Mode
  *  Network, then the subnetwork_name must be specified and the IP address is
  *  created from the IPCidrRange of the subnetwork.If specified, the subnetwork
- *  must exist in the same region as the Flex app.
+ *  must exist in the same region as the App Engine flexible environment
+ *  application.
  */
 @property(nonatomic, copy, nullable) NSString *subnetworkName;
 
@@ -1604,35 +2033,6 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 /**
  *  Metadata for the given google.longrunning.Operation.
  */
-@interface GTLRAppengine_OperationMetadataExperimental : GTLRObject
-
-/** Time that this operation completed.\@OutputOnly */
-@property(nonatomic, strong, nullable) GTLRDateTime *endTime;
-
-/** Time that this operation was created.\@OutputOnly */
-@property(nonatomic, strong, nullable) GTLRDateTime *insertTime;
-
-/**
- *  API method that initiated this operation. Example:
- *  google.appengine.experimental.CustomDomains.CreateCustomDomain.\@OutputOnly
- */
-@property(nonatomic, copy, nullable) NSString *method;
-
-/**
- *  Name of the resource that this operation is acting on. Example:
- *  apps/myapp/customDomains/example.com.\@OutputOnly
- */
-@property(nonatomic, copy, nullable) NSString *target;
-
-/** User who requested this operation.\@OutputOnly */
-@property(nonatomic, copy, nullable) NSString *user;
-
-@end
-
-
-/**
- *  Metadata for the given google.longrunning.Operation.
- */
 @interface GTLRAppengine_OperationMetadataV1 : GTLRObject
 
 /** Time that this operation completed.\@OutputOnly */
@@ -1779,6 +2179,13 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  */
 @interface GTLRAppengine_ReadinessCheck : GTLRObject
 
+/**
+ *  A maximum time limit on application initialization, measured from moment the
+ *  application successfully replies to a healthcheck until it is ready to serve
+ *  traffic.
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *appStartTimeout;
+
 /** Interval between health checks. */
 @property(nonatomic, strong, nullable) GTLRDuration *checkInterval;
 
@@ -1836,6 +2243,41 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *targetRequestCountPerSecond;
+
+@end
+
+
+/**
+ *  A DNS resource record.
+ */
+@interface GTLRAppengine_ResourceRecord : GTLRObject
+
+/**
+ *  Relative name of the object affected by this record. Only applicable for
+ *  CNAME records. Example: 'www'.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Data for this record. Values vary by record type, as defined in RFC 1035
+ *  (section 5) and RFC 1034 (section 3.6.1).
+ */
+@property(nonatomic, copy, nullable) NSString *rrdata;
+
+/**
+ *  Resource record type. Example: AAAA.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRAppengine_ResourceRecord_Type_A An A resource record. Data is
+ *        an IPv4 address. (Value: "A")
+ *    @arg @c kGTLRAppengine_ResourceRecord_Type_Aaaa An AAAA resource record.
+ *        Data is an IPv6 address. (Value: "AAAA")
+ *    @arg @c kGTLRAppengine_ResourceRecord_Type_Cname A CNAME resource record.
+ *        Data is a domain name to be aliased. (Value: "CNAME")
+ *    @arg @c kGTLRAppengine_ResourceRecord_Type_RecordTypeUnspecified An
+ *        unknown resource record. (Value: "RECORD_TYPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *type;
 
 @end
 
@@ -1912,6 +2354,58 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  *  within the service.
  */
 @property(nonatomic, strong, nullable) GTLRAppengine_TrafficSplit *split;
+
+@end
+
+
+/**
+ *  SSL configuration for a DomainMapping resource.
+ */
+@interface GTLRAppengine_SslSettings : GTLRObject
+
+/**
+ *  ID of the AuthorizedCertificate resource configuring SSL for the
+ *  application. Clearing this field will remove SSL support. Example: 12345.
+ */
+@property(nonatomic, copy, nullable) NSString *certificateId;
+
+@end
+
+
+/**
+ *  Scheduler settings for standard environment.
+ */
+@interface GTLRAppengine_StandardSchedulerSettings : GTLRObject
+
+/**
+ *  Maximum number of instances for an app version. Set to a non-positive value
+ *  (0 by convention) to disable max_instances configuration.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maxInstances;
+
+/**
+ *  Minimum number of instances for an app version. Set to a non-positive value
+ *  (0 by convention) to disable min_instances configuration.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minInstances;
+
+/**
+ *  Target CPU utilization ratio to maintain when scaling.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *targetCpuUtilization;
+
+/**
+ *  Target throughput utilization ratio to maintain when scaling
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *targetThroughputUtilization;
 
 @end
 
@@ -2034,8 +2528,8 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a common set
- *  of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRAppengine_Status_Details_Item *> *details;
 
@@ -2402,7 +2896,10 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/** Extra network settings. Only applicable for VM runtimes. */
+/**
+ *  Extra network settings. Only applicable for App Engine flexible environment
+ *  versions.
+ */
 @property(nonatomic, strong, nullable) GTLRAppengine_Network *network;
 
 /**
@@ -2543,3 +3040,5 @@ GTLR_EXTERN NSString * const kGTLRAppengine_Version_ServingStatus_Stopped;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

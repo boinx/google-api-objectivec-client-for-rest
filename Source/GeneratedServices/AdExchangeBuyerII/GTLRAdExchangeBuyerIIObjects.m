@@ -8,7 +8,7 @@
 //   Bidding configurations and auction metrics, and Marketplace programmatic
 //   deals.
 // Documentation:
-//   https://developers.google.com/ad-exchange/buyer-rest/guides/client-access/
+//   https://developers.google.com/ad-exchange/buyer-rest/reference/rest/
 
 #import "GTLRAdExchangeBuyerIIObjects.h"
 
@@ -225,20 +225,14 @@ NSString * const kGTLRAdExchangeBuyerII_FilterSet_Platforms_Tablet = @"TABLET";
 // GTLRAdExchangeBuyerII_FilterSet.timeSeriesGranularity
 NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_Daily = @"DAILY";
 NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_Hourly = @"HOURLY";
-NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_IntervalUnspecified = @"INTERVAL_UNSPECIFIED";
-
-// GTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse.detailType
-NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_CreativeAttribute = @"CREATIVE_ATTRIBUTE";
-NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_ProductCategory = @"PRODUCT_CATEGORY";
-NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_SensitiveCategory = @"SENSITIVE_CATEGORY";
-NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_TypeUnspecified = @"TYPE_UNSPECIFIED";
-NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_Vendor = @"VENDOR";
+NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_TimeSeriesGranularityUnspecified = @"TIME_SERIES_GRANULARITY_UNSPECIFIED";
 
 // GTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse.detailType
 NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_CreativeAttribute = @"CREATIVE_ATTRIBUTE";
+NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_DetailTypeUnspecified = @"DETAIL_TYPE_UNSPECIFIED";
+NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_DisapprovalReason = @"DISAPPROVAL_REASON";
 NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_ProductCategory = @"PRODUCT_CATEGORY";
 NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_SensitiveCategory = @"SENSITIVE_CATEGORY";
-NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_TypeUnspecified = @"TYPE_UNSPECIFIED";
 NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_Vendor = @"VENDOR";
 
 // GTLRAdExchangeBuyerII_NonBillableWinningBidStatusRow.status
@@ -357,7 +351,7 @@ NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_StatusUnspecif
 
 @implementation GTLRAdExchangeBuyerII_Client
 @dynamic clientAccountId, clientName, entityId, entityNameProperty, entityType,
-         role, status, visibleToSeller;
+         partnerClientId, role, status, visibleToSeller;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"entityNameProperty" : @"entityName" };
@@ -540,9 +534,9 @@ NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_StatusUnspecif
 //
 
 @implementation GTLRAdExchangeBuyerII_FilterSet
-@dynamic absoluteDateRange, buyerAccountId, creativeId, dealId, environment,
-         filterSetId, format, ownerAccountId, platforms, realtimeTimeRange,
-         relativeDateRange, sellerNetworkIds, timeSeriesGranularity;
+@dynamic absoluteDateRange, creativeId, dealId, environment, format, name,
+         platforms, realtimeTimeRange, relativeDateRange, sellerNetworkIds,
+         timeSeriesGranularity;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
@@ -735,28 +729,6 @@ NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_StatusUnspecif
 
 + (NSString *)collectionItemsKey {
   return @"creatives";
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse
-//
-
-@implementation GTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse
-@dynamic detailType, filteredBidDetailRows, nextPageToken;
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"filteredBidDetailRows" : [GTLRAdExchangeBuyerII_FilteredBidDetailRow class]
-  };
-  return map;
-}
-
-+ (NSString *)collectionItemsKey {
-  return @"filteredBidDetailRows";
 }
 
 @end

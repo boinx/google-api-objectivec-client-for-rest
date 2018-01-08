@@ -314,8 +314,9 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 //
 
 @implementation GTLRDataflow_CounterStructuredName
-@dynamic componentStepName, executionStepName, name, origin, originalStepName,
-         originNamespace, portion, workerId;
+@dynamic componentStepName, executionStepName, inputIndex, name, origin,
+         originalRequestingStepName, originalStepName, originNamespace, portion,
+         workerId;
 @end
 
 
@@ -445,15 +446,7 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 //
 
 @implementation GTLRDataflow_DistributionUpdate
-@dynamic count, logBuckets, max, min, sum, sumOfSquares;
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"logBuckets" : [GTLRDataflow_LogBucket class]
-  };
-  return map;
-}
-
+@dynamic count, histogram, max, min, sum, sumOfSquares;
 @end
 
 
@@ -669,6 +662,24 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 
 @implementation GTLRDataflow_GetTemplateResponse
 @dynamic metadata, status;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRDataflow_Histogram
+//
+
+@implementation GTLRDataflow_Histogram
+@dynamic bucketCounts, firstBucketOffset;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"bucketCounts" : [NSNumber class]
+  };
+  return map;
+}
+
 @end
 
 
@@ -993,16 +1004,6 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
   return map;
 }
 
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRDataflow_LogBucket
-//
-
-@implementation GTLRDataflow_LogBucket
-@dynamic count, log;
 @end
 
 
@@ -1674,7 +1675,7 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 //
 
 @implementation GTLRDataflow_SourceOperationRequest
-@dynamic getMetadata, split;
+@dynamic getMetadata, name, originalName, split, stageName, systemName;
 @end
 
 
@@ -2153,7 +2154,8 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 //
 
 @implementation GTLRDataflow_WorkerMessage
-@dynamic labels, time, workerHealthReport, workerMessageCode, workerMetrics;
+@dynamic labels, time, workerHealthReport, workerMessageCode, workerMetrics,
+         workerShutdownNotice;
 @end
 
 
@@ -2201,7 +2203,8 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 //
 
 @implementation GTLRDataflow_WorkerMessageResponse
-@dynamic workerHealthReportResponse, workerMetricsResponse;
+@dynamic workerHealthReportResponse, workerMetricsResponse,
+         workerShutdownNoticeResponse;
 @end
 
 
@@ -2279,6 +2282,25 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRDataflow_WorkerShutdownNotice
+//
+
+@implementation GTLRDataflow_WorkerShutdownNotice
+@dynamic reason;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRDataflow_WorkerShutdownNoticeResponse
+//
+
+@implementation GTLRDataflow_WorkerShutdownNoticeResponse
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRDataflow_WorkItem
 //
 
@@ -2344,7 +2366,8 @@ NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPolicyUnknown =
 @implementation GTLRDataflow_WorkItemStatus
 @dynamic completed, counterUpdates, dynamicSourceSplit, errors, metricUpdates,
          progress, reportedProgress, reportIndex, requestedLeaseDuration,
-         sourceFork, sourceOperationResponse, stopPosition, workItemId;
+         sourceFork, sourceOperationResponse, stopPosition,
+         totalThrottlerWaitTimeSeconds, workItemId;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{

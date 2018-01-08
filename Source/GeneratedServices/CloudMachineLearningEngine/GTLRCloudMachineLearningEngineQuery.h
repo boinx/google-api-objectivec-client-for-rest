@@ -27,6 +27,11 @@
 @class GTLRCloudMachineLearningEngine_GoogleIamV1SetIamPolicyRequest;
 @class GTLRCloudMachineLearningEngine_GoogleIamV1TestIamPermissionsRequest;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -166,6 +171,43 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
+ *  Gets the access control policy for a resource.
+ *  Returns an empty policy if the resource exists and does not have a policy
+ *  set.
+ *
+ *  Method: ml.projects.jobs.getIamPolicy
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudMachineLearningEngineCloudPlatform
+ */
+@interface GTLRCloudMachineLearningEngineQuery_ProjectsJobsGetIamPolicy : GTLRCloudMachineLearningEngineQuery
+// Previous library name was
+//   +[GTLQueryCloudMachineLearningEngine queryForProjectsJobsGetIamPolicyWithresource:]
+
+/**
+ *  REQUIRED: The resource for which the policy is being requested.
+ *  See the operation documentation for the appropriate value for this field.
+ */
+@property(nonatomic, copy, nullable) NSString *resource;
+
+/**
+ *  Fetches a @c GTLRCloudMachineLearningEngine_GoogleIamV1Policy.
+ *
+ *  Gets the access control policy for a resource.
+ *  Returns an empty policy if the resource exists and does not have a policy
+ *  set.
+ *
+ *  @param resource REQUIRED: The resource for which the policy is being
+ *    requested.
+ *    See the operation documentation for the appropriate value for this field.
+ *
+ *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsJobsGetIamPolicy
+ */
++ (instancetype)queryWithResource:(NSString *)resource;
+
+@end
+
+/**
  *  Lists the jobs in the project.
  *
  *  Method: ml.projects.jobs.list
@@ -212,6 +254,149 @@ NS_ASSUME_NONNULL_BEGIN
  *        information.
  */
 + (instancetype)queryWithParent:(NSString *)parent;
+
+@end
+
+/**
+ *  Updates a specific job resource.
+ *  Currently the only supported fields to update are `labels`.
+ *
+ *  Method: ml.projects.jobs.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudMachineLearningEngineCloudPlatform
+ */
+@interface GTLRCloudMachineLearningEngineQuery_ProjectsJobsPatch : GTLRCloudMachineLearningEngineQuery
+// Previous library name was
+//   +[GTLQueryCloudMachineLearningEngine queryForProjectsJobsPatchWithObject:name:]
+
+/** Required. The job name. */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Required. Specifies the path, relative to `Job`, of the field to update.
+ *  To adopt etag mechanism, include `etag` field in the mask, and include the
+ *  `etag` value in your job resource.
+ *  For example, to change the labels of a job, the `update_mask` parameter
+ *  would be specified as `labels`, `etag`, and the
+ *  `PATCH` request body would specify the new value, as follows:
+ *  {
+ *  "labels": {
+ *  "owner": "Google",
+ *  "color": "Blue"
+ *  }
+ *  "etag": "33a64df551425fcc55e4d42a148795d9f25f89d4"
+ *  }
+ *  If `etag` matches the one on the server, the labels of the job will be
+ *  replaced with the given ones, and the server end `etag` will be
+ *  recalculated.
+ *  Currently the only supported update masks are `labels` and `etag`.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+/**
+ *  Fetches a @c GTLRCloudMachineLearningEngine_GoogleCloudMlV1Job.
+ *
+ *  Updates a specific job resource.
+ *  Currently the only supported fields to update are `labels`.
+ *
+ *  @param object The @c GTLRCloudMachineLearningEngine_GoogleCloudMlV1Job to
+ *    include in the query.
+ *  @param name Required. The job name.
+ *
+ *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsJobsPatch
+ */
++ (instancetype)queryWithObject:(GTLRCloudMachineLearningEngine_GoogleCloudMlV1Job *)object
+                           name:(NSString *)name;
+
+@end
+
+/**
+ *  Sets the access control policy on the specified resource. Replaces any
+ *  existing policy.
+ *
+ *  Method: ml.projects.jobs.setIamPolicy
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudMachineLearningEngineCloudPlatform
+ */
+@interface GTLRCloudMachineLearningEngineQuery_ProjectsJobsSetIamPolicy : GTLRCloudMachineLearningEngineQuery
+// Previous library name was
+//   +[GTLQueryCloudMachineLearningEngine queryForProjectsJobsSetIamPolicyWithObject:resource:]
+
+/**
+ *  REQUIRED: The resource for which the policy is being specified.
+ *  See the operation documentation for the appropriate value for this field.
+ */
+@property(nonatomic, copy, nullable) NSString *resource;
+
+/**
+ *  Fetches a @c GTLRCloudMachineLearningEngine_GoogleIamV1Policy.
+ *
+ *  Sets the access control policy on the specified resource. Replaces any
+ *  existing policy.
+ *
+ *  @param object The @c
+ *    GTLRCloudMachineLearningEngine_GoogleIamV1SetIamPolicyRequest to include
+ *    in the query.
+ *  @param resource REQUIRED: The resource for which the policy is being
+ *    specified.
+ *    See the operation documentation for the appropriate value for this field.
+ *
+ *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsJobsSetIamPolicy
+ */
++ (instancetype)queryWithObject:(GTLRCloudMachineLearningEngine_GoogleIamV1SetIamPolicyRequest *)object
+                       resource:(NSString *)resource;
+
+@end
+
+/**
+ *  Returns permissions that a caller has on the specified resource.
+ *  If the resource does not exist, this will return an empty set of
+ *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
+ *
+ *  Method: ml.projects.jobs.testIamPermissions
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudMachineLearningEngineCloudPlatform
+ */
+@interface GTLRCloudMachineLearningEngineQuery_ProjectsJobsTestIamPermissions : GTLRCloudMachineLearningEngineQuery
+// Previous library name was
+//   +[GTLQueryCloudMachineLearningEngine queryForProjectsJobsTestIamPermissionsWithObject:resource:]
+
+/**
+ *  REQUIRED: The resource for which the policy detail is being requested.
+ *  See the operation documentation for the appropriate value for this field.
+ */
+@property(nonatomic, copy, nullable) NSString *resource;
+
+/**
+ *  Fetches a @c
+ *  GTLRCloudMachineLearningEngine_GoogleIamV1TestIamPermissionsResponse.
+ *
+ *  Returns permissions that a caller has on the specified resource.
+ *  If the resource does not exist, this will return an empty set of
+ *  permissions, not a NOT_FOUND error.
+ *  Note: This operation is designed to be used for building permission-aware
+ *  UIs and command-line tools, not for authorization checking. This operation
+ *  may "fail open" without warning.
+ *
+ *  @param object The @c
+ *    GTLRCloudMachineLearningEngine_GoogleIamV1TestIamPermissionsRequest to
+ *    include in the query.
+ *  @param resource REQUIRED: The resource for which the policy detail is being
+ *    requested.
+ *    See the operation documentation for the appropriate value for this field.
+ *
+ *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsJobsTestIamPermissions
+ */
++ (instancetype)queryWithObject:(GTLRCloudMachineLearningEngine_GoogleIamV1TestIamPermissionsRequest *)object
+                       resource:(NSString *)resource;
 
 @end
 
@@ -369,6 +554,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Previous library name was
 //   +[GTLQueryCloudMachineLearningEngine queryForProjectsModelsListWithparent:]
 
+/** Optional. Specifies the subset of models to retrieve. */
+@property(nonatomic, copy, nullable) NSString *filter;
+
 /**
  *  Optional. The number of models to retrieve per "page" of results. If there
  *  are more remaining results than this number, the response message will
@@ -405,6 +593,63 @@ NS_ASSUME_NONNULL_BEGIN
  *        information.
  */
 + (instancetype)queryWithParent:(NSString *)parent;
+
+@end
+
+/**
+ *  Updates a specific model resource.
+ *  Currently the only supported fields to update are `description` and
+ *  `default_version.name`.
+ *
+ *  Method: ml.projects.models.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudMachineLearningEngineCloudPlatform
+ */
+@interface GTLRCloudMachineLearningEngineQuery_ProjectsModelsPatch : GTLRCloudMachineLearningEngineQuery
+// Previous library name was
+//   +[GTLQueryCloudMachineLearningEngine queryForProjectsModelsPatchWithObject:name:]
+
+/** Required. The project name. */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Required. Specifies the path, relative to `Model`, of the field to update.
+ *  For example, to change the description of a model to "foo" and set its
+ *  default version to "version_1", the `update_mask` parameter would be
+ *  specified as `description`, `default_version.name`, and the `PATCH`
+ *  request body would specify the new value, as follows:
+ *  {
+ *  "description": "foo",
+ *  "defaultVersion": {
+ *  "name":"version_1"
+ *  }
+ *  }
+ *  In this example, the model is blindly overwritten since no etag is given.
+ *  To adopt etag mechanism, include `etag` field in the mask, and include the
+ *  `etag` value in your model resource.
+ *  Currently the supported update masks are `description`,
+ *  `default_version.name`, `labels`, and `etag`.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+/**
+ *  Fetches a @c GTLRCloudMachineLearningEngine_GoogleLongrunningOperation.
+ *
+ *  Updates a specific model resource.
+ *  Currently the only supported fields to update are `description` and
+ *  `default_version.name`.
+ *
+ *  @param object The @c GTLRCloudMachineLearningEngine_GoogleCloudMlV1Model to
+ *    include in the query.
+ *  @param name Required. The project name.
+ *
+ *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsModelsPatch
+ */
++ (instancetype)queryWithObject:(GTLRCloudMachineLearningEngine_GoogleCloudMlV1Model *)object
+                           name:(NSString *)name;
 
 @end
 
@@ -632,6 +877,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Previous library name was
 //   +[GTLQueryCloudMachineLearningEngine queryForProjectsModelsVersionsListWithparent:]
 
+/** Optional. Specifies the subset of versions to retrieve. */
+@property(nonatomic, copy, nullable) NSString *filter;
+
 /**
  *  Optional. The number of versions to retrieve per "page" of results. If
  *  there are more remaining results than this number, the response message
@@ -672,6 +920,58 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
+ *  Updates the specified Version resource.
+ *  Currently the only supported field to update is `description`.
+ *
+ *  Method: ml.projects.models.versions.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudMachineLearningEngineCloudPlatform
+ */
+@interface GTLRCloudMachineLearningEngineQuery_ProjectsModelsVersionsPatch : GTLRCloudMachineLearningEngineQuery
+// Previous library name was
+//   +[GTLQueryCloudMachineLearningEngine queryForProjectsModelsVersionsPatchWithObject:name:]
+
+/** Required. The name of the model. */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Required. Specifies the path, relative to `Version`, of the field to
+ *  update. Must be present and non-empty.
+ *  For example, to change the description of a version to "foo", the
+ *  `update_mask` parameter would be specified as `description`, and the
+ *  `PATCH` request body would specify the new value, as follows:
+ *  {
+ *  "description": "foo"
+ *  }
+ *  In this example, the version is blindly overwritten since no etag is given.
+ *  To adopt etag mechanism, include `etag` field in the mask, and include the
+ *  `etag` value in your version resource.
+ *  Currently the only supported update masks are `description`, `labels`, and
+ *  `etag`.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+/**
+ *  Fetches a @c GTLRCloudMachineLearningEngine_GoogleLongrunningOperation.
+ *
+ *  Updates the specified Version resource.
+ *  Currently the only supported field to update is `description`.
+ *
+ *  @param object The @c GTLRCloudMachineLearningEngine_GoogleCloudMlV1Version
+ *    to include in the query.
+ *  @param name Required. The name of the model.
+ *
+ *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsModelsVersionsPatch
+ */
++ (instancetype)queryWithObject:(GTLRCloudMachineLearningEngine_GoogleCloudMlV1Version *)object
+                           name:(NSString *)name;
+
+@end
+
+/**
  *  Designates a version to be the default for the model.
  *  The default version is used for prediction requests made against the model
  *  that don't specify a version.
@@ -692,8 +992,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  Required. The name of the version to make the default for the model. You
  *  can get the names of all the versions of a model by calling
  *  [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
- *  Authorization: `ml.models.update` permission is required on the parent
- *  model.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
@@ -714,8 +1012,6 @@ NS_ASSUME_NONNULL_BEGIN
  *    model. You
  *    can get the names of all the versions of a model by calling
  *    [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
- *    Authorization: `ml.models.update` permission is required on the parent
- *    model.
  *
  *  @returns GTLRCloudMachineLearningEngineQuery_ProjectsModelsVersionsSetDefault
  */
@@ -896,7 +1192,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Performs prediction on the data in the request.
- *  **** REMOVE FROM GENERATED DOCUMENTATION
+ *  Cloud ML Engine implements a custom `predict` verb on top of an HTTP POST
+ *  method. For details of the format, see the **guide to the
+ *  [predict request format](/ml-engine/docs/v1/predict-request)**.
  *
  *  Method: ml.projects.predict
  *
@@ -917,7 +1215,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Fetches a @c GTLRCloudMachineLearningEngine_GoogleApiHttpBody.
  *
  *  Performs prediction on the data in the request.
- *  **** REMOVE FROM GENERATED DOCUMENTATION
+ *  Cloud ML Engine implements a custom `predict` verb on top of an HTTP POST
+ *  method. For details of the format, see the **guide to the
+ *  [predict request format](/ml-engine/docs/v1/predict-request)**.
  *
  *  @param object The @c
  *    GTLRCloudMachineLearningEngine_GoogleCloudMlV1PredictRequest to include in
@@ -934,3 +1234,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

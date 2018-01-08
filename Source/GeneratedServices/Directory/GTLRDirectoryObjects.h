@@ -43,11 +43,17 @@
 @class GTLRDirectory_SchemaFieldSpec;
 @class GTLRDirectory_SchemaFieldSpec_NumericIndexingSpec;
 @class GTLRDirectory_Token;
+@class GTLRDirectory_TrustedAppId;
 @class GTLRDirectory_User;
 @class GTLRDirectory_User_CustomSchemas;
 @class GTLRDirectory_UserCustomProperties;
 @class GTLRDirectory_UserName;
 @class GTLRDirectory_VerificationCode;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -95,6 +101,60 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Kind of resource this is. */
 @property(nonatomic, copy, nullable) NSString *kind;
+
+@end
+
+
+/**
+ *  JSON template for App Access Collections Resource object in Directory API.
+ */
+@interface GTLRDirectory_AppAccessCollections : GTLRObject
+
+/** List of blocked api access buckets. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *blockedApiAccessBuckets;
+
+/**
+ *  Boolean to indicate whether to enforce app access settings on Android Drive
+ *  or not.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *enforceSettingsForAndroidDrive;
+
+/**
+ *  Error message provided by the Admin that will be shown to the user when an
+ *  app is blocked.
+ */
+@property(nonatomic, copy, nullable) NSString *errorMessage;
+
+/** ETag of the resource. */
+@property(nonatomic, copy, nullable) NSString *ETag;
+
+/**
+ *  Identifies the resource as an app access collection. Value:
+ *  admin#directory#appaccesscollection
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  Unique ID of app access collection. (Readonly)
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *resourceId;
+
+/**
+ *  Resource name given by the customer while creating/updating. Should be
+ *  unique under given customer.
+ */
+@property(nonatomic, copy, nullable) NSString *resourceName;
+
+/**
+ *  Boolean that indicates whether to trust domain owned apps.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *trustDomainOwnedApps;
 
 @end
 
@@ -175,6 +235,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** ETag of the resource. */
 @property(nonatomic, copy, nullable) NSString *etags;
+
+/**
+ *  The auto-generated name of the calendar resource which includes metadata
+ *  about the resource such as building name, floor, capacity, etc. For example,
+ *  NYC-2-Training Room 1A (16)
+ */
+@property(nonatomic, copy, nullable) NSString *generatedResourceName;
 
 /**
  *  The type of the resource. For calendar resources, the value is
@@ -487,6 +554,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Token used to access next page of this result. */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  JSON request template for moving ChromeOs Device to given OU in Directory
+ *  Devices API.
+ */
+@interface GTLRDirectory_ChromeOsMoveDevicesToOu : GTLRObject
+
+/** ChromeOs Devices to be moved to OU */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *deviceIds;
 
 @end
 
@@ -843,6 +922,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Token used to access next page of this result. */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  JSON template for Has Member response in Directory API.
+ */
+@interface GTLRDirectory_MembersHasMember : GTLRObject
+
+/**
+ *  Identifies whether given user is a member or not.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *isMember;
 
 @end
 
@@ -1623,6 +1717,57 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ *  JSON template for Trusted App Ids Resource object in Directory API.
+ */
+@interface GTLRDirectory_TrustedAppId : GTLRObject
+
+/** Android package name. */
+@property(nonatomic, copy, nullable) NSString *androidPackageName;
+
+/** SHA1 signature of the app certificate. */
+@property(nonatomic, copy, nullable) NSString *certificateHashSHA1;
+
+/** SHA256 signature of the app certificate. */
+@property(nonatomic, copy, nullable) NSString *certificateHashSHA256;
+
+@property(nonatomic, copy, nullable) NSString *ETag;
+
+/** Identifies the resource as a trusted AppId. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+@end
+
+
+/**
+ *  JSON template for Trusted Apps response object of a user in Directory API.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "trustedApps" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRDirectory_TrustedApps : GTLRCollectionObject
+
+/** ETag of the resource. */
+@property(nonatomic, copy, nullable) NSString *ETag;
+
+/** Identifies the resource as trusted apps response. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+/**
+ *  Trusted Apps list.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRDirectory_TrustedAppId *> *trustedApps;
+
+@end
+
+
+/**
  *  JSON template for User object in Directory API.
  */
 @interface GTLRDirectory_User : GTLRObject
@@ -1678,6 +1823,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  Can be any valid JSON type.
  */
 @property(nonatomic, strong, nullable) id externalIds;
+
+/**
+ *  gender
+ *
+ *  Can be any valid JSON type.
+ */
+@property(nonatomic, strong, nullable) id gender;
 
 /** Hash function name for password. Supported are MD5, SHA-1 and crypt */
 @property(nonatomic, copy, nullable) NSString *hashFunction;
@@ -1744,6 +1896,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *isMailboxSetup;
+
+/**
+ *  keywords
+ *
+ *  Can be any valid JSON type.
+ */
+@property(nonatomic, strong, nullable) id keywords;
 
 /** Kind of resource this is. */
 @property(nonatomic, copy, nullable) NSString *kind;
@@ -2001,6 +2160,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ *  GTLRDirectory_UserGender
+ */
+@interface GTLRDirectory_UserGender : GTLRObject
+
+/**
+ *  AddressMeAs. A human-readable string containing the proper way to refer to
+ *  the profile owner by humans, for example "he/him/his" or "they/them/their".
+ */
+@property(nonatomic, copy, nullable) NSString *addressMeAs;
+
+/** Custom gender. */
+@property(nonatomic, copy, nullable) NSString *customGender;
+
+/** Gender. */
+@property(nonatomic, copy, nullable) NSString *type;
+
+@end
+
+
+/**
  *  JSON template for instant messenger of an user.
  */
 @interface GTLRDirectory_UserIm : GTLRObject
@@ -2035,6 +2214,29 @@ NS_ASSUME_NONNULL_BEGIN
  *  types should have the CUSTOM value as type and also have a customType value.
  */
 @property(nonatomic, copy, nullable) NSString *type;
+
+@end
+
+
+/**
+ *  JSON template for a keyword entry.
+ */
+@interface GTLRDirectory_UserKeyword : GTLRObject
+
+/** Custom Type. */
+@property(nonatomic, copy, nullable) NSString *customType;
+
+/**
+ *  Each entry can have a type which indicates standard type of that entry. For
+ *  example, keyword could be of type occupation or outlook. In addition to the
+ *  standard type, an entry can have a custom type and can give it any name.
+ *  Such types should have the CUSTOM value as type and also have a customType
+ *  value.
+ */
+@property(nonatomic, copy, nullable) NSString *type;
+
+/** Keyword. */
+@property(nonatomic, copy, nullable) NSString *value;
 
 @end
 
@@ -2282,13 +2484,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface GTLRDirectory_UserPosixAccount : GTLRObject
 
+/** A POSIX account field identifier. (Read-only) */
+@property(nonatomic, copy, nullable) NSString *accountId;
+
 /** The GECOS (user information) for this account. */
 @property(nonatomic, copy, nullable) NSString *gecos;
 
 /**
  *  The default group ID.
  *
- *  Uses NSNumber of intValue.
+ *  Uses NSNumber of unsignedLongLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *gid;
 
@@ -2311,7 +2516,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The POSIX compliant user ID.
  *
- *  Uses NSNumber of intValue.
+ *  Uses NSNumber of unsignedLongLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *uid;
 
@@ -2490,3 +2695,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -4,10 +4,9 @@
 // API:
 //   Stackdriver Trace API (cloudtrace/v2)
 // Description:
-//   Send and retrieve trace data from Stackdriver Trace. Data is generated and
-//   available by default for all App Engine applications. Data from other
-//   applications can be written to Stackdriver Trace for display, reporting,
-//   and analysis.
+//   Sends application trace data to Stackdriver Trace for viewing. Trace data
+//   is collected for all App Engine applications by default. Trace data from
+//   other applications can be provided using this API.
 // Documentation:
 //   https://cloud.google.com/trace
 
@@ -46,44 +45,6 @@
 
 @end
 
-@implementation GTLRCloudTraceQuery_ProjectsTracesList
-
-@dynamic endTime, filter, orderBy, pageSize, pageToken, parent, startTime;
-
-+ (instancetype)queryWithParent:(NSString *)parent {
-  NSArray *pathParams = @[ @"parent" ];
-  NSString *pathURITemplate = @"v2/{+parent}/traces";
-  GTLRCloudTraceQuery_ProjectsTracesList *query =
-    [[self alloc] initWithPathURITemplate:pathURITemplate
-                               HTTPMethod:nil
-                       pathParameterNames:pathParams];
-  query.parent = parent;
-  query.expectedObjectClass = [GTLRCloudTrace_ListTracesResponse class];
-  query.loggingName = @"cloudtrace.projects.traces.list";
-  return query;
-}
-
-@end
-
-@implementation GTLRCloudTraceQuery_ProjectsTracesListSpans
-
-@dynamic pageToken, parent;
-
-+ (instancetype)queryWithParent:(NSString *)parent {
-  NSArray *pathParams = @[ @"parent" ];
-  NSString *pathURITemplate = @"v2/{+parent}:listSpans";
-  GTLRCloudTraceQuery_ProjectsTracesListSpans *query =
-    [[self alloc] initWithPathURITemplate:pathURITemplate
-                               HTTPMethod:nil
-                       pathParameterNames:pathParams];
-  query.parent = parent;
-  query.expectedObjectClass = [GTLRCloudTrace_ListSpansResponse class];
-  query.loggingName = @"cloudtrace.projects.traces.listSpans";
-  return query;
-}
-
-@end
-
 @implementation GTLRCloudTraceQuery_ProjectsTracesSpansCreate
 
 @dynamic name;
@@ -95,10 +56,10 @@
     return nil;
   }
   NSArray *pathParams = @[ @"name" ];
-  NSString *pathURITemplate = @"v2/{+name}";
+  NSString *pathURITemplate = @"v2/{+name}/spans";
   GTLRCloudTraceQuery_ProjectsTracesSpansCreate *query =
     [[self alloc] initWithPathURITemplate:pathURITemplate
-                               HTTPMethod:@"PUT"
+                               HTTPMethod:@"POST"
                        pathParameterNames:pathParams];
   query.bodyObject = object;
   query.name = name;

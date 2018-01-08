@@ -70,6 +70,11 @@
 @class GTLRGenomics_VariantSetMetadata;
 @class GTLRGenomics_VariantSetMetadata_Info;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -1601,7 +1606,7 @@ GTLR_EXTERN NSString * const kGTLRGenomics_VariantSetMetadata_Type_TypeUnspecifi
 
 /**
  *  If the value is `false`, it means the operation is still in progress.
- *  If true, the operation is completed, and either `error` or `response` is
+ *  If `true`, the operation is completed, and either `error` or `response` is
  *  available.
  *
  *  Uses NSNumber of boolValue.
@@ -1627,7 +1632,7 @@ GTLR_EXTERN NSString * const kGTLRGenomics_VariantSetMetadata_Type_TypeUnspecifi
 /**
  *  If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned. If
  *  importing Variants, an ImportVariantsResponse is returned. For pipelines and
- *  exports, an empty response is returned.
+ *  exports, an Empty response is returned.
  */
 @property(nonatomic, strong, nullable) GTLRGenomics_Operation_Response *response;
 
@@ -1650,7 +1655,7 @@ GTLR_EXTERN NSString * const kGTLRGenomics_VariantSetMetadata_Type_TypeUnspecifi
 /**
  *  If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned. If
  *  importing Variants, an ImportVariantsResponse is returned. For pipelines and
- *  exports, an empty response is returned.
+ *  exports, an Empty response is returned.
  *
  *  @note This class is documented as having more properties of any valid JSON
  *        type. Use @c -additionalJSONKeys and @c -additionalPropertyForName: to
@@ -3200,8 +3205,8 @@ GTLR_EXTERN NSString * const kGTLRGenomics_VariantSetMetadata_Type_TypeUnspecifi
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a
- *  common set of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRGenomics_Status_Details_Item *> *details;
 
@@ -3769,3 +3774,5 @@ GTLR_EXTERN NSString * const kGTLRGenomics_VariantSetMetadata_Type_TypeUnspecifi
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

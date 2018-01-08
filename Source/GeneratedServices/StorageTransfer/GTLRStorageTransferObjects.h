@@ -39,6 +39,11 @@
 @class GTLRStorageTransfer_TransferOptions;
 @class GTLRStorageTransfer_TransferSpec;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -598,7 +603,7 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
  *  * MD5 - The base64-encoded MD5 hash of the object.
  *  For an example of a valid TSV file, see
  *  [Transferring data from
- *  URLs](https://cloud.google.com/storage/transfer/#urls)
+ *  URLs](https://cloud.google.com/storage/transfer/create-url-list).
  *  When transferring data based on a URL list, keep the following in mind:
  *  * When an object located at `http(s)://hostname:port/<URL-path>` is
  *  transferred
@@ -752,7 +757,7 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
 
 /**
  *  If the value is `false`, it means the operation is still in progress.
- *  If true, the operation is completed, and either `error` or `response` is
+ *  If `true`, the operation is completed, and either `error` or `response` is
  *  available.
  *
  *  Uses NSNumber of boolValue.
@@ -921,8 +926,8 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a
- *  common set of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRStorageTransfer_Status_Details_Item *> *details;
 
@@ -1023,8 +1028,8 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
 
 /**
  *  Bytes found in the data source that are scheduled to be transferred,
- *  which will be copied, excluded based on conditions, or skipped due to
- *  failures.
+ *  excluding any that are filtered based on object conditions or skipped due
+ *  to sync.
  *
  *  Uses NSNumber of longLongValue.
  */
@@ -1082,8 +1087,8 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
 
 /**
  *  Objects found in the data source that are scheduled to be transferred,
- *  which will be copied, excluded based on conditions, or skipped due to
- *  failures.
+ *  excluding any that are filtered based on object conditions or skipped due
+ *  to sync.
  *
  *  Uses NSNumber of longLongValue.
  */
@@ -1145,16 +1150,10 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/**
- *  The ID of the Google Cloud Platform Console project that owns the job.
- *  Required.
- */
+/** The ID of the Google Cloud Platform Console project that owns the job. */
 @property(nonatomic, copy, nullable) NSString *projectId;
 
-/**
- *  Schedule specification.
- *  Required.
- */
+/** Schedule specification. */
 @property(nonatomic, strong, nullable) GTLRStorageTransfer_Schedule *schedule;
 
 /**
@@ -1179,10 +1178,7 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
  */
 @property(nonatomic, copy, nullable) NSString *status;
 
-/**
- *  Transfer specification.
- *  Required.
- */
+/** Transfer specification. */
 @property(nonatomic, strong, nullable) GTLRStorageTransfer_TransferSpec *transferSpec;
 
 @end
@@ -1325,7 +1321,10 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
 @property(nonatomic, copy, nullable) NSString *projectId;
 
 /**
- *  The job to update.
+ *  The job to update. `transferJob` is expected to specify only three fields:
+ *  `description`, `transferSpec`, and `status`. An UpdateTransferJobRequest
+ *  that specifies other fields will be rejected with an error
+ *  `INVALID_ARGUMENT`.
  *  Required.
  */
 @property(nonatomic, strong, nullable) GTLRStorageTransfer_TransferJob *transferJob;
@@ -1345,3 +1344,5 @@ GTLR_EXTERN NSString * const kGTLRStorageTransfer_TransferOperation_Status_Succe
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

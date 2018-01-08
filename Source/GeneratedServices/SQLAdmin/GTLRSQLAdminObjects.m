@@ -121,7 +121,7 @@
 
 @implementation GTLRSQLAdmin_DatabaseInstance
 @dynamic backendType, connectionName, currentDiskSize, databaseVersion, ETag,
-         failoverReplica, instanceType, ipAddresses, ipv6Address, kind,
+         failoverReplica, gceZone, instanceType, ipAddresses, ipv6Address, kind,
          masterInstanceName, maxDiskSize, name, onPremisesConfiguration,
          project, region, replicaConfiguration, replicaNames, selfLink,
          serverCaCert, serviceAccountEmailAddress, settings, state,
@@ -168,6 +168,36 @@
   return map;
 }
 
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRSQLAdmin_DemoteMasterConfiguration
+//
+
+@implementation GTLRSQLAdmin_DemoteMasterConfiguration
+@dynamic kind, mysqlReplicaConfiguration;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRSQLAdmin_DemoteMasterContext
+//
+
+@implementation GTLRSQLAdmin_DemoteMasterContext
+@dynamic kind, masterInstanceName, replicaConfiguration;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRSQLAdmin_DemoteMasterMySqlReplicaConfiguration
+//
+
+@implementation GTLRSQLAdmin_DemoteMasterMySqlReplicaConfiguration
+@dynamic caCertificate, clientCertificate, clientKey, kind, password, username;
 @end
 
 
@@ -300,6 +330,16 @@
 
 @implementation GTLRSQLAdmin_InstancesCloneRequest
 @dynamic cloneContext;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRSQLAdmin_InstancesDemoteMasterRequest
+//
+
+@implementation GTLRSQLAdmin_InstancesDemoteMasterRequest
+@dynamic demoteMasterContext;
 @end
 
 

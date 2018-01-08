@@ -26,6 +26,11 @@
 @class GTLRToolResults_PublishXunitXmlFilesRequest;
 @class GTLRToolResults_Step;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -143,6 +148,121 @@ GTLR_EXTERN NSString * const kGTLRToolResultsFilterPerfMetricTypeUnspecified;
  */
 + (instancetype)queryWithObject:(GTLRToolResults_History *)object
                       projectId:(NSString *)projectId;
+
+@end
+
+/**
+ *  Retrieves a single screenshot cluster by its ID
+ *
+ *  Method: toolresults.projects.histories.executions.clusters.get
+ */
+@interface GTLRToolResultsQuery_ProjectsHistoriesExecutionsClustersGet : GTLRToolResultsQuery
+// Previous library name was
+//   +[GTLQueryToolResults queryForProjectsHistoriesExecutionsClustersGetWithprojectId:historyId:executionId:clusterId:]
+
+/**
+ *  A Cluster id
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *clusterId;
+
+/**
+ *  An Execution id.
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *executionId;
+
+/**
+ *  A History id.
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *historyId;
+
+/**
+ *  A Project id.
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *projectId;
+
+/**
+ *  Fetches a @c GTLRToolResults_ScreenshotCluster.
+ *
+ *  Retrieves a single screenshot cluster by its ID
+ *
+ *  @param projectId A Project id.
+ *    Required.
+ *  @param historyId A History id.
+ *    Required.
+ *  @param executionId An Execution id.
+ *    Required.
+ *  @param clusterId A Cluster id
+ *    Required.
+ *
+ *  @returns GTLRToolResultsQuery_ProjectsHistoriesExecutionsClustersGet
+ */
++ (instancetype)queryWithProjectId:(NSString *)projectId
+                         historyId:(NSString *)historyId
+                       executionId:(NSString *)executionId
+                         clusterId:(NSString *)clusterId;
+
+@end
+
+/**
+ *  Lists Screenshot Clusters
+ *  Returns the list of screenshot clusters corresponding to an execution.
+ *  Screenshot clusters are created after the execution is finished. Clusters
+ *  are created from a set of screenshots. Between any two screenshots, a
+ *  matching score is calculated based off their metadata that determines how
+ *  similar they are. Screenshots are placed in the cluster that has screens
+ *  which have the highest matching scores.
+ *
+ *  Method: toolresults.projects.histories.executions.clusters.list
+ */
+@interface GTLRToolResultsQuery_ProjectsHistoriesExecutionsClustersList : GTLRToolResultsQuery
+// Previous library name was
+//   +[GTLQueryToolResults queryForProjectsHistoriesExecutionsClustersListWithprojectId:historyId:executionId:]
+
+/**
+ *  An Execution id.
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *executionId;
+
+/**
+ *  A History id.
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *historyId;
+
+/**
+ *  A Project id.
+ *  Required.
+ */
+@property(nonatomic, copy, nullable) NSString *projectId;
+
+/**
+ *  Fetches a @c GTLRToolResults_ListScreenshotClustersResponse.
+ *
+ *  Lists Screenshot Clusters
+ *  Returns the list of screenshot clusters corresponding to an execution.
+ *  Screenshot clusters are created after the execution is finished. Clusters
+ *  are created from a set of screenshots. Between any two screenshots, a
+ *  matching score is calculated based off their metadata that determines how
+ *  similar they are. Screenshots are placed in the cluster that has screens
+ *  which have the highest matching scores.
+ *
+ *  @param projectId A Project id.
+ *    Required.
+ *  @param historyId A History id.
+ *    Required.
+ *  @param executionId An Execution id.
+ *    Required.
+ *
+ *  @returns GTLRToolResultsQuery_ProjectsHistoriesExecutionsClustersList
+ */
++ (instancetype)queryWithProjectId:(NSString *)projectId
+                         historyId:(NSString *)historyId
+                       executionId:(NSString *)executionId;
 
 @end
 
@@ -744,10 +864,10 @@ GTLR_EXTERN NSString * const kGTLRToolResultsFilterPerfMetricTypeUnspecified;
 @end
 
 /**
- *  Creates a PerfMetricsSummary resource.
- *  May return any of the following error code(s): - ALREADY_EXISTS - A
- *  PerfMetricSummary already exists for the given Step - NOT_FOUND - The
- *  containing Step does not exist
+ *  Creates a PerfMetricsSummary resource. Returns the existing one if it has
+ *  already been created.
+ *  May return any of the following error code(s): - NOT_FOUND - The containing
+ *  Step does not exist
  *
  *  Method: toolresults.projects.histories.executions.steps.perfMetricsSummary.create
  *
@@ -773,10 +893,10 @@ GTLR_EXTERN NSString * const kGTLRToolResultsFilterPerfMetricTypeUnspecified;
 /**
  *  Fetches a @c GTLRToolResults_PerfMetricsSummary.
  *
- *  Creates a PerfMetricsSummary resource.
- *  May return any of the following error code(s): - ALREADY_EXISTS - A
- *  PerfMetricSummary already exists for the given Step - NOT_FOUND - The
- *  containing Step does not exist
+ *  Creates a PerfMetricsSummary resource. Returns the existing one if it has
+ *  already been created.
+ *  May return any of the following error code(s): - NOT_FOUND - The containing
+ *  Step does not exist
  *
  *  @param object The @c GTLRToolResults_PerfMetricsSummary to include in the
  *    query.
@@ -1458,3 +1578,5 @@ GTLR_EXTERN NSString * const kGTLRToolResultsFilterPerfMetricTypeUnspecified;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

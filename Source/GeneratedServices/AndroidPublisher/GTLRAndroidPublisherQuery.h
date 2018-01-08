@@ -24,12 +24,16 @@
 @class GTLRAndroidPublisher_AppEdit;
 @class GTLRAndroidPublisher_ExpansionFile;
 @class GTLRAndroidPublisher_InAppProduct;
-@class GTLRAndroidPublisher_InappproductsBatchRequest;
 @class GTLRAndroidPublisher_Listing;
 @class GTLRAndroidPublisher_ReviewsReplyRequest;
 @class GTLRAndroidPublisher_SubscriptionPurchasesDeferRequest;
 @class GTLRAndroidPublisher_Testers;
 @class GTLRAndroidPublisher_Track;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -2239,30 +2243,6 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
 @end
 
 /**
- *  GTLRAndroidPublisherQuery_InappproductsBatch
- *
- *  Method: androidpublisher.inappproducts.batch
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeAndroidPublisher
- */
-@interface GTLRAndroidPublisherQuery_InappproductsBatch : GTLRAndroidPublisherQuery
-// Previous library name was
-//   +[GTLQueryAndroidPublisher queryForInappproductsBatchWithObject:]
-
-/**
- *  Fetches a @c GTLRAndroidPublisher_InappproductsBatchResponse.
- *
- *  @param object The @c GTLRAndroidPublisher_InappproductsBatchRequest to
- *    include in the query.
- *
- *  @returns GTLRAndroidPublisherQuery_InappproductsBatch
- */
-+ (instancetype)queryWithObject:(GTLRAndroidPublisher_InappproductsBatchRequest *)object;
-
-@end
-
-/**
  *  Delete an in-app product for an app.
  *
  *  Method: androidpublisher.inappproducts.delete
@@ -2816,7 +2796,9 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
  *  The time, in milliseconds since the Epoch, of the newest voided in-app
  *  product purchase that you want to see in the response. The value of this
  *  parameter cannot be greater than the current time and is ignored if a
- *  pagination token is set. Default value is current time.
+ *  pagination token is set. Default value is current time. Note: This filter is
+ *  applied on the time at which the record is seen as voided by our systems and
+ *  not the actual voided time returned in the response.
  */
 @property(nonatomic, assign) long long endTime;
 
@@ -2834,7 +2816,9 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
  *  The time, in milliseconds since the Epoch, of the oldest voided in-app
  *  product purchase that you want to see in the response. The value of this
  *  parameter cannot be older than 30 days and is ignored if a pagination token
- *  is set. Default value is current time minus 30 days.
+ *  is set. Default value is current time minus 30 days. Note: This filter is
+ *  applied on the time at which the record is seen as voided by our systems and
+ *  not the actual voided time returned in the response.
  */
 @property(nonatomic, assign) long long startTime;
 
@@ -2972,3 +2956,5 @@ GTLR_EXTERN NSString * const kGTLRAndroidPublisherTrackRollout;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

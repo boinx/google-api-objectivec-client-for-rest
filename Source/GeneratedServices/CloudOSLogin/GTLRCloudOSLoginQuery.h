@@ -2,12 +2,11 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud OS Login API (oslogin/v1alpha)
+//   Google Cloud OS Login API (oslogin/v1)
 // Description:
-//   A Google Cloud API for managing OS login configuration for Directory API
-//   users.
+//   Manages OS login configuration for Google account users.
 // Documentation:
-//   https://developers.google.com/apis-explorer/#p/oslogin/v1alpha/
+//   https://cloud.google.com/compute/docs/oslogin/rest/
 
 #if GTLR_BUILT_AS_FRAMEWORK
   #import "GTLR/GTLRQuery.h"
@@ -20,6 +19,11 @@
 #endif
 
 @class GTLRCloudOSLogin_SshPublicKey;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeCloudOSLoginCloudPlatform
- *    @c kGTLRAuthScopeCloudOSLoginCloudPlatformReadOnly
+ *    @c kGTLRAuthScopeCloudOSLoginCompute
  */
 @interface GTLRCloudOSLoginQuery_UsersGetLoginProfile : GTLRCloudOSLoginQuery
 // Previous library name was
@@ -73,6 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeCloudOSLoginCloudPlatform
+ *    @c kGTLRAuthScopeCloudOSLoginCompute
  */
 @interface GTLRCloudOSLoginQuery_UsersImportSshPublicKey : GTLRCloudOSLoginQuery
 // Previous library name was
@@ -80,6 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** The unique ID for the user in format `users/{user}`. */
 @property(nonatomic, copy, nullable) NSString *parent;
+
+/** The project ID of the Google Cloud Platform project. */
+@property(nonatomic, copy, nullable) NSString *projectId;
 
 /**
  *  Fetches a @c GTLRCloudOSLogin_ImportSshPublicKeyResponse.
@@ -99,12 +107,49 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
+ *  Deletes a POSIX account.
+ *
+ *  Method: oslogin.users.projects.delete
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeCloudOSLoginCloudPlatform
+ *    @c kGTLRAuthScopeCloudOSLoginCompute
+ */
+@interface GTLRCloudOSLoginQuery_UsersProjectsDelete : GTLRCloudOSLoginQuery
+// Previous library name was
+//   +[GTLQueryCloudOSLogin queryForUsersProjectsDeleteWithname:]
+
+/**
+ *  A reference to the POSIX account to update. POSIX accounts are identified
+ *  by the project ID they are associated with. A reference to the POSIX
+ *  account is in format `users/{user}/projects/{project}`.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Fetches a @c GTLRCloudOSLogin_Empty.
+ *
+ *  Deletes a POSIX account.
+ *
+ *  @param name A reference to the POSIX account to update. POSIX accounts are
+ *    identified
+ *    by the project ID they are associated with. A reference to the POSIX
+ *    account is in format `users/{user}/projects/{project}`.
+ *
+ *  @returns GTLRCloudOSLoginQuery_UsersProjectsDelete
+ */
++ (instancetype)queryWithName:(NSString *)name;
+
+@end
+
+/**
  *  Deletes an SSH public key.
  *
  *  Method: oslogin.users.sshPublicKeys.delete
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeCloudOSLoginCloudPlatform
+ *    @c kGTLRAuthScopeCloudOSLoginCompute
  */
 @interface GTLRCloudOSLoginQuery_UsersSshPublicKeysDelete : GTLRCloudOSLoginQuery
 // Previous library name was
@@ -140,6 +185,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeCloudOSLoginCloudPlatform
+ *    @c kGTLRAuthScopeCloudOSLoginCompute
  */
 @interface GTLRCloudOSLoginQuery_UsersSshPublicKeysGet : GTLRCloudOSLoginQuery
 // Previous library name was
@@ -176,6 +222,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeCloudOSLoginCloudPlatform
+ *    @c kGTLRAuthScopeCloudOSLoginCompute
  */
 @interface GTLRCloudOSLoginQuery_UsersSshPublicKeysPatch : GTLRCloudOSLoginQuery
 // Previous library name was
@@ -215,3 +262,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

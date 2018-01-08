@@ -32,7 +32,7 @@ NSString * const kGTLRAuthScopeComputeReadonly              = @"https://www.goog
     // From discovery.
     self.rootURLString = @"https://www.googleapis.com/";
     self.servicePath = @"compute/v1/projects/";
-    self.batchPath = @"batch";
+    self.batchPath = @"batch/compute/v1";
     self.prettyPrintQueryParameterNames = @[ @"prettyPrint" ];
   }
   return self;
@@ -91,6 +91,13 @@ NSString * const kGTLRAuthScopeComputeReadonly              = @"https://www.goog
     @"compute#instanceList" : [GTLRCompute_InstanceList class],
     @"compute#instanceTemplate" : [GTLRCompute_InstanceTemplate class],
     @"compute#instanceTemplateList" : [GTLRCompute_InstanceTemplateList class],
+    @"compute#interconnect" : [GTLRCompute_Interconnect class],
+    @"compute#interconnectAttachment" : [GTLRCompute_InterconnectAttachment class],
+    @"compute#interconnectAttachmentAggregatedList" : [GTLRCompute_InterconnectAttachmentAggregatedList class],
+    @"compute#interconnectAttachmentList" : [GTLRCompute_InterconnectAttachmentList class],
+    @"compute#interconnectList" : [GTLRCompute_InterconnectList class],
+    @"compute#interconnectLocation" : [GTLRCompute_InterconnectLocation class],
+    @"compute#interconnectLocationList" : [GTLRCompute_InterconnectLocationList class],
     @"compute#license" : [GTLRCompute_License class],
     @"compute#machineType" : [GTLRCompute_MachineType class],
     @"compute#machineTypeAggregatedList" : [GTLRCompute_MachineTypeAggregatedList class],

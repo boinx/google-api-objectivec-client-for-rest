@@ -46,6 +46,11 @@
 @class GTLRStorage_ObjectAccessControl_ProjectTeam;
 @class GTLRStorage_Policy_Bindings_Item;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -797,8 +802,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, nullable) NSString *contentLanguage;
 
 /**
- *  Content-Type of the object data. If contentType is not specified, object
- *  downloads will be served as application/octet-stream.
+ *  Content-Type of the object data. If an object is stored without a
+ *  Content-Type, it is served as application/octet-stream.
  */
 @property(nonatomic, copy, nullable) NSString *contentType;
 
@@ -1125,10 +1130,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The ID of the resource to which this policy belongs. Will be of the form
- *  buckets/bucket for buckets, and buckets/bucket/objects/object for objects. A
- *  specific generation may be specified by appending #generationNumber to the
- *  end of the object name, e.g. buckets/my-bucket/objects/data.txt#17. The
- *  current generation can be denoted with #0. This field is ignored on input.
+ *  projects/_/buckets/bucket for buckets, and
+ *  projects/_/buckets/bucket/objects/object for objects. A specific generation
+ *  may be specified by appending #generationNumber to the end of the object
+ *  name, e.g. projects/_/buckets/my-bucket/objects/data.txt#17. The current
+ *  generation can be denoted with #0. This field is ignored on input.
  */
 @property(nonatomic, copy, nullable) NSString *resourceId;
 
@@ -1139,6 +1145,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  GTLRStorage_Policy_Bindings_Item
  */
 @interface GTLRStorage_Policy_Bindings_Item : GTLRObject
+
+/**
+ *  condition
+ *
+ *  Can be any valid JSON type.
+ */
+@property(nonatomic, strong, nullable) id condition;
 
 /**
  *  A collection of identifiers for members who may assume the provided role.
@@ -1293,3 +1306,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

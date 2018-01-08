@@ -101,6 +101,11 @@
 @class GTLRAnalytics_WebPropertyRef;
 @class GTLRAnalytics_WebPropertySummary;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -525,6 +530,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** IDs of views (profiles) linked to the custom data source. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *profilesLinked;
 
+/** Collection of schema headers of the custom data source. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *schema;
+
 /** Link for this Analytics custom data source. */
 @property(nonatomic, copy, nullable) NSString *selfLink;
 
@@ -534,6 +542,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** Time this custom data source was last modified. */
 @property(nonatomic, strong, nullable) GTLRDateTime *updated;
 
+/** Upload type of the custom data source. */
 @property(nonatomic, copy, nullable) NSString *uploadType;
 
 /**
@@ -2572,7 +2581,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** The status of this foreign account link. */
 @property(nonatomic, copy, nullable) NSString *status;
 
-/** The type of the foreign account. For example `ADWORDS_LINKS`. */
+/**
+ *  The type of the foreign account. For example, `ADWORDS_LINKS`, `DBM_LINKS`,
+ *  `MCC_LINKS` or `OPTIMIZE`.
+ */
 @property(nonatomic, copy, nullable) NSString *type;
 
 /**
@@ -3859,6 +3871,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSString *status;
 
+/** Time this file is uploaded. */
+@property(nonatomic, strong, nullable) GTLRDateTime *uploadTime;
+
 @end
 
 
@@ -4194,3 +4209,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -2,9 +2,9 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Apps Script Execution API (script/v1)
+//   Google Apps Script API (script/v1)
 // Description:
-//   Executes Google Apps Script projects.
+//   An API for managing and executing Google Apps Script projects.
 // Documentation:
 //   https://developers.google.com/apps-script/execution/rest/v1/scripts/run
 
@@ -20,6 +20,11 @@
 
 @class GTLRScript_ExecutionRequest;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -34,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Runs a function in an Apps Script project. The project must be deployed
- *  for use with the Apps Script Execution API.
+ *  for use with the Apps Script API.
  *  This method requires authorization with an OAuth 2.0 token that includes at
  *  least one of the scopes listed in the [Authorization](#authorization)
  *  section; script projects that do not require authorization cannot be
@@ -62,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 //   +[GTLQueryScript queryForScriptsRunWithObject:scriptId:]
 
 /**
- *  The project key of the script to be executed. To find the project key, open
+ *  The script ID of the script to be executed. To find the script ID, open
  *  the project in the script editor and select **File > Project properties**.
  */
 @property(nonatomic, copy, nullable) NSString *scriptId;
@@ -71,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Fetches a @c GTLRScript_Operation.
  *
  *  Runs a function in an Apps Script project. The project must be deployed
- *  for use with the Apps Script Execution API.
+ *  for use with the Apps Script API.
  *  This method requires authorization with an OAuth 2.0 token that includes at
  *  least one of the scopes listed in the [Authorization](#authorization)
  *  section; script projects that do not require authorization cannot be
@@ -80,8 +85,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  **File > Project properties** and click the **Scopes** tab.
  *
  *  @param object The @c GTLRScript_ExecutionRequest to include in the query.
- *  @param scriptId The project key of the script to be executed. To find the
- *    project key, open
+ *  @param scriptId The script ID of the script to be executed. To find the
+ *    script ID, open
  *    the project in the script editor and select **File > Project properties**.
  *
  *  @returns GTLRScriptQuery_ScriptsRun
@@ -92,3 +97,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

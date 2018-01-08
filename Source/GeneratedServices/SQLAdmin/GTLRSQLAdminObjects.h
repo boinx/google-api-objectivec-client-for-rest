@@ -28,6 +28,9 @@
 @class GTLRSQLAdmin_DatabaseFlags;
 @class GTLRSQLAdmin_DatabaseInstance;
 @class GTLRSQLAdmin_DatabaseInstance_FailoverReplica;
+@class GTLRSQLAdmin_DemoteMasterConfiguration;
+@class GTLRSQLAdmin_DemoteMasterContext;
+@class GTLRSQLAdmin_DemoteMasterMySqlReplicaConfiguration;
 @class GTLRSQLAdmin_ExportContext;
 @class GTLRSQLAdmin_ExportContext_CsvExportOptions;
 @class GTLRSQLAdmin_ExportContext_SqlExportOptions;
@@ -53,6 +56,11 @@
 @class GTLRSQLAdmin_Tier;
 @class GTLRSQLAdmin_TruncateLogContext;
 @class GTLRSQLAdmin_User;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -344,9 +352,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) NSNumber *currentDiskSize;
 
 /**
- *  The database engine type and version. The databaseVersion can not be changed
- *  after instance creation. Can be MYSQL_5_5, MYSQL_5_6 or MYSQL_5_7. Defaults
- *  to MYSQL_5_6. MYSQL_5_7 is applicable only to Second Generation instances.
+ *  The database engine type and version. The databaseVersion field can not be
+ *  changed after instance creation. MySQL Second Generation instances:
+ *  MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6 MySQL
+ *  First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5
  */
 @property(nonatomic, copy, nullable) NSString *databaseVersion;
 
@@ -358,6 +367,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  only to Second Generation instances.
  */
 @property(nonatomic, strong, nullable) GTLRSQLAdmin_DatabaseInstance_FailoverReplica *failoverReplica;
+
+/**
+ *  The GCE zone that the instance is serving from. In case when the instance is
+ *  failed over to standby zone, this value may be different with what user
+ *  specified in the settings.
+ */
+@property(nonatomic, copy, nullable) NSString *gceZone;
 
 /**
  *  The instance type. This can be one of the following.
@@ -499,6 +515,80 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** This is always sql#databasesList. */
 @property(nonatomic, copy, nullable) NSString *kind;
+
+@end
+
+
+/**
+ *  Read-replica configuration for connecting to the on-premises master.
+ */
+@interface GTLRSQLAdmin_DemoteMasterConfiguration : GTLRObject
+
+/** This is always sql#demoteMasterConfiguration. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  MySQL specific configuration when replicating from a MySQL on-premises
+ *  master. Replication configuration information such as the username,
+ *  password, certificates, and keys are not stored in the instance metadata.
+ *  The configuration information is used only to set up the replication
+ *  connection and is stored by MySQL in a file named master.info in the data
+ *  directory.
+ */
+@property(nonatomic, strong, nullable) GTLRSQLAdmin_DemoteMasterMySqlReplicaConfiguration *mysqlReplicaConfiguration;
+
+@end
+
+
+/**
+ *  Database instance demote master context.
+ */
+@interface GTLRSQLAdmin_DemoteMasterContext : GTLRObject
+
+/** This is always sql#demoteMasterContext. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  The name of the instance which will act as on-premises master in the
+ *  replication setup.
+ */
+@property(nonatomic, copy, nullable) NSString *masterInstanceName;
+
+/**
+ *  Configuration specific to read-replicas replicating from the on-premises
+ *  master.
+ */
+@property(nonatomic, strong, nullable) GTLRSQLAdmin_DemoteMasterConfiguration *replicaConfiguration;
+
+@end
+
+
+/**
+ *  Read-replica configuration specific to MySQL databases.
+ */
+@interface GTLRSQLAdmin_DemoteMasterMySqlReplicaConfiguration : GTLRObject
+
+/** PEM representation of the trusted CA's x509 certificate. */
+@property(nonatomic, copy, nullable) NSString *caCertificate;
+
+/** PEM representation of the slave's x509 certificate. */
+@property(nonatomic, copy, nullable) NSString *clientCertificate;
+
+/**
+ *  PEM representation of the slave's private key. The corresponsing public key
+ *  is encoded in the client's certificate. The format of the slave's private
+ *  key can be either PKCS #1 or PKCS #8.
+ */
+@property(nonatomic, copy, nullable) NSString *clientKey;
+
+/** This is always sql#demoteMasterMysqlReplicaConfiguration. */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/** The password for the replication connection. */
+@property(nonatomic, copy, nullable) NSString *password;
+
+/** The username for the replication connection. */
+@property(nonatomic, copy, nullable) NSString *username;
 
 @end
 
@@ -696,8 +786,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, nullable) NSString *fileType;
 
 /**
- *  The PostgreSQL user to use for this import operation. Defaults to
- *  cloudsqlsuperuser. Does not apply to MySQL instances.
+ *  The PostgreSQL user for this import operation. Defaults to
+ *  cloudsqlsuperuser. Used only for PostgreSQL instances.
  */
 @property(nonatomic, copy, nullable) NSString *importUser;
 
@@ -738,6 +828,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Contains details about the clone operation. */
 @property(nonatomic, strong, nullable) GTLRSQLAdmin_CloneContext *cloneContext;
+
+@end
+
+
+/**
+ *  Database demote master request.
+ */
+@interface GTLRSQLAdmin_InstancesDemoteMasterRequest : GTLRObject
+
+/** Contains details about the demoteMaster operation. */
+@property(nonatomic, strong, nullable) GTLRSQLAdmin_DemoteMasterContext *demoteMasterContext;
 
 @end
 
@@ -847,8 +948,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) NSNumber *ipv4Enabled;
 
 /**
- *  Whether the mysqld should default to 'REQUIRE X509' for users connecting
- *  over IP.
+ *  Whether SSL connections over IP should be enforced or not.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -1647,3 +1747,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

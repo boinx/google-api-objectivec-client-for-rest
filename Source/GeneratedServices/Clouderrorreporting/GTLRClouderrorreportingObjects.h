@@ -31,6 +31,11 @@
 @class GTLRClouderrorreporting_TimedCount;
 @class GTLRClouderrorreporting_TrackingIssue;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -59,8 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  report the error, usually the place where it was logged.
  *  For a logged exception this would be the source line where the
  *  exception is logged, usually close to the place where it was
- *  caught. This value is in contrast to `Exception.cause_location`,
- *  which describes the source line where the exception was thrown.
+ *  caught.
  */
 @property(nonatomic, strong, nullable) GTLRClouderrorreporting_SourceLocation *reportLocation;
 
@@ -504,3 +508,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   BigQuery Data Transfer Service API (bigquerydatatransfer/v1)
+//   BigQuery Data Transfer API (bigquerydatatransfer/v1)
 // Description:
 //   Transfers data from partner SaaS applications to Google BigQuery on a
 //   scheduled, managed basis.
@@ -20,10 +20,13 @@
 #endif
 
 @class GTLRBigQueryDataTransfer_CheckValidCredsRequest;
-@class GTLRBigQueryDataTransfer_IsEnabledRequest;
 @class GTLRBigQueryDataTransfer_ScheduleTransferRunsRequest;
-@class GTLRBigQueryDataTransfer_SetEnabledRequest;
 @class GTLRBigQueryDataTransfer_TransferConfig;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -51,22 +54,20 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferRunAttemptLatest;
 GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferRunAttemptRunAttemptUnspecified;
 
 // ----------------------------------------------------------------------------
-// statuses
+// states
 
 /** Value: "CANCELLED" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesCancelled;
+GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatesCancelled;
 /** Value: "FAILED" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesFailed;
-/** Value: "INACTIVE" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesInactive;
+GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatesFailed;
 /** Value: "PENDING" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesPending;
+GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatesPending;
 /** Value: "RUNNING" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesRunning;
+GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatesRunning;
 /** Value: "SUCCEEDED" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesSucceeded;
-/** Value: "TRANSFER_STATUS_UNSPECIFIED" */
-GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnspecified;
+GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatesSucceeded;
+/** Value: "TRANSFER_STATE_UNSPECIFIED" */
+GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatesTransferStateUnspecified;
 
 // ----------------------------------------------------------------------------
 // Query Classes
@@ -85,6 +86,10 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  Returns true if valid credentials exist for the given data source and
  *  requesting user.
+ *  Some data sources doesn't support service account, so we need to talk to
+ *  them on behalf of the end user. This API just checks whether we have OAuth
+ *  token for the particular user, which is a pre-requisite before user can
+ *  create a transfer config.
  *
  *  Method: bigquerydatatransfer.projects.dataSources.checkValidCreds
  *
@@ -108,6 +113,10 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  *
  *  Returns true if valid credentials exist for the given data source and
  *  requesting user.
+ *  Some data sources doesn't support service account, so we need to talk to
+ *  them on behalf of the end user. This API just checks whether we have OAuth
+ *  token for the particular user, which is a pre-requisite before user can
+ *  create a transfer config.
  *
  *  @param object The @c GTLRBigQueryDataTransfer_CheckValidCredsRequest to
  *    include in the query.
@@ -212,45 +221,12 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @end
 
 /**
- *  Returns true if data transfer is enabled for a project.
- *
- *  Method: bigquerydatatransfer.projects.isEnabled
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeBigQueryDataTransferBigquery
- *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatform
- *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatformReadOnly
- */
-@interface GTLRBigQueryDataTransferQuery_ProjectsIsEnabled : GTLRBigQueryDataTransferQuery
-// Previous library name was
-//   +[GTLQueryBigQueryDataTransfer queryForProjectsIsEnabledWithObject:name:]
-
-/**
- *  The name of the project resource in the form:
- *  `projects/{project_id}`
- */
-@property(nonatomic, copy, nullable) NSString *name;
-
-/**
- *  Fetches a @c GTLRBigQueryDataTransfer_IsEnabledResponse.
- *
- *  Returns true if data transfer is enabled for a project.
- *
- *  @param object The @c GTLRBigQueryDataTransfer_IsEnabledRequest to include in
- *    the query.
- *  @param name The name of the project resource in the form:
- *    `projects/{project_id}`
- *
- *  @returns GTLRBigQueryDataTransferQuery_ProjectsIsEnabled
- */
-+ (instancetype)queryWithObject:(GTLRBigQueryDataTransfer_IsEnabledRequest *)object
-                           name:(NSString *)name;
-
-@end
-
-/**
  *  Returns true if valid credentials exist for the given data source and
  *  requesting user.
+ *  Some data sources doesn't support service account, so we need to talk to
+ *  them on behalf of the end user. This API just checks whether we have OAuth
+ *  token for the particular user, which is a pre-requisite before user can
+ *  create a transfer config.
  *
  *  Method: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
  *
@@ -274,6 +250,10 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  *
  *  Returns true if valid credentials exist for the given data source and
  *  requesting user.
+ *  Some data sources doesn't support service account, so we need to talk to
+ *  them on behalf of the end user. This API just checks whether we have OAuth
+ *  token for the particular user, which is a pre-requisite before user can
+ *  create a transfer config.
  *
  *  @param object The @c GTLRBigQueryDataTransfer_CheckValidCredsRequest to
  *    include in the query.
@@ -378,80 +358,75 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @end
 
 /**
- *  Returns true if data transfer is enabled for a project.
+ *  Get information about a location.
  *
- *  Method: bigquerydatatransfer.projects.locations.isEnabled
+ *  Method: bigquerydatatransfer.projects.locations.get
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeBigQueryDataTransferBigquery
  *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatform
  *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatformReadOnly
  */
-@interface GTLRBigQueryDataTransferQuery_ProjectsLocationsIsEnabled : GTLRBigQueryDataTransferQuery
+@interface GTLRBigQueryDataTransferQuery_ProjectsLocationsGet : GTLRBigQueryDataTransferQuery
 // Previous library name was
-//   +[GTLQueryBigQueryDataTransfer queryForProjectsLocationsIsEnabledWithObject:name:]
+//   +[GTLQueryBigQueryDataTransfer queryForProjectsLocationsGetWithname:]
 
-/**
- *  The name of the project resource in the form:
- *  `projects/{project_id}`
- */
+/** Resource name for the location. */
 @property(nonatomic, copy, nullable) NSString *name;
 
 /**
- *  Fetches a @c GTLRBigQueryDataTransfer_IsEnabledResponse.
+ *  Fetches a @c GTLRBigQueryDataTransfer_Location.
  *
- *  Returns true if data transfer is enabled for a project.
+ *  Get information about a location.
  *
- *  @param object The @c GTLRBigQueryDataTransfer_IsEnabledRequest to include in
- *    the query.
- *  @param name The name of the project resource in the form:
- *    `projects/{project_id}`
+ *  @param name Resource name for the location.
  *
- *  @returns GTLRBigQueryDataTransferQuery_ProjectsLocationsIsEnabled
+ *  @returns GTLRBigQueryDataTransferQuery_ProjectsLocationsGet
  */
-+ (instancetype)queryWithObject:(GTLRBigQueryDataTransfer_IsEnabledRequest *)object
-                           name:(NSString *)name;
++ (instancetype)queryWithName:(NSString *)name;
 
 @end
 
 /**
- *  Enables or disables data transfer for a project. This
- *  method requires the additional scope of
- *  'https://www.googleapis.com/auth/cloudplatformprojects'
- *  to manage the cloud project permissions.
+ *  Lists information about the supported locations for this service.
  *
- *  Method: bigquerydatatransfer.projects.locations.setEnabled
+ *  Method: bigquerydatatransfer.projects.locations.list
  *
  *  Authorization scope(s):
+ *    @c kGTLRAuthScopeBigQueryDataTransferBigquery
  *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatform
+ *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatformReadOnly
  */
-@interface GTLRBigQueryDataTransferQuery_ProjectsLocationsSetEnabled : GTLRBigQueryDataTransferQuery
+@interface GTLRBigQueryDataTransferQuery_ProjectsLocationsList : GTLRBigQueryDataTransferQuery
 // Previous library name was
-//   +[GTLQueryBigQueryDataTransfer queryForProjectsLocationsSetEnabledWithObject:name:]
+//   +[GTLQueryBigQueryDataTransfer queryForProjectsLocationsListWithname:]
 
-/**
- *  The name of the project resource in the form:
- *  `projects/{project_id}`
- */
+/** The standard list filter. */
+@property(nonatomic, copy, nullable) NSString *filter;
+
+/** The resource that owns the locations collection, if applicable. */
 @property(nonatomic, copy, nullable) NSString *name;
 
+/** The standard list page size. */
+@property(nonatomic, assign) NSInteger pageSize;
+
+/** The standard list page token. */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
 /**
- *  Fetches a @c GTLRBigQueryDataTransfer_Empty.
+ *  Fetches a @c GTLRBigQueryDataTransfer_ListLocationsResponse.
  *
- *  Enables or disables data transfer for a project. This
- *  method requires the additional scope of
- *  'https://www.googleapis.com/auth/cloudplatformprojects'
- *  to manage the cloud project permissions.
+ *  Lists information about the supported locations for this service.
  *
- *  @param object The @c GTLRBigQueryDataTransfer_SetEnabledRequest to include
- *    in the query.
- *  @param name The name of the project resource in the form:
- *    `projects/{project_id}`
+ *  @param name The resource that owns the locations collection, if applicable.
  *
- *  @returns GTLRBigQueryDataTransferQuery_ProjectsLocationsSetEnabled
+ *  @returns GTLRBigQueryDataTransferQuery_ProjectsLocationsList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
  */
-+ (instancetype)queryWithObject:(GTLRBigQueryDataTransfer_SetEnabledRequest *)object
-                           name:(NSString *)name;
++ (instancetype)queryWithName:(NSString *)name;
 
 @end
 
@@ -490,10 +465,8 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  The BigQuery project id where the transfer configuration should be created.
  *  Must be in the format /projects/{project_id}/locations/{location_id}
- *  or
- *  /projects/{project_id}/locations/-
- *  In case when '-' is specified as location_id, location is infered from
- *  the destination dataset region.
+ *  If specified location and location of the destination bigquery dataset
+ *  do not match - the request will fail.
  */
 @property(nonatomic, copy, nullable) NSString *parent;
 
@@ -507,10 +480,8 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  *  @param parent The BigQuery project id where the transfer configuration
  *    should be created.
  *    Must be in the format /projects/{project_id}/locations/{location_id}
- *    or
- *    /projects/{project_id}/locations/-
- *    In case when '-' is specified as location_id, location is infered from
- *    the destination dataset region.
+ *    If specified location and location of the destination bigquery dataset
+ *    do not match - the request will fail.
  *
  *  @returns GTLRBigQueryDataTransferQuery_ProjectsLocationsTransferConfigsCreate
  */
@@ -662,7 +633,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  Optional OAuth2 authorization code to use with this transfer configuration.
  *  If it is provided, the transfer configuration will be associated with the
- *  gaia id of the authorizing user.
+ *  authorizing user.
  *  In order to obtain authorization_code, please make a
  *  request to
  *  https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
@@ -679,11 +650,12 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @property(nonatomic, copy, nullable) NSString *authorizationCode;
 
 /**
- *  The resource name of the transfer run.
- *  Transfer run names have the form
+ *  The resource name of the transfer config.
+ *  Transfer config names have the form
  *  `projects/{project_id}/transferConfigs/{config_id}`.
  *  Where `config_id` is usually a uuid, even though it is not
- *  guaranteed or required. The name is ignored when creating a transfer run.
+ *  guaranteed or required. The name is ignored when creating a transfer
+ *  config.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
@@ -702,11 +674,12 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  *
  *  @param object The @c GTLRBigQueryDataTransfer_TransferConfig to include in
  *    the query.
- *  @param name The resource name of the transfer run.
- *    Transfer run names have the form
+ *  @param name The resource name of the transfer config.
+ *    Transfer config names have the form
  *    `projects/{project_id}/transferConfigs/{config_id}`.
  *    Where `config_id` is usually a uuid, even though it is not
- *    guaranteed or required. The name is ignored when creating a transfer run.
+ *    guaranteed or required. The name is ignored when creating a transfer
+ *    config.
  *
  *  @returns GTLRBigQueryDataTransferQuery_ProjectsLocationsTransferConfigsPatch
  */
@@ -828,19 +801,18 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @property(nonatomic, copy, nullable) NSString *runAttempt;
 
 /**
- *  When specified, only transfer runs with requested statuses are returned.
+ *  When specified, only transfer runs with requested states are returned.
  *
  *  Likely values:
- *    @arg @c kGTLRBigQueryDataTransferStatusesTransferStatusUnspecified Value
- *        "TRANSFER_STATUS_UNSPECIFIED"
- *    @arg @c kGTLRBigQueryDataTransferStatusesInactive Value "INACTIVE"
- *    @arg @c kGTLRBigQueryDataTransferStatusesPending Value "PENDING"
- *    @arg @c kGTLRBigQueryDataTransferStatusesRunning Value "RUNNING"
- *    @arg @c kGTLRBigQueryDataTransferStatusesSucceeded Value "SUCCEEDED"
- *    @arg @c kGTLRBigQueryDataTransferStatusesFailed Value "FAILED"
- *    @arg @c kGTLRBigQueryDataTransferStatusesCancelled Value "CANCELLED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesTransferStateUnspecified Value
+ *        "TRANSFER_STATE_UNSPECIFIED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesPending Value "PENDING"
+ *    @arg @c kGTLRBigQueryDataTransferStatesRunning Value "RUNNING"
+ *    @arg @c kGTLRBigQueryDataTransferStatesSucceeded Value "SUCCEEDED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesFailed Value "FAILED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesCancelled Value "CANCELLED"
  */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *statuses;
+@property(nonatomic, strong, nullable) NSArray<NSString *> *states;
 
 /**
  *  Fetches a @c GTLRBigQueryDataTransfer_ListTransferRunsResponse.
@@ -926,7 +898,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @end
 
 /**
- *  Creates transfer runs for a time range [range_start_time, range_end_time].
+ *  Creates transfer runs for a time range [start_time, end_time].
  *  For each date - or whatever granularity the data source supports - in the
  *  range, one transfer run is created.
  *  Note that runs are created per UTC time in the time range.
@@ -950,7 +922,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  Fetches a @c GTLRBigQueryDataTransfer_ScheduleTransferRunsResponse.
  *
- *  Creates transfer runs for a time range [range_start_time, range_end_time].
+ *  Creates transfer runs for a time range [start_time, end_time].
  *  For each date - or whatever granularity the data source supports - in the
  *  range, one transfer run is created.
  *  Note that runs are created per UTC time in the time range.
@@ -964,47 +936,6 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  */
 + (instancetype)queryWithObject:(GTLRBigQueryDataTransfer_ScheduleTransferRunsRequest *)object
                          parent:(NSString *)parent;
-
-@end
-
-/**
- *  Enables or disables data transfer for a project. This
- *  method requires the additional scope of
- *  'https://www.googleapis.com/auth/cloudplatformprojects'
- *  to manage the cloud project permissions.
- *
- *  Method: bigquerydatatransfer.projects.setEnabled
- *
- *  Authorization scope(s):
- *    @c kGTLRAuthScopeBigQueryDataTransferCloudPlatform
- */
-@interface GTLRBigQueryDataTransferQuery_ProjectsSetEnabled : GTLRBigQueryDataTransferQuery
-// Previous library name was
-//   +[GTLQueryBigQueryDataTransfer queryForProjectsSetEnabledWithObject:name:]
-
-/**
- *  The name of the project resource in the form:
- *  `projects/{project_id}`
- */
-@property(nonatomic, copy, nullable) NSString *name;
-
-/**
- *  Fetches a @c GTLRBigQueryDataTransfer_Empty.
- *
- *  Enables or disables data transfer for a project. This
- *  method requires the additional scope of
- *  'https://www.googleapis.com/auth/cloudplatformprojects'
- *  to manage the cloud project permissions.
- *
- *  @param object The @c GTLRBigQueryDataTransfer_SetEnabledRequest to include
- *    in the query.
- *  @param name The name of the project resource in the form:
- *    `projects/{project_id}`
- *
- *  @returns GTLRBigQueryDataTransferQuery_ProjectsSetEnabled
- */
-+ (instancetype)queryWithObject:(GTLRBigQueryDataTransfer_SetEnabledRequest *)object
-                           name:(NSString *)name;
 
 @end
 
@@ -1043,10 +974,8 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  The BigQuery project id where the transfer configuration should be created.
  *  Must be in the format /projects/{project_id}/locations/{location_id}
- *  or
- *  /projects/{project_id}/locations/-
- *  In case when '-' is specified as location_id, location is infered from
- *  the destination dataset region.
+ *  If specified location and location of the destination bigquery dataset
+ *  do not match - the request will fail.
  */
 @property(nonatomic, copy, nullable) NSString *parent;
 
@@ -1060,10 +989,8 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  *  @param parent The BigQuery project id where the transfer configuration
  *    should be created.
  *    Must be in the format /projects/{project_id}/locations/{location_id}
- *    or
- *    /projects/{project_id}/locations/-
- *    In case when '-' is specified as location_id, location is infered from
- *    the destination dataset region.
+ *    If specified location and location of the destination bigquery dataset
+ *    do not match - the request will fail.
  *
  *  @returns GTLRBigQueryDataTransferQuery_ProjectsTransferConfigsCreate
  */
@@ -1215,7 +1142,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  Optional OAuth2 authorization code to use with this transfer configuration.
  *  If it is provided, the transfer configuration will be associated with the
- *  gaia id of the authorizing user.
+ *  authorizing user.
  *  In order to obtain authorization_code, please make a
  *  request to
  *  https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
@@ -1232,11 +1159,12 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @property(nonatomic, copy, nullable) NSString *authorizationCode;
 
 /**
- *  The resource name of the transfer run.
- *  Transfer run names have the form
+ *  The resource name of the transfer config.
+ *  Transfer config names have the form
  *  `projects/{project_id}/transferConfigs/{config_id}`.
  *  Where `config_id` is usually a uuid, even though it is not
- *  guaranteed or required. The name is ignored when creating a transfer run.
+ *  guaranteed or required. The name is ignored when creating a transfer
+ *  config.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
@@ -1255,11 +1183,12 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
  *
  *  @param object The @c GTLRBigQueryDataTransfer_TransferConfig to include in
  *    the query.
- *  @param name The resource name of the transfer run.
- *    Transfer run names have the form
+ *  @param name The resource name of the transfer config.
+ *    Transfer config names have the form
  *    `projects/{project_id}/transferConfigs/{config_id}`.
  *    Where `config_id` is usually a uuid, even though it is not
- *    guaranteed or required. The name is ignored when creating a transfer run.
+ *    guaranteed or required. The name is ignored when creating a transfer
+ *    config.
  *
  *  @returns GTLRBigQueryDataTransferQuery_ProjectsTransferConfigsPatch
  */
@@ -1381,19 +1310,18 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @property(nonatomic, copy, nullable) NSString *runAttempt;
 
 /**
- *  When specified, only transfer runs with requested statuses are returned.
+ *  When specified, only transfer runs with requested states are returned.
  *
  *  Likely values:
- *    @arg @c kGTLRBigQueryDataTransferStatusesTransferStatusUnspecified Value
- *        "TRANSFER_STATUS_UNSPECIFIED"
- *    @arg @c kGTLRBigQueryDataTransferStatusesInactive Value "INACTIVE"
- *    @arg @c kGTLRBigQueryDataTransferStatusesPending Value "PENDING"
- *    @arg @c kGTLRBigQueryDataTransferStatusesRunning Value "RUNNING"
- *    @arg @c kGTLRBigQueryDataTransferStatusesSucceeded Value "SUCCEEDED"
- *    @arg @c kGTLRBigQueryDataTransferStatusesFailed Value "FAILED"
- *    @arg @c kGTLRBigQueryDataTransferStatusesCancelled Value "CANCELLED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesTransferStateUnspecified Value
+ *        "TRANSFER_STATE_UNSPECIFIED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesPending Value "PENDING"
+ *    @arg @c kGTLRBigQueryDataTransferStatesRunning Value "RUNNING"
+ *    @arg @c kGTLRBigQueryDataTransferStatesSucceeded Value "SUCCEEDED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesFailed Value "FAILED"
+ *    @arg @c kGTLRBigQueryDataTransferStatesCancelled Value "CANCELLED"
  */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *statuses;
+@property(nonatomic, strong, nullable) NSArray<NSString *> *states;
 
 /**
  *  Fetches a @c GTLRBigQueryDataTransfer_ListTransferRunsResponse.
@@ -1479,7 +1407,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @end
 
 /**
- *  Creates transfer runs for a time range [range_start_time, range_end_time].
+ *  Creates transfer runs for a time range [start_time, end_time].
  *  For each date - or whatever granularity the data source supports - in the
  *  range, one transfer run is created.
  *  Note that runs are created per UTC time in the time range.
@@ -1503,7 +1431,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 /**
  *  Fetches a @c GTLRBigQueryDataTransfer_ScheduleTransferRunsResponse.
  *
- *  Creates transfer runs for a time range [range_start_time, range_end_time].
+ *  Creates transfer runs for a time range [start_time, end_time].
  *  For each date - or whatever granularity the data source supports - in the
  *  range, one transfer run is created.
  *  Note that runs are created per UTC time in the time range.
@@ -1521,3 +1449,5 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransferStatusesTransferStatusUnsp
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

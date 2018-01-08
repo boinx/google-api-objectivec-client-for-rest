@@ -114,7 +114,7 @@
 
 @implementation GTLRComputeQuery_AddressesDelete
 
-@dynamic address, project, region;
+@dynamic address, project, region, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -164,7 +164,7 @@
 
 @implementation GTLRComputeQuery_AddressesInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Address *)object
                         project:(NSString *)project
@@ -235,7 +235,7 @@
 
 @implementation GTLRComputeQuery_AutoscalersDelete
 
-@dynamic autoscaler, project, zoneProperty;
+@dynamic autoscaler, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -293,7 +293,7 @@
 
 @implementation GTLRComputeQuery_AutoscalersInsert
 
-@dynamic project, zoneProperty;
+@dynamic project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -353,7 +353,7 @@
 
 @implementation GTLRComputeQuery_AutoscalersPatch
 
-@dynamic autoscaler, project, zoneProperty;
+@dynamic autoscaler, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -386,7 +386,7 @@
 
 @implementation GTLRComputeQuery_AutoscalersUpdate
 
-@dynamic autoscaler, project, zoneProperty;
+@dynamic autoscaler, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -419,7 +419,7 @@
 
 @implementation GTLRComputeQuery_BackendBucketsDelete
 
-@dynamic backendBucket, project;
+@dynamic backendBucket, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                    backendBucket:(NSString *)backendBucket {
@@ -465,7 +465,7 @@
 
 @implementation GTLRComputeQuery_BackendBucketsInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendBucket *)object
                         project:(NSString *)project {
@@ -509,7 +509,7 @@
 
 @implementation GTLRComputeQuery_BackendBucketsPatch
 
-@dynamic backendBucket, project;
+@dynamic backendBucket, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendBucket *)object
                         project:(NSString *)project
@@ -538,7 +538,7 @@
 
 @implementation GTLRComputeQuery_BackendBucketsUpdate
 
-@dynamic backendBucket, project;
+@dynamic backendBucket, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendBucket *)object
                         project:(NSString *)project
@@ -586,7 +586,7 @@
 
 @implementation GTLRComputeQuery_BackendServicesDelete
 
-@dynamic backendService, project;
+@dynamic backendService, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                   backendService:(NSString *)backendService {
@@ -661,7 +661,7 @@
 
 @implementation GTLRComputeQuery_BackendServicesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendService *)object
                         project:(NSString *)project {
@@ -705,7 +705,7 @@
 
 @implementation GTLRComputeQuery_BackendServicesPatch
 
-@dynamic backendService, project;
+@dynamic backendService, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendService *)object
                         project:(NSString *)project
@@ -734,7 +734,7 @@
 
 @implementation GTLRComputeQuery_BackendServicesUpdate
 
-@dynamic backendService, project;
+@dynamic backendService, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendService *)object
                         project:(NSString *)project
@@ -782,7 +782,7 @@
 
 @implementation GTLRComputeQuery_DisksCreateSnapshot
 
-@dynamic disk, guestFlush, project, zoneProperty;
+@dynamic disk, guestFlush, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -817,7 +817,7 @@
 
 @implementation GTLRComputeQuery_DisksDelete
 
-@dynamic disk, project, zoneProperty;
+@dynamic disk, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -875,7 +875,7 @@
 
 @implementation GTLRComputeQuery_DisksInsert
 
-@dynamic project, sourceImage, zoneProperty;
+@dynamic project, requestId, sourceImage, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -935,7 +935,7 @@
 
 @implementation GTLRComputeQuery_DisksResize
 
-@dynamic disk, project, zoneProperty;
+@dynamic disk, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -970,7 +970,7 @@
 
 @implementation GTLRComputeQuery_DisksSetLabels
 
-@dynamic project, resource, zoneProperty;
+@dynamic project, requestId, resource, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -1080,7 +1080,7 @@
 
 @implementation GTLRComputeQuery_FirewallsDelete
 
-@dynamic firewall, project;
+@dynamic firewall, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                         firewall:(NSString *)firewall {
@@ -1126,7 +1126,7 @@
 
 @implementation GTLRComputeQuery_FirewallsInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Firewall *)object
                         project:(NSString *)project {
@@ -1170,7 +1170,7 @@
 
 @implementation GTLRComputeQuery_FirewallsPatch
 
-@dynamic firewall, project;
+@dynamic firewall, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Firewall *)object
                         project:(NSString *)project
@@ -1199,7 +1199,7 @@
 
 @implementation GTLRComputeQuery_FirewallsUpdate
 
-@dynamic firewall, project;
+@dynamic firewall, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Firewall *)object
                         project:(NSString *)project
@@ -1247,7 +1247,7 @@
 
 @implementation GTLRComputeQuery_ForwardingRulesDelete
 
-@dynamic forwardingRule, project, region;
+@dynamic forwardingRule, project, region, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -1297,7 +1297,7 @@
 
 @implementation GTLRComputeQuery_ForwardingRulesInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_ForwardingRule *)object
                         project:(NSString *)project
@@ -1349,7 +1349,7 @@
 
 @implementation GTLRComputeQuery_ForwardingRulesSetTarget
 
-@dynamic forwardingRule, project, region;
+@dynamic forwardingRule, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetReference *)object
                         project:(NSString *)project
@@ -1380,7 +1380,7 @@
 
 @implementation GTLRComputeQuery_GlobalAddressesDelete
 
-@dynamic address, project;
+@dynamic address, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                          address:(NSString *)address {
@@ -1426,7 +1426,7 @@
 
 @implementation GTLRComputeQuery_GlobalAddressesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Address *)object
                         project:(NSString *)project {
@@ -1470,7 +1470,7 @@
 
 @implementation GTLRComputeQuery_GlobalForwardingRulesDelete
 
-@dynamic forwardingRule, project;
+@dynamic forwardingRule, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                   forwardingRule:(NSString *)forwardingRule {
@@ -1516,7 +1516,7 @@
 
 @implementation GTLRComputeQuery_GlobalForwardingRulesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_ForwardingRule *)object
                         project:(NSString *)project {
@@ -1560,7 +1560,7 @@
 
 @implementation GTLRComputeQuery_GlobalForwardingRulesSetTarget
 
-@dynamic forwardingRule, project;
+@dynamic forwardingRule, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetReference *)object
                         project:(NSString *)project
@@ -1672,7 +1672,7 @@
 
 @implementation GTLRComputeQuery_HealthChecksDelete
 
-@dynamic healthCheck, project;
+@dynamic healthCheck, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                      healthCheck:(NSString *)healthCheck {
@@ -1718,7 +1718,7 @@
 
 @implementation GTLRComputeQuery_HealthChecksInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HealthCheck *)object
                         project:(NSString *)project {
@@ -1762,7 +1762,7 @@
 
 @implementation GTLRComputeQuery_HealthChecksPatch
 
-@dynamic healthCheck, project;
+@dynamic healthCheck, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HealthCheck *)object
                         project:(NSString *)project
@@ -1791,7 +1791,7 @@
 
 @implementation GTLRComputeQuery_HealthChecksUpdate
 
-@dynamic healthCheck, project;
+@dynamic healthCheck, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HealthCheck *)object
                         project:(NSString *)project
@@ -1820,7 +1820,7 @@
 
 @implementation GTLRComputeQuery_HttpHealthChecksDelete
 
-@dynamic httpHealthCheck, project;
+@dynamic httpHealthCheck, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                  httpHealthCheck:(NSString *)httpHealthCheck {
@@ -1866,7 +1866,7 @@
 
 @implementation GTLRComputeQuery_HttpHealthChecksInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HttpHealthCheck *)object
                         project:(NSString *)project {
@@ -1910,7 +1910,7 @@
 
 @implementation GTLRComputeQuery_HttpHealthChecksPatch
 
-@dynamic httpHealthCheck, project;
+@dynamic httpHealthCheck, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HttpHealthCheck *)object
                         project:(NSString *)project
@@ -1939,7 +1939,7 @@
 
 @implementation GTLRComputeQuery_HttpHealthChecksUpdate
 
-@dynamic httpHealthCheck, project;
+@dynamic httpHealthCheck, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HttpHealthCheck *)object
                         project:(NSString *)project
@@ -1968,7 +1968,7 @@
 
 @implementation GTLRComputeQuery_HttpsHealthChecksDelete
 
-@dynamic httpsHealthCheck, project;
+@dynamic httpsHealthCheck, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                 httpsHealthCheck:(NSString *)httpsHealthCheck {
@@ -2014,7 +2014,7 @@
 
 @implementation GTLRComputeQuery_HttpsHealthChecksInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HttpsHealthCheck *)object
                         project:(NSString *)project {
@@ -2058,7 +2058,7 @@
 
 @implementation GTLRComputeQuery_HttpsHealthChecksPatch
 
-@dynamic httpsHealthCheck, project;
+@dynamic httpsHealthCheck, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HttpsHealthCheck *)object
                         project:(NSString *)project
@@ -2087,7 +2087,7 @@
 
 @implementation GTLRComputeQuery_HttpsHealthChecksUpdate
 
-@dynamic httpsHealthCheck, project;
+@dynamic httpsHealthCheck, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_HttpsHealthCheck *)object
                         project:(NSString *)project
@@ -2116,7 +2116,7 @@
 
 @implementation GTLRComputeQuery_ImagesDelete
 
-@dynamic image, project;
+@dynamic image, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                            image:(NSString *)image {
@@ -2139,7 +2139,7 @@
 
 @implementation GTLRComputeQuery_ImagesDeprecate
 
-@dynamic image, project;
+@dynamic image, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_DeprecationStatus *)object
                         project:(NSString *)project
@@ -2214,7 +2214,7 @@
 
 @implementation GTLRComputeQuery_ImagesInsert
 
-@dynamic forceCreate, project;
+@dynamic forceCreate, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Image *)object
                         project:(NSString *)project {
@@ -2287,7 +2287,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersAbandonInstances
 
-@dynamic instanceGroupManager, project, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2341,7 +2341,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersDelete
 
-@dynamic instanceGroupManager, project, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2370,7 +2370,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersDeleteInstances
 
-@dynamic instanceGroupManager, project, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2434,7 +2434,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersInsert
 
-@dynamic project, zoneProperty;
+@dynamic project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2528,7 +2528,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersRecreateInstances
 
-@dynamic instanceGroupManager, project, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2563,7 +2563,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersResize
 
-@dynamic instanceGroupManager, project, size, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, size, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2594,7 +2594,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersSetInstanceTemplate
 
-@dynamic instanceGroupManager, project, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2629,7 +2629,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupManagersSetTargetPools
 
-@dynamic instanceGroupManager, project, zoneProperty;
+@dynamic instanceGroupManager, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2664,7 +2664,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupsAddInstances
 
-@dynamic instanceGroup, project, zoneProperty;
+@dynamic instanceGroup, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2718,7 +2718,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupsDelete
 
-@dynamic instanceGroup, project, zoneProperty;
+@dynamic instanceGroup, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2776,7 +2776,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupsInsert
 
-@dynamic project, zoneProperty;
+@dynamic project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2872,7 +2872,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupsRemoveInstances
 
-@dynamic instanceGroup, project, zoneProperty;
+@dynamic instanceGroup, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2907,7 +2907,7 @@
 
 @implementation GTLRComputeQuery_InstanceGroupsSetNamedPorts
 
-@dynamic instanceGroup, project, zoneProperty;
+@dynamic instanceGroup, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2942,7 +2942,7 @@
 
 @implementation GTLRComputeQuery_InstancesAddAccessConfig
 
-@dynamic instance, networkInterface, project, zoneProperty;
+@dynamic instance, networkInterface, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -2998,7 +2998,7 @@
 
 @implementation GTLRComputeQuery_InstancesAttachDisk
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3033,7 +3033,7 @@
 
 @implementation GTLRComputeQuery_InstancesDelete
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3062,7 +3062,8 @@
 
 @implementation GTLRComputeQuery_InstancesDeleteAccessConfig
 
-@dynamic accessConfig, instance, networkInterface, project, zoneProperty;
+@dynamic accessConfig, instance, networkInterface, project, requestId,
+         zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3095,7 +3096,7 @@
 
 @implementation GTLRComputeQuery_InstancesDetachDisk
 
-@dynamic deviceName, instance, project, zoneProperty;
+@dynamic deviceName, instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3184,7 +3185,7 @@
 
 @implementation GTLRComputeQuery_InstancesInsert
 
-@dynamic project, zoneProperty;
+@dynamic project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3244,7 +3245,7 @@
 
 @implementation GTLRComputeQuery_InstancesReset
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3271,9 +3272,38 @@
 
 @end
 
+@implementation GTLRComputeQuery_InstancesSetDeletionProtection
+
+@dynamic deletionProtection, project, requestId, resource, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)parameterNameMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
++ (instancetype)queryWithProject:(NSString *)project
+                    zoneProperty:(NSString *)zoneProperty
+                        resource:(NSString *)resource {
+  NSArray *pathParams = @[
+    @"project", @"resource", @"zone"
+  ];
+  NSString *pathURITemplate = @"{project}/zones/{zone}/instances/{resource}/setDeletionProtection";
+  GTLRComputeQuery_InstancesSetDeletionProtection *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.zoneProperty = zoneProperty;
+  query.resource = resource;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.instances.setDeletionProtection";
+  return query;
+}
+
+@end
+
 @implementation GTLRComputeQuery_InstancesSetDiskAutoDelete
 
-@dynamic autoDelete, deviceName, instance, project, zoneProperty;
+@dynamic autoDelete, deviceName, instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3306,7 +3336,7 @@
 
 @implementation GTLRComputeQuery_InstancesSetLabels
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3341,7 +3371,7 @@
 
 @implementation GTLRComputeQuery_InstancesSetMachineResources
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3376,7 +3406,7 @@
 
 @implementation GTLRComputeQuery_InstancesSetMachineType
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3411,7 +3441,7 @@
 
 @implementation GTLRComputeQuery_InstancesSetMetadata
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3444,9 +3474,44 @@
 
 @end
 
+@implementation GTLRComputeQuery_InstancesSetMinCpuPlatform
+
+@dynamic instance, project, requestId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)parameterNameMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
++ (instancetype)queryWithObject:(GTLRCompute_InstancesSetMinCpuPlatformRequest *)object
+                        project:(NSString *)project
+                   zoneProperty:(NSString *)zoneProperty
+                       instance:(NSString *)instance {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[
+    @"instance", @"project", @"zone"
+  ];
+  NSString *pathURITemplate = @"{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform";
+  GTLRComputeQuery_InstancesSetMinCpuPlatform *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.project = project;
+  query.zoneProperty = zoneProperty;
+  query.instance = instance;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.instances.setMinCpuPlatform";
+  return query;
+}
+
+@end
+
 @implementation GTLRComputeQuery_InstancesSetScheduling
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3481,7 +3546,7 @@
 
 @implementation GTLRComputeQuery_InstancesSetServiceAccount
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3516,7 +3581,7 @@
 
 @implementation GTLRComputeQuery_InstancesSetTags
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3551,7 +3616,7 @@
 
 @implementation GTLRComputeQuery_InstancesStart
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3580,7 +3645,7 @@
 
 @implementation GTLRComputeQuery_InstancesStartWithEncryptionKey
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3615,7 +3680,7 @@
 
 @implementation GTLRComputeQuery_InstancesStop
 
-@dynamic instance, project, zoneProperty;
+@dynamic instance, project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -3644,7 +3709,7 @@
 
 @implementation GTLRComputeQuery_InstanceTemplatesDelete
 
-@dynamic instanceTemplate, project;
+@dynamic instanceTemplate, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                 instanceTemplate:(NSString *)instanceTemplate {
@@ -3690,7 +3755,7 @@
 
 @implementation GTLRComputeQuery_InstanceTemplatesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_InstanceTemplate *)object
                         project:(NSString *)project {
@@ -3727,6 +3792,288 @@
   query.project = project;
   query.expectedObjectClass = [GTLRCompute_InstanceTemplateList class];
   query.loggingName = @"compute.instanceTemplates.list";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectAttachmentsAggregatedList
+
+@dynamic filter, maxResults, orderBy, pageToken, project;
+
++ (instancetype)queryWithProject:(NSString *)project {
+  NSArray *pathParams = @[ @"project" ];
+  NSString *pathURITemplate = @"{project}/aggregated/interconnectAttachments";
+  GTLRComputeQuery_InterconnectAttachmentsAggregatedList *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.expectedObjectClass = [GTLRCompute_InterconnectAttachmentAggregatedList class];
+  query.loggingName = @"compute.interconnectAttachments.aggregatedList";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectAttachmentsDelete
+
+@dynamic interconnectAttachment, project, region, requestId;
+
++ (instancetype)queryWithProject:(NSString *)project
+                          region:(NSString *)region
+          interconnectAttachment:(NSString *)interconnectAttachment {
+  NSArray *pathParams = @[
+    @"interconnectAttachment", @"project", @"region"
+  ];
+  NSString *pathURITemplate = @"{project}/regions/{region}/interconnectAttachments/{interconnectAttachment}";
+  GTLRComputeQuery_InterconnectAttachmentsDelete *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"DELETE"
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.region = region;
+  query.interconnectAttachment = interconnectAttachment;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.interconnectAttachments.delete";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectAttachmentsGet
+
+@dynamic interconnectAttachment, project, region;
+
++ (instancetype)queryWithProject:(NSString *)project
+                          region:(NSString *)region
+          interconnectAttachment:(NSString *)interconnectAttachment {
+  NSArray *pathParams = @[
+    @"interconnectAttachment", @"project", @"region"
+  ];
+  NSString *pathURITemplate = @"{project}/regions/{region}/interconnectAttachments/{interconnectAttachment}";
+  GTLRComputeQuery_InterconnectAttachmentsGet *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.region = region;
+  query.interconnectAttachment = interconnectAttachment;
+  query.expectedObjectClass = [GTLRCompute_InterconnectAttachment class];
+  query.loggingName = @"compute.interconnectAttachments.get";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectAttachmentsInsert
+
+@dynamic project, region, requestId;
+
++ (instancetype)queryWithObject:(GTLRCompute_InterconnectAttachment *)object
+                        project:(NSString *)project
+                         region:(NSString *)region {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[
+    @"project", @"region"
+  ];
+  NSString *pathURITemplate = @"{project}/regions/{region}/interconnectAttachments";
+  GTLRComputeQuery_InterconnectAttachmentsInsert *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.project = project;
+  query.region = region;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.interconnectAttachments.insert";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectAttachmentsList
+
+@dynamic filter, maxResults, orderBy, pageToken, project, region;
+
++ (instancetype)queryWithProject:(NSString *)project
+                          region:(NSString *)region {
+  NSArray *pathParams = @[
+    @"project", @"region"
+  ];
+  NSString *pathURITemplate = @"{project}/regions/{region}/interconnectAttachments";
+  GTLRComputeQuery_InterconnectAttachmentsList *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.region = region;
+  query.expectedObjectClass = [GTLRCompute_InterconnectAttachmentList class];
+  query.loggingName = @"compute.interconnectAttachments.list";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectLocationsGet
+
+@dynamic interconnectLocation, project;
+
++ (instancetype)queryWithProject:(NSString *)project
+            interconnectLocation:(NSString *)interconnectLocation {
+  NSArray *pathParams = @[
+    @"interconnectLocation", @"project"
+  ];
+  NSString *pathURITemplate = @"{project}/global/interconnectLocations/{interconnectLocation}";
+  GTLRComputeQuery_InterconnectLocationsGet *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.interconnectLocation = interconnectLocation;
+  query.expectedObjectClass = [GTLRCompute_InterconnectLocation class];
+  query.loggingName = @"compute.interconnectLocations.get";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectLocationsList
+
+@dynamic filter, maxResults, orderBy, pageToken, project;
+
++ (instancetype)queryWithProject:(NSString *)project {
+  NSArray *pathParams = @[ @"project" ];
+  NSString *pathURITemplate = @"{project}/global/interconnectLocations";
+  GTLRComputeQuery_InterconnectLocationsList *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.expectedObjectClass = [GTLRCompute_InterconnectLocationList class];
+  query.loggingName = @"compute.interconnectLocations.list";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectsDelete
+
+@dynamic interconnect, project, requestId;
+
++ (instancetype)queryWithProject:(NSString *)project
+                    interconnect:(NSString *)interconnect {
+  NSArray *pathParams = @[
+    @"interconnect", @"project"
+  ];
+  NSString *pathURITemplate = @"{project}/global/interconnects/{interconnect}";
+  GTLRComputeQuery_InterconnectsDelete *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"DELETE"
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.interconnect = interconnect;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.interconnects.delete";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectsGet
+
+@dynamic interconnect, project;
+
++ (instancetype)queryWithProject:(NSString *)project
+                    interconnect:(NSString *)interconnect {
+  NSArray *pathParams = @[
+    @"interconnect", @"project"
+  ];
+  NSString *pathURITemplate = @"{project}/global/interconnects/{interconnect}";
+  GTLRComputeQuery_InterconnectsGet *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.interconnect = interconnect;
+  query.expectedObjectClass = [GTLRCompute_Interconnect class];
+  query.loggingName = @"compute.interconnects.get";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectsInsert
+
+@dynamic project, requestId;
+
++ (instancetype)queryWithObject:(GTLRCompute_Interconnect *)object
+                        project:(NSString *)project {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[ @"project" ];
+  NSString *pathURITemplate = @"{project}/global/interconnects";
+  GTLRComputeQuery_InterconnectsInsert *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.project = project;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.interconnects.insert";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectsList
+
+@dynamic filter, maxResults, orderBy, pageToken, project;
+
++ (instancetype)queryWithProject:(NSString *)project {
+  NSArray *pathParams = @[ @"project" ];
+  NSString *pathURITemplate = @"{project}/global/interconnects";
+  GTLRComputeQuery_InterconnectsList *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.project = project;
+  query.expectedObjectClass = [GTLRCompute_InterconnectList class];
+  query.loggingName = @"compute.interconnects.list";
+  return query;
+}
+
+@end
+
+@implementation GTLRComputeQuery_InterconnectsPatch
+
+@dynamic interconnect, project, requestId;
+
++ (instancetype)queryWithObject:(GTLRCompute_Interconnect *)object
+                        project:(NSString *)project
+                   interconnect:(NSString *)interconnect {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[
+    @"interconnect", @"project"
+  ];
+  NSString *pathURITemplate = @"{project}/global/interconnects/{interconnect}";
+  GTLRComputeQuery_InterconnectsPatch *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"PATCH"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.project = project;
+  query.interconnect = interconnect;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.interconnects.patch";
   return query;
 }
 
@@ -3832,7 +4179,7 @@
 
 @implementation GTLRComputeQuery_NetworksAddPeering
 
-@dynamic network, project;
+@dynamic network, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_NetworksAddPeeringRequest *)object
                         project:(NSString *)project
@@ -3861,7 +4208,7 @@
 
 @implementation GTLRComputeQuery_NetworksDelete
 
-@dynamic network, project;
+@dynamic network, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                          network:(NSString *)network {
@@ -3907,7 +4254,7 @@
 
 @implementation GTLRComputeQuery_NetworksInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Network *)object
                         project:(NSString *)project {
@@ -3949,9 +4296,38 @@
 
 @end
 
+@implementation GTLRComputeQuery_NetworksPatch
+
+@dynamic network, project, requestId;
+
++ (instancetype)queryWithObject:(GTLRCompute_Network *)object
+                        project:(NSString *)project
+                        network:(NSString *)network {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[
+    @"network", @"project"
+  ];
+  NSString *pathURITemplate = @"{project}/global/networks/{network}";
+  GTLRComputeQuery_NetworksPatch *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"PATCH"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.project = project;
+  query.network = network;
+  query.expectedObjectClass = [GTLRCompute_Operation class];
+  query.loggingName = @"compute.networks.patch";
+  return query;
+}
+
+@end
+
 @implementation GTLRComputeQuery_NetworksRemovePeering
 
-@dynamic network, project;
+@dynamic network, project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_NetworksRemovePeeringRequest *)object
                         project:(NSString *)project
@@ -3980,7 +4356,7 @@
 
 @implementation GTLRComputeQuery_NetworksSwitchToCustomMode
 
-@dynamic network, project;
+@dynamic network, project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                          network:(NSString *)network {
@@ -4003,7 +4379,7 @@
 
 @implementation GTLRComputeQuery_ProjectsDisableXpnHost
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project {
   NSArray *pathParams = @[ @"project" ];
@@ -4022,7 +4398,7 @@
 
 @implementation GTLRComputeQuery_ProjectsDisableXpnResource
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_ProjectsDisableXpnResourceRequest *)object
                         project:(NSString *)project {
@@ -4047,7 +4423,7 @@
 
 @implementation GTLRComputeQuery_ProjectsEnableXpnHost
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project {
   NSArray *pathParams = @[ @"project" ];
@@ -4066,7 +4442,7 @@
 
 @implementation GTLRComputeQuery_ProjectsEnableXpnResource
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_ProjectsEnableXpnResourceRequest *)object
                         project:(NSString *)project {
@@ -4181,7 +4557,7 @@
 
 @implementation GTLRComputeQuery_ProjectsMoveDisk
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_DiskMoveRequest *)object
                         project:(NSString *)project {
@@ -4206,7 +4582,7 @@
 
 @implementation GTLRComputeQuery_ProjectsMoveInstance
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_InstanceMoveRequest *)object
                         project:(NSString *)project {
@@ -4231,7 +4607,7 @@
 
 @implementation GTLRComputeQuery_ProjectsSetCommonInstanceMetadata
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Metadata *)object
                         project:(NSString *)project {
@@ -4256,7 +4632,7 @@
 
 @implementation GTLRComputeQuery_ProjectsSetUsageExportBucket
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_UsageExportLocation *)object
                         project:(NSString *)project {
@@ -4281,7 +4657,7 @@
 
 @implementation GTLRComputeQuery_RegionAutoscalersDelete
 
-@dynamic autoscaler, project, region;
+@dynamic autoscaler, project, region, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -4331,7 +4707,7 @@
 
 @implementation GTLRComputeQuery_RegionAutoscalersInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Autoscaler *)object
                         project:(NSString *)project
@@ -4383,7 +4759,7 @@
 
 @implementation GTLRComputeQuery_RegionAutoscalersPatch
 
-@dynamic autoscaler, project, region;
+@dynamic autoscaler, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Autoscaler *)object
                         project:(NSString *)project
@@ -4412,7 +4788,7 @@
 
 @implementation GTLRComputeQuery_RegionAutoscalersUpdate
 
-@dynamic autoscaler, project, region;
+@dynamic autoscaler, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Autoscaler *)object
                         project:(NSString *)project
@@ -4441,7 +4817,7 @@
 
 @implementation GTLRComputeQuery_RegionBackendServicesDelete
 
-@dynamic backendService, project, region;
+@dynamic backendService, project, region, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -4522,7 +4898,7 @@
 
 @implementation GTLRComputeQuery_RegionBackendServicesInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendService *)object
                         project:(NSString *)project
@@ -4574,7 +4950,7 @@
 
 @implementation GTLRComputeQuery_RegionBackendServicesPatch
 
-@dynamic backendService, project, region;
+@dynamic backendService, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendService *)object
                         project:(NSString *)project
@@ -4605,7 +4981,7 @@
 
 @implementation GTLRComputeQuery_RegionBackendServicesUpdate
 
-@dynamic backendService, project, region;
+@dynamic backendService, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_BackendService *)object
                         project:(NSString *)project
@@ -4680,7 +5056,7 @@
 
 @implementation GTLRComputeQuery_RegionCommitmentsInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Commitment *)object
                         project:(NSString *)project
@@ -4732,7 +5108,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersAbandonInstances
 
-@dynamic instanceGroupManager, project, region;
+@dynamic instanceGroupManager, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_RegionInstanceGroupManagersAbandonInstancesRequest *)object
                         project:(NSString *)project
@@ -4763,7 +5139,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersDelete
 
-@dynamic instanceGroupManager, project, region;
+@dynamic instanceGroupManager, project, region, requestId;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -4788,7 +5164,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersDeleteInstances
 
-@dynamic instanceGroupManager, project, region;
+@dynamic instanceGroupManager, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_RegionInstanceGroupManagersDeleteInstancesRequest *)object
                         project:(NSString *)project
@@ -4844,7 +5220,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_InstanceGroupManager *)object
                         project:(NSString *)project
@@ -4926,7 +5302,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersRecreateInstances
 
-@dynamic instanceGroupManager, project, region;
+@dynamic instanceGroupManager, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_RegionInstanceGroupManagersRecreateRequest *)object
                         project:(NSString *)project
@@ -4957,7 +5333,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersResize
 
-@dynamic instanceGroupManager, project, region, size;
+@dynamic instanceGroupManager, project, region, requestId, size;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -4984,7 +5360,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersSetInstanceTemplate
 
-@dynamic instanceGroupManager, project, region;
+@dynamic instanceGroupManager, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_RegionInstanceGroupManagersSetTemplateRequest *)object
                         project:(NSString *)project
@@ -5015,7 +5391,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupManagersSetTargetPools
 
-@dynamic instanceGroupManager, project, region;
+@dynamic instanceGroupManager, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_RegionInstanceGroupManagersSetTargetPoolsRequest *)object
                         project:(NSString *)project
@@ -5125,7 +5501,7 @@
 
 @implementation GTLRComputeQuery_RegionInstanceGroupsSetNamedPorts
 
-@dynamic instanceGroup, project, region;
+@dynamic instanceGroup, project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_RegionInstanceGroupsSetNamedPortsRequest *)object
                         project:(NSString *)project
@@ -5289,7 +5665,7 @@
 
 @implementation GTLRComputeQuery_RoutersDelete
 
-@dynamic project, region, router;
+@dynamic project, region, requestId, router;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -5364,7 +5740,7 @@
 
 @implementation GTLRComputeQuery_RoutersInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Router *)object
                         project:(NSString *)project
@@ -5416,7 +5792,7 @@
 
 @implementation GTLRComputeQuery_RoutersPatch
 
-@dynamic project, region, router;
+@dynamic project, region, requestId, router;
 
 + (instancetype)queryWithObject:(GTLRCompute_Router *)object
                         project:(NSString *)project
@@ -5478,7 +5854,7 @@
 
 @implementation GTLRComputeQuery_RoutersUpdate
 
-@dynamic project, region, router;
+@dynamic project, region, requestId, router;
 
 + (instancetype)queryWithObject:(GTLRCompute_Router *)object
                         project:(NSString *)project
@@ -5509,7 +5885,7 @@
 
 @implementation GTLRComputeQuery_RoutesDelete
 
-@dynamic project, route;
+@dynamic project, requestId, route;
 
 + (instancetype)queryWithProject:(NSString *)project
                            route:(NSString *)route {
@@ -5555,7 +5931,7 @@
 
 @implementation GTLRComputeQuery_RoutesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Route *)object
                         project:(NSString *)project {
@@ -5599,7 +5975,7 @@
 
 @implementation GTLRComputeQuery_SnapshotsDelete
 
-@dynamic project, snapshot;
+@dynamic project, requestId, snapshot;
 
 + (instancetype)queryWithProject:(NSString *)project
                         snapshot:(NSString *)snapshot {
@@ -5693,7 +6069,7 @@
 
 @implementation GTLRComputeQuery_SslCertificatesDelete
 
-@dynamic project, sslCertificate;
+@dynamic project, requestId, sslCertificate;
 
 + (instancetype)queryWithProject:(NSString *)project
                   sslCertificate:(NSString *)sslCertificate {
@@ -5739,7 +6115,7 @@
 
 @implementation GTLRComputeQuery_SslCertificatesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_SslCertificate *)object
                         project:(NSString *)project {
@@ -5802,7 +6178,7 @@
 
 @implementation GTLRComputeQuery_SubnetworksDelete
 
-@dynamic project, region, subnetwork;
+@dynamic project, region, requestId, subnetwork;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -5827,7 +6203,7 @@
 
 @implementation GTLRComputeQuery_SubnetworksExpandIpCidrRange
 
-@dynamic project, region, subnetwork;
+@dynamic project, region, requestId, subnetwork;
 
 + (instancetype)queryWithObject:(GTLRCompute_SubnetworksExpandIpCidrRangeRequest *)object
                         project:(NSString *)project
@@ -5883,7 +6259,7 @@
 
 @implementation GTLRComputeQuery_SubnetworksInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_Subnetwork *)object
                         project:(NSString *)project
@@ -5935,7 +6311,7 @@
 
 @implementation GTLRComputeQuery_SubnetworksSetPrivateIpGoogleAccess
 
-@dynamic project, region, subnetwork;
+@dynamic project, region, requestId, subnetwork;
 
 + (instancetype)queryWithObject:(GTLRCompute_SubnetworksSetPrivateIpGoogleAccessRequest *)object
                         project:(NSString *)project
@@ -5966,7 +6342,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpProxiesDelete
 
-@dynamic project, targetHttpProxy;
+@dynamic project, requestId, targetHttpProxy;
 
 + (instancetype)queryWithProject:(NSString *)project
                  targetHttpProxy:(NSString *)targetHttpProxy {
@@ -6012,7 +6388,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpProxiesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetHttpProxy *)object
                         project:(NSString *)project {
@@ -6056,7 +6432,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpProxiesSetUrlMap
 
-@dynamic project, targetHttpProxy;
+@dynamic project, requestId, targetHttpProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_UrlMapReference *)object
                         project:(NSString *)project
@@ -6085,7 +6461,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpsProxiesDelete
 
-@dynamic project, targetHttpsProxy;
+@dynamic project, requestId, targetHttpsProxy;
 
 + (instancetype)queryWithProject:(NSString *)project
                 targetHttpsProxy:(NSString *)targetHttpsProxy {
@@ -6131,7 +6507,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpsProxiesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetHttpsProxy *)object
                         project:(NSString *)project {
@@ -6175,7 +6551,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpsProxiesSetSslCertificates
 
-@dynamic project, targetHttpsProxy;
+@dynamic project, requestId, targetHttpsProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetHttpsProxiesSetSslCertificatesRequest *)object
                         project:(NSString *)project
@@ -6204,7 +6580,7 @@
 
 @implementation GTLRComputeQuery_TargetHttpsProxiesSetUrlMap
 
-@dynamic project, targetHttpsProxy;
+@dynamic project, requestId, targetHttpsProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_UrlMapReference *)object
                         project:(NSString *)project
@@ -6252,7 +6628,7 @@
 
 @implementation GTLRComputeQuery_TargetInstancesDelete
 
-@dynamic project, targetInstance, zoneProperty;
+@dynamic project, requestId, targetInstance, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -6310,7 +6686,7 @@
 
 @implementation GTLRComputeQuery_TargetInstancesInsert
 
-@dynamic project, zoneProperty;
+@dynamic project, requestId, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)parameterNameMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -6370,7 +6746,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsAddHealthCheck
 
-@dynamic project, region, targetPool;
+@dynamic project, region, requestId, targetPool;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetPoolsAddHealthCheckRequest *)object
                         project:(NSString *)project
@@ -6401,7 +6777,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsAddInstance
 
-@dynamic project, region, targetPool;
+@dynamic project, region, requestId, targetPool;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetPoolsAddInstanceRequest *)object
                         project:(NSString *)project
@@ -6451,7 +6827,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsDelete
 
-@dynamic project, region, targetPool;
+@dynamic project, region, requestId, targetPool;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -6532,7 +6908,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetPool *)object
                         project:(NSString *)project
@@ -6584,7 +6960,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsRemoveHealthCheck
 
-@dynamic project, region, targetPool;
+@dynamic project, region, requestId, targetPool;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetPoolsRemoveHealthCheckRequest *)object
                         project:(NSString *)project
@@ -6615,7 +6991,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsRemoveInstance
 
-@dynamic project, region, targetPool;
+@dynamic project, region, requestId, targetPool;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetPoolsRemoveInstanceRequest *)object
                         project:(NSString *)project
@@ -6646,7 +7022,7 @@
 
 @implementation GTLRComputeQuery_TargetPoolsSetBackup
 
-@dynamic failoverRatio, project, region, targetPool;
+@dynamic failoverRatio, project, region, requestId, targetPool;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetReference *)object
                         project:(NSString *)project
@@ -6677,7 +7053,7 @@
 
 @implementation GTLRComputeQuery_TargetSslProxiesDelete
 
-@dynamic project, targetSslProxy;
+@dynamic project, requestId, targetSslProxy;
 
 + (instancetype)queryWithProject:(NSString *)project
                   targetSslProxy:(NSString *)targetSslProxy {
@@ -6723,7 +7099,7 @@
 
 @implementation GTLRComputeQuery_TargetSslProxiesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetSslProxy *)object
                         project:(NSString *)project {
@@ -6767,7 +7143,7 @@
 
 @implementation GTLRComputeQuery_TargetSslProxiesSetBackendService
 
-@dynamic project, targetSslProxy;
+@dynamic project, requestId, targetSslProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetSslProxiesSetBackendServiceRequest *)object
                         project:(NSString *)project
@@ -6796,7 +7172,7 @@
 
 @implementation GTLRComputeQuery_TargetSslProxiesSetProxyHeader
 
-@dynamic project, targetSslProxy;
+@dynamic project, requestId, targetSslProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetSslProxiesSetProxyHeaderRequest *)object
                         project:(NSString *)project
@@ -6825,7 +7201,7 @@
 
 @implementation GTLRComputeQuery_TargetSslProxiesSetSslCertificates
 
-@dynamic project, targetSslProxy;
+@dynamic project, requestId, targetSslProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetSslProxiesSetSslCertificatesRequest *)object
                         project:(NSString *)project
@@ -6854,7 +7230,7 @@
 
 @implementation GTLRComputeQuery_TargetTcpProxiesDelete
 
-@dynamic project, targetTcpProxy;
+@dynamic project, requestId, targetTcpProxy;
 
 + (instancetype)queryWithProject:(NSString *)project
                   targetTcpProxy:(NSString *)targetTcpProxy {
@@ -6900,7 +7276,7 @@
 
 @implementation GTLRComputeQuery_TargetTcpProxiesInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetTcpProxy *)object
                         project:(NSString *)project {
@@ -6944,7 +7320,7 @@
 
 @implementation GTLRComputeQuery_TargetTcpProxiesSetBackendService
 
-@dynamic project, targetTcpProxy;
+@dynamic project, requestId, targetTcpProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetTcpProxiesSetBackendServiceRequest *)object
                         project:(NSString *)project
@@ -6973,7 +7349,7 @@
 
 @implementation GTLRComputeQuery_TargetTcpProxiesSetProxyHeader
 
-@dynamic project, targetTcpProxy;
+@dynamic project, requestId, targetTcpProxy;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetTcpProxiesSetProxyHeaderRequest *)object
                         project:(NSString *)project
@@ -7021,7 +7397,7 @@
 
 @implementation GTLRComputeQuery_TargetVpnGatewaysDelete
 
-@dynamic project, region, targetVpnGateway;
+@dynamic project, region, requestId, targetVpnGateway;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -7071,7 +7447,7 @@
 
 @implementation GTLRComputeQuery_TargetVpnGatewaysInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_TargetVpnGateway *)object
                         project:(NSString *)project
@@ -7123,7 +7499,7 @@
 
 @implementation GTLRComputeQuery_UrlMapsDelete
 
-@dynamic project, urlMap;
+@dynamic project, requestId, urlMap;
 
 + (instancetype)queryWithProject:(NSString *)project
                           urlMap:(NSString *)urlMap {
@@ -7169,7 +7545,7 @@
 
 @implementation GTLRComputeQuery_UrlMapsInsert
 
-@dynamic project;
+@dynamic project, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_UrlMap *)object
                         project:(NSString *)project {
@@ -7194,7 +7570,7 @@
 
 @implementation GTLRComputeQuery_UrlMapsInvalidateCache
 
-@dynamic project, urlMap;
+@dynamic project, requestId, urlMap;
 
 + (instancetype)queryWithObject:(GTLRCompute_CacheInvalidationRule *)object
                         project:(NSString *)project
@@ -7242,7 +7618,7 @@
 
 @implementation GTLRComputeQuery_UrlMapsPatch
 
-@dynamic project, urlMap;
+@dynamic project, requestId, urlMap;
 
 + (instancetype)queryWithObject:(GTLRCompute_UrlMap *)object
                         project:(NSString *)project
@@ -7271,7 +7647,7 @@
 
 @implementation GTLRComputeQuery_UrlMapsUpdate
 
-@dynamic project, urlMap;
+@dynamic project, requestId, urlMap;
 
 + (instancetype)queryWithObject:(GTLRCompute_UrlMap *)object
                         project:(NSString *)project
@@ -7348,7 +7724,7 @@
 
 @implementation GTLRComputeQuery_VpnTunnelsDelete
 
-@dynamic project, region, vpnTunnel;
+@dynamic project, region, requestId, vpnTunnel;
 
 + (instancetype)queryWithProject:(NSString *)project
                           region:(NSString *)region
@@ -7398,7 +7774,7 @@
 
 @implementation GTLRComputeQuery_VpnTunnelsInsert
 
-@dynamic project, region;
+@dynamic project, region, requestId;
 
 + (instancetype)queryWithObject:(GTLRCompute_VpnTunnel *)object
                         project:(NSString *)project

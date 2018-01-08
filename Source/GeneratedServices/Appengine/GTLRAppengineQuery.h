@@ -20,10 +20,19 @@
 #endif
 
 @class GTLRAppengine_Application;
+@class GTLRAppengine_AuthorizedCertificate;
+@class GTLRAppengine_BatchUpdateIngressRulesRequest;
 @class GTLRAppengine_DebugInstanceRequest;
+@class GTLRAppengine_DomainMapping;
+@class GTLRAppengine_FirewallRule;
 @class GTLRAppengine_RepairApplicationRequest;
 @class GTLRAppengine_Service;
 @class GTLRAppengine_Version;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,12 +40,26 @@ NS_ASSUME_NONNULL_BEGIN
 // Constants - For some of the query classes' properties below.
 
 // ----------------------------------------------------------------------------
+// overrideStrategy
+
+/** Value: "OVERRIDE" */
+GTLR_EXTERN NSString * const kGTLRAppengineOverrideStrategyOverride;
+/** Value: "STRICT" */
+GTLR_EXTERN NSString * const kGTLRAppengineOverrideStrategyStrict;
+/** Value: "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY" */
+GTLR_EXTERN NSString * const kGTLRAppengineOverrideStrategyUnspecifiedDomainOverrideStrategy;
+
+// ----------------------------------------------------------------------------
 // view
 
 /** Value: "BASIC" */
 GTLR_EXTERN NSString * const kGTLRAppengineViewBasic;
+/** Value: "BASIC_CERTIFICATE" */
+GTLR_EXTERN NSString * const kGTLRAppengineViewBasicCertificate;
 /** Value: "FULL" */
 GTLR_EXTERN NSString * const kGTLRAppengineViewFull;
+/** Value: "FULL_CERTIFICATE" */
+GTLR_EXTERN NSString * const kGTLRAppengineViewFullCertificate;
 
 // ----------------------------------------------------------------------------
 // Query Classes
@@ -49,6 +72,280 @@ GTLR_EXTERN NSString * const kGTLRAppengineViewFull;
 
 /** Selector specifying which fields to include in a partial response. */
 @property(nonatomic, copy, nullable) NSString *fields;
+
+@end
+
+/**
+ *  Uploads the specified SSL certificate.
+ *
+ *  Method: appengine.apps.authorizedCertificates.create
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsAuthorizedCertificatesCreate : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsAuthorizedCertificatesCreateWithObject:appsId:]
+
+/**
+ *  Part of `parent`. Name of the parent Application resource. Example:
+ *  apps/myapp.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/**
+ *  Fetches a @c GTLRAppengine_AuthorizedCertificate.
+ *
+ *  Uploads the specified SSL certificate.
+ *
+ *  @param object The @c GTLRAppengine_AuthorizedCertificate to include in the
+ *    query.
+ *  @param appsId Part of `parent`. Name of the parent Application resource.
+ *    Example: apps/myapp.
+ *
+ *  @returns GTLRAppengineQuery_AppsAuthorizedCertificatesCreate
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_AuthorizedCertificate *)object
+                         appsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Deletes the specified SSL certificate.
+ *
+ *  Method: appengine.apps.authorizedCertificates.delete
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsAuthorizedCertificatesDelete : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsAuthorizedCertificatesDeleteWithappsId:authorizedCertificatesId:]
+
+/**
+ *  Part of `name`. Name of the resource to delete. Example:
+ *  apps/myapp/authorizedCertificates/12345.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *authorizedCertificatesId;
+
+/**
+ *  Fetches a @c GTLRAppengine_Empty.
+ *
+ *  Deletes the specified SSL certificate.
+ *
+ *  @param appsId Part of `name`. Name of the resource to delete. Example:
+ *    apps/myapp/authorizedCertificates/12345.
+ *  @param authorizedCertificatesId Part of `name`. See documentation of
+ *    `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsAuthorizedCertificatesDelete
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId
+       authorizedCertificatesId:(NSString *)authorizedCertificatesId;
+
+@end
+
+/**
+ *  Gets the specified SSL certificate.
+ *
+ *  Method: appengine.apps.authorizedCertificates.get
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsAuthorizedCertificatesGet : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsAuthorizedCertificatesGetWithappsId:authorizedCertificatesId:]
+
+/**
+ *  Part of `name`. Name of the resource requested. Example:
+ *  apps/myapp/authorizedCertificates/12345.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *authorizedCertificatesId;
+
+/**
+ *  Controls the set of fields returned in the GET response.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRAppengineViewBasicCertificate Value "BASIC_CERTIFICATE"
+ *    @arg @c kGTLRAppengineViewFullCertificate Value "FULL_CERTIFICATE"
+ */
+@property(nonatomic, copy, nullable) NSString *view;
+
+/**
+ *  Fetches a @c GTLRAppengine_AuthorizedCertificate.
+ *
+ *  Gets the specified SSL certificate.
+ *
+ *  @param appsId Part of `name`. Name of the resource requested. Example:
+ *    apps/myapp/authorizedCertificates/12345.
+ *  @param authorizedCertificatesId Part of `name`. See documentation of
+ *    `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsAuthorizedCertificatesGet
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId
+       authorizedCertificatesId:(NSString *)authorizedCertificatesId;
+
+@end
+
+/**
+ *  Lists all SSL certificates the user is authorized to administer.
+ *
+ *  Method: appengine.apps.authorizedCertificates.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsAuthorizedCertificatesList : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsAuthorizedCertificatesListWithappsId:]
+
+/**
+ *  Part of `parent`. Name of the parent Application resource. Example:
+ *  apps/myapp.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Maximum results to return per page. */
+@property(nonatomic, assign) NSInteger pageSize;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
+/**
+ *  Controls the set of fields returned in the LIST response.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRAppengineViewBasicCertificate Value "BASIC_CERTIFICATE"
+ *    @arg @c kGTLRAppengineViewFullCertificate Value "FULL_CERTIFICATE"
+ */
+@property(nonatomic, copy, nullable) NSString *view;
+
+/**
+ *  Fetches a @c GTLRAppengine_ListAuthorizedCertificatesResponse.
+ *
+ *  Lists all SSL certificates the user is authorized to administer.
+ *
+ *  @param appsId Part of `parent`. Name of the parent Application resource.
+ *    Example: apps/myapp.
+ *
+ *  @returns GTLRAppengineQuery_AppsAuthorizedCertificatesList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Updates the specified SSL certificate. To renew a certificate and maintain
+ *  its existing domain mappings, update certificate_data with a new
+ *  certificate. The new certificate must be applicable to the same domains as
+ *  the original certificate. The certificate display_name may also be updated.
+ *
+ *  Method: appengine.apps.authorizedCertificates.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsAuthorizedCertificatesPatch : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsAuthorizedCertificatesPatchWithObject:appsId:authorizedCertificatesId:]
+
+/**
+ *  Part of `name`. Name of the resource to update. Example:
+ *  apps/myapp/authorizedCertificates/12345.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *authorizedCertificatesId;
+
+/**
+ *  Standard field mask for the set of fields to be updated. Updates are only
+ *  supported on the certificate_raw_data and display_name fields.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+/**
+ *  Fetches a @c GTLRAppengine_AuthorizedCertificate.
+ *
+ *  Updates the specified SSL certificate. To renew a certificate and maintain
+ *  its existing domain mappings, update certificate_data with a new
+ *  certificate. The new certificate must be applicable to the same domains as
+ *  the original certificate. The certificate display_name may also be updated.
+ *
+ *  @param object The @c GTLRAppengine_AuthorizedCertificate to include in the
+ *    query.
+ *  @param appsId Part of `name`. Name of the resource to update. Example:
+ *    apps/myapp/authorizedCertificates/12345.
+ *  @param authorizedCertificatesId Part of `name`. See documentation of
+ *    `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsAuthorizedCertificatesPatch
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_AuthorizedCertificate *)object
+                         appsId:(NSString *)appsId
+       authorizedCertificatesId:(NSString *)authorizedCertificatesId;
+
+@end
+
+/**
+ *  Lists all domains the user is authorized to administer.
+ *
+ *  Method: appengine.apps.authorizedDomains.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsAuthorizedDomainsList : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsAuthorizedDomainsListWithappsId:]
+
+/**
+ *  Part of `parent`. Name of the parent Application resource. Example:
+ *  apps/myapp.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Maximum results to return per page. */
+@property(nonatomic, assign) NSInteger pageSize;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
+/**
+ *  Fetches a @c GTLRAppengine_ListAuthorizedDomainsResponse.
+ *
+ *  Lists all domains the user is authorized to administer.
+ *
+ *  @param appsId Part of `parent`. Name of the parent Application resource.
+ *    Example: apps/myapp.
+ *
+ *  @returns GTLRAppengineQuery_AppsAuthorizedDomainsList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId;
 
 @end
 
@@ -86,6 +383,480 @@ GTLR_EXTERN NSString * const kGTLRAppengineViewFull;
  *  @returns GTLRAppengineQuery_AppsCreate
  */
 + (instancetype)queryWithObject:(GTLRAppengine_Application *)object;
+
+@end
+
+/**
+ *  Maps a domain to an application. A user must be authorized to administer a
+ *  domain in order to map it to an application. For a list of available
+ *  authorized domains, see AuthorizedDomains.ListAuthorizedDomains.
+ *
+ *  Method: appengine.apps.domainMappings.create
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsDomainMappingsCreate : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsDomainMappingsCreateWithObject:appsId:]
+
+/**
+ *  Part of `parent`. Name of the parent Application resource. Example:
+ *  apps/myapp.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/**
+ *  Whether the domain creation should override any existing mappings for this
+ *  domain. By default, overrides are rejected.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRAppengineOverrideStrategyUnspecifiedDomainOverrideStrategy
+ *        Value "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY"
+ *    @arg @c kGTLRAppengineOverrideStrategyStrict Value "STRICT"
+ *    @arg @c kGTLRAppengineOverrideStrategyOverride Value "OVERRIDE"
+ */
+@property(nonatomic, copy, nullable) NSString *overrideStrategy;
+
+/**
+ *  Fetches a @c GTLRAppengine_Operation.
+ *
+ *  Maps a domain to an application. A user must be authorized to administer a
+ *  domain in order to map it to an application. For a list of available
+ *  authorized domains, see AuthorizedDomains.ListAuthorizedDomains.
+ *
+ *  @param object The @c GTLRAppengine_DomainMapping to include in the query.
+ *  @param appsId Part of `parent`. Name of the parent Application resource.
+ *    Example: apps/myapp.
+ *
+ *  @returns GTLRAppengineQuery_AppsDomainMappingsCreate
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_DomainMapping *)object
+                         appsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Deletes the specified domain mapping. A user must be authorized to
+ *  administer the associated domain in order to delete a DomainMapping
+ *  resource.
+ *
+ *  Method: appengine.apps.domainMappings.delete
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsDomainMappingsDelete : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsDomainMappingsDeleteWithappsId:domainMappingsId:]
+
+/**
+ *  Part of `name`. Name of the resource to delete. Example:
+ *  apps/myapp/domainMappings/example.com.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *domainMappingsId;
+
+/**
+ *  Fetches a @c GTLRAppengine_Operation.
+ *
+ *  Deletes the specified domain mapping. A user must be authorized to
+ *  administer the associated domain in order to delete a DomainMapping
+ *  resource.
+ *
+ *  @param appsId Part of `name`. Name of the resource to delete. Example:
+ *    apps/myapp/domainMappings/example.com.
+ *  @param domainMappingsId Part of `name`. See documentation of `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsDomainMappingsDelete
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId
+               domainMappingsId:(NSString *)domainMappingsId;
+
+@end
+
+/**
+ *  Gets the specified domain mapping.
+ *
+ *  Method: appengine.apps.domainMappings.get
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsDomainMappingsGet : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsDomainMappingsGetWithappsId:domainMappingsId:]
+
+/**
+ *  Part of `name`. Name of the resource requested. Example:
+ *  apps/myapp/domainMappings/example.com.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *domainMappingsId;
+
+/**
+ *  Fetches a @c GTLRAppengine_DomainMapping.
+ *
+ *  Gets the specified domain mapping.
+ *
+ *  @param appsId Part of `name`. Name of the resource requested. Example:
+ *    apps/myapp/domainMappings/example.com.
+ *  @param domainMappingsId Part of `name`. See documentation of `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsDomainMappingsGet
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId
+               domainMappingsId:(NSString *)domainMappingsId;
+
+@end
+
+/**
+ *  Lists the domain mappings on an application.
+ *
+ *  Method: appengine.apps.domainMappings.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsDomainMappingsList : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsDomainMappingsListWithappsId:]
+
+/**
+ *  Part of `parent`. Name of the parent Application resource. Example:
+ *  apps/myapp.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Maximum results to return per page. */
+@property(nonatomic, assign) NSInteger pageSize;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
+/**
+ *  Fetches a @c GTLRAppengine_ListDomainMappingsResponse.
+ *
+ *  Lists the domain mappings on an application.
+ *
+ *  @param appsId Part of `parent`. Name of the parent Application resource.
+ *    Example: apps/myapp.
+ *
+ *  @returns GTLRAppengineQuery_AppsDomainMappingsList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Updates the specified domain mapping. To map an SSL certificate to a domain
+ *  mapping, update certificate_id to point to an AuthorizedCertificate
+ *  resource. A user must be authorized to administer the associated domain in
+ *  order to update a DomainMapping resource.
+ *
+ *  Method: appengine.apps.domainMappings.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsDomainMappingsPatch : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsDomainMappingsPatchWithObject:appsId:domainMappingsId:]
+
+/**
+ *  Part of `name`. Name of the resource to update. Example:
+ *  apps/myapp/domainMappings/example.com.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *domainMappingsId;
+
+/**
+ *  Standard field mask for the set of fields to be updated.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+/**
+ *  Fetches a @c GTLRAppengine_Operation.
+ *
+ *  Updates the specified domain mapping. To map an SSL certificate to a domain
+ *  mapping, update certificate_id to point to an AuthorizedCertificate
+ *  resource. A user must be authorized to administer the associated domain in
+ *  order to update a DomainMapping resource.
+ *
+ *  @param object The @c GTLRAppengine_DomainMapping to include in the query.
+ *  @param appsId Part of `name`. Name of the resource to update. Example:
+ *    apps/myapp/domainMappings/example.com.
+ *  @param domainMappingsId Part of `name`. See documentation of `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsDomainMappingsPatch
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_DomainMapping *)object
+                         appsId:(NSString *)appsId
+               domainMappingsId:(NSString *)domainMappingsId;
+
+@end
+
+/**
+ *  Replaces the entire firewall ruleset in one bulk operation. This overrides
+ *  and replaces the rules of an existing firewall with the new rules.If the
+ *  final rule does not match traffic with the '*' wildcard IP range, then an
+ *  "allow all" rule is explicitly added to the end of the list.
+ *
+ *  Method: appengine.apps.firewall.ingressRules.batchUpdate
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsFirewallIngressRulesBatchUpdate : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsFirewallIngressRulesBatchUpdateWithObject:appsId:]
+
+/**
+ *  Part of `name`. Name of the Firewall collection to set. Example:
+ *  apps/myapp/firewall/ingressRules.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/**
+ *  Fetches a @c GTLRAppengine_BatchUpdateIngressRulesResponse.
+ *
+ *  Replaces the entire firewall ruleset in one bulk operation. This overrides
+ *  and replaces the rules of an existing firewall with the new rules.If the
+ *  final rule does not match traffic with the '*' wildcard IP range, then an
+ *  "allow all" rule is explicitly added to the end of the list.
+ *
+ *  @param object The @c GTLRAppengine_BatchUpdateIngressRulesRequest to include
+ *    in the query.
+ *  @param appsId Part of `name`. Name of the Firewall collection to set.
+ *    Example: apps/myapp/firewall/ingressRules.
+ *
+ *  @returns GTLRAppengineQuery_AppsFirewallIngressRulesBatchUpdate
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_BatchUpdateIngressRulesRequest *)object
+                         appsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Creates a firewall rule for the application.
+ *
+ *  Method: appengine.apps.firewall.ingressRules.create
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsFirewallIngressRulesCreate : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsFirewallIngressRulesCreateWithObject:appsId:]
+
+/**
+ *  Part of `parent`. Name of the parent Firewall collection in which to create
+ *  a new rule. Example: apps/myapp/firewall/ingressRules.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/**
+ *  Fetches a @c GTLRAppengine_FirewallRule.
+ *
+ *  Creates a firewall rule for the application.
+ *
+ *  @param object The @c GTLRAppengine_FirewallRule to include in the query.
+ *  @param appsId Part of `parent`. Name of the parent Firewall collection in
+ *    which to create a new rule. Example: apps/myapp/firewall/ingressRules.
+ *
+ *  @returns GTLRAppengineQuery_AppsFirewallIngressRulesCreate
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_FirewallRule *)object
+                         appsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Deletes the specified firewall rule.
+ *
+ *  Method: appengine.apps.firewall.ingressRules.delete
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsFirewallIngressRulesDelete : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsFirewallIngressRulesDeleteWithappsId:ingressRulesId:]
+
+/**
+ *  Part of `name`. Name of the Firewall resource to delete. Example:
+ *  apps/myapp/firewall/ingressRules/100.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *ingressRulesId;
+
+/**
+ *  Fetches a @c GTLRAppengine_Empty.
+ *
+ *  Deletes the specified firewall rule.
+ *
+ *  @param appsId Part of `name`. Name of the Firewall resource to delete.
+ *    Example: apps/myapp/firewall/ingressRules/100.
+ *  @param ingressRulesId Part of `name`. See documentation of `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsFirewallIngressRulesDelete
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId
+                 ingressRulesId:(NSString *)ingressRulesId;
+
+@end
+
+/**
+ *  Gets the specified firewall rule.
+ *
+ *  Method: appengine.apps.firewall.ingressRules.get
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsFirewallIngressRulesGet : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsFirewallIngressRulesGetWithappsId:ingressRulesId:]
+
+/**
+ *  Part of `name`. Name of the Firewall resource to retrieve. Example:
+ *  apps/myapp/firewall/ingressRules/100.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *ingressRulesId;
+
+/**
+ *  Fetches a @c GTLRAppengine_FirewallRule.
+ *
+ *  Gets the specified firewall rule.
+ *
+ *  @param appsId Part of `name`. Name of the Firewall resource to retrieve.
+ *    Example: apps/myapp/firewall/ingressRules/100.
+ *  @param ingressRulesId Part of `name`. See documentation of `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsFirewallIngressRulesGet
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId
+                 ingressRulesId:(NSString *)ingressRulesId;
+
+@end
+
+/**
+ *  Lists the firewall rules of an application.
+ *
+ *  Method: appengine.apps.firewall.ingressRules.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineAdmin
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ *    @c kGTLRAuthScopeAppengineCloudPlatformReadOnly
+ */
+@interface GTLRAppengineQuery_AppsFirewallIngressRulesList : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsFirewallIngressRulesListWithappsId:]
+
+/**
+ *  Part of `parent`. Name of the Firewall collection to retrieve. Example:
+ *  apps/myapp/firewall/ingressRules.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/**
+ *  A valid IP Address. If set, only rules matching this address will be
+ *  returned. The first returned rule will be the rule that fires on requests
+ *  from this IP.
+ */
+@property(nonatomic, copy, nullable) NSString *matchingAddress;
+
+/** Maximum results to return per page. */
+@property(nonatomic, assign) NSInteger pageSize;
+
+/** Continuation token for fetching the next page of results. */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
+/**
+ *  Fetches a @c GTLRAppengine_ListIngressRulesResponse.
+ *
+ *  Lists the firewall rules of an application.
+ *
+ *  @param appsId Part of `parent`. Name of the Firewall collection to retrieve.
+ *    Example: apps/myapp/firewall/ingressRules.
+ *
+ *  @returns GTLRAppengineQuery_AppsFirewallIngressRulesList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
+ */
++ (instancetype)queryWithAppsId:(NSString *)appsId;
+
+@end
+
+/**
+ *  Updates the specified firewall rule.
+ *
+ *  Method: appengine.apps.firewall.ingressRules.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeAppengineCloudPlatform
+ */
+@interface GTLRAppengineQuery_AppsFirewallIngressRulesPatch : GTLRAppengineQuery
+// Previous library name was
+//   +[GTLQueryAppengine queryForAppsFirewallIngressRulesPatchWithObject:appsId:ingressRulesId:]
+
+/**
+ *  Part of `name`. Name of the Firewall resource to update. Example:
+ *  apps/myapp/firewall/ingressRules/100.
+ */
+@property(nonatomic, copy, nullable) NSString *appsId;
+
+/** Part of `name`. See documentation of `appsId`. */
+@property(nonatomic, copy, nullable) NSString *ingressRulesId;
+
+/**
+ *  Standard field mask for the set of fields to be updated.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+/**
+ *  Fetches a @c GTLRAppengine_FirewallRule.
+ *
+ *  Updates the specified firewall rule.
+ *
+ *  @param object The @c GTLRAppengine_FirewallRule to include in the query.
+ *  @param appsId Part of `name`. Name of the Firewall resource to update.
+ *    Example: apps/myapp/firewall/ingressRules/100.
+ *  @param ingressRulesId Part of `name`. See documentation of `appsId`.
+ *
+ *  @returns GTLRAppengineQuery_AppsFirewallIngressRulesPatch
+ */
++ (instancetype)queryWithObject:(GTLRAppengine_FirewallRule *)object
+                         appsId:(NSString *)appsId
+                 ingressRulesId:(NSString *)ingressRulesId;
 
 @end
 
@@ -1000,6 +1771,22 @@ GTLR_EXTERN NSString * const kGTLRAppengineViewFull;
  *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
  *  For Version resources that use automatic scaling and run in the App Engine
  *  standard environment.
+ *  automatic_scaling.min_total_instances
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
+ *  automatic_scaling.max_total_instances
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
+ *  automatic_scaling.cool_down_period_sec
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
+ *  automatic_scaling.cpu_utilization.target_utilization
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
  *
  *  Method: appengine.apps.services.versions.patch
  *
@@ -1050,6 +1837,22 @@ GTLR_EXTERN NSString * const kGTLRAppengineViewFull;
  *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
  *  For Version resources that use automatic scaling and run in the App Engine
  *  standard environment.
+ *  automatic_scaling.min_total_instances
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
+ *  automatic_scaling.max_total_instances
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
+ *  automatic_scaling.cool_down_period_sec
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
+ *  automatic_scaling.cpu_utilization.target_utilization
+ *  (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
+ *  For Version resources that use automatic scaling and run in the App Engine
+ *  Flexible environment.
  *
  *  @param object The @c GTLRAppengine_Version to include in the query.
  *  @param appsId Part of `name`. Name of the resource to update. Example:
@@ -1067,3 +1870,5 @@ GTLR_EXTERN NSString * const kGTLRAppengineViewFull;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

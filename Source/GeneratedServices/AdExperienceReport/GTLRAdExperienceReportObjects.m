@@ -20,11 +20,6 @@ NSString * const kGTLRAdExperienceReport_PlatformSummary_BetterAdsStatus_Passing
 NSString * const kGTLRAdExperienceReport_PlatformSummary_BetterAdsStatus_Unknown = @"UNKNOWN";
 NSString * const kGTLRAdExperienceReport_PlatformSummary_BetterAdsStatus_Warning = @"WARNING";
 
-// GTLRAdExperienceReport_PlatformSummary.egregiousStatus
-NSString * const kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Failing = @"FAILING";
-NSString * const kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Passing = @"PASSING";
-NSString * const kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Unknown = @"UNKNOWN";
-
 // GTLRAdExperienceReport_PlatformSummary.filterStatus
 NSString * const kGTLRAdExperienceReport_PlatformSummary_FilterStatus_Off = @"OFF";
 NSString * const kGTLRAdExperienceReport_PlatformSummary_FilterStatus_On = @"ON";
@@ -43,8 +38,8 @@ NSString * const kGTLRAdExperienceReport_PlatformSummary_Region_RegionUnknown = 
 //
 
 @implementation GTLRAdExperienceReport_PlatformSummary
-@dynamic betterAdsStatus, egregiousStatus, enforcementTime, filterStatus,
-         lastChangeTime, region, reportUrl, underReview;
+@dynamic betterAdsStatus, enforcementTime, filterStatus, lastChangeTime, region,
+         reportUrl, underReview;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{

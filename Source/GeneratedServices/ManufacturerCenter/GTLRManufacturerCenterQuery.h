@@ -20,6 +20,11 @@
 
 @class GTLRManufacturerCenter_Product;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -87,9 +92,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Gets the product from a Manufacturer Center account, including product
  *  issues.
- *  A recently updated product takes some time to be processed before any
- *  changes are visible. While some issues may be available once the product
- *  has been processed, other issues may take days to appear.
+ *  A recently updated product takes around 15 minutes to process. Changes are
+ *  only visible after it has been processed. While some issues may be
+ *  available once the product has been processed, other issues may take days
+ *  to appear.
  *
  *  Method: manufacturers.accounts.products.get
  *
@@ -122,9 +128,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Gets the product from a Manufacturer Center account, including product
  *  issues.
- *  A recently updated product takes some time to be processed before any
- *  changes are visible. While some issues may be available once the product
- *  has been processed, other issues may take days to appear.
+ *  A recently updated product takes around 15 minutes to process. Changes are
+ *  only visible after it has been processed. While some issues may be
+ *  available once the product has been processed, other issues may take days
+ *  to appear.
  *
  *  @param parent Parent ID in the format `accounts/{account_id}`.
  *    `account_id` - The ID of the Manufacturer Center account.
@@ -262,3 +269,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -111,7 +111,7 @@ NSString * const kGTLRShoppingContentTemplateNameTemplate2  = @"template2";
 
 @implementation GTLRShoppingContentQuery_AccountsDelete
 
-@dynamic accountId, dryRun, merchantId;
+@dynamic accountId, dryRun, force, merchantId;
 
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId {
@@ -602,7 +602,7 @@ NSString * const kGTLRShoppingContentTemplateNameTemplate2  = @"template2";
 
 @implementation GTLRShoppingContentQuery_DatafeedstatusesGet
 
-@dynamic datafeedId, merchantId;
+@dynamic country, datafeedId, language, merchantId;
 
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                          datafeedId:(unsigned long long)datafeedId {

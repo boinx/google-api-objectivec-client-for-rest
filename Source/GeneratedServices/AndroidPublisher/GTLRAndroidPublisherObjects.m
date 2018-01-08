@@ -26,7 +26,7 @@
 //
 
 @implementation GTLRAndroidPublisher_ApkBinary
-@dynamic sha1;
+@dynamic sha1, sha256;
 @end
 
 
@@ -372,83 +372,6 @@
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAndroidPublisher_InappproductsBatchRequest
-//
-
-@implementation GTLRAndroidPublisher_InappproductsBatchRequest
-@dynamic entrys;
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"entrys" : [GTLRAndroidPublisher_InappproductsBatchRequestEntry class]
-  };
-  return map;
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsBatchRequestEntry
-//
-
-@implementation GTLRAndroidPublisher_InappproductsBatchRequestEntry
-@dynamic batchId, inappproductsinsertrequest, inappproductsupdaterequest,
-         methodName;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsBatchResponse
-//
-
-@implementation GTLRAndroidPublisher_InappproductsBatchResponse
-@dynamic entrys, kind;
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"entrys" : [GTLRAndroidPublisher_InappproductsBatchResponseEntry class]
-  };
-  return map;
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsBatchResponseEntry
-//
-
-@implementation GTLRAndroidPublisher_InappproductsBatchResponseEntry
-@dynamic batchId, inappproductsinsertresponse, inappproductsupdateresponse;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsInsertRequest
-//
-
-@implementation GTLRAndroidPublisher_InappproductsInsertRequest
-@dynamic inappproduct;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsInsertResponse
-//
-
-@implementation GTLRAndroidPublisher_InappproductsInsertResponse
-@dynamic inappproduct;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
 //   GTLRAndroidPublisher_InappproductsListResponse
 //
 
@@ -462,26 +385,6 @@
   return map;
 }
 
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsUpdateRequest
-//
-
-@implementation GTLRAndroidPublisher_InappproductsUpdateRequest
-@dynamic inappproduct;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRAndroidPublisher_InappproductsUpdateResponse
-//
-
-@implementation GTLRAndroidPublisher_InappproductsUpdateResponse
-@dynamic inappproduct;
 @end
 
 
@@ -549,7 +452,7 @@
 //
 
 @implementation GTLRAndroidPublisher_ProductPurchase
-@dynamic consumptionState, developerPayload, kind, purchaseState,
+@dynamic consumptionState, developerPayload, kind, orderId, purchaseState,
          purchaseTimeMillis;
 @end
 
@@ -665,7 +568,7 @@
 
 @implementation GTLRAndroidPublisher_SubscriptionPurchase
 @dynamic autoRenewing, cancelReason, countryCode, developerPayload,
-         expiryTimeMillis, kind, paymentState, priceAmountMicros,
+         expiryTimeMillis, kind, orderId, paymentState, priceAmountMicros,
          priceCurrencyCode, startTimeMillis, userCancellationTimeMillis;
 @end
 

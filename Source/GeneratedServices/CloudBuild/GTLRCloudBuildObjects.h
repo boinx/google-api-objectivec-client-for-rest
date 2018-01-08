@@ -32,12 +32,20 @@
 @class GTLRCloudBuild_Operation_Response;
 @class GTLRCloudBuild_RepoSource;
 @class GTLRCloudBuild_Results;
+@class GTLRCloudBuild_Secret;
+@class GTLRCloudBuild_Secret_SecretEnv;
 @class GTLRCloudBuild_Source;
 @class GTLRCloudBuild_SourceProvenance;
 @class GTLRCloudBuild_SourceProvenance_FileHashes;
 @class GTLRCloudBuild_Status;
 @class GTLRCloudBuild_Status_Details_Item;
 @class GTLRCloudBuild_StorageSource;
+@class GTLRCloudBuild_Volume;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -95,6 +103,51 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Build_Status_Timeout;
  *  Value: "WORKING"
  */
 GTLR_EXTERN NSString * const kGTLRCloudBuild_Build_Status_Working;
+
+// ----------------------------------------------------------------------------
+// GTLRCloudBuild_BuildOptions.logStreamingOption
+
+/**
+ *  Service may automatically determine build log streaming behavior.
+ *
+ *  Value: "STREAM_DEFAULT"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudBuild_BuildOptions_LogStreamingOption_StreamDefault;
+/**
+ *  Build logs should not be streamed to Google Cloud Storage; they will be
+ *  written when the build is completed.
+ *
+ *  Value: "STREAM_OFF"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudBuild_BuildOptions_LogStreamingOption_StreamOff;
+/**
+ *  Build logs should be streamed to Google Cloud Storage.
+ *
+ *  Value: "STREAM_ON"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudBuild_BuildOptions_LogStreamingOption_StreamOn;
+
+// ----------------------------------------------------------------------------
+// GTLRCloudBuild_BuildOptions.machineType
+
+/**
+ *  Highcpu machine with 32 CPUs.
+ *
+ *  Value: "N1_HIGHCPU_32"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudBuild_BuildOptions_MachineType_N1Highcpu32;
+/**
+ *  Highcpu machine with 8 CPUs.
+ *
+ *  Value: "N1_HIGHCPU_8"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudBuild_BuildOptions_MachineType_N1Highcpu8;
+/**
+ *  Standard machine type.
+ *
+ *  Value: "UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudBuild_BuildOptions_MachineType_Unspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRCloudBuild_BuildOptions.requestedVerifyOption
@@ -167,6 +220,7 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
  *  - $TAG_NAME: the tag name specified by RepoSource.
  *  - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or
  *  resolved from the specified branch or tag.
+ *  - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.
  */
 @interface GTLRCloudBuild_Build : GTLRObject
 
@@ -237,6 +291,9 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
  *  \@OutputOnly
  */
 @property(nonatomic, strong, nullable) GTLRCloudBuild_Results *results;
+
+/** Secrets to decrypt using Cloud KMS. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudBuild_Secret *> *secrets;
 
 /** Describes where to find the source files to build. */
 @property(nonatomic, strong, nullable) GTLRCloudBuild_Source *source;
@@ -332,6 +389,47 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 @interface GTLRCloudBuild_BuildOptions : GTLRObject
 
 /**
+ *  Requested disk size for the VM that runs the build. Note that this is *NOT*
+ *  "disk free"; some of the space will be used by the operating system and
+ *  build utilities. Also note that this is the minimum disk size that will be
+ *  allocated for the build -- the build may run with a larger disk than
+ *  requested. At present, the maximum disk size is 1000GB; builds that request
+ *  more than the maximum are rejected with an error.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *diskSizeGb;
+
+/**
+ *  LogStreamingOption to define build log streaming behavior to Google Cloud
+ *  Storage.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCloudBuild_BuildOptions_LogStreamingOption_StreamDefault
+ *        Service may automatically determine build log streaming behavior.
+ *        (Value: "STREAM_DEFAULT")
+ *    @arg @c kGTLRCloudBuild_BuildOptions_LogStreamingOption_StreamOff Build
+ *        logs should not be streamed to Google Cloud Storage; they will be
+ *        written when the build is completed. (Value: "STREAM_OFF")
+ *    @arg @c kGTLRCloudBuild_BuildOptions_LogStreamingOption_StreamOn Build
+ *        logs should be streamed to Google Cloud Storage. (Value: "STREAM_ON")
+ */
+@property(nonatomic, copy, nullable) NSString *logStreamingOption;
+
+/**
+ *  GCE VM size to run the build on.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCloudBuild_BuildOptions_MachineType_N1Highcpu32 Highcpu
+ *        machine with 32 CPUs. (Value: "N1_HIGHCPU_32")
+ *    @arg @c kGTLRCloudBuild_BuildOptions_MachineType_N1Highcpu8 Highcpu
+ *        machine with 8 CPUs. (Value: "N1_HIGHCPU_8")
+ *    @arg @c kGTLRCloudBuild_BuildOptions_MachineType_Unspecified Standard
+ *        machine type. (Value: "UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *machineType;
+
+/**
  *  Requested verifiability options.
  *
  *  Likely values:
@@ -418,6 +516,22 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
  *  later build step.
  */
 @property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  A list of environment variables which are encrypted using a Cloud KMS
+ *  crypto key. These values must be specified in the build's secrets.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *secretEnv;
+
+/**
+ *  List of volumes to mount into the build step.
+ *  Each volume will be created as an empty volume prior to execution of the
+ *  build step. Upon completion of the build, volumes and their contents will
+ *  be discarded.
+ *  Using a named volume in only one step is not valid as it is indicative
+ *  of a mis-configured build request.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudBuild_Volume *> *volumes;
 
 /**
  *  The ID(s) of the step(s) that this build step depends on.
@@ -649,7 +763,7 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 
 /**
  *  If the value is `false`, it means the operation is still in progress.
- *  If true, the operation is completed, and either `error` or `response` is
+ *  If `true`, the operation is completed, and either `error` or `response` is
  *  available.
  *
  *  Uses NSNumber of boolValue.
@@ -735,6 +849,9 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 /** Explicit commit SHA to build. */
 @property(nonatomic, copy, nullable) NSString *commitSha;
 
+/** Directory, relative to the source root, in which to run the build. */
+@property(nonatomic, copy, nullable) NSString *dir;
+
 /**
  *  ID of the project that owns the repo. If omitted, the project ID requesting
  *  the build is assumed.
@@ -767,6 +884,51 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 
 
 /**
+ *  RetryBuildRequest specifies a build to retry.
+ */
+@interface GTLRCloudBuild_RetryBuildRequest : GTLRObject
+@end
+
+
+/**
+ *  Secret pairs a set of secret environment variables containing encrypted
+ *  values with the Cloud KMS key to use to decrypt the value.
+ */
+@interface GTLRCloudBuild_Secret : GTLRObject
+
+/** Cloud KMS key name to use to decrypt these envs. */
+@property(nonatomic, copy, nullable) NSString *kmsKeyName;
+
+/**
+ *  Map of environment variable name to its encrypted value.
+ *  Secret environment variables must be unique across all of a build's
+ *  secrets, and must be used by at least one build step. Values can be at most
+ *  1 KB in size. There can be at most ten secret values across all of a
+ *  build's secrets.
+ */
+@property(nonatomic, strong, nullable) GTLRCloudBuild_Secret_SecretEnv *secretEnv;
+
+@end
+
+
+/**
+ *  Map of environment variable name to its encrypted value.
+ *  Secret environment variables must be unique across all of a build's
+ *  secrets, and must be used by at least one build step. Values can be at most
+ *  1 KB in size. There can be at most ten secret values across all of a
+ *  build's secrets.
+ *
+ *  @note This class is documented as having more properties of NSString
+ *        (Contains encoded binary data; GTLRBase64 can encode/decode (probably
+ *        web-safe format).). Use @c -additionalJSONKeys and @c
+ *        -additionalPropertyForName: to get the list of properties and then
+ *        fetch them; or @c -additionalProperties to fetch them all at once.
+ */
+@interface GTLRCloudBuild_Secret_SecretEnv : GTLRObject
+@end
+
+
+/**
  *  Source describes the location of the source in a supported storage
  *  service.
  */
@@ -775,10 +937,7 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 /** If provided, get source from this location in a Cloud Repo. */
 @property(nonatomic, strong, nullable) GTLRCloudBuild_RepoSource *repoSource;
 
-/**
- *  If provided, get the source from this location in in Google Cloud
- *  Storage.
- */
+/** If provided, get the source from this location in Google Cloud Storage. */
 @property(nonatomic, strong, nullable) GTLRCloudBuild_StorageSource *storageSource;
 
 @end
@@ -891,8 +1050,8 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a
- *  common set of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCloudBuild_Status_Details_Item *> *details;
 
@@ -948,4 +1107,29 @@ GTLR_EXTERN NSString * const kGTLRCloudBuild_Hash_Type_Sha256;
 
 @end
 
+
+/**
+ *  Volume describes a Docker container volume which is mounted into build steps
+ *  in order to persist files across build step execution.
+ */
+@interface GTLRCloudBuild_Volume : GTLRObject
+
+/**
+ *  Name of the volume to mount.
+ *  Volume names must be unique per build step and must be valid names for
+ *  Docker volumes. Each named volume must be used by at least two build steps.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Path at which to mount the volume.
+ *  Paths must be absolute and cannot conflict with other volume paths on the
+ *  same build step or with certain reserved volume paths.
+ */
+@property(nonatomic, copy, nullable) NSString *path;
+
+@end
+
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

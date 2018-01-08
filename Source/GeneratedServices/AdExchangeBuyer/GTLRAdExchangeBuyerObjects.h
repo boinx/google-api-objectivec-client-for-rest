@@ -75,6 +75,11 @@
 @class GTLRAdExchangeBuyer_TargetingValueDayPartTargetingDayPart;
 @class GTLRAdExchangeBuyer_TargetingValueSize;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -2505,7 +2510,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface GTLRAdExchangeBuyer_PublisherProfileApiProto : GTLRObject
 
-/** The account id of the seller. */
+/** Deprecated: use the seller.account_id. The account id of the seller. */
 @property(nonatomic, copy, nullable) NSString *accountId;
 
 /** Publisher provided info on its audience. */
@@ -2807,3 +2812,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

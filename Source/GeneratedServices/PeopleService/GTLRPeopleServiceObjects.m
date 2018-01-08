@@ -52,6 +52,12 @@ NSString * const kGTLRPeopleService_ProfileMetadata_ObjectType_ObjectTypeUnspeci
 NSString * const kGTLRPeopleService_ProfileMetadata_ObjectType_Page = @"PAGE";
 NSString * const kGTLRPeopleService_ProfileMetadata_ObjectType_Person = @"PERSON";
 
+// GTLRPeopleService_ProfileMetadata.userTypes
+NSString * const kGTLRPeopleService_ProfileMetadata_UserTypes_GoogleAppsUser = @"GOOGLE_APPS_USER";
+NSString * const kGTLRPeopleService_ProfileMetadata_UserTypes_GoogleUser = @"GOOGLE_USER";
+NSString * const kGTLRPeopleService_ProfileMetadata_UserTypes_GplusUser = @"GPLUS_USER";
+NSString * const kGTLRPeopleService_ProfileMetadata_UserTypes_UserTypeUnknown = @"USER_TYPE_UNKNOWN";
+
 // GTLRPeopleService_Source.type
 NSString * const kGTLRPeopleService_Source_Type_Account        = @"ACCOUNT";
 NSString * const kGTLRPeopleService_Source_Type_Contact        = @"CONTACT";
@@ -470,7 +476,7 @@ NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecified = @"SOURCE
          interests, locales, memberships, metadata, names, nicknames,
          occupations, organizations, phoneNumbers, photos, relations,
          relationshipInterests, relationshipStatuses, residences, resourceName,
-         skills, taglines, urls;
+         skills, taglines, urls, userDefined;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"ETag" : @"etag" };
@@ -503,7 +509,8 @@ NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecified = @"SOURCE
     @"residences" : [GTLRPeopleService_Residence class],
     @"skills" : [GTLRPeopleService_Skill class],
     @"taglines" : [GTLRPeopleService_Tagline class],
-    @"urls" : [GTLRPeopleService_Url class]
+    @"urls" : [GTLRPeopleService_Url class],
+    @"userDefined" : [GTLRPeopleService_UserDefined class]
   };
   return map;
 }
@@ -558,7 +565,12 @@ NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecified = @"SOURCE
 //
 
 @implementation GTLRPeopleService_Photo
-@dynamic metadata, url;
+@dynamic defaultProperty, metadata, url;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"defaultProperty" : @"default" };
+}
+
 @end
 
 
@@ -568,7 +580,15 @@ NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecified = @"SOURCE
 //
 
 @implementation GTLRPeopleService_ProfileMetadata
-@dynamic objectType;
+@dynamic objectType, userTypes;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"userTypes" : [NSString class]
+  };
+  return map;
+}
+
 @end
 
 
@@ -700,4 +720,14 @@ NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecified = @"SOURCE
 
 @implementation GTLRPeopleService_Url
 @dynamic formattedType, metadata, type, value;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRPeopleService_UserDefined
+//
+
+@implementation GTLRPeopleService_UserDefined
+@dynamic key, metadata, value;
 @end

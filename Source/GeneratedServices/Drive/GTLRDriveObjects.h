@@ -46,6 +46,11 @@
 @class GTLRDrive_TeamDrive_Capabilities;
 @class GTLRDrive_User;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -670,6 +675,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  removeParents parameters to modify the values.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *parents;
+
+/** List of permission IDs for users with access to this file. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *permissionIds;
 
 /**
  *  The full list of permissions for the file. This is only available if the
@@ -1688,6 +1696,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSString *colorRgb;
 
+/** The time at which the Team Drive was created (RFC 3339 date-time). */
+@property(nonatomic, strong, nullable) GTLRDateTime *createdTime;
+
 /**
  *  The ID of this Team Drive which is also the ID of the top level folder for
  *  this Team Drive.
@@ -1951,3 +1962,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

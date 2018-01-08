@@ -2,9 +2,9 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Video Intelligence API (videointelligence/v1beta1)
+//   Cloud Video Intelligence API (videointelligence/v1beta1)
 // Description:
-//   Google Cloud Video Intelligence API.
+//   Cloud Video Intelligence API.
 // Documentation:
 //   https://cloud.google.com/video-intelligence/docs/
 
@@ -19,6 +19,11 @@
 #endif
 
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,3 +71,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

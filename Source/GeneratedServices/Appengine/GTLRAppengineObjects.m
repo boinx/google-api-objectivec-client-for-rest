@@ -45,10 +45,21 @@ NSString * const kGTLRAppengine_ErrorHandler_ErrorCode_ErrorCodeOverQuota = @"ER
 NSString * const kGTLRAppengine_ErrorHandler_ErrorCode_ErrorCodeTimeout = @"ERROR_CODE_TIMEOUT";
 NSString * const kGTLRAppengine_ErrorHandler_ErrorCode_ErrorCodeUnspecified = @"ERROR_CODE_UNSPECIFIED";
 
+// GTLRAppengine_FirewallRule.action
+NSString * const kGTLRAppengine_FirewallRule_Action_Allow      = @"ALLOW";
+NSString * const kGTLRAppengine_FirewallRule_Action_Deny       = @"DENY";
+NSString * const kGTLRAppengine_FirewallRule_Action_UnspecifiedAction = @"UNSPECIFIED_ACTION";
+
 // GTLRAppengine_Instance.availability
 NSString * const kGTLRAppengine_Instance_Availability_Dynamic  = @"DYNAMIC";
 NSString * const kGTLRAppengine_Instance_Availability_Resident = @"RESIDENT";
 NSString * const kGTLRAppengine_Instance_Availability_Unspecified = @"UNSPECIFIED";
+
+// GTLRAppengine_ResourceRecord.type
+NSString * const kGTLRAppengine_ResourceRecord_Type_A          = @"A";
+NSString * const kGTLRAppengine_ResourceRecord_Type_Aaaa       = @"AAAA";
+NSString * const kGTLRAppengine_ResourceRecord_Type_Cname      = @"CNAME";
+NSString * const kGTLRAppengine_ResourceRecord_Type_RecordTypeUnspecified = @"RECORD_TYPE_UNSPECIFIED";
 
 // GTLRAppengine_TrafficSplit.shardBy
 NSString * const kGTLRAppengine_TrafficSplit_ShardBy_Cookie    = @"COOKIE";
@@ -124,8 +135,8 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 @implementation GTLRAppengine_Application
 @dynamic authDomain, codeBucket, defaultBucket, defaultCookieExpiration,
-         defaultHostname, dispatchRules, gcrDomain, iap, identifier, locationId,
-         name, servingStatus;
+         defaultHostname, dispatchRules, featureSettings, gcrDomain, iap,
+         identifier, locationId, name, servingStatus;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"identifier" : @"id" };
@@ -143,6 +154,45 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRAppengine_AuthorizedCertificate
+//
+
+@implementation GTLRAppengine_AuthorizedCertificate
+@dynamic certificateRawData, displayName, domainMappingsCount, domainNames,
+         expireTime, identifier, name, visibleDomainMappings;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"identifier" : @"id" };
+}
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"domainNames" : [NSString class],
+    @"visibleDomainMappings" : [NSString class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_AuthorizedDomain
+//
+
+@implementation GTLRAppengine_AuthorizedDomain
+@dynamic identifier, name;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"identifier" : @"id" };
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRAppengine_AutomaticScaling
 //
 
@@ -150,7 +200,7 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 @dynamic coolDownPeriod, cpuUtilization, diskUtilization, maxConcurrentRequests,
          maxIdleInstances, maxPendingLatency, maxTotalInstances,
          minIdleInstances, minPendingLatency, minTotalInstances,
-         networkUtilization, requestUtilization;
+         networkUtilization, requestUtilization, standardSchedulerSettings;
 @end
 
 
@@ -161,6 +211,52 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 @implementation GTLRAppengine_BasicScaling
 @dynamic idleTimeout, maxInstances;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_BatchUpdateIngressRulesRequest
+//
+
+@implementation GTLRAppengine_BatchUpdateIngressRulesRequest
+@dynamic ingressRules;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"ingressRules" : [GTLRAppengine_FirewallRule class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_BatchUpdateIngressRulesResponse
+//
+
+@implementation GTLRAppengine_BatchUpdateIngressRulesResponse
+@dynamic ingressRules;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"ingressRules" : [GTLRAppengine_FirewallRule class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_CertificateRawData
+//
+
+@implementation GTLRAppengine_CertificateRawData
+@dynamic privateKey, publicCertificate;
 @end
 
 
@@ -231,6 +327,37 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRAppengine_DomainMapping
+//
+
+@implementation GTLRAppengine_DomainMapping
+@dynamic identifier, name, resourceRecords, sslSettings;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"identifier" : @"id" };
+}
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"resourceRecords" : [GTLRAppengine_ResourceRecord class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_Empty
+//
+
+@implementation GTLRAppengine_Empty
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRAppengine_EndpointsApiService
 //
 
@@ -251,11 +378,36 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRAppengine_FeatureSettings
+//
+
+@implementation GTLRAppengine_FeatureSettings
+@dynamic splitHealthChecks;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRAppengine_FileInfo
 //
 
 @implementation GTLRAppengine_FileInfo
 @dynamic mimeType, sha1Sum, sourceUrl;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_FirewallRule
+//
+
+@implementation GTLRAppengine_FirewallRule
+@dynamic action, descriptionProperty, priority, sourceRange;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"descriptionProperty" : @"description" };
+}
+
 @end
 
 
@@ -304,6 +456,94 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 @implementation GTLRAppengine_Library
 @dynamic name, version;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_ListAuthorizedCertificatesResponse
+//
+
+@implementation GTLRAppengine_ListAuthorizedCertificatesResponse
+@dynamic certificates, nextPageToken;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"certificates" : [GTLRAppengine_AuthorizedCertificate class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"certificates";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_ListAuthorizedDomainsResponse
+//
+
+@implementation GTLRAppengine_ListAuthorizedDomainsResponse
+@dynamic domains, nextPageToken;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"domains" : [GTLRAppengine_AuthorizedDomain class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"domains";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_ListDomainMappingsResponse
+//
+
+@implementation GTLRAppengine_ListDomainMappingsResponse
+@dynamic domainMappings, nextPageToken;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"domainMappings" : [GTLRAppengine_DomainMapping class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"domainMappings";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_ListIngressRulesResponse
+//
+
+@implementation GTLRAppengine_ListIngressRulesResponse
+@dynamic ingressRules, nextPageToken;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"ingressRules" : [GTLRAppengine_FirewallRule class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"ingressRules";
+}
+
 @end
 
 
@@ -565,16 +805,6 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRAppengine_OperationMetadataExperimental
-//
-
-@implementation GTLRAppengine_OperationMetadataExperimental
-@dynamic endTime, insertTime, method, target, user;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
 //   GTLRAppengine_OperationMetadataV1
 //
 
@@ -643,7 +873,8 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 //
 
 @implementation GTLRAppengine_ReadinessCheck
-@dynamic checkInterval, failureThreshold, host, path, successThreshold, timeout;
+@dynamic appStartTimeout, checkInterval, failureThreshold, host, path,
+         successThreshold, timeout;
 @end
 
 
@@ -663,6 +894,16 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
 
 @implementation GTLRAppengine_RequestUtilization
 @dynamic targetConcurrentRequests, targetRequestCountPerSecond;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_ResourceRecord
+//
+
+@implementation GTLRAppengine_ResourceRecord
+@dynamic name, rrdata, type;
 @end
 
 
@@ -706,6 +947,27 @@ NSString * const kGTLRAppengine_Version_ServingStatus_Stopped  = @"STOPPED";
   return @{ @"identifier" : @"id" };
 }
 
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_SslSettings
+//
+
+@implementation GTLRAppengine_SslSettings
+@dynamic certificateId;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRAppengine_StandardSchedulerSettings
+//
+
+@implementation GTLRAppengine_StandardSchedulerSettings
+@dynamic maxInstances, minInstances, targetCpuUtilization,
+         targetThroughputUtilization;
 @end
 
 

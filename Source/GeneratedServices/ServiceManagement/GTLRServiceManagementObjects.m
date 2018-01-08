@@ -25,33 +25,6 @@ NSString * const kGTLRServiceManagement_AuditLogConfig_LogType_DataRead = @"DATA
 NSString * const kGTLRServiceManagement_AuditLogConfig_LogType_DataWrite = @"DATA_WRITE";
 NSString * const kGTLRServiceManagement_AuditLogConfig_LogType_LogTypeUnspecified = @"LOG_TYPE_UNSPECIFIED";
 
-// GTLRServiceManagement_CloudAuditOptions.logName
-NSString * const kGTLRServiceManagement_CloudAuditOptions_LogName_AdminActivity = @"ADMIN_ACTIVITY";
-NSString * const kGTLRServiceManagement_CloudAuditOptions_LogName_DataAccess = @"DATA_ACCESS";
-NSString * const kGTLRServiceManagement_CloudAuditOptions_LogName_UnspecifiedLogName = @"UNSPECIFIED_LOG_NAME";
-
-// GTLRServiceManagement_Condition.iam
-NSString * const kGTLRServiceManagement_Condition_Iam_Approver = @"APPROVER";
-NSString * const kGTLRServiceManagement_Condition_Iam_Attribution = @"ATTRIBUTION";
-NSString * const kGTLRServiceManagement_Condition_Iam_Authority = @"AUTHORITY";
-NSString * const kGTLRServiceManagement_Condition_Iam_JustificationType = @"JUSTIFICATION_TYPE";
-NSString * const kGTLRServiceManagement_Condition_Iam_NoAttr   = @"NO_ATTR";
-
-// GTLRServiceManagement_Condition.op
-NSString * const kGTLRServiceManagement_Condition_Op_Discharged = @"DISCHARGED";
-NSString * const kGTLRServiceManagement_Condition_Op_Equals    = @"EQUALS";
-NSString * const kGTLRServiceManagement_Condition_Op_In        = @"IN";
-NSString * const kGTLRServiceManagement_Condition_Op_NoOp      = @"NO_OP";
-NSString * const kGTLRServiceManagement_Condition_Op_NotEquals = @"NOT_EQUALS";
-NSString * const kGTLRServiceManagement_Condition_Op_NotIn     = @"NOT_IN";
-
-// GTLRServiceManagement_Condition.sys
-NSString * const kGTLRServiceManagement_Condition_Sys_Ip      = @"IP";
-NSString * const kGTLRServiceManagement_Condition_Sys_Name    = @"NAME";
-NSString * const kGTLRServiceManagement_Condition_Sys_NoAttr  = @"NO_ATTR";
-NSString * const kGTLRServiceManagement_Condition_Sys_Region  = @"REGION";
-NSString * const kGTLRServiceManagement_Condition_Sys_Service = @"SERVICE";
-
 // GTLRServiceManagement_ConfigChange.changeType
 NSString * const kGTLRServiceManagement_ConfigChange_ChangeType_Added = @"ADDED";
 NSString * const kGTLRServiceManagement_ConfigChange_ChangeType_ChangeTypeUnspecified = @"CHANGE_TYPE_UNSPECIFIED";
@@ -63,6 +36,7 @@ NSString * const kGTLRServiceManagement_ConfigFile_FileType_FileDescriptorSetPro
 NSString * const kGTLRServiceManagement_ConfigFile_FileType_FileTypeUnspecified = @"FILE_TYPE_UNSPECIFIED";
 NSString * const kGTLRServiceManagement_ConfigFile_FileType_OpenApiJson = @"OPEN_API_JSON";
 NSString * const kGTLRServiceManagement_ConfigFile_FileType_OpenApiYaml = @"OPEN_API_YAML";
+NSString * const kGTLRServiceManagement_ConfigFile_FileType_ProtoFile = @"PROTO_FILE";
 NSString * const kGTLRServiceManagement_ConfigFile_FileType_ServiceConfigYaml = @"SERVICE_CONFIG_YAML";
 
 // GTLRServiceManagement_Diagnostic.kind
@@ -105,6 +79,12 @@ NSString * const kGTLRServiceManagement_FlowOperationMetadata_CancelState_Cancel
 NSString * const kGTLRServiceManagement_FlowOperationMetadata_CancelState_Running = @"RUNNING";
 NSString * const kGTLRServiceManagement_FlowOperationMetadata_CancelState_Uncancellable = @"UNCANCELLABLE";
 
+// GTLRServiceManagement_FlowOperationMetadata.surface
+NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceConsumerManagement = @"SERVICE_CONSUMER_MANAGEMENT";
+NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceManagement = @"SERVICE_MANAGEMENT";
+NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceUsage = @"SERVICE_USAGE";
+NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_UnspecifiedOpService = @"UNSPECIFIED_OP_SERVICE";
+
 // GTLRServiceManagement_LabelDescriptor.valueType
 NSString * const kGTLRServiceManagement_LabelDescriptor_ValueType_Bool = @"BOOL";
 NSString * const kGTLRServiceManagement_LabelDescriptor_ValueType_Int64 = @"INT64";
@@ -137,14 +117,6 @@ NSString * const kGTLRServiceManagement_Rollout_Status_InProgress = @"IN_PROGRES
 NSString * const kGTLRServiceManagement_Rollout_Status_Pending = @"PENDING";
 NSString * const kGTLRServiceManagement_Rollout_Status_RolloutStatusUnspecified = @"ROLLOUT_STATUS_UNSPECIFIED";
 NSString * const kGTLRServiceManagement_Rollout_Status_Success = @"SUCCESS";
-
-// GTLRServiceManagement_Rule.action
-NSString * const kGTLRServiceManagement_Rule_Action_Allow      = @"ALLOW";
-NSString * const kGTLRServiceManagement_Rule_Action_AllowWithLog = @"ALLOW_WITH_LOG";
-NSString * const kGTLRServiceManagement_Rule_Action_Deny       = @"DENY";
-NSString * const kGTLRServiceManagement_Rule_Action_DenyWithLog = @"DENY_WITH_LOG";
-NSString * const kGTLRServiceManagement_Rule_Action_Log        = @"LOG";
-NSString * const kGTLRServiceManagement_Rule_Action_NoAction   = @"NO_ACTION";
 
 // GTLRServiceManagement_Step.status
 NSString * const kGTLRServiceManagement_Step_Status_Cancelled  = @"CANCELLED";
@@ -283,7 +255,7 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 //
 
 @implementation GTLRServiceManagement_AuthProvider
-@dynamic audiences, identifier, issuer, jwksUri;
+@dynamic audiences, authorizationUrl, identifier, issuer, jwksUri;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"identifier" : @"id" };
@@ -332,6 +304,42 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRServiceManagement_Billing
+//
+
+@implementation GTLRServiceManagement_Billing
+@dynamic consumerDestinations;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"consumerDestinations" : [GTLRServiceManagement_BillingDestination class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRServiceManagement_BillingDestination
+//
+
+@implementation GTLRServiceManagement_BillingDestination
+@dynamic metrics, monitoredResource;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"metrics" : [NSString class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRServiceManagement_Binding
 //
 
@@ -359,34 +367,6 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
     @"configChanges" : [GTLRServiceManagement_ConfigChange class]
-  };
-  return map;
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRServiceManagement_CloudAuditOptions
-//
-
-@implementation GTLRServiceManagement_CloudAuditOptions
-@dynamic logName;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRServiceManagement_Condition
-//
-
-@implementation GTLRServiceManagement_Condition
-@dynamic iam, op, svc, sys, value, values;
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"values" : [NSString class]
   };
   return map;
 }
@@ -503,16 +483,6 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRServiceManagement_CounterOptions
-//
-
-@implementation GTLRServiceManagement_CounterOptions
-@dynamic field, metric;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
 //   GTLRServiceManagement_CustomAuthRequirements
 //
 
@@ -564,15 +534,6 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
   return NO;
 }
 
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRServiceManagement_DataAccessOptions
-//
-
-@implementation GTLRServiceManagement_DataAccessOptions
 @end
 
 
@@ -662,12 +623,11 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 //
 
 @implementation GTLRServiceManagement_Endpoint
-@dynamic aliases, allowCors, apis, features, name, target;
+@dynamic aliases, allowCors, features, name, target;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
     @"aliases" : [NSString class],
-    @"apis" : [NSString class],
     @"features" : [NSString class]
   };
   return map;
@@ -769,7 +729,8 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 //
 
 @implementation GTLRServiceManagement_FlowOperationMetadata
-@dynamic cancelState, deadline, flowName, resourceNames, startTime;
+@dynamic cancelState, deadline, flowName, operationType, resourceNames,
+         startTime, surface;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
@@ -876,8 +837,7 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 
 @implementation GTLRServiceManagement_HttpRule
 @dynamic additionalBindings, body, custom, deleteProperty, get, mediaDownload,
-         mediaUpload, patch, post, put, responseBody, restCollection,
-         restMethodName, selector;
+         mediaUpload, patch, post, put, responseBody, selector;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"deleteProperty" : @"delete" };
@@ -993,16 +953,6 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
   return @"services";
 }
 
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRServiceManagement_LogConfig
-//
-
-@implementation GTLRServiceManagement_LogConfig
-@dynamic cloudAudit, counter, dataAccess;
 @end
 
 
@@ -1355,7 +1305,7 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 //
 
 @implementation GTLRServiceManagement_Policy
-@dynamic auditConfigs, bindings, ETag, iamOwned, rules, version;
+@dynamic auditConfigs, bindings, ETag, iamOwned, version;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"ETag" : @"etag" };
@@ -1364,8 +1314,7 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
     @"auditConfigs" : [GTLRServiceManagement_AuditConfig class],
-    @"bindings" : [GTLRServiceManagement_Binding class],
-    @"rules" : [GTLRServiceManagement_Rule class]
+    @"bindings" : [GTLRServiceManagement_Binding class]
   };
   return map;
 }
@@ -1435,46 +1384,15 @@ NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3 = @"SYNTAX_PROT
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRServiceManagement_Rule
-//
-
-@implementation GTLRServiceManagement_Rule
-@dynamic action, conditions, descriptionProperty, inProperty, logConfig, notIn,
-         permissions;
-
-+ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
-  NSDictionary<NSString *, NSString *> *map = @{
-    @"descriptionProperty" : @"description",
-    @"inProperty" : @"in"
-  };
-  return map;
-}
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"conditions" : [GTLRServiceManagement_Condition class],
-    @"in" : [NSString class],
-    @"logConfig" : [GTLRServiceManagement_LogConfig class],
-    @"notIn" : [NSString class],
-    @"permissions" : [NSString class]
-  };
-  return map;
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
 //   GTLRServiceManagement_Service
 //
 
 @implementation GTLRServiceManagement_Service
-@dynamic apis, authentication, backend, configVersion, context, control,
-         customError, documentation, endpoints, enums, experimental, http,
-         identifier, logging, logs, metrics, monitoredResources, monitoring,
-         name, producerProjectId, quota, sourceInfo, systemParameters,
-         systemTypes, title, types, usage, visibility;
+@dynamic apis, authentication, backend, billing, configVersion, context,
+         control, customError, documentation, endpoints, enums, experimental,
+         http, identifier, logging, logs, metrics, monitoredResources,
+         monitoring, name, producerProjectId, quota, sourceInfo,
+         systemParameters, systemTypes, title, types, usage, visibility;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"identifier" : @"id" };

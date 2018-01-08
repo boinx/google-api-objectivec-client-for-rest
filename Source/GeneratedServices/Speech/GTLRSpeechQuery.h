@@ -22,6 +22,11 @@
 @class GTLRSpeech_LongRunningRecognizeRequest;
 @class GTLRSpeech_RecognizeRequest;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -50,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeSpeechCloudPlatform
+ *    @c kGTLRAuthScopeSpeechCloudSpeech
  */
 @interface GTLRSpeechQuery_OperationsCancel : GTLRSpeechQuery
 // Previous library name was
@@ -93,6 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeSpeechCloudPlatform
+ *    @c kGTLRAuthScopeSpeechCloudSpeech
  */
 @interface GTLRSpeechQuery_OperationsDelete : GTLRSpeechQuery
 // Previous library name was
@@ -126,6 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeSpeechCloudPlatform
+ *    @c kGTLRAuthScopeSpeechCloudSpeech
  */
 @interface GTLRSpeechQuery_OperationsGet : GTLRSpeechQuery
 // Previous library name was
@@ -164,6 +172,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeSpeechCloudPlatform
+ *    @c kGTLRAuthScopeSpeechCloudSpeech
  */
 @interface GTLRSpeechQuery_OperationsList : GTLRSpeechQuery
 // Previous library name was
@@ -214,6 +223,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeSpeechCloudPlatform
+ *    @c kGTLRAuthScopeSpeechCloudSpeech
  */
 @interface GTLRSpeechQuery_SpeechLongrunningrecognize : GTLRSpeechQuery
 // Previous library name was
@@ -244,6 +254,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Authorization scope(s):
  *    @c kGTLRAuthScopeSpeechCloudPlatform
+ *    @c kGTLRAuthScopeSpeechCloudSpeech
  */
 @interface GTLRSpeechQuery_SpeechRecognize : GTLRSpeechQuery
 // Previous library name was
@@ -264,3 +275,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

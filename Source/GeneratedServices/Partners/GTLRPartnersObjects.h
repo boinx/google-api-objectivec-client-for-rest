@@ -53,6 +53,11 @@
 @class GTLRPartners_UserOverrides;
 @class GTLRPartners_UserProfile;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -1682,6 +1687,12 @@ GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_Agenc
  */
 GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedMobileFromAddChannel;
 /**
+ *  Agency opted in for migrating their exams to Academy for Ads.
+ *
+ *  Value: "AGENCY_SELECTED_OPT_IN_AFA_MIGRATION"
+ */
+GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInAfaMigration;
+/**
  *  Agency selected `opt-in beta tests and market research`.
  *
  *  Value: "AGENCY_SELECTED_OPT_IN_BETA_TESTS_AND_MKT_RESEARCH"
@@ -1723,6 +1734,12 @@ GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_Agenc
  *  Value: "AGENCY_SELECTED_OPT_IN_SELECT_ALL_EMAIL_NOTIFICATIONS"
  */
 GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInSelectAllEmailNotifications;
+/**
+ *  Agency opted out for migrating their exams to Academy for Ads.
+ *
+ *  Value: "AGENCY_SELECTED_OPT_OUT_AFA_MIGRATION"
+ */
+GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptOutAfaMigration;
 /**
  *  Agency selected `opt-out unselect all email notifications`.
  *
@@ -2060,6 +2077,12 @@ GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbVi
  *  Value: "SMB_VIEWED_A_PARTNER_PROFILE"
  */
 GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedAPartnerProfile;
+/**
+ *  Advertiser viewed Digital Sales certificate.
+ *
+ *  Value: "SMB_VIEWED_DIGITAL_SALES_CERTIFICATE"
+ */
+GTLR_EXTERN NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedDigitalSalesCertificate;
 /**
  *  Advertiser viewed DoubleClick certificate.
  *
@@ -3420,36 +3443,6 @@ GTLR_EXTERN NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializat
  *  specified otherwise, this must conform to the
  *  <a href="http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84
  *  standard</a>. Values must be within normalized ranges.
- *  Example of normalization code in Python:
- *  def NormalizeLongitude(longitude):
- *  """Wraps decimal degrees longitude to [-180.0, 180.0]."""
- *  q, r = divmod(longitude, 360.0)
- *  if r > 180.0 or (r == 180.0 and q <= -1.0):
- *  return r - 360.0
- *  return r
- *  def NormalizeLatLng(latitude, longitude):
- *  """Wraps decimal degrees latitude and longitude to
- *  [-90.0, 90.0] and [-180.0, 180.0], respectively."""
- *  r = latitude % 360.0
- *  if r <= 90.0:
- *  return r, NormalizeLongitude(longitude)
- *  elif r >= 270.0:
- *  return r - 360, NormalizeLongitude(longitude)
- *  else:
- *  return 180 - r, NormalizeLongitude(longitude + 180.0)
- *  assert 180.0 == NormalizeLongitude(180.0)
- *  assert -180.0 == NormalizeLongitude(-180.0)
- *  assert -179.0 == NormalizeLongitude(181.0)
- *  assert (0.0, 0.0) == NormalizeLatLng(360.0, 0.0)
- *  assert (0.0, 0.0) == NormalizeLatLng(-360.0, 0.0)
- *  assert (85.0, 180.0) == NormalizeLatLng(95.0, 0.0)
- *  assert (-85.0, -170.0) == NormalizeLatLng(-95.0, 10.0)
- *  assert (90.0, 10.0) == NormalizeLatLng(90.0, 10.0)
- *  assert (-90.0, -10.0) == NormalizeLatLng(-90.0, -10.0)
- *  assert (0.0, -170.0) == NormalizeLatLng(-180.0, 10.0)
- *  assert (0.0, -170.0) == NormalizeLatLng(180.0, 10.0)
- *  assert (-90.0, 10.0) == NormalizeLatLng(270.0, 10.0)
- *  assert (90.0, 10.0) == NormalizeLatLng(-270.0, 10.0)
  */
 @interface GTLRPartners_LatLng : GTLRObject
 
@@ -4175,6 +4168,9 @@ GTLR_EXTERN NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializat
  *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedMobileFromAddChannel
  *        Agency selected `mobile` from add channel drop-down. (Value:
  *        "AGENCY_SELECTED_MOBILE_FROM_ADD_CHANNEL")
+ *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInAfaMigration
+ *        Agency opted in for migrating their exams to Academy for Ads. (Value:
+ *        "AGENCY_SELECTED_OPT_IN_AFA_MIGRATION")
  *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInBetaTestsAndMktResearch
  *        Agency selected `opt-in beta tests and market research`. (Value:
  *        "AGENCY_SELECTED_OPT_IN_BETA_TESTS_AND_MKT_RESEARCH")
@@ -4196,6 +4192,9 @@ GTLR_EXTERN NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializat
  *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInSelectAllEmailNotifications
  *        Agency selected `opt-in select all email notifications`. (Value:
  *        "AGENCY_SELECTED_OPT_IN_SELECT_ALL_EMAIL_NOTIFICATIONS")
+ *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptOutAfaMigration
+ *        Agency opted out for migrating their exams to Academy for Ads. (Value:
+ *        "AGENCY_SELECTED_OPT_OUT_AFA_MIGRATION")
  *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptOutUnselectAllEmailNotifications
  *        Agency selected `opt-out unselect all email notifications`. (Value:
  *        "AGENCY_SELECTED_OPT_OUT_UNSELECT_ALL_EMAIL_NOTIFICATIONS")
@@ -4358,6 +4357,9 @@ GTLR_EXTERN NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializat
  *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedAPartnerProfile
  *        Advertiser viewed a partner profile. (Value:
  *        "SMB_VIEWED_A_PARTNER_PROFILE")
+ *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedDigitalSalesCertificate
+ *        Advertiser viewed Digital Sales certificate. (Value:
+ *        "SMB_VIEWED_DIGITAL_SALES_CERTIFICATE")
  *    @arg @c kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedDoubleclickCertificate
  *        Advertiser viewed DoubleClick certificate. (Value:
  *        "SMB_VIEWED_DOUBLECLICK_CERTIFICATE")
@@ -4927,6 +4929,13 @@ GTLR_EXTERN NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializat
 /** A list of ids representing which markets the user was interested in. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *markets;
 
+/**
+ *  Whether or not to migrate the user's exam data to Academy for Ads.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *migrateToAfa;
+
 /** The user's phone number. */
 @property(nonatomic, copy, nullable) NSString *phoneNumber;
 
@@ -4943,3 +4952,5 @@ GTLR_EXTERN NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializat
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

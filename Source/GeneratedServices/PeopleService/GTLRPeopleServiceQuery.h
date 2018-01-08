@@ -23,6 +23,11 @@
 @class GTLRPeopleService_Person;
 @class GTLRPeopleService_UpdateContactGroupRequest;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -269,7 +274,7 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
 
 /**
  *  The resource name for the contact group, assigned by the server. An ASCII
- *  string, in the form of `contactGroups/<contact_group_id>`.
+ *  string, in the form of `contactGroups/`<var>contact_group_id</var>.
  */
 @property(nonatomic, copy, nullable) NSString *resourceName;
 
@@ -283,7 +288,7 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *    in the query.
  *  @param resourceName The resource name for the contact group, assigned by the
  *    server. An ASCII
- *    string, in the form of `contactGroups/<contact_group_id>`.
+ *    string, in the form of `contactGroups/`<var>contact_group_id</var>.
  *
  *  @returns GTLRPeopleServiceQuery_ContactGroupsUpdate
  */
@@ -330,7 +335,6 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *  * events
  *  * genders
  *  * imClients
- *  * interests
  *  * locales
  *  * memberships
  *  * metadata
@@ -503,7 +507,6 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *  * events
  *  * genders
  *  * imClients
- *  * interests
  *  * locales
  *  * memberships
  *  * metadata
@@ -537,7 +540,8 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
 /**
  *  The resource name of the person to provide information about.
  *  - To get information about the authenticated user, specify `people/me`.
- *  - To get information about a google account, specify `people/<account_id>`.
+ *  - To get information about a google account, specify
+ *  `people/`<var>account_id</var>.
  *  - To get information about a contact, specify the resource name that
  *  identifies the contact as returned by
  *  [`people.connections.list`](/people/api/rest/v1/people.connections/list).
@@ -556,7 +560,7 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *    about.
  *    - To get information about the authenticated user, specify `people/me`.
  *    - To get information about a google account, specify
- *    `people/<account_id>`.
+ *    `people/`<var>account_id</var>.
  *    - To get information about a contact, specify the resource name that
  *    identifies the contact as returned by
  *    [`people.connections.list`](/people/api/rest/v1/people.connections/list).
@@ -604,7 +608,6 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *  * events
  *  * genders
  *  * imClients
- *  * interests
  *  * locales
  *  * memberships
  *  * metadata
@@ -636,10 +639,14 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
 @property(nonatomic, copy, nullable) NSString *requestMaskIncludeField;
 
 /**
- *  The resource name, such as one returned by
- *  [`people.connections.list`](/people/api/rest/v1/people.connections/list),
- *  of one of the people to provide information about. You can include this
- *  parameter up to 50 times in one request.
+ *  The resource names of the people to provide information about.
+ *  - To get information about the authenticated user, specify `people/me`.
+ *  - To get information about a google account, specify
+ *  `people/`<var>account_id</var>.
+ *  - To get information about a contact, specify the resource name that
+ *  identifies the contact as returned by
+ *  [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+ *  You can include up to 50 resource names in one request.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *resourceNames;
 
@@ -682,7 +689,8 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
 
 /**
  *  The resource name for the person, assigned by the server. An ASCII string
- *  with a max length of 27 characters, in the form of `people/<person_id>`.
+ *  with a max length of 27 characters, in the form of
+ *  `people/`<var>person_id</var>.
  */
 @property(nonatomic, copy, nullable) NSString *resourceName;
 
@@ -697,7 +705,6 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *  * events
  *  * genders
  *  * imClients
- *  * interests
  *  * locales
  *  * names
  *  * nicknames
@@ -731,7 +738,8 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
  *  @param object The @c GTLRPeopleService_Person to include in the query.
  *  @param resourceName The resource name for the person, assigned by the
  *    server. An ASCII string
- *    with a max length of 27 characters, in the form of `people/<person_id>`.
+ *    with a max length of 27 characters, in the form of
+ *    `people/`<var>person_id</var>.
  *
  *  @returns GTLRPeopleServiceQuery_PeopleUpdateContact
  */
@@ -741,3 +749,5 @@ GTLR_EXTERN NSString * const kGTLRPeopleServiceSortOrderLastNameAscending;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

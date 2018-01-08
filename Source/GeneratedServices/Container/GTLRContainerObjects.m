@@ -24,7 +24,7 @@ NSString * const kGTLRContainer_Cluster_Status_Stopping        = @"STOPPING";
 
 // GTLRContainer_NetworkPolicy.provider
 NSString * const kGTLRContainer_NetworkPolicy_Provider_Calico  = @"CALICO";
-NSString * const kGTLRContainer_NetworkPolicy_Provider_Unknown = @"UNKNOWN";
+NSString * const kGTLRContainer_NetworkPolicy_Provider_ProviderUnspecified = @"PROVIDER_UNSPECIFIED";
 
 // GTLRContainer_NodePool.status
 NSString * const kGTLRContainer_NodePool_Status_Error          = @"ERROR";
@@ -44,6 +44,7 @@ NSString * const kGTLRContainer_Operation_OperationType_DeleteCluster = @"DELETE
 NSString * const kGTLRContainer_Operation_OperationType_DeleteNodePool = @"DELETE_NODE_POOL";
 NSString * const kGTLRContainer_Operation_OperationType_RepairCluster = @"REPAIR_CLUSTER";
 NSString * const kGTLRContainer_Operation_OperationType_SetLabels = @"SET_LABELS";
+NSString * const kGTLRContainer_Operation_OperationType_SetMaintenancePolicy = @"SET_MAINTENANCE_POLICY";
 NSString * const kGTLRContainer_Operation_OperationType_SetMasterAuth = @"SET_MASTER_AUTH";
 NSString * const kGTLRContainer_Operation_OperationType_SetNetworkPolicy = @"SET_NETWORK_POLICY";
 NSString * const kGTLRContainer_Operation_OperationType_SetNodePoolManagement = @"SET_NODE_POOL_MANAGEMENT";
@@ -63,7 +64,18 @@ NSString * const kGTLRContainer_Operation_Status_StatusUnspecified = @"STATUS_UN
 // GTLRContainer_SetMasterAuthRequest.action
 NSString * const kGTLRContainer_SetMasterAuthRequest_Action_GeneratePassword = @"GENERATE_PASSWORD";
 NSString * const kGTLRContainer_SetMasterAuthRequest_Action_SetPassword = @"SET_PASSWORD";
+NSString * const kGTLRContainer_SetMasterAuthRequest_Action_SetUsername = @"SET_USERNAME";
 NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN";
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRContainer_AcceleratorConfig
+//
+
+@implementation GTLRContainer_AcceleratorConfig
+@dynamic acceleratorCount, acceleratorType;
+@end
+
 
 // ----------------------------------------------------------------------------
 //
@@ -71,7 +83,8 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_AddonsConfig
-@dynamic horizontalPodAutoscaling, httpLoadBalancing;
+@dynamic horizontalPodAutoscaling, httpLoadBalancing, kubernetesDashboard,
+         networkPolicyConfig;
 @end
 
 
@@ -101,6 +114,16 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRContainer_CidrBlock
+//
+
+@implementation GTLRContainer_CidrBlock
+@dynamic cidrBlock, displayName;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRContainer_ClientCertificateConfig
 //
 
@@ -119,7 +142,8 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
          currentNodeCount, currentNodeVersion, descriptionProperty,
          enableKubernetesAlpha, endpoint, expireTime, initialClusterVersion,
          initialNodeCount, instanceGroupUrls, ipAllocationPolicy,
-         labelFingerprint, legacyAbac, locations, loggingService, masterAuth,
+         labelFingerprint, legacyAbac, locations, loggingService,
+         maintenancePolicy, masterAuth, masterAuthorizedNetworksConfig,
          monitoringService, name, network, networkPolicy, nodeConfig,
          nodeIpv4CidrSize, nodePools, resourceLabels, selfLink,
          servicesIpv4Cidr, status, statusMessage, subnetwork, zoneProperty;
@@ -165,8 +189,9 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 
 @implementation GTLRContainer_ClusterUpdate
 @dynamic desiredAddonsConfig, desiredImageType, desiredLocations,
-         desiredMasterVersion, desiredMonitoringService,
-         desiredNodePoolAutoscaling, desiredNodePoolId, desiredNodeVersion;
+         desiredMasterAuthorizedNetworksConfig, desiredMasterVersion,
+         desiredMonitoringService, desiredNodePoolAutoscaling,
+         desiredNodePoolId, desiredNodeVersion;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
@@ -209,6 +234,16 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRContainer_DailyMaintenanceWindow
+//
+
+@implementation GTLRContainer_DailyMaintenanceWindow
+@dynamic duration, startTime;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRContainer_Empty
 //
 
@@ -242,8 +277,20 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_IPAllocationPolicy
-@dynamic clusterIpv4Cidr, createSubnetwork, nodeIpv4Cidr, servicesIpv4Cidr,
-         subnetworkName, useIpAliases;
+@dynamic clusterIpv4Cidr, clusterIpv4CidrBlock, clusterSecondaryRangeName,
+         createSubnetwork, nodeIpv4Cidr, nodeIpv4CidrBlock, servicesIpv4Cidr,
+         servicesIpv4CidrBlock, servicesSecondaryRangeName, subnetworkName,
+         useIpAliases;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRContainer_KubernetesDashboard
+//
+
+@implementation GTLRContainer_KubernetesDashboard
+@dynamic disabled;
 @end
 
 
@@ -315,12 +362,50 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRContainer_MaintenancePolicy
+//
+
+@implementation GTLRContainer_MaintenancePolicy
+@dynamic window;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRContainer_MaintenanceWindow
+//
+
+@implementation GTLRContainer_MaintenanceWindow
+@dynamic dailyMaintenanceWindow;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRContainer_MasterAuth
 //
 
 @implementation GTLRContainer_MasterAuth
 @dynamic clientCertificate, clientCertificateConfig, clientKey,
          clusterCaCertificate, password, username;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRContainer_MasterAuthorizedNetworksConfig
+//
+
+@implementation GTLRContainer_MasterAuthorizedNetworksConfig
+@dynamic cidrBlocks, enabled;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"cidrBlocks" : [GTLRContainer_CidrBlock class]
+  };
+  return map;
+}
+
 @end
 
 
@@ -336,15 +421,27 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRContainer_NetworkPolicyConfig
+//
+
+@implementation GTLRContainer_NetworkPolicyConfig
+@dynamic disabled;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRContainer_NodeConfig
 //
 
 @implementation GTLRContainer_NodeConfig
-@dynamic diskSizeGb, imageType, labels, localSsdCount, machineType, metadata,
-         oauthScopes, preemptible, serviceAccount, tags;
+@dynamic accelerators, diskSizeGb, imageType, labels, localSsdCount,
+         machineType, metadata, minCpuPlatform, oauthScopes, preemptible,
+         serviceAccount, tags;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
+    @"accelerators" : [GTLRContainer_AcceleratorConfig class],
     @"oauthScopes" : [NSString class],
     @"tags" : [NSString class]
   };
@@ -427,8 +524,8 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_Operation
-@dynamic detail, name, operationType, selfLink, status, statusMessage,
-         targetLink, zoneProperty;
+@dynamic detail, endTime, name, operationType, selfLink, startTime, status,
+         statusMessage, targetLink, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -536,6 +633,16 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 
 @implementation GTLRContainer_SetLoggingServiceRequest
 @dynamic loggingService;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRContainer_SetMaintenancePolicyRequest
+//
+
+@implementation GTLRContainer_SetMaintenancePolicyRequest
+@dynamic maintenancePolicy;
 @end
 
 

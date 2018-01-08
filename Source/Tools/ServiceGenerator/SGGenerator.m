@@ -64,6 +64,15 @@ static NSString *kCommonQueryParamsKey            = @"commonQueryParam";
 static NSString *kCommonPrettyPrintQueryParamsKey = @"commonPrettyPrintQueryParams";
 static NSString *kEnumMapKey                      = @"enumMap";
 
+
+static NSString *kSuppressDocumentationWarningsBegin =
+  @"// Generated comments include content from the discovery document; avoid them\n"
+  @"// causing warnings since clang's checks are some what arbitrary.\n"
+  @"#pragma clang diagnostic push\n"
+  @"#pragma clang diagnostic ignored \"-Wdocumentation\"\n";
+static NSString *kSuppressDocumentationWarningsEnd =
+  @"#pragma clang diagnostic pop\n";
+
 typedef enum {
   kGenerateInterface = 1,
   kGenerateImplementation
@@ -82,6 +91,7 @@ typedef enum {
 
 - (void)sg_setProperty:(id)obj forKey:(NSString *)key;
 - (id)sg_propertyForKey:(NSString *)key;
++ (NSArray *)sg_acceptedUnknowns;
 @end
 
 @interface GTLRDiscovery_RestDescription (SGGeneratorAdditions)
@@ -159,7 +169,6 @@ typedef enum {
 @interface SGGenerator ()
 @property(strong) NSMutableArray *warnings;
 @property(strong) NSMutableArray *infos;
-@property(readonly) BOOL useLegacyObjectNaming;
 @end
 
 // Helper to get the objects of a dictionary out in a sorted order.
@@ -202,6 +211,17 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
   Class additionalPropClass = [[obj class] classForAdditionalProperties];
   if (additionalPropClass == Nil) {
     NSArray *apiUnknowns = [obj additionalJSONKeys];
+
+    // The OP servers have added a few keys that aren't documented, this
+    // support allows some of them to be stripped from the audit report
+    // since they are noise.
+    NSArray *acceptedUnknowns = [[obj class] sg_acceptedUnknowns];
+    if (acceptedUnknowns.count) {
+      NSMutableArray *worker = [apiUnknowns mutableCopy];
+      [worker removeObjectsInArray:acceptedUnknowns];
+      apiUnknowns = worker.count ? worker : nil;
+    }
+
     if (apiUnknowns != nil) {
       apiUnknowns = [apiUnknowns sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
       NSString *info =
@@ -395,11 +415,6 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
 
 - (BOOL)auditJSON {
   BOOL result = (_options & kSGGeneratorOptionAuditJSON) != 0;
-  return result;
-}
-
-- (BOOL)useLegacyObjectNaming {
-  BOOL result = (_options & kSGGeneratorOptionLegacyObjectNaming) != 0;
   return result;
 }
 
@@ -752,10 +767,6 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
         [NSString stringWithFormat:@"Collision over the class name '%@' (schemas '%@' and '%@')",
          objcClassName,
          previousSchema.sg_fullSchemaName, schema.sg_fullSchemaName];
-      if (self.useLegacyObjectNaming) {
-        errStr =
-            [errStr stringByAppendingString:@", not using --useLegacyObjectClassNames will likely avoid this."];
-      }
       messageHandler(kSGGeneratorHandlerMessageError, errStr);
       allGood = NO;
     } else {
@@ -841,6 +852,8 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
   NSString *versionCheck = [self headerVersionCheck];
   [parts addObject:versionCheck];
 
+  [parts addObject:kSuppressDocumentationWarningsBegin];
+
   [parts addObject:@"NS_ASSUME_NONNULL_BEGIN\n"];
 
   NSArray *scopesConstants =
@@ -901,6 +914,8 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
   [parts addObject:@"@end\n"];
 
   [parts addObject:@"NS_ASSUME_NONNULL_END\n"];
+
+  [parts addObject:kSuppressDocumentationWarningsEnd];
 
   return [parts componentsJoinedByString:@"\n"];
 }
@@ -1113,6 +1128,8 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
     [parts addObject:classForwards];
   }
 
+  [parts addObject:kSuppressDocumentationWarningsBegin];
+
   [parts addObject:@"NS_ASSUME_NONNULL_BEGIN\n"];
 
   NSString *commentExtra = @"For some of the query classes' properties below.";
@@ -1139,6 +1156,8 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
   }
 
   [parts addObject:@"NS_ASSUME_NONNULL_END\n"];
+
+  [parts addObject:kSuppressDocumentationWarningsEnd];
 
   return [parts componentsJoinedByString:@"\n"];
 }
@@ -1240,6 +1259,8 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
     [parts addObject:[subParts componentsJoinedByString:@""]];
   }
 
+  [parts addObject:kSuppressDocumentationWarningsBegin];
+
   [parts addObject:@"NS_ASSUME_NONNULL_BEGIN\n"];
 
   NSString *commentExtra = @"For some of the classes' properties below.";
@@ -1270,6 +1291,8 @@ static void CheckForUnknownJSON(GTLRObject *obj, NSArray *keyPath,
   [parts addObject:[classParts componentsJoinedByString:@"\n\n"]];
 
   [parts addObject:@"NS_ASSUME_NONNULL_END\n"];
+
+  [parts addObject:kSuppressDocumentationWarningsEnd];
 
   return [parts componentsJoinedByString:@"\n"];
 }
@@ -3005,6 +3028,10 @@ static NSString *MappedParamInterfaceName(NSString *name, BOOL takesObject, BOOL
   return [self.userProperties objectForKey:key];
 }
 
++ (NSArray *)sg_acceptedUnknowns {
+  return nil;
+}
+
 @end
 
 @implementation GTLRDiscovery_RestDescription (SGGeneratorAdditions)
@@ -3987,9 +4014,7 @@ static NSString *OverrideName(NSString *name, EQueryOrObject queryOrObject,
   NSString *result = [resolvedSchema sg_propertyForKey:kSchemaObjCClassNameKey];
   if (result == nil) {
     NSArray *parts = [resolvedSchema sg_fullSchemaPath:YES foldArrayItems:YES];
-    SGGenerator *generator = self.sg_generator;
-    NSString *joiner = (generator.useLegacyObjectNaming ? @"" : @"_");
-    NSString *fullName = [parts componentsJoinedByString:joiner];
+    NSString *fullName = [parts componentsJoinedByString:@"_"];
 
     result = [NSString stringWithFormat:@"%@%@_%@",
               kProjectPrefix, self.sg_generator.formattedAPIName, fullName];
@@ -4584,6 +4609,13 @@ static SGTypeInfo *LookupTypeInfo(NSString *typeString,
   // Set in sg_calculateMediaPaths.
   NSString *result = [self sg_propertyForKey:kSimpleUploadPathOverrideKey];
   return result;
+}
+
++ (NSArray *)sg_acceptedUnknowns {
+  // "flatPath" has never been documented but is on every method of every
+  // OP api. There have been some indications it might get removed since
+  // it never was used.
+  return @[@"flatPath"];
 }
 
 @end

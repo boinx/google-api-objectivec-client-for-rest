@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   BigQuery Data Transfer Service API (bigquerydatatransfer/v1)
+//   BigQuery Data Transfer API (bigquerydatatransfer/v1)
 // Description:
 //   Transfers data from partner SaaS applications to Google BigQuery on a
 //   scheduled, managed basis.
@@ -21,7 +21,7 @@ NSString * const kGTLRBigQueryDataTransfer_DataSource_AuthorizationType_GooglePl
 
 // GTLRBigQueryDataTransfer_DataSource.dataRefreshType
 NSString * const kGTLRBigQueryDataTransfer_DataSource_DataRefreshType_CustomSlidingWindow = @"CUSTOM_SLIDING_WINDOW";
-NSString * const kGTLRBigQueryDataTransfer_DataSource_DataRefreshType_None = @"NONE";
+NSString * const kGTLRBigQueryDataTransfer_DataSource_DataRefreshType_DataRefreshTypeUnspecified = @"DATA_REFRESH_TYPE_UNSPECIFIED";
 NSString * const kGTLRBigQueryDataTransfer_DataSource_DataRefreshType_SlidingWindow = @"SLIDING_WINDOW";
 
 // GTLRBigQueryDataTransfer_DataSource.transferType
@@ -38,14 +38,13 @@ NSString * const kGTLRBigQueryDataTransfer_DataSourceParameter_Type_Record = @"R
 NSString * const kGTLRBigQueryDataTransfer_DataSourceParameter_Type_String = @"STRING";
 NSString * const kGTLRBigQueryDataTransfer_DataSourceParameter_Type_TypeUnspecified = @"TYPE_UNSPECIFIED";
 
-// GTLRBigQueryDataTransfer_TransferConfig.status
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_Cancelled = @"CANCELLED";
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_Failed = @"FAILED";
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_Inactive = @"INACTIVE";
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_Pending = @"PENDING";
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_Running = @"RUNNING";
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_Succeeded = @"SUCCEEDED";
-NSString * const kGTLRBigQueryDataTransfer_TransferConfig_Status_TransferStatusUnspecified = @"TRANSFER_STATUS_UNSPECIFIED";
+// GTLRBigQueryDataTransfer_TransferConfig.state
+NSString * const kGTLRBigQueryDataTransfer_TransferConfig_State_Cancelled = @"CANCELLED";
+NSString * const kGTLRBigQueryDataTransfer_TransferConfig_State_Failed = @"FAILED";
+NSString * const kGTLRBigQueryDataTransfer_TransferConfig_State_Pending = @"PENDING";
+NSString * const kGTLRBigQueryDataTransfer_TransferConfig_State_Running = @"RUNNING";
+NSString * const kGTLRBigQueryDataTransfer_TransferConfig_State_Succeeded = @"SUCCEEDED";
+NSString * const kGTLRBigQueryDataTransfer_TransferConfig_State_TransferStateUnspecified = @"TRANSFER_STATE_UNSPECIFIED";
 
 // GTLRBigQueryDataTransfer_TransferMessage.severity
 NSString * const kGTLRBigQueryDataTransfer_TransferMessage_Severity_Error = @"ERROR";
@@ -53,14 +52,13 @@ NSString * const kGTLRBigQueryDataTransfer_TransferMessage_Severity_Info = @"INF
 NSString * const kGTLRBigQueryDataTransfer_TransferMessage_Severity_MessageSeverityUnspecified = @"MESSAGE_SEVERITY_UNSPECIFIED";
 NSString * const kGTLRBigQueryDataTransfer_TransferMessage_Severity_Warning = @"WARNING";
 
-// GTLRBigQueryDataTransfer_TransferRun.status
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_Cancelled = @"CANCELLED";
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_Failed = @"FAILED";
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_Inactive = @"INACTIVE";
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_Pending = @"PENDING";
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_Running = @"RUNNING";
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_Succeeded = @"SUCCEEDED";
-NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnspecified = @"TRANSFER_STATUS_UNSPECIFIED";
+// GTLRBigQueryDataTransfer_TransferRun.state
+NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Cancelled = @"CANCELLED";
+NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Failed = @"FAILED";
+NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Pending = @"PENDING";
+NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Running = @"RUNNING";
+NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Succeeded = @"SUCCEEDED";
+NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_TransferStateUnspecified = @"TRANSFER_STATE_UNSPECIFIED";
 
 // ----------------------------------------------------------------------------
 //
@@ -89,9 +87,9 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 @implementation GTLRBigQueryDataTransfer_DataSource
 @dynamic authorizationType, clientId, dataRefreshType, dataSourceId,
          defaultDataRefreshWindowDays, defaultSchedule, descriptionProperty,
-         displayName, helpUrl, manualRunsDisabled, name, parameters, scopes,
-         statusUpdateDeadlineSeconds, supportsCustomSchedule,
-         supportsMultipleTransfers, transferType;
+         displayName, helpUrl, manualRunsDisabled, minimumScheduleInterval,
+         name, parameters, scopes, supportsCustomSchedule,
+         supportsMultipleTransfers, transferType, updateDeadlineSeconds;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"descriptionProperty" : @"description" };
@@ -144,25 +142,6 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRBigQueryDataTransfer_IsEnabledRequest
-//
-
-@implementation GTLRBigQueryDataTransfer_IsEnabledRequest
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRBigQueryDataTransfer_IsEnabledResponse
-//
-
-@implementation GTLRBigQueryDataTransfer_IsEnabledResponse
-@dynamic enabled;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
 //   GTLRBigQueryDataTransfer_ListDataSourcesResponse
 //
 
@@ -178,6 +157,28 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 
 + (NSString *)collectionItemsKey {
   return @"dataSources";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRBigQueryDataTransfer_ListLocationsResponse
+//
+
+@implementation GTLRBigQueryDataTransfer_ListLocationsResponse
+@dynamic locations, nextPageToken;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"locations" : [GTLRBigQueryDataTransfer_Location class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"locations";
 }
 
 @end
@@ -251,11 +252,49 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRBigQueryDataTransfer_Location
+//
+
+@implementation GTLRBigQueryDataTransfer_Location
+@dynamic labels, locationId, metadata, name;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRBigQueryDataTransfer_Location_Labels
+//
+
+@implementation GTLRBigQueryDataTransfer_Location_Labels
+
++ (Class)classForAdditionalProperties {
+  return [NSString class];
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRBigQueryDataTransfer_Location_Metadata
+//
+
+@implementation GTLRBigQueryDataTransfer_Location_Metadata
+
++ (Class)classForAdditionalProperties {
+  return [NSObject class];
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRBigQueryDataTransfer_ScheduleTransferRunsRequest
 //
 
 @implementation GTLRBigQueryDataTransfer_ScheduleTransferRunsRequest
-@dynamic rangeEndTime, rangeStartTime;
+@dynamic endTime, startTime;
 @end
 
 
@@ -265,11 +304,11 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 //
 
 @implementation GTLRBigQueryDataTransfer_ScheduleTransferRunsResponse
-@dynamic createdRuns;
+@dynamic runs;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
-    @"createdRuns" : [GTLRBigQueryDataTransfer_TransferRun class]
+    @"runs" : [GTLRBigQueryDataTransfer_TransferRun class]
   };
   return map;
 }
@@ -279,11 +318,33 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRBigQueryDataTransfer_SetEnabledRequest
+//   GTLRBigQueryDataTransfer_Status
 //
 
-@implementation GTLRBigQueryDataTransfer_SetEnabledRequest
-@dynamic enabled;
+@implementation GTLRBigQueryDataTransfer_Status
+@dynamic code, details, message;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"details" : [GTLRBigQueryDataTransfer_Status_Details_Item class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRBigQueryDataTransfer_Status_Details_Item
+//
+
+@implementation GTLRBigQueryDataTransfer_Status_Details_Item
+
++ (Class)classForAdditionalProperties {
+  return [NSObject class];
+}
+
 @end
 
 
@@ -295,7 +356,7 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 @implementation GTLRBigQueryDataTransfer_TransferConfig
 @dynamic dataRefreshWindowDays, datasetRegion, dataSourceId,
          destinationDatasetId, disabled, displayName, name, nextRunTime, params,
-         schedule, status, updateTime, userId;
+         schedule, state, updateTime, userId;
 @end
 
 
@@ -329,9 +390,8 @@ NSString * const kGTLRBigQueryDataTransfer_TransferRun_Status_TransferStatusUnsp
 //
 
 @implementation GTLRBigQueryDataTransfer_TransferRun
-@dynamic datasetRegion, dataSourceId, destinationDatasetId, endTime, name,
-         params, runTime, schedule, scheduleTime, startTime, status, updateTime,
-         userId;
+@dynamic dataSourceId, destinationDatasetId, endTime, errorStatus, name, params,
+         runTime, schedule, scheduleTime, startTime, state, updateTime, userId;
 @end
 
 

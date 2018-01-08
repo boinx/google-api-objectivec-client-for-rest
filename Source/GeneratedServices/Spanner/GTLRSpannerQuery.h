@@ -23,6 +23,7 @@
 @class GTLRSpanner_CommitRequest;
 @class GTLRSpanner_CreateDatabaseRequest;
 @class GTLRSpanner_CreateInstanceRequest;
+@class GTLRSpanner_CreateSessionRequest;
 @class GTLRSpanner_ExecuteSqlRequest;
 @class GTLRSpanner_GetIamPolicyRequest;
 @class GTLRSpanner_ReadRequest;
@@ -31,6 +32,11 @@
 @class GTLRSpanner_TestIamPermissionsRequest;
 @class GTLRSpanner_UpdateDatabaseDdlRequest;
 @class GTLRSpanner_UpdateInstanceRequest;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -746,7 +752,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface GTLRSpannerQuery_ProjectsInstancesDatabasesSessionsCreate : GTLRSpannerQuery
 // Previous library name was
-//   +[GTLQuerySpanner queryForProjectsInstancesDatabasesSessionsCreateWithdatabase:]
+//   +[GTLQuerySpanner queryForProjectsInstancesDatabasesSessionsCreateWithObject:database:]
 
 /** Required. The database in which the new session is created. */
 @property(nonatomic, copy, nullable) NSString *database;
@@ -771,11 +777,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  Idle sessions can be kept alive by sending a trivial SQL query
  *  periodically, e.g., `"SELECT 1"`.
  *
+ *  @param object The @c GTLRSpanner_CreateSessionRequest to include in the
+ *    query.
  *  @param database Required. The database in which the new session is created.
  *
  *  @returns GTLRSpannerQuery_ProjectsInstancesDatabasesSessionsCreate
  */
-+ (instancetype)queryWithDatabase:(NSString *)database;
++ (instancetype)queryWithObject:(GTLRSpanner_CreateSessionRequest *)object
+                       database:(NSString *)database;
 
 @end
 
@@ -926,6 +935,63 @@ NS_ASSUME_NONNULL_BEGIN
  *  @returns GTLRSpannerQuery_ProjectsInstancesDatabasesSessionsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
+
+@end
+
+/**
+ *  Lists all sessions in a given database.
+ *
+ *  Method: spanner.projects.instances.databases.sessions.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeSpannerCloudPlatform
+ *    @c kGTLRAuthScopeSpannerData
+ */
+@interface GTLRSpannerQuery_ProjectsInstancesDatabasesSessionsList : GTLRSpannerQuery
+// Previous library name was
+//   +[GTLQuerySpanner queryForProjectsInstancesDatabasesSessionsListWithdatabase:]
+
+/** Required. The database in which to list sessions. */
+@property(nonatomic, copy, nullable) NSString *database;
+
+/**
+ *  An expression for filtering the results of the request. Filter rules are
+ *  case insensitive. The fields eligible for filtering are:
+ *  * `labels.key` where key is the name of a label
+ *  Some examples of using filters are:
+ *  * `labels.env:*` --> The session has the label "env".
+ *  * `labels.env:dev` --> The session has the label "env" and the value of
+ *  the label contains the string "dev".
+ */
+@property(nonatomic, copy, nullable) NSString *filter;
+
+/**
+ *  Number of sessions to be returned in the response. If 0 or less, defaults
+ *  to the server's maximum allowed page size.
+ */
+@property(nonatomic, assign) NSInteger pageSize;
+
+/**
+ *  If non-empty, `page_token` should contain a
+ *  next_page_token from a previous
+ *  ListSessionsResponse.
+ */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
+/**
+ *  Fetches a @c GTLRSpanner_ListSessionsResponse.
+ *
+ *  Lists all sessions in a given database.
+ *
+ *  @param database Required. The database in which to list sessions.
+ *
+ *  @returns GTLRSpannerQuery_ProjectsInstancesDatabasesSessionsList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
+ */
++ (instancetype)queryWithDatabase:(NSString *)database;
 
 @end
 
@@ -1343,18 +1409,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  An expression for filtering the results of the request. Filter rules are
  *  case insensitive. The fields eligible for filtering are:
- *  * name
- *  * display_name
- *  * labels.key where key is the name of a label
+ *  * `name`
+ *  * `display_name`
+ *  * `labels.key` where key is the name of a label
  *  Some examples of using filters are:
- *  * name:* --> The instance has a name.
- *  * name:Howl --> The instance's name contains the string "howl".
- *  * name:HOWL --> Equivalent to above.
- *  * NAME:howl --> Equivalent to above.
- *  * labels.env:* --> The instance has the label "env".
- *  * labels.env:dev --> The instance has the label "env" and the value of
+ *  * `name:*` --> The instance has a name.
+ *  * `name:Howl` --> The instance's name contains the string "howl".
+ *  * `name:HOWL` --> Equivalent to above.
+ *  * `NAME:howl` --> Equivalent to above.
+ *  * `labels.env:*` --> The instance has the label "env".
+ *  * `labels.env:dev` --> The instance has the label "env" and the value of
  *  the label contains the string "dev".
- *  * name:howl labels.env:dev --> The instance's name contains "howl" and
+ *  * `name:howl labels.env:dev` --> The instance's name contains "howl" and
  *  it has the label "env" with its value
  *  containing "dev".
  */
@@ -1769,3 +1835,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

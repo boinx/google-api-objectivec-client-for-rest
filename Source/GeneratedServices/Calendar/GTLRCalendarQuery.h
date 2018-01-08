@@ -25,6 +25,11 @@
 @class GTLRCalendar_Event;
 @class GTLRCalendar_FreeBusyRequest;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -189,6 +194,12 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
 @property(nonatomic, copy, nullable) NSString *calendarId;
 
 /**
+ *  Whether to send notifications about the calendar sharing change. Optional.
+ *  The default is True.
+ */
+@property(nonatomic, assign) BOOL sendNotifications;
+
+/**
  *  Fetches a @c GTLRCalendar_AclRule.
  *
  *  Creates an access control rule.
@@ -297,6 +308,12 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
 @property(nonatomic, copy, nullable) NSString *ruleId;
 
 /**
+ *  Whether to send notifications about the calendar sharing change. Note that
+ *  there are no notifications on access removal. Optional. The default is True.
+ */
+@property(nonatomic, assign) BOOL sendNotifications;
+
+/**
  *  Fetches a @c GTLRCalendar_AclRule.
  *
  *  Updates an access control rule. This method supports patch semantics.
@@ -336,6 +353,12 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
 
 /** ACL rule identifier. */
 @property(nonatomic, copy, nullable) NSString *ruleId;
+
+/**
+ *  Whether to send notifications about the calendar sharing change. Note that
+ *  there are no notifications on access removal. Optional. The default is True.
+ */
+@property(nonatomic, assign) BOOL sendNotifications;
 
 /**
  *  Fetches a @c GTLRCalendar_AclRule.
@@ -1479,7 +1502,8 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
  *  Upper bound (exclusive) for an event's start time to filter by. Optional.
  *  The default is not to filter by start time. Must be an RFC3339 timestamp
  *  with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
- *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
+ *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If
+ *  timeMin is set, timeMax must be greater than timeMin.
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *timeMax;
 
@@ -1487,7 +1511,8 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
  *  Lower bound (inclusive) for an event's end time to filter by. Optional. The
  *  default is not to filter by end time. Must be an RFC3339 timestamp with
  *  mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
- *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
+ *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If
+ *  timeMax is set, timeMin must be smaller than timeMax.
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *timeMin;
 
@@ -1898,7 +1923,8 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
  *  Upper bound (exclusive) for an event's start time to filter by. Optional.
  *  The default is not to filter by start time. Must be an RFC3339 timestamp
  *  with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
- *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
+ *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If
+ *  timeMin is set, timeMax must be greater than timeMin.
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *timeMax;
 
@@ -1906,7 +1932,8 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
  *  Lower bound (inclusive) for an event's end time to filter by. Optional. The
  *  default is not to filter by end time. Must be an RFC3339 timestamp with
  *  mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
- *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
+ *  2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If
+ *  timeMax is set, timeMin must be smaller than timeMax.
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *timeMin;
 
@@ -2095,3 +2122,5 @@ GTLR_EXTERN NSString * const kGTLRCalendarOrderByUpdated;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -4,10 +4,9 @@
 // API:
 //   Stackdriver Trace API (cloudtrace/v2)
 // Description:
-//   Send and retrieve trace data from Stackdriver Trace. Data is generated and
-//   available by default for all App Engine applications. Data from other
-//   applications can be written to Stackdriver Trace for display, reporting,
-//   and analysis.
+//   Sends application trace data to Stackdriver Trace for viewing. Trace data
+//   is collected for all App Engine applications by default. Trace data from
+//   other applications can be provided using this API.
 // Documentation:
 //   https://cloud.google.com/trace
 
@@ -27,8 +26,8 @@
 @class GTLRCloudTrace_AttributeValue;
 @class GTLRCloudTrace_Link;
 @class GTLRCloudTrace_Links;
+@class GTLRCloudTrace_MessageEvent;
 @class GTLRCloudTrace_Module;
-@class GTLRCloudTrace_NetworkEvent;
 @class GTLRCloudTrace_Span;
 @class GTLRCloudTrace_StackFrame;
 @class GTLRCloudTrace_StackFrames;
@@ -37,8 +36,12 @@
 @class GTLRCloudTrace_Status_Details_Item;
 @class GTLRCloudTrace_TimeEvent;
 @class GTLRCloudTrace_TimeEvents;
-@class GTLRCloudTrace_Trace;
 @class GTLRCloudTrace_TruncatableString;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,17 +52,17 @@ NS_ASSUME_NONNULL_BEGIN
 // GTLRCloudTrace_Link.type
 
 /**
- *  The current span is a child of the linked span.
+ *  The linked span is a child of the current span.
  *
- *  Value: "CHILD"
+ *  Value: "CHILD_LINKED_SPAN"
  */
-GTLR_EXTERN NSString * const kGTLRCloudTrace_Link_Type_Child;
+GTLR_EXTERN NSString * const kGTLRCloudTrace_Link_Type_ChildLinkedSpan;
 /**
- *  The current span is the parent of the linked span.
+ *  The linked span is a parent of the current span.
  *
- *  Value: "PARENT"
+ *  Value: "PARENT_LINKED_SPAN"
  */
-GTLR_EXTERN NSString * const kGTLRCloudTrace_Link_Type_Parent;
+GTLR_EXTERN NSString * const kGTLRCloudTrace_Link_Type_ParentLinkedSpan;
 /**
  *  The relationship of the two spans is unknown.
  *
@@ -68,26 +71,26 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_Link_Type_Parent;
 GTLR_EXTERN NSString * const kGTLRCloudTrace_Link_Type_TypeUnspecified;
 
 // ----------------------------------------------------------------------------
-// GTLRCloudTrace_NetworkEvent.type
+// GTLRCloudTrace_MessageEvent.type
 
 /**
- *  Indicates a received RPC message.
+ *  Indicates a received message.
  *
- *  Value: "RECV"
+ *  Value: "RECEIVED"
  */
-GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_Recv;
+GTLR_EXTERN NSString * const kGTLRCloudTrace_MessageEvent_Type_Received;
 /**
- *  Indicates a sent RPC message.
+ *  Indicates a sent message.
  *
  *  Value: "SENT"
  */
-GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_Sent;
+GTLR_EXTERN NSString * const kGTLRCloudTrace_MessageEvent_Type_Sent;
 /**
  *  Unknown event type.
  *
  *  Value: "TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
+GTLR_EXTERN NSString * const kGTLRCloudTrace_MessageEvent_Type_TypeUnspecified;
 
 /**
  *  Text annotation with a set of attributes.
@@ -95,7 +98,7 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @interface GTLRCloudTrace_Annotation : GTLRObject
 
 /**
- *  A set of attributes on the annotation. There is a limit of 4 attributes
+ *  A set of attributes on the annotation. You can have up to 4 attributes
  *  per Annotation.
  */
 @property(nonatomic, strong, nullable) GTLRCloudTrace_Attributes *attributes;
@@ -187,7 +190,10 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
  */
 @interface GTLRCloudTrace_BatchWriteSpansRequest : GTLRObject
 
-/** A collection of spans. */
+/**
+ *  A list of new spans. The span names must not match existing
+ *  spans, or the results are undefined.
+ */
 @property(nonatomic, strong, nullable) NSArray<GTLRCloudTrace_Span *> *spans;
 
 @end
@@ -215,25 +221,25 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @interface GTLRCloudTrace_Link : GTLRObject
 
 /**
- *  A set of attributes on the link. There is a limit of 32 attributes per
+ *  A set of attributes on the link. You have have up to 32 attributes per
  *  link.
  */
 @property(nonatomic, strong, nullable) GTLRCloudTrace_Attributes *attributes;
 
-/** `SPAN_ID` identifies a span within a trace. */
+/** The [SPAN_ID] for a span within a trace. */
 @property(nonatomic, copy, nullable) NSString *spanId;
 
-/** `TRACE_ID` identifies a trace within a project. */
+/** The [TRACE_ID] for a trace within a project. */
 @property(nonatomic, copy, nullable) NSString *traceId;
 
 /**
  *  The relationship of the current span relative to the linked span.
  *
  *  Likely values:
- *    @arg @c kGTLRCloudTrace_Link_Type_Child The current span is a child of the
- *        linked span. (Value: "CHILD")
- *    @arg @c kGTLRCloudTrace_Link_Type_Parent The current span is the parent of
- *        the linked span. (Value: "PARENT")
+ *    @arg @c kGTLRCloudTrace_Link_Type_ChildLinkedSpan The linked span is a
+ *        child of the current span. (Value: "CHILD_LINKED_SPAN")
+ *    @arg @c kGTLRCloudTrace_Link_Type_ParentLinkedSpan The linked span is a
+ *        parent of the current span. (Value: "PARENT_LINKED_SPAN")
  *    @arg @c kGTLRCloudTrace_Link_Type_TypeUnspecified The relationship of the
  *        two spans is unknown. (Value: "TYPE_UNSPECIFIED")
  */
@@ -263,57 +269,49 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 
 
 /**
- *  The response message for the `ListSpans` method.
+ *  An event describing a message sent/received between Spans.
+ */
+@interface GTLRCloudTrace_MessageEvent : GTLRObject
+
+/**
+ *  The number of compressed bytes sent or received. If missing assumed to
+ *  be the same size as uncompressed.
  *
- *  @note This class supports NSFastEnumeration and indexed subscripting over
- *        its "spans" property. If returned as the result of a query, it should
- *        support automatic pagination (when @c shouldFetchNextPages is
- *        enabled).
+ *  Uses NSNumber of longLongValue.
  */
-@interface GTLRCloudTrace_ListSpansResponse : GTLRCollectionObject
+@property(nonatomic, strong, nullable) NSNumber *compressedSizeBytes;
 
 /**
- *  If defined, indicates that there might be more spans that match the
- *  request. Pass this as the value of `pageToken` in a subsequent request to
- *  retrieve additional spans.
- */
-@property(nonatomic, copy, nullable) NSString *nextPageToken;
-
-/**
- *  The requested spans, if there are any in the specified trace.
+ *  An identifier for the MessageEvent's message that can be used to match
+ *  SENT and RECEIVED MessageEvents. It is recommended to be unique within
+ *  a Span.
  *
- *  @note This property is used to support NSFastEnumeration and indexed
- *        subscripting on this class.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudTrace_Span *> *spans;
-
-@end
-
-
-/**
- *  The response message for the `ListTraces` method.
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
  *
- *  @note This class supports NSFastEnumeration and indexed subscripting over
- *        its "traces" property. If returned as the result of a query, it should
- *        support automatic pagination (when @c shouldFetchNextPages is
- *        enabled).
+ *  Uses NSNumber of longLongValue.
  */
-@interface GTLRCloudTrace_ListTracesResponse : GTLRCollectionObject
+@property(nonatomic, strong, nullable) NSNumber *identifier;
 
 /**
- *  If there might be more results than those appearing in this response, then
- *  `next_page_token` is included. To get the next set of results, call this
- *  method again using the value of `next_page_token` as `page_token`.
- */
-@property(nonatomic, copy, nullable) NSString *nextPageToken;
-
-/**
- *  List of trace records returned.
+ *  Type of MessageEvent. Indicates whether the message was sent or
+ *  received.
  *
- *  @note This property is used to support NSFastEnumeration and indexed
- *        subscripting on this class.
+ *  Likely values:
+ *    @arg @c kGTLRCloudTrace_MessageEvent_Type_Received Indicates a received
+ *        message. (Value: "RECEIVED")
+ *    @arg @c kGTLRCloudTrace_MessageEvent_Type_Sent Indicates a sent message.
+ *        (Value: "SENT")
+ *    @arg @c kGTLRCloudTrace_MessageEvent_Type_TypeUnspecified Unknown event
+ *        type. (Value: "TYPE_UNSPECIFIED")
  */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudTrace_Trace *> *traces;
+@property(nonatomic, copy, nullable) NSString *type;
+
+/**
+ *  The number of uncompressed bytes sent or received.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *uncompressedSizeBytes;
 
 @end
 
@@ -339,49 +337,6 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 
 
 /**
- *  An event describing an RPC message sent or received on the network.
- */
-@interface GTLRCloudTrace_NetworkEvent : GTLRObject
-
-/**
- *  An identifier for the message, which must be unique in this span.
- *
- *  Uses NSNumber of unsignedLongLongValue.
- */
-@property(nonatomic, strong, nullable) NSNumber *messageId;
-
-/**
- *  The number of bytes sent or received.
- *
- *  Uses NSNumber of unsignedLongLongValue.
- */
-@property(nonatomic, strong, nullable) NSNumber *messageSize;
-
-/**
- *  For sent messages, this is the time at which the first bit was sent.
- *  For received messages, this is the time at which the last bit was
- *  received.
- */
-@property(nonatomic, strong, nullable) GTLRDateTime *time;
-
-/**
- *  Type of NetworkEvent. Indicates whether the RPC message was sent or
- *  received.
- *
- *  Likely values:
- *    @arg @c kGTLRCloudTrace_NetworkEvent_Type_Recv Indicates a received RPC
- *        message. (Value: "RECV")
- *    @arg @c kGTLRCloudTrace_NetworkEvent_Type_Sent Indicates a sent RPC
- *        message. (Value: "SENT")
- *    @arg @c kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified Unknown event
- *        type. (Value: "TYPE_UNSPECIFIED")
- */
-@property(nonatomic, copy, nullable) NSString *type;
-
-@end
-
-
-/**
  *  A span represents a single operation within a trace. Spans can be
  *  nested to form a trace tree. Often, a trace contains a root span
  *  that describes the end-to-end latency, and one or more subspans for
@@ -392,7 +347,7 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @interface GTLRCloudTrace_Span : GTLRObject
 
 /**
- *  A set of attributes on the span. There is a limit of 32 attributes per
+ *  A set of attributes on the span. You can have up to 32 attributes per
  *  span.
  */
 @property(nonatomic, strong, nullable) GTLRCloudTrace_Attributes *attributes;
@@ -401,7 +356,7 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
  *  An optional number of child spans that were generated while this span
  *  was active. If set, allows implementation to detect missing child spans.
  *
- *  Uses NSNumber of unsignedIntValue.
+ *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *childSpanCount;
 
@@ -423,15 +378,16 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *endTime;
 
-/** A maximum of 128 links are allowed per Span. */
+/** Links associated with the span. You can have up to 128 links per Span. */
 @property(nonatomic, strong, nullable) GTLRCloudTrace_Links *links;
 
 /**
  *  The resource name of the span in the following format:
- *  projects/[PROJECT_ID]traces/[TRACE_ID]/spans/SPAN_ID is a unique identifier
- *  for a trace within a project.
- *  [SPAN_ID] is a unique identifier for a span within a trace,
- *  assigned when the span is created.
+ *  projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/SPAN_ID is a unique identifier
+ *  for a trace within a project;
+ *  it is a 32-character hexadecimal encoding of a 16-byte array.
+ *  [SPAN_ID] is a unique identifier for a span within a trace; it
+ *  is a 16-character hexadecimal encoding of an 8-byte array.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
@@ -442,9 +398,10 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @property(nonatomic, copy, nullable) NSString *parentSpanId;
 
 /**
- *  A highly recommended but not required flag that identifies when a trace
- *  crosses a process boundary. True when the parent_span belongs to the
- *  same process as the current span.
+ *  (Optional) Set this parameter to indicate whether this span is in
+ *  the same process as its parent. If you do not set this parameter,
+ *  Stackdriver Trace is unable to take advantage of this helpful
+ *  information.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -467,7 +424,7 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @property(nonatomic, strong, nullable) GTLRCloudTrace_Status *status;
 
 /**
- *  The included time events. There can be up to 32 annotations and 128 network
+ *  A set of time events. You can have up to 32 annotations and 128 message
  *  events per span.
  */
 @property(nonatomic, strong, nullable) GTLRCloudTrace_TimeEvents *timeEvents;
@@ -560,7 +517,7 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
  *  Subsequent spans within the same request can refer
  *  to that stack trace by only setting `stackTraceHashId`.
  *
- *  Uses NSNumber of unsignedLongLongValue.
+ *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *stackTraceHashId;
 
@@ -622,8 +579,8 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a
- *  common set of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCloudTrace_Status_Details_Item *> *details;
 
@@ -650,15 +607,15 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 
 
 /**
- *  A time-stamped annotation or network event in the Span.
+ *  A time-stamped annotation or message event in the Span.
  */
 @interface GTLRCloudTrace_TimeEvent : GTLRObject
 
-/** One or more key:value pairs. */
+/** Text annotation with a set of attributes. */
 @property(nonatomic, strong, nullable) GTLRCloudTrace_Annotation *annotation;
 
-/** An event describing an RPC message sent/received on the network. */
-@property(nonatomic, strong, nullable) GTLRCloudTrace_NetworkEvent *networkEvent;
+/** An event describing a message sent/received between Spans. */
+@property(nonatomic, strong, nullable) GTLRCloudTrace_MessageEvent *messageEvent;
 
 /** The timestamp indicating the time the event occurred. */
 @property(nonatomic, strong, nullable) GTLRDateTime *time;
@@ -669,7 +626,7 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 /**
  *  A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
  *  on the span, consisting of either user-supplied key:value pairs, or
- *  details of an RPC message sent/received on the network.
+ *  details of a message sent/received between Spans.
  */
 @interface GTLRCloudTrace_TimeEvents : GTLRObject
 
@@ -682,33 +639,15 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @property(nonatomic, strong, nullable) NSNumber *droppedAnnotationsCount;
 
 /**
- *  The number of dropped network events in all the included time events.
- *  If the value is 0, then no network events were dropped.
+ *  The number of dropped message events in all the included time events.
+ *  If the value is 0, then no message events were dropped.
  *
  *  Uses NSNumber of intValue.
  */
-@property(nonatomic, strong, nullable) NSNumber *droppedNetworkEventsCount;
+@property(nonatomic, strong, nullable) NSNumber *droppedMessageEventsCount;
 
 /** A collection of `TimeEvent`s. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCloudTrace_TimeEvent *> *timeEvent;
-
-@end
-
-
-/**
- *  A trace describes how long it takes for an application to perform some
- *  operations. It consists of a set of spans, each representing
- *  an operation and including time information and operation details.
- */
-@interface GTLRCloudTrace_Trace : GTLRObject
-
-/**
- *  The resource name of the trace in the following format:
- *  projects/[PROJECT_ID]/traces/TRACE_ID is a unique identifier for a trace
- *  within a project.
- *  The ID is assigned when the trace is created.
- */
-@property(nonatomic, copy, nullable) NSString *name;
 
 @end
 
@@ -727,15 +666,17 @@ GTLR_EXTERN NSString * const kGTLRCloudTrace_NetworkEvent_Type_TypeUnspecified;
 @property(nonatomic, strong, nullable) NSNumber *truncatedByteCount;
 
 /**
- *  The shortened string. For example, if the original string was 500
- *  bytes long and the limit of the string was 128 bytes, then this
- *  value contains the first 128 bytes of the 500-byte string. Note that
- *  truncation always happens on the character boundary, to ensure that
- *  truncated string is still valid UTF8. In case of multi-byte characters,
- *  size of truncated string can be less than truncation limit.
+ *  The shortened string. For example, if the original string is 500
+ *  bytes long and the limit of the string is 128 bytes, then
+ *  `value` contains the first 128 bytes of the 500-byte string.
+ *  Truncation always happens on a UTF8 character boundary. If there
+ *  are multi-byte characters in the string, then the length of the
+ *  shortened string might be less than the size limit.
  */
 @property(nonatomic, copy, nullable) NSString *value;
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

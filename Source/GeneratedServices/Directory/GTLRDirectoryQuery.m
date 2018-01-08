@@ -222,6 +222,32 @@ NSString * const kGTLRDirectoryViewTypeDomainPublic = @"domain_public";
 
 @end
 
+@implementation GTLRDirectoryQuery_ChromeosdevicesMoveDevicesToOu
+
+@dynamic customerId, orgUnitPath;
+
++ (instancetype)queryWithObject:(GTLRDirectory_ChromeOsMoveDevicesToOu *)object
+                     customerId:(NSString *)customerId
+                    orgUnitPath:(NSString *)orgUnitPath {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[ @"customerId" ];
+  NSString *pathURITemplate = @"customer/{customerId}/devices/chromeos/moveDevicesToOu";
+  GTLRDirectoryQuery_ChromeosdevicesMoveDevicesToOu *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.customerId = customerId;
+  query.orgUnitPath = orgUnitPath;
+  query.loggingName = @"directory.chromeosdevices.moveDevicesToOu";
+  return query;
+}
+
+@end
+
 @implementation GTLRDirectoryQuery_ChromeosdevicesPatch
 
 @dynamic customerId, deviceId, projection;
@@ -762,6 +788,29 @@ NSString * const kGTLRDirectoryViewTypeDomainPublic = @"domain_public";
 
 @end
 
+@implementation GTLRDirectoryQuery_MembersHasMember
+
+@dynamic groupKey, memberKey;
+
++ (instancetype)queryWithGroupKey:(NSString *)groupKey
+                        memberKey:(NSString *)memberKey {
+  NSArray *pathParams = @[
+    @"groupKey", @"memberKey"
+  ];
+  NSString *pathURITemplate = @"groups/{groupKey}/hasMember/{memberKey}";
+  GTLRDirectoryQuery_MembersHasMember *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.groupKey = groupKey;
+  query.memberKey = memberKey;
+  query.expectedObjectClass = [GTLRDirectory_MembersHasMember class];
+  query.loggingName = @"directory.members.hasMember";
+  return query;
+}
+
+@end
+
 @implementation GTLRDirectoryQuery_MembersInsert
 
 @dynamic groupKey;
@@ -1268,6 +1317,36 @@ NSString * const kGTLRDirectoryViewTypeDomainPublic = @"domain_public";
   query.customer = customer;
   query.expectedObjectClass = [GTLRDirectory_Privileges class];
   query.loggingName = @"directory.privileges.list";
+  return query;
+}
+
+@end
+
+@implementation GTLRDirectoryQuery_ResolvedAppAccessSettingsGetSettings
+
++ (instancetype)query {
+  NSString *pathURITemplate = @"resolvedappaccesssettings";
+  GTLRDirectoryQuery_ResolvedAppAccessSettingsGetSettings *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:nil];
+  query.expectedObjectClass = [GTLRDirectory_AppAccessCollections class];
+  query.loggingName = @"directory.resolvedAppAccessSettings.GetSettings";
+  return query;
+}
+
+@end
+
+@implementation GTLRDirectoryQuery_ResolvedAppAccessSettingsListTrustedApps
+
++ (instancetype)query {
+  NSString *pathURITemplate = @"trustedapps";
+  GTLRDirectoryQuery_ResolvedAppAccessSettingsListTrustedApps *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:nil];
+  query.expectedObjectClass = [GTLRDirectory_TrustedApps class];
+  query.loggingName = @"directory.resolvedAppAccessSettings.ListTrustedApps";
   return query;
 }
 

@@ -55,6 +55,29 @@
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRDirectory_AppAccessCollections
+//
+
+@implementation GTLRDirectory_AppAccessCollections
+@dynamic blockedApiAccessBuckets, enforceSettingsForAndroidDrive, errorMessage,
+         ETag, kind, resourceId, resourceName, trustDomainOwnedApps;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"ETag" : @"etag" };
+}
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"blockedApiAccessBuckets" : [NSString class]
+  };
+  return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRDirectory_Asp
 //
 
@@ -96,8 +119,8 @@
 //
 
 @implementation GTLRDirectory_CalendarResource
-@dynamic etags, kind, resourceDescription, resourceEmail, resourceId,
-         resourceName, resourceType;
+@dynamic etags, generatedResourceName, kind, resourceDescription, resourceEmail,
+         resourceId, resourceName, resourceType;
 @end
 
 
@@ -231,6 +254,24 @@
 
 + (NSString *)collectionItemsKey {
   return @"chromeosdevices";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRDirectory_ChromeOsMoveDevicesToOu
+//
+
+@implementation GTLRDirectory_ChromeOsMoveDevicesToOu
+@dynamic deviceIds;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"deviceIds" : [NSString class]
+  };
+  return map;
 }
 
 @end
@@ -446,6 +487,16 @@
   return @"members";
 }
 
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRDirectory_MembersHasMember
+//
+
+@implementation GTLRDirectory_MembersHasMember
+@dynamic isMember;
 @end
 
 
@@ -870,19 +921,61 @@
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRDirectory_TrustedAppId
+//
+
+@implementation GTLRDirectory_TrustedAppId
+@dynamic androidPackageName, certificateHashSHA1, certificateHashSHA256, ETag,
+         kind;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"ETag" : @"etag" };
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRDirectory_TrustedApps
+//
+
+@implementation GTLRDirectory_TrustedApps
+@dynamic ETag, kind, nextPageToken, trustedApps;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"ETag" : @"etag" };
+}
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"trustedApps" : [GTLRDirectory_TrustedAppId class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"trustedApps";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRDirectory_User
 //
 
 @implementation GTLRDirectory_User
 @dynamic addresses, agreedToTerms, aliases, changePasswordAtNextLogin,
          creationTime, customerId, customSchemas, deletionTime, emails, ETag,
-         externalIds, hashFunction, identifier, ims, includeInGlobalAddressList,
-         ipWhitelisted, isAdmin, isDelegatedAdmin, isEnforcedIn2Sv,
-         isEnrolledIn2Sv, isMailboxSetup, kind, languages, lastLoginTime,
-         locations, name, nonEditableAliases, notes, organizations, orgUnitPath,
-         password, phones, posixAccounts, primaryEmail, relations,
-         sshPublicKeys, suspended, suspensionReason, thumbnailPhotoEtag,
-         thumbnailPhotoUrl, websites;
+         externalIds, gender, hashFunction, identifier, ims,
+         includeInGlobalAddressList, ipWhitelisted, isAdmin, isDelegatedAdmin,
+         isEnforcedIn2Sv, isEnrolledIn2Sv, isMailboxSetup, keywords, kind,
+         languages, lastLoginTime, locations, name, nonEditableAliases, notes,
+         organizations, orgUnitPath, password, phones, posixAccounts,
+         primaryEmail, relations, sshPublicKeys, suspended, suspensionReason,
+         thumbnailPhotoEtag, thumbnailPhotoUrl, websites;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   NSDictionary<NSString *, NSString *> *map = @{
@@ -975,11 +1068,31 @@
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRDirectory_UserGender
+//
+
+@implementation GTLRDirectory_UserGender
+@dynamic addressMeAs, customGender, type;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRDirectory_UserIm
 //
 
 @implementation GTLRDirectory_UserIm
 @dynamic customProtocol, customType, im, primary, protocol, type;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRDirectory_UserKeyword
+//
+
+@implementation GTLRDirectory_UserKeyword
+@dynamic customType, type, value;
 @end
 
 
@@ -1075,7 +1188,8 @@
 //
 
 @implementation GTLRDirectory_UserPosixAccount
-@dynamic gecos, gid, homeDirectory, primary, shell, systemId, uid, username;
+@dynamic accountId, gecos, gid, homeDirectory, primary, shell, systemId, uid,
+         username;
 @end
 
 

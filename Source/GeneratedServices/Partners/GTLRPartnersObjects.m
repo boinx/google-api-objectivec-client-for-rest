@@ -345,6 +345,7 @@ NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedDis
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedMediaBuyerAsJobFunction = @"AGENCY_SELECTED_MEDIA_BUYER_AS_JOB_FUNCTION";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedMediaPlannerAsJobFunction = @"AGENCY_SELECTED_MEDIA_PLANNER_AS_JOB_FUNCTION";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedMobileFromAddChannel = @"AGENCY_SELECTED_MOBILE_FROM_ADD_CHANNEL";
+NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInAfaMigration = @"AGENCY_SELECTED_OPT_IN_AFA_MIGRATION";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInBetaTestsAndMktResearch = @"AGENCY_SELECTED_OPT_IN_BETA_TESTS_AND_MKT_RESEARCH";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInBetaTestsInMyProfilePortal = @"AGENCY_SELECTED_OPT_IN_BETA_TESTS_IN_MY_PROFILE_PORTAL";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInNewsInMyProfilePortal = @"AGENCY_SELECTED_OPT_IN_NEWS_IN_MY_PROFILE_PORTAL";
@@ -352,6 +353,7 @@ NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOpt
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInPerformanceSuggestions = @"AGENCY_SELECTED_OPT_IN_PERFORMANCE_SUGGESTIONS";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInPerformanceSugInMyProfilePortal = @"AGENCY_SELECTED_OPT_IN_PERFORMANCE_SUG_IN_MY_PROFILE_PORTAL";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptInSelectAllEmailNotifications = @"AGENCY_SELECTED_OPT_IN_SELECT_ALL_EMAIL_NOTIFICATIONS";
+NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptOutAfaMigration = @"AGENCY_SELECTED_OPT_OUT_AFA_MIGRATION";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOptOutUnselectAllEmailNotifications = @"AGENCY_SELECTED_OPT_OUT_UNSELECT_ALL_EMAIL_NOTIFICATIONS";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedOtherAsJobFunction = @"AGENCY_SELECTED_OTHER_AS_JOB_FUNCTION";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_AgencySelectedProductionAsJobFunction = @"AGENCY_SELECTED_PRODUCTION_AS_JOB_FUNCTION";
@@ -408,6 +410,7 @@ NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedAdwordsS
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedAnalyticsCertificate = @"SMB_VIEWED_ANALYTICS_CERTIFICATE";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedAPartnerOnGps = @"SMB_VIEWED_A_PARTNER_ON_GPS";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedAPartnerProfile = @"SMB_VIEWED_A_PARTNER_PROFILE";
+NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedDigitalSalesCertificate = @"SMB_VIEWED_DIGITAL_SALES_CERTIFICATE";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedDoubleclickCertificate = @"SMB_VIEWED_DOUBLECLICK_CERTIFICATE";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedMobileCertificate = @"SMB_VIEWED_MOBILE_CERTIFICATE";
 NSString * const kGTLRPartners_LogUserEventRequest_EventAction_SmbViewedMobileSitesCertificate = @"SMB_VIEWED_MOBILE_SITES_CERTIFICATE";
@@ -1196,7 +1199,7 @@ NSString * const kGTLRPartners_SpecializationStatus_BadgeSpecializationState_Bad
 @implementation GTLRPartners_UserProfile
 @dynamic address, adwordsManagerAccount, channels, emailAddress, emailOptIns,
          familyName, givenName, industries, jobFunctions, languages, markets,
-         phoneNumber, primaryCountryCode, profilePublic;
+         migrateToAfa, phoneNumber, primaryCountryCode, profilePublic;
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{

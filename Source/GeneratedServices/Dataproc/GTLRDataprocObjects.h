@@ -67,6 +67,11 @@
 @class GTLRDataproc_Status_Details_Item;
 @class GTLRDataproc_YarnApplication;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -817,8 +822,8 @@ GTLR_EXTERN NSString * const kGTLRDataproc_YarnApplication_State_Submitted;
  *  Optional. The zone where the Google Compute Engine cluster will be located.
  *  On a create request, it is required in the "global" region. If omitted in a
  *  non-global Cloud Dataproc region, the service will pick a zone in the
- *  corresponding GCE region. On a get request, zone will always be present.A
- *  full URL, partial URI, or short name are valid. Examples:
+ *  corresponding Compute Engine region. On a get request, zone will always be
+ *  present.A full URL, partial URI, or short name are valid. Examples:
  *  https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]
  *  projects/[project_id]/zones/[zone]
  *  us-central1-f
@@ -1700,7 +1705,7 @@ GTLR_EXTERN NSString * const kGTLRDataproc_YarnApplication_State_Submitted;
  *  mapred: mapred-site.xml
  *  pig: pig.properties
  *  spark: spark-defaults.conf
- *  yarn: yarn-site.xml
+ *  yarn: yarn-site.xmlFor more information, see Cluster properties.
  */
 @property(nonatomic, strong, nullable) GTLRDataproc_SoftwareConfig_Properties *properties;
 
@@ -1719,7 +1724,7 @@ GTLR_EXTERN NSString * const kGTLRDataproc_YarnApplication_State_Submitted;
  *  mapred: mapred-site.xml
  *  pig: pig.properties
  *  spark: spark-defaults.conf
- *  yarn: yarn-site.xml
+ *  yarn: yarn-site.xmlFor more information, see Cluster properties.
  *
  *  @note This class is documented as having more properties of NSString. Use @c
  *        -additionalJSONKeys and @c -additionalPropertyForName: to get the list
@@ -1908,8 +1913,8 @@ GTLR_EXTERN NSString * const kGTLRDataproc_YarnApplication_State_Submitted;
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a common set
- *  of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRDataproc_Status_Details_Item *> *details;
 
@@ -2000,3 +2005,5 @@ GTLR_EXTERN NSString * const kGTLRDataproc_YarnApplication_State_Submitted;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

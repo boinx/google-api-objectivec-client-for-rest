@@ -34,10 +34,61 @@
 @class GTLRFirebaseRules_TestResult;
 @class GTLRFirebaseRules_TestSuite;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
 // Constants - For some of the classes' properties below.
+
+// ----------------------------------------------------------------------------
+// GTLRFirebaseRules_GetReleaseExecutableResponse.executableVersion
+
+/**
+ *  Firebase Rules syntax 'rules2' executable versions:
+ *  Custom AST for use with Java clients.
+ *
+ *  Value: "FIREBASE_RULES_EXECUTABLE_V1"
+ */
+GTLR_EXTERN NSString * const kGTLRFirebaseRules_GetReleaseExecutableResponse_ExecutableVersion_FirebaseRulesExecutableV1;
+/**
+ *  CEL-based executable for use with C++ clients.
+ *
+ *  Value: "FIREBASE_RULES_EXECUTABLE_V2"
+ */
+GTLR_EXTERN NSString * const kGTLRFirebaseRules_GetReleaseExecutableResponse_ExecutableVersion_FirebaseRulesExecutableV2;
+/**
+ *  Executable format unspecified.
+ *  Defaults to FIREBASE_RULES_EXECUTABLE_V1
+ *
+ *  Value: "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRFirebaseRules_GetReleaseExecutableResponse_ExecutableVersion_ReleaseExecutableVersionUnspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRFirebaseRules_GetReleaseExecutableResponse.language
+
+/**
+ *  Event Flow triggers.
+ *
+ *  Value: "EVENT_FLOW_TRIGGERS"
+ */
+GTLR_EXTERN NSString * const kGTLRFirebaseRules_GetReleaseExecutableResponse_Language_EventFlowTriggers;
+/**
+ *  Firebase Rules language.
+ *
+ *  Value: "FIREBASE_RULES"
+ */
+GTLR_EXTERN NSString * const kGTLRFirebaseRules_GetReleaseExecutableResponse_Language_FirebaseRules;
+/**
+ *  Language unspecified. Defaults to FIREBASE_RULES.
+ *
+ *  Value: "LANGUAGE_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRFirebaseRules_GetReleaseExecutableResponse_Language_LanguageUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRFirebaseRules_Issue.severity
@@ -211,6 +262,60 @@ GTLR_EXTERN NSString * const kGTLRFirebaseRules_TestResult_State_Success;
 
 /** The mock result of the function call. */
 @property(nonatomic, strong, nullable) GTLRFirebaseRules_Result *result;
+
+@end
+
+
+/**
+ *  The response for FirebaseRulesService.GetReleaseExecutable
+ */
+@interface GTLRFirebaseRules_GetReleaseExecutableResponse : GTLRObject
+
+/**
+ *  Executable view of the `Ruleset` referenced by the `Release`.
+ *
+ *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
+ *  web-safe format).
+ */
+@property(nonatomic, copy, nullable) NSString *executable;
+
+/**
+ *  The Rules runtime version of the executable.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRFirebaseRules_GetReleaseExecutableResponse_ExecutableVersion_FirebaseRulesExecutableV1
+ *        Firebase Rules syntax 'rules2' executable versions:
+ *        Custom AST for use with Java clients. (Value:
+ *        "FIREBASE_RULES_EXECUTABLE_V1")
+ *    @arg @c kGTLRFirebaseRules_GetReleaseExecutableResponse_ExecutableVersion_FirebaseRulesExecutableV2
+ *        CEL-based executable for use with C++ clients. (Value:
+ *        "FIREBASE_RULES_EXECUTABLE_V2")
+ *    @arg @c kGTLRFirebaseRules_GetReleaseExecutableResponse_ExecutableVersion_ReleaseExecutableVersionUnspecified
+ *        Executable format unspecified.
+ *        Defaults to FIREBASE_RULES_EXECUTABLE_V1 (Value:
+ *        "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *executableVersion;
+
+/**
+ *  `Language` used to generate the executable bytes.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRFirebaseRules_GetReleaseExecutableResponse_Language_EventFlowTriggers
+ *        Event Flow triggers. (Value: "EVENT_FLOW_TRIGGERS")
+ *    @arg @c kGTLRFirebaseRules_GetReleaseExecutableResponse_Language_FirebaseRules
+ *        Firebase Rules language. (Value: "FIREBASE_RULES")
+ *    @arg @c kGTLRFirebaseRules_GetReleaseExecutableResponse_Language_LanguageUnspecified
+ *        Language unspecified. Defaults to FIREBASE_RULES. (Value:
+ *        "LANGUAGE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *language;
+
+/** `Ruleset` name associated with the `Release` executable. */
+@property(nonatomic, copy, nullable) NSString *rulesetName;
+
+/** Timestamp for the most recent `Release.update_time`. */
+@property(nonatomic, strong, nullable) GTLRDateTime *updateTime;
 
 @end
 
@@ -600,4 +705,28 @@ GTLR_EXTERN NSString * const kGTLRFirebaseRules_TestResult_State_Success;
 
 @end
 
+
+/**
+ *  The request for FirebaseRulesService.UpdateReleasePatch.
+ */
+@interface GTLRFirebaseRules_UpdateReleaseRequest : GTLRObject
+
+/**
+ *  `Release` to update.
+ *
+ *  Remapped to 'releaseProperty' to avoid NSObject's 'release'.
+ */
+@property(nonatomic, strong, nullable) GTLRFirebaseRules_Release *releaseProperty;
+
+/**
+ *  Specifies which fields to update.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *updateMask;
+
+@end
+
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -8,7 +8,7 @@
 //   Bidding configurations and auction metrics, and Marketplace programmatic
 //   deals.
 // Documentation:
-//   https://developers.google.com/ad-exchange/buyer-rest/guides/client-access/
+//   https://developers.google.com/ad-exchange/buyer-rest/reference/rest/
 
 #if GTLR_BUILT_AS_FRAMEWORK
   #import "GTLR/GTLRObject.h"
@@ -56,6 +56,11 @@
 @class GTLRAdExchangeBuyerII_ServingRestriction;
 @class GTLRAdExchangeBuyerII_TimeInterval;
 @class GTLRAdExchangeBuyerII_VideoContent;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -1092,48 +1097,9 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranular
  *  A placeholder for an unspecified interval; no time series is applied.
  *  All rows in response will contain data for the entire requested time range.
  *
- *  Value: "INTERVAL_UNSPECIFIED"
+ *  Value: "TIME_SERIES_GRANULARITY_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_IntervalUnspecified;
-
-// ----------------------------------------------------------------------------
-// GTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse.detailType
-
-/**
- *  Indicates that the detail ID refers to a creative attribute; see
- *  [publisher-excludable-creative-attributes](https://developers.google.com/ad-exchange/rtb/downloads/publisher-excludable-creative-attributes).
- *
- *  Value: "CREATIVE_ATTRIBUTE"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_CreativeAttribute;
-/**
- *  Indicates that the detail ID refers to a product category; see
- *  [ad-product-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-product-categories).
- *
- *  Value: "PRODUCT_CATEGORY"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_ProductCategory;
-/**
- *  Indicates that the detail ID refers to a sensitive category; see
- *  [ad-sensitive-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-sensitive-categories).
- *
- *  Value: "SENSITIVE_CATEGORY"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_SensitiveCategory;
-/**
- *  A placeholder for an undefined status.
- *  This value will never be returned in responses.
- *
- *  Value: "TYPE_UNSPECIFIED"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_TypeUnspecified;
-/**
- *  Indicates that the detail ID refers to a vendor; see
- *  [vendors](https://developers.google.com/ad-exchange/rtb/downloads/vendors).
- *
- *  Value: "VENDOR"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_Vendor;
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_TimeSeriesGranularityUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse.detailType
@@ -1145,6 +1111,21 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativ
  *  Value: "CREATIVE_ATTRIBUTE"
  */
 GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_CreativeAttribute;
+/**
+ *  A placeholder for an undefined status.
+ *  This value will never be returned in responses.
+ *
+ *  Value: "DETAIL_TYPE_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_DetailTypeUnspecified;
+/**
+ *  Indicates that the detail ID refers to a disapproval reason; see
+ *  DisapprovalReason enum in
+ *  [snippet-status-report-proto](https://developers.google.com/ad-exchange/rtb/downloads/snippet-status-report-proto).
+ *
+ *  Value: "DISAPPROVAL_REASON"
+ */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_DisapprovalReason;
 /**
  *  Indicates that the detail ID refers to a product category; see
  *  [ad-product-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-product-categories).
@@ -1159,13 +1140,6 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownB
  *  Value: "SENSITIVE_CATEGORY"
  */
 GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_SensitiveCategory;
-/**
- *  A placeholder for an undefined status.
- *  This value will never be returned in responses.
- *
- *  Value: "TYPE_UNSPECIFIED"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_TypeUnspecified;
 /**
  *  Indicates that the detail ID refers to a vendor; see
  *  [vendors](https://developers.google.com/ad-exchange/rtb/downloads/vendors).
@@ -1486,6 +1460,18 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *        (Value: "ENTITY_TYPE_UNSPECIFIED")
  */
 @property(nonatomic, copy, nullable) NSString *entityType;
+
+/**
+ *  Optional arbitrary unique identifier of this client buyer from the
+ *  standpoint of its Ad Exchange sponsor buyer.
+ *  This field can be used to associate a client buyer with the identifier
+ *  in the namespace of its sponsor buyer, lookup client buyers by that
+ *  identifier and verify whether an Ad Exchange counterpart of a given client
+ *  buyer already exists.
+ *  If present, must be unique among all the client buyers for its
+ *  Ad Exchange sponsor buyer.
+ */
+@property(nonatomic, copy, nullable) NSString *partnerClientId;
 
 /**
  *  The role which is assigned to the client buyer. Each role implies a set of
@@ -2328,17 +2314,16 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @property(nonatomic, strong, nullable) GTLRAdExchangeBuyerII_AbsoluteDateRange *absoluteDateRange;
 
 /**
- *  The ID of the buyer account on which to filter; optional.
- *
- *  Uses NSNumber of longLongValue.
+ *  The ID of the creative on which to filter; optional. This field may be set
+ *  only for a filter set that accesses buyer-level troubleshooting data, i.e.
+ *  one whose name matches the `bidders/ * /accounts/ * /filterSets/ *` pattern.
  */
-@property(nonatomic, strong, nullable) NSNumber *buyerAccountId;
-
-/** The ID of the creative on which to filter; optional. */
 @property(nonatomic, copy, nullable) NSString *creativeId;
 
 /**
- *  The ID of the deal on which to filter; optional.
+ *  The ID of the deal on which to filter; optional. This field may be set
+ *  only for a filter set that accesses buyer-level troubleshooting data, i.e.
+ *  one whose name matches the `bidders/ * /accounts/ * /filterSets/ *` pattern.
  *
  *  Uses NSNumber of longLongValue.
  */
@@ -2360,15 +2345,6 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @property(nonatomic, copy, nullable) NSString *environment;
 
 /**
- *  The ID of the filter set; unique within the account of the filter set
- *  owner.
- *  The value of this field is ignored in create operations.
- *
- *  Uses NSNumber of longLongValue.
- */
-@property(nonatomic, strong, nullable) NSNumber *filterSetId;
-
-/**
  *  The format on which to filter; optional.
  *
  *  Likely values:
@@ -2383,12 +2359,15 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @property(nonatomic, copy, nullable) NSString *format;
 
 /**
- *  The account ID of the buyer who owns this filter set.
- *  The value of this field is ignored in create operations.
- *
- *  Uses NSNumber of longLongValue.
+ *  A user-defined name of the filter set. Filter set names must be unique
+ *  globally and match one of the patterns:
+ *  - `bidders/ * /filterSets/ *` (for accessing bidder-level troubleshooting
+ *  data)
+ *  - `bidders/ * /accounts/ * /filterSets/ *` (for accessing buyer-level
+ *  troubleshooting data)
+ *  This field is required in create operations.
  */
-@property(nonatomic, strong, nullable) NSNumber *ownerAccountId;
+@property(nonatomic, copy, nullable) NSString *name;
 
 /**
  *  The list of platforms on which to filter; may be empty. The filters
@@ -2431,10 +2410,10 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *        Indicates that data will be broken down by the day. (Value: "DAILY")
  *    @arg @c kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_Hourly
  *        Indicates that data will be broken down by the hour. (Value: "HOURLY")
- *    @arg @c kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_IntervalUnspecified
+ *    @arg @c kGTLRAdExchangeBuyerII_FilterSet_TimeSeriesGranularity_TimeSeriesGranularityUnspecified
  *        A placeholder for an unspecified interval; no time series is applied.
  *        All rows in response will contain data for the entire requested time
- *        range. (Value: "INTERVAL_UNSPECIFIED")
+ *        range. (Value: "TIME_SERIES_GRANULARITY_UNSPECIFIED")
  */
 @property(nonatomic, copy, nullable) NSString *timeSeriesGranularity;
 
@@ -2557,8 +2536,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListBidMetricsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.bidMetrics.list
+ *  field in the subsequent call to the bidMetrics.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -2589,8 +2567,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListBidResponseErrorsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.bidResponseErrors.list
+ *  field in the subsequent call to the bidResponseErrors.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -2622,8 +2599,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListBidResponsesWithoutBidsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.bidResponsesWithoutBids.list
+ *  field in the subsequent call to the bidResponsesWithoutBids.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -2757,67 +2733,6 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 
 
 /**
- *  Response message for listing all details associated with a given filtered
- *  bid
- *  reason and a given creative.
- *
- *  @note This class supports NSFastEnumeration and indexed subscripting over
- *        its "filteredBidDetailRows" property. If returned as the result of a
- *        query, it should support automatic pagination (when @c
- *        shouldFetchNextPages is enabled).
- */
-@interface GTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse : GTLRCollectionObject
-
-/**
- *  The type of detail that the detail IDs represent.
- *
- *  Likely values:
- *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_CreativeAttribute
- *        Indicates that the detail ID refers to a creative attribute; see
- *        [publisher-excludable-creative-attributes](https://developers.google.com/ad-exchange/rtb/downloads/publisher-excludable-creative-attributes).
- *        (Value: "CREATIVE_ATTRIBUTE")
- *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_ProductCategory
- *        Indicates that the detail ID refers to a product category; see
- *        [ad-product-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-product-categories).
- *        (Value: "PRODUCT_CATEGORY")
- *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_SensitiveCategory
- *        Indicates that the detail ID refers to a sensitive category; see
- *        [ad-sensitive-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-sensitive-categories).
- *        (Value: "SENSITIVE_CATEGORY")
- *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_TypeUnspecified
- *        A placeholder for an undefined status.
- *        This value will never be returned in responses. (Value:
- *        "TYPE_UNSPECIFIED")
- *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusAndCreativeBreakdownByDetailResponse_DetailType_Vendor
- *        Indicates that the detail ID refers to a vendor; see
- *        [vendors](https://developers.google.com/ad-exchange/rtb/downloads/vendors).
- *        (Value: "VENDOR")
- */
-@property(nonatomic, copy, nullable) NSString *detailType;
-
-/**
- *  List of rows, with counts of bids with a given creative status and
- *  creative, aggregated by detail.
- *
- *  @note This property is used to support NSFastEnumeration and indexed
- *        subscripting on this class.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRAdExchangeBuyerII_FilteredBidDetailRow *> *filteredBidDetailRows;
-
-/**
- *  A token to retrieve the next page of results.
- *  Pass this value in the
- *  ListCreativeStatusAndCreativeBreakdownByDetailRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.filteredBids.creatives.details.list
- *  method to retrieve the next page of results.
- */
-@property(nonatomic, copy, nullable) NSString *nextPageToken;
-
-@end
-
-
-/**
  *  Response message for listing all creatives associated with a given filtered
  *  bid reason.
  *
@@ -2841,8 +2756,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListCreativeStatusBreakdownByCreativeRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.filteredBids.creatives.list
+ *  field in the subsequent call to the filteredBids.creatives.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -2870,6 +2784,15 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *        Indicates that the detail ID refers to a creative attribute; see
  *        [publisher-excludable-creative-attributes](https://developers.google.com/ad-exchange/rtb/downloads/publisher-excludable-creative-attributes).
  *        (Value: "CREATIVE_ATTRIBUTE")
+ *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_DetailTypeUnspecified
+ *        A placeholder for an undefined status.
+ *        This value will never be returned in responses. (Value:
+ *        "DETAIL_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_DisapprovalReason
+ *        Indicates that the detail ID refers to a disapproval reason; see
+ *        DisapprovalReason enum in
+ *        [snippet-status-report-proto](https://developers.google.com/ad-exchange/rtb/downloads/snippet-status-report-proto).
+ *        (Value: "DISAPPROVAL_REASON")
  *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_ProductCategory
  *        Indicates that the detail ID refers to a product category; see
  *        [ad-product-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-product-categories).
@@ -2878,10 +2801,6 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *        Indicates that the detail ID refers to a sensitive category; see
  *        [ad-sensitive-categories](https://developers.google.com/ad-exchange/rtb/downloads/ad-sensitive-categories).
  *        (Value: "SENSITIVE_CATEGORY")
- *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_TypeUnspecified
- *        A placeholder for an undefined status.
- *        This value will never be returned in responses. (Value:
- *        "TYPE_UNSPECIFIED")
  *    @arg @c kGTLRAdExchangeBuyerII_ListCreativeStatusBreakdownByDetailResponse_DetailType_Vendor
  *        Indicates that the detail ID refers to a vendor; see
  *        [vendors](https://developers.google.com/ad-exchange/rtb/downloads/vendors).
@@ -2902,8 +2821,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListCreativeStatusBreakdownByDetailRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.filteredBids.details.list
+ *  field in the subsequent call to the filteredBids.details.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -2965,8 +2883,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListFilteredBidRequestsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.filteredBidRequests.list
+ *  field in the subsequent call to the filteredBidRequests.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -2998,8 +2915,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListFilteredBidsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.filteredBids.list
+ *  field in the subsequent call to the filteredBids.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -3061,8 +2977,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListImpressionMetricsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.impressionMetrics.list
+ *  field in the subsequent call to the impressionMetrics.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -3093,8 +3008,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListLosingBidsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.losingBids.list
+ *  field in the subsequent call to the losingBids.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -3118,8 +3032,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  A token to retrieve the next page of results.
  *  Pass this value in the
  *  ListNonBillableWinningBidsRequest.pageToken
- *  field in the subsequent call to the
- *  accounts.filterSets.nonBillableWinningBids.list
+ *  field in the subsequent call to the nonBillableWinningBids.list
  *  method to retrieve the next page of results.
  */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
@@ -3462,16 +3375,6 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 
 /**
  *  An interval of time, with an absolute start and end.
- *  This is included in the response, for several reasons:
- *  1) The request may have specified start or end times relative to the time
- *  the
- *  request was sent; the response indicates the corresponding absolute time
- *  interval.
- *  2) The request may have specified an end time past the latest time for which
- *  data was available (e.g. if requesting data for the today); the response
- *  indicates the latest time for which data was actually returned.
- *  3) The response data for a single request may be broken down into multiple
- *  time intervals, if a time series was requested.
  */
 @interface GTLRAdExchangeBuyerII_TimeInterval : GTLRObject
 
@@ -3518,3 +3421,5 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

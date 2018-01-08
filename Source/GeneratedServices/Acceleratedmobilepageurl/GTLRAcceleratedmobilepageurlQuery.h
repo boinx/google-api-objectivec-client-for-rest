@@ -4,7 +4,7 @@
 // API:
 //   Accelerated Mobile Pages (AMP) URL API (acceleratedmobilepageurl/v1)
 // Description:
-//   Retrieves the list of AMP URL (and equivalent AMP Cache URL) for a given
+//   Retrieves the list of AMP URLs (and equivalent AMP Cache URLs) for a given
 //   list of public URL(s).
 // Documentation:
 //   https://developers.google.com/amp/cache/
@@ -20,6 +20,11 @@
 #endif
 
 @class GTLRAcceleratedmobilepageurl_BatchGetAmpUrlsRequest;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -59,3 +64,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

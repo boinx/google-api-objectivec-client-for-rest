@@ -51,6 +51,7 @@
 @class GTLRDataflow_FlattenInstruction;
 @class GTLRDataflow_FloatingPointList;
 @class GTLRDataflow_FloatingPointMean;
+@class GTLRDataflow_Histogram;
 @class GTLRDataflow_InstructionInput;
 @class GTLRDataflow_InstructionOutput;
 @class GTLRDataflow_InstructionOutput_Codec;
@@ -66,7 +67,6 @@
 @class GTLRDataflow_KeyRangeDataDiskAssignment;
 @class GTLRDataflow_KeyRangeLocation;
 @class GTLRDataflow_LaunchTemplateParameters_Parameters;
-@class GTLRDataflow_LogBucket;
 @class GTLRDataflow_MapTask;
 @class GTLRDataflow_MetricShortId;
 @class GTLRDataflow_MetricStructuredName;
@@ -150,11 +150,18 @@
 @class GTLRDataflow_WorkerPool_Metadata;
 @class GTLRDataflow_WorkerPool_PoolArgs;
 @class GTLRDataflow_WorkerSettings;
+@class GTLRDataflow_WorkerShutdownNotice;
+@class GTLRDataflow_WorkerShutdownNoticeResponse;
 @class GTLRDataflow_WorkItem;
 @class GTLRDataflow_WorkItemServiceState;
 @class GTLRDataflow_WorkItemServiceState_HarnessData;
 @class GTLRDataflow_WorkItemStatus;
 @class GTLRDataflow_WriteInstruction;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -1469,6 +1476,18 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 @property(nonatomic, copy, nullable) NSString *executionStepName;
 
 /**
+ *  Index of an input collection that's being read from/written to as a side
+ *  input.
+ *  The index identifies a step's side inputs starting by 1 (e.g. the first
+ *  side input has input_index 1, the third has input_index 3).
+ *  Side inputs are identified by a pair of (original_step_name, input_index).
+ *  This field helps uniquely identify them.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *inputIndex;
+
+/**
  *  Counter name. Not necessarily globally-unique, but unique within the
  *  context of the other fields.
  *  Required.
@@ -1485,6 +1504,13 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
  *        created by the user. (Value: "USER")
  */
 @property(nonatomic, copy, nullable) NSString *origin;
+
+/**
+ *  The step name requesting an operation, such as GBK.
+ *  I.e. the ParDo causing a read/write from shuffle to occur, or a
+ *  read from side inputs.
+ */
+@property(nonatomic, copy, nullable) NSString *originalRequestingStepName;
 
 /**
  *  System generated name of the original step in the user's graph, before
@@ -1860,11 +1886,8 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 /** The count of the number of elements present in the distribution. */
 @property(nonatomic, strong, nullable) GTLRDataflow_SplitInt64 *count;
 
-/**
- *  (Optional) Logarithmic histogram of values.
- *  Each log may be in no more than one bucket. Order does not matter.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRDataflow_LogBucket *> *logBuckets;
+/** (Optional) Histogram of value counts for the distribution. */
+@property(nonatomic, strong, nullable) GTLRDataflow_Histogram *histogram;
 
 /** The maximum value present in the distribution. */
 @property(nonatomic, strong, nullable) GTLRDataflow_SplitInt64 *max;
@@ -2287,6 +2310,38 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
  *  request will be indicated in the error_details.
  */
 @property(nonatomic, strong, nullable) GTLRDataflow_Status *status;
+
+@end
+
+
+/**
+ *  Histogram of value counts for a distribution.
+ *  Buckets have an inclusive lower bound and exclusive upper bound and use
+ *  "1,2,5 bucketing": The first bucket range is from [0,1) and all subsequent
+ *  bucket boundaries are powers of ten multiplied by 1, 2, or 5. Thus, bucket
+ *  boundaries are 0, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, ...
+ *  Negative values are not supported.
+ */
+@interface GTLRDataflow_Histogram : GTLRObject
+
+/**
+ *  Counts of values in each bucket. For efficiency, prefix and trailing
+ *  buckets with count = 0 are elided. Buckets can store the full range of
+ *  values of an unsigned long, with ULLONG_MAX falling into the 59th bucket
+ *  with range [1e19, 2e19).
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSNumber *> *bucketCounts;
+
+/**
+ *  Starting index of first stored bucket. The non-inclusive upper-bound of
+ *  the ith bucket is given by:
+ *  pow(10,(i-first_bucket_offset)/3) * (1,2,5)[(i-first_bucket_offset)%3]
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *firstBucketOffset;
 
 @end
 
@@ -3023,35 +3078,6 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 
 /** Set if there may be more results than fit in this response. */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
-
-@end
-
-
-/**
- *  Bucket of values for Distribution's logarithmic histogram.
- */
-@interface GTLRDataflow_LogBucket : GTLRObject
-
-/**
- *  Number of values in this bucket.
- *
- *  Uses NSNumber of longLongValue.
- */
-@property(nonatomic, strong, nullable) NSNumber *count;
-
-/**
- *  floor(log2(value)); defined to be zero for nonpositive values.
- *  log(-1) = 0
- *  log(0) = 0
- *  log(1) = 0
- *  log(2) = 1
- *  log(3) = 1
- *  log(4) = 2
- *  log(5) = 2
- *
- *  Uses NSNumber of intValue.
- */
-@property(nonatomic, strong, nullable) NSNumber *log;
 
 @end
 
@@ -4166,8 +4192,29 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 /** Information about a request to get metadata about a source. */
 @property(nonatomic, strong, nullable) GTLRDataflow_SourceGetMetadataRequest *getMetadata;
 
+/** User-provided name of the Read instruction for this source. */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  System-defined name for the Read instruction for this source
+ *  in the original workflow graph.
+ */
+@property(nonatomic, copy, nullable) NSString *originalName;
+
 /** Information about a request to split a source. */
 @property(nonatomic, strong, nullable) GTLRDataflow_SourceSplitRequest *split;
+
+/**
+ *  System-defined name of the stage containing the source operation.
+ *  Unique across the workflow.
+ */
+@property(nonatomic, copy, nullable) NSString *stageName;
+
+/**
+ *  System-defined name of the Read instruction for this source.
+ *  Unique across the workflow.
+ */
+@property(nonatomic, copy, nullable) NSString *systemName;
 
 @end
 
@@ -4429,8 +4476,8 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a
- *  common set of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRDataflow_Status_Details_Item *> *details;
 
@@ -5061,6 +5108,9 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 /** Resource metrics reported by workers. */
 @property(nonatomic, strong, nullable) GTLRDataflow_ResourceUtilizationReport *workerMetrics;
 
+/** Shutdown notice by workers. */
+@property(nonatomic, strong, nullable) GTLRDataflow_WorkerShutdownNotice *workerShutdownNotice;
+
 @end
 
 
@@ -5171,6 +5221,9 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 
 /** Service's response to reporting worker metrics (currently empty). */
 @property(nonatomic, strong, nullable) GTLRDataflow_ResourceUtilizationReportResponse *workerMetricsResponse;
+
+/** Service's response to shutdown notice (currently empty). */
+@property(nonatomic, strong, nullable) GTLRDataflow_WorkerShutdownNoticeResponse *workerShutdownNoticeResponse;
 
 @end
 
@@ -5430,6 +5483,32 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 
 
 /**
+ *  Shutdown notification from workers. This is to be sent by the shutdown
+ *  script of the worker VM so that the backend knows that the VM is being
+ *  shut down.
+ */
+@interface GTLRDataflow_WorkerShutdownNotice : GTLRObject
+
+/**
+ *  The reason for the worker shutdown.
+ *  Current possible values are:
+ *  "UNKNOWN": shutdown reason is unknown.
+ *  "PREEMPTION": shutdown reason is preemption.
+ *  Other possible reasons may be added in the future.
+ */
+@property(nonatomic, copy, nullable) NSString *reason;
+
+@end
+
+
+/**
+ *  Service-side response to WorkerMessage issuing shutdown notice.
+ */
+@interface GTLRDataflow_WorkerShutdownNoticeResponse : GTLRObject
+@end
+
+
+/**
  *  WorkItem represents basic information about a WorkItem to be executed
  *  in the cloud.
  */
@@ -5657,6 +5736,13 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
  */
 @property(nonatomic, strong, nullable) GTLRDataflow_Position *stopPosition;
 
+/**
+ *  Total time the worker spent being throttled by external systems.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *totalThrottlerWaitTimeSeconds;
+
 /** Identifies the WorkItem. */
 @property(nonatomic, copy, nullable) NSString *workItemId;
 
@@ -5678,3 +5764,5 @@ GTLR_EXTERN NSString * const kGTLRDataflow_WorkerPool_TeardownPolicy_TeardownPol
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

@@ -22,6 +22,11 @@
 @class GTLRAdExperienceReport_PlatformSummary;
 @class GTLRAdExperienceReport_SiteSummaryResponse;
 
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 // ----------------------------------------------------------------------------
@@ -54,28 +59,6 @@ GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_BetterAdsSt
  *  Value: "WARNING"
  */
 GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_BetterAdsStatus_Warning;
-
-// ----------------------------------------------------------------------------
-// GTLRAdExperienceReport_PlatformSummary.egregiousStatus
-
-/**
- *  Failing.
- *
- *  Value: "FAILING"
- */
-GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Failing;
-/**
- *  Passing.
- *
- *  Value: "PASSING"
- */
-GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Passing;
-/**
- *  Not reviewed.
- *
- *  Value: "UNKNOWN"
- */
-GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Unknown;
 
 // ----------------------------------------------------------------------------
 // GTLRAdExperienceReport_PlatformSummary.filterStatus
@@ -122,7 +105,7 @@ GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_Region_Regi
 GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_Region_RegionUnknown;
 
 /**
- *  Summary of the ads rating of a site for a specific platform.
+ *  Summary of the ad experience rating of a site for a specific platform.
  */
 @interface GTLRAdExperienceReport_PlatformSummary : GTLRObject
 
@@ -140,19 +123,6 @@ GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_Region_Regi
  *        Warning. (Value: "WARNING")
  */
 @property(nonatomic, copy, nullable) NSString *betterAdsStatus;
-
-/**
- *  The status of the site reviewed for egregious ads.
- *
- *  Likely values:
- *    @arg @c kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Failing
- *        Failing. (Value: "FAILING")
- *    @arg @c kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Passing
- *        Passing. (Value: "PASSING")
- *    @arg @c kGTLRAdExperienceReport_PlatformSummary_EgregiousStatus_Unknown
- *        Not reviewed. (Value: "UNKNOWN")
- */
-@property(nonatomic, copy, nullable) NSString *egregiousStatus;
 
 /** The date on which ad filtering begins. */
 @property(nonatomic, strong, nullable) GTLRDateTime *enforcementTime;
@@ -221,3 +191,5 @@ GTLR_EXTERN NSString * const kGTLRAdExperienceReport_PlatformSummary_Region_Regi
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

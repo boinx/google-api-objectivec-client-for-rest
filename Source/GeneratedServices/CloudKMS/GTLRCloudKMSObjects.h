@@ -22,20 +22,20 @@
 @class GTLRCloudKMS_AuditConfig;
 @class GTLRCloudKMS_AuditLogConfig;
 @class GTLRCloudKMS_Binding;
-@class GTLRCloudKMS_CloudAuditOptions;
-@class GTLRCloudKMS_Condition;
-@class GTLRCloudKMS_CounterOptions;
 @class GTLRCloudKMS_CryptoKey;
+@class GTLRCloudKMS_CryptoKey_Labels;
 @class GTLRCloudKMS_CryptoKeyVersion;
-@class GTLRCloudKMS_DataAccessOptions;
 @class GTLRCloudKMS_Expr;
 @class GTLRCloudKMS_KeyRing;
 @class GTLRCloudKMS_Location;
 @class GTLRCloudKMS_Location_Labels;
 @class GTLRCloudKMS_Location_Metadata;
-@class GTLRCloudKMS_LogConfig;
 @class GTLRCloudKMS_Policy;
-@class GTLRCloudKMS_Rule;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -69,151 +69,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_AuditLogConfig_LogType_DataWrite;
  *  Value: "LOG_TYPE_UNSPECIFIED"
  */
 GTLR_EXTERN NSString * const kGTLRCloudKMS_AuditLogConfig_LogType_LogTypeUnspecified;
-
-// ----------------------------------------------------------------------------
-// GTLRCloudKMS_CloudAuditOptions.logName
-
-/**
- *  Corresponds to "cloudaudit.googleapis.com/activity"
- *
- *  Value: "ADMIN_ACTIVITY"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_CloudAuditOptions_LogName_AdminActivity;
-/**
- *  Corresponds to "cloudaudit.googleapis.com/data_access"
- *
- *  Value: "DATA_ACCESS"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_CloudAuditOptions_LogName_DataAccess;
-/**
- *  Default. Should not be used.
- *
- *  Value: "UNSPECIFIED_LOG_NAME"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_CloudAuditOptions_LogName_UnspecifiedLogName;
-
-// ----------------------------------------------------------------------------
-// GTLRCloudKMS_Condition.iam
-
-/**
- *  An approver (distinct from the requester) that has authorized this
- *  request.
- *  When used with IN, the condition indicates that one of the approvers
- *  associated with the request matches the specified principal, or is a
- *  member of the specified group. Approvers can only grant additional
- *  access, and are thus only used in a strictly positive context
- *  (e.g. ALLOW/IN or DENY/NOT_IN).
- *
- *  Value: "APPROVER"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Iam_Approver;
-/**
- *  The principal (even if an authority selector is present), which
- *  must only be used for attribution, not authorization.
- *
- *  Value: "ATTRIBUTION"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Iam_Attribution;
-/**
- *  Either principal or (if present) authority selector.
- *
- *  Value: "AUTHORITY"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Iam_Authority;
-/**
- *  What types of justifications have been supplied with this request.
- *  String values should match enum names from tech.iam.JustificationType,
- *  e.g. "MANUAL_STRING". It is not permitted to grant access based on
- *  the *absence* of a justification, so justification conditions can only
- *  be used in a "positive" context (e.g., ALLOW/IN or DENY/NOT_IN).
- *  Multiple justifications, e.g., a Buganizer ID and a manually-entered
- *  reason, are normal and supported.
- *
- *  Value: "JUSTIFICATION_TYPE"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Iam_JustificationType;
-/**
- *  Default non-attribute.
- *
- *  Value: "NO_ATTR"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Iam_NoAttr;
-
-// ----------------------------------------------------------------------------
-// GTLRCloudKMS_Condition.op
-
-/**
- *  Subject is discharged
- *
- *  Value: "DISCHARGED"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Op_Discharged;
-/**
- *  DEPRECATED. Use IN instead.
- *
- *  Value: "EQUALS"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Op_Equals;
-/**
- *  The condition is true if the subject (or any element of it if it is
- *  a set) matches any of the supplied values.
- *
- *  Value: "IN"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Op_In;
-/**
- *  Default no-op.
- *
- *  Value: "NO_OP"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Op_NoOp;
-/**
- *  DEPRECATED. Use NOT_IN instead.
- *
- *  Value: "NOT_EQUALS"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Op_NotEquals;
-/**
- *  The condition is true if the subject (or every element of it if it is
- *  a set) matches none of the supplied values.
- *
- *  Value: "NOT_IN"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Op_NotIn;
-
-// ----------------------------------------------------------------------------
-// GTLRCloudKMS_Condition.sys
-
-/**
- *  IP address of the caller
- *
- *  Value: "IP"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Sys_Ip;
-/**
- *  Resource name
- *
- *  Value: "NAME"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Sys_Name;
-/**
- *  Default non-attribute type
- *
- *  Value: "NO_ATTR"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Sys_NoAttr;
-/**
- *  Region of the resource
- *
- *  Value: "REGION"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Sys_Region;
-/**
- *  Service name
- *
- *  Value: "SERVICE"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Condition_Sys_Service;
 
 // ----------------------------------------------------------------------------
 // GTLRCloudKMS_CryptoKey.purpose
@@ -272,48 +127,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_CryptoKeyVersion_State_Disabled;
  *  Value: "ENABLED"
  */
 GTLR_EXTERN NSString * const kGTLRCloudKMS_CryptoKeyVersion_State_Enabled;
-
-// ----------------------------------------------------------------------------
-// GTLRCloudKMS_Rule.action
-
-/**
- *  Matching 'Entries' grant access.
- *
- *  Value: "ALLOW"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_Allow;
-/**
- *  Matching 'Entries' grant access and the caller promises to log
- *  the request per the returned log_configs.
- *
- *  Value: "ALLOW_WITH_LOG"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_AllowWithLog;
-/**
- *  Matching 'Entries' deny access.
- *
- *  Value: "DENY"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_Deny;
-/**
- *  Matching 'Entries' deny access and the caller promises to log
- *  the request per the returned log_configs.
- *
- *  Value: "DENY_WITH_LOG"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_DenyWithLog;
-/**
- *  Matching 'Entries' tell IAM.Check callers to generate logs.
- *
- *  Value: "LOG"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_Log;
-/**
- *  Default no action.
- *
- *  Value: "NO_ACTION"
- */
-GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 
 /**
  *  Specifies the audit configuration for a service.
@@ -473,126 +286,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 
 
 /**
- *  Write a Cloud Audit log
- */
-@interface GTLRCloudKMS_CloudAuditOptions : GTLRObject
-
-/**
- *  The log_name to populate in the Cloud Audit Record.
- *
- *  Likely values:
- *    @arg @c kGTLRCloudKMS_CloudAuditOptions_LogName_AdminActivity Corresponds
- *        to "cloudaudit.googleapis.com/activity" (Value: "ADMIN_ACTIVITY")
- *    @arg @c kGTLRCloudKMS_CloudAuditOptions_LogName_DataAccess Corresponds to
- *        "cloudaudit.googleapis.com/data_access" (Value: "DATA_ACCESS")
- *    @arg @c kGTLRCloudKMS_CloudAuditOptions_LogName_UnspecifiedLogName
- *        Default. Should not be used. (Value: "UNSPECIFIED_LOG_NAME")
- */
-@property(nonatomic, copy, nullable) NSString *logName;
-
-@end
-
-
-/**
- *  A condition to be met.
- */
-@interface GTLRCloudKMS_Condition : GTLRObject
-
-/**
- *  Trusted attributes supplied by the IAM system.
- *
- *  Likely values:
- *    @arg @c kGTLRCloudKMS_Condition_Iam_Approver An approver (distinct from
- *        the requester) that has authorized this
- *        request.
- *        When used with IN, the condition indicates that one of the approvers
- *        associated with the request matches the specified principal, or is a
- *        member of the specified group. Approvers can only grant additional
- *        access, and are thus only used in a strictly positive context
- *        (e.g. ALLOW/IN or DENY/NOT_IN). (Value: "APPROVER")
- *    @arg @c kGTLRCloudKMS_Condition_Iam_Attribution The principal (even if an
- *        authority selector is present), which
- *        must only be used for attribution, not authorization. (Value:
- *        "ATTRIBUTION")
- *    @arg @c kGTLRCloudKMS_Condition_Iam_Authority Either principal or (if
- *        present) authority selector. (Value: "AUTHORITY")
- *    @arg @c kGTLRCloudKMS_Condition_Iam_JustificationType What types of
- *        justifications have been supplied with this request.
- *        String values should match enum names from tech.iam.JustificationType,
- *        e.g. "MANUAL_STRING". It is not permitted to grant access based on
- *        the *absence* of a justification, so justification conditions can only
- *        be used in a "positive" context (e.g., ALLOW/IN or DENY/NOT_IN).
- *        Multiple justifications, e.g., a Buganizer ID and a manually-entered
- *        reason, are normal and supported. (Value: "JUSTIFICATION_TYPE")
- *    @arg @c kGTLRCloudKMS_Condition_Iam_NoAttr Default non-attribute. (Value:
- *        "NO_ATTR")
- */
-@property(nonatomic, copy, nullable) NSString *iam;
-
-/**
- *  An operator to apply the subject with.
- *
- *  Likely values:
- *    @arg @c kGTLRCloudKMS_Condition_Op_Discharged Subject is discharged
- *        (Value: "DISCHARGED")
- *    @arg @c kGTLRCloudKMS_Condition_Op_Equals DEPRECATED. Use IN instead.
- *        (Value: "EQUALS")
- *    @arg @c kGTLRCloudKMS_Condition_Op_In The condition is true if the subject
- *        (or any element of it if it is
- *        a set) matches any of the supplied values. (Value: "IN")
- *    @arg @c kGTLRCloudKMS_Condition_Op_NoOp Default no-op. (Value: "NO_OP")
- *    @arg @c kGTLRCloudKMS_Condition_Op_NotEquals DEPRECATED. Use NOT_IN
- *        instead. (Value: "NOT_EQUALS")
- *    @arg @c kGTLRCloudKMS_Condition_Op_NotIn The condition is true if the
- *        subject (or every element of it if it is
- *        a set) matches none of the supplied values. (Value: "NOT_IN")
- */
-@property(nonatomic, copy, nullable) NSString *op;
-
-/** Trusted attributes discharged by the service. */
-@property(nonatomic, copy, nullable) NSString *svc;
-
-/**
- *  Trusted attributes supplied by any service that owns resources and uses
- *  the IAM system for access control.
- *
- *  Likely values:
- *    @arg @c kGTLRCloudKMS_Condition_Sys_Ip IP address of the caller (Value:
- *        "IP")
- *    @arg @c kGTLRCloudKMS_Condition_Sys_Name Resource name (Value: "NAME")
- *    @arg @c kGTLRCloudKMS_Condition_Sys_NoAttr Default non-attribute type
- *        (Value: "NO_ATTR")
- *    @arg @c kGTLRCloudKMS_Condition_Sys_Region Region of the resource (Value:
- *        "REGION")
- *    @arg @c kGTLRCloudKMS_Condition_Sys_Service Service name (Value:
- *        "SERVICE")
- */
-@property(nonatomic, copy, nullable) NSString *sys;
-
-/** DEPRECATED. Use 'values' instead. */
-@property(nonatomic, copy, nullable) NSString *value;
-
-/** The objects of the condition. This is mutually exclusive with 'value'. */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *values;
-
-@end
-
-
-/**
- *  Options for counters
- */
-@interface GTLRCloudKMS_CounterOptions : GTLRObject
-
-/** The field value to attribute. */
-@property(nonatomic, copy, nullable) NSString *field;
-
-/** The metric to update. */
-@property(nonatomic, copy, nullable) NSString *metric;
-
-@end
-
-
-/**
  *  A CryptoKey represents a logical key that can be used for cryptographic
  *  operations.
  *  A CryptoKey is made up of one or more versions, which
@@ -602,6 +295,12 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 
 /** Output only. The time at which this CryptoKey was created. */
 @property(nonatomic, strong, nullable) GTLRDateTime *createTime;
+
+/**
+ *  Labels with user-defined metadata. For more information, see
+ *  [Labeling Keys](/kms/docs/labeling-keys).
+ */
+@property(nonatomic, strong, nullable) GTLRCloudKMS_CryptoKey_Labels *labels;
 
 /**
  *  Output only. The resource name for this CryptoKey in the format
@@ -654,11 +353,28 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 
 
 /**
+ *  Labels with user-defined metadata. For more information, see
+ *  [Labeling Keys](/kms/docs/labeling-keys).
+ *
+ *  @note This class is documented as having more properties of NSString. Use @c
+ *        -additionalJSONKeys and @c -additionalPropertyForName: to get the list
+ *        of properties and then fetch them; or @c -additionalProperties to
+ *        fetch them all at once.
+ */
+@interface GTLRCloudKMS_CryptoKey_Labels : GTLRObject
+@end
+
+
+/**
  *  A CryptoKeyVersion represents an individual cryptographic key, and the
  *  associated key material.
  *  It can be used for cryptographic operations either directly, or via its
  *  parent CryptoKey, in which case the server will choose the appropriate
  *  version for the operation.
+ *  For security reasons, the raw cryptographic key material represented by a
+ *  CryptoKeyVersion can never be viewed or exported. It can only be used to
+ *  encrypt or decrypt data when an authorized user or application invokes Cloud
+ *  KMS.
  */
 @interface GTLRCloudKMS_CryptoKeyVersion : GTLRObject
 
@@ -710,13 +426,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
  */
 @property(nonatomic, copy, nullable) NSString *state;
 
-@end
-
-
-/**
- *  Write a Data Access (Gin) log
- */
-@interface GTLRCloudKMS_DataAccessOptions : GTLRObject
 @end
 
 
@@ -1055,40 +764,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 
 
 /**
- *  Specifies what kind of log the caller must write
- *  Increment a streamz counter with the specified metric and field names.
- *  Metric names should start with a '/', generally be lowercase-only,
- *  and end in "_count". Field names should not contain an initial slash.
- *  The actual exported metric names will have "/iam/policy" prepended.
- *  Field names correspond to IAM request parameters and field values are
- *  their respective values.
- *  At present the only supported field names are
- *  - "iam_principal", corresponding to IAMContext.principal;
- *  - "" (empty string), resulting in one aggretated counter with no field.
- *  Examples:
- *  counter { metric: "/debug_access_count" field: "iam_principal" }
- *  ==> increment counter /iam/policy/backend_debug_access_count
- *  {iam_principal=[value of IAMContext.principal]}
- *  At this time we do not support:
- *  * multiple field names (though this may be supported in the future)
- *  * decrementing the counter
- *  * incrementing it by anything other than 1
- */
-@interface GTLRCloudKMS_LogConfig : GTLRObject
-
-/** Cloud audit options. */
-@property(nonatomic, strong, nullable) GTLRCloudKMS_CloudAuditOptions *cloudAudit;
-
-/** Counter options. */
-@property(nonatomic, strong, nullable) GTLRCloudKMS_CounterOptions *counter;
-
-/** Data access options. */
-@property(nonatomic, strong, nullable) GTLRCloudKMS_DataAccessOptions *dataAccess;
-
-@end
-
-
-/**
  *  Defines an Identity and Access Management (IAM) policy. It is used to
  *  specify access control policies for Cloud Platform resources.
  *  A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
@@ -1153,19 +828,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 @property(nonatomic, strong, nullable) NSNumber *iamOwned;
 
 /**
- *  If more than one rule is specified, the rules are applied in the following
- *  manner:
- *  - All matching LOG rules are always applied.
- *  - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
- *  Logging will be applied if one or more matching rule requires logging.
- *  - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
- *  granted.
- *  Logging will be applied if one or more matching rule requires logging.
- *  - Otherwise, if no rule applies, permission is denied.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudKMS_Rule *> *rules;
-
-/**
  *  Version of the `Policy`. The default version is 0.
  *
  *  Uses NSNumber of intValue.
@@ -1179,74 +841,6 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
  *  Request message for KeyManagementService.RestoreCryptoKeyVersion.
  */
 @interface GTLRCloudKMS_RestoreCryptoKeyVersionRequest : GTLRObject
-@end
-
-
-/**
- *  A rule to be applied in a Policy.
- */
-@interface GTLRCloudKMS_Rule : GTLRObject
-
-/**
- *  Required
- *
- *  Likely values:
- *    @arg @c kGTLRCloudKMS_Rule_Action_Allow Matching 'Entries' grant access.
- *        (Value: "ALLOW")
- *    @arg @c kGTLRCloudKMS_Rule_Action_AllowWithLog Matching 'Entries' grant
- *        access and the caller promises to log
- *        the request per the returned log_configs. (Value: "ALLOW_WITH_LOG")
- *    @arg @c kGTLRCloudKMS_Rule_Action_Deny Matching 'Entries' deny access.
- *        (Value: "DENY")
- *    @arg @c kGTLRCloudKMS_Rule_Action_DenyWithLog Matching 'Entries' deny
- *        access and the caller promises to log
- *        the request per the returned log_configs. (Value: "DENY_WITH_LOG")
- *    @arg @c kGTLRCloudKMS_Rule_Action_Log Matching 'Entries' tell IAM.Check
- *        callers to generate logs. (Value: "LOG")
- *    @arg @c kGTLRCloudKMS_Rule_Action_NoAction Default no action. (Value:
- *        "NO_ACTION")
- */
-@property(nonatomic, copy, nullable) NSString *action;
-
-/** Additional restrictions that must be met */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudKMS_Condition *> *conditions;
-
-/**
- *  Human-readable description of the rule.
- *
- *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
- */
-@property(nonatomic, copy, nullable) NSString *descriptionProperty;
-
-/**
- *  If one or more 'in' clauses are specified, the rule matches if
- *  the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
- *
- *  Remapped to 'inProperty' to avoid language reserved word 'in'.
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *inProperty;
-
-/**
- *  The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
- *  that match the LOG action.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudKMS_LogConfig *> *logConfig;
-
-/**
- *  If one or more 'not_in' clauses are specified, the rule matches
- *  if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
- *  The format for in and not_in entries is the same as for members in a
- *  Binding (see google/iam/v1/policy.proto).
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *notIn;
-
-/**
- *  A permission is a string of form '<service>.<resource type>.<verb>'
- *  (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
- *  and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *permissions;
-
 @end
 
 
@@ -1318,3 +912,5 @@ GTLR_EXTERN NSString * const kGTLRCloudKMS_Rule_Action_NoAction;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

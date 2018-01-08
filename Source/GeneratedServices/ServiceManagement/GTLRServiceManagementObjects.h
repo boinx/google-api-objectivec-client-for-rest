@@ -31,22 +31,20 @@
 @class GTLRServiceManagement_AuthRequirement;
 @class GTLRServiceManagement_Backend;
 @class GTLRServiceManagement_BackendRule;
+@class GTLRServiceManagement_Billing;
+@class GTLRServiceManagement_BillingDestination;
 @class GTLRServiceManagement_Binding;
 @class GTLRServiceManagement_ChangeReport;
-@class GTLRServiceManagement_CloudAuditOptions;
-@class GTLRServiceManagement_Condition;
 @class GTLRServiceManagement_ConfigChange;
 @class GTLRServiceManagement_ConfigFile;
 @class GTLRServiceManagement_ConfigSource;
 @class GTLRServiceManagement_Context;
 @class GTLRServiceManagement_ContextRule;
 @class GTLRServiceManagement_Control;
-@class GTLRServiceManagement_CounterOptions;
 @class GTLRServiceManagement_CustomAuthRequirements;
 @class GTLRServiceManagement_CustomError;
 @class GTLRServiceManagement_CustomErrorRule;
 @class GTLRServiceManagement_CustomHttpPattern;
-@class GTLRServiceManagement_DataAccessOptions;
 @class GTLRServiceManagement_DeleteServiceStrategy;
 @class GTLRServiceManagement_Diagnostic;
 @class GTLRServiceManagement_Documentation;
@@ -62,7 +60,6 @@
 @class GTLRServiceManagement_Http;
 @class GTLRServiceManagement_HttpRule;
 @class GTLRServiceManagement_LabelDescriptor;
-@class GTLRServiceManagement_LogConfig;
 @class GTLRServiceManagement_LogDescriptor;
 @class GTLRServiceManagement_Logging;
 @class GTLRServiceManagement_LoggingDestination;
@@ -89,7 +86,6 @@
 @class GTLRServiceManagement_QuotaLimit;
 @class GTLRServiceManagement_QuotaLimit_Values;
 @class GTLRServiceManagement_Rollout;
-@class GTLRServiceManagement_Rule;
 @class GTLRServiceManagement_Service;
 @class GTLRServiceManagement_SourceContext;
 @class GTLRServiceManagement_SourceInfo;
@@ -107,6 +103,11 @@
 @class GTLRServiceManagement_UsageRule;
 @class GTLRServiceManagement_Visibility;
 @class GTLRServiceManagement_VisibilityRule;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -156,151 +157,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_AuditLogConfig_LogType_DataW
  *  Value: "LOG_TYPE_UNSPECIFIED"
  */
 GTLR_EXTERN NSString * const kGTLRServiceManagement_AuditLogConfig_LogType_LogTypeUnspecified;
-
-// ----------------------------------------------------------------------------
-// GTLRServiceManagement_CloudAuditOptions.logName
-
-/**
- *  Corresponds to "cloudaudit.googleapis.com/activity"
- *
- *  Value: "ADMIN_ACTIVITY"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_CloudAuditOptions_LogName_AdminActivity;
-/**
- *  Corresponds to "cloudaudit.googleapis.com/data_access"
- *
- *  Value: "DATA_ACCESS"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_CloudAuditOptions_LogName_DataAccess;
-/**
- *  Default. Should not be used.
- *
- *  Value: "UNSPECIFIED_LOG_NAME"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_CloudAuditOptions_LogName_UnspecifiedLogName;
-
-// ----------------------------------------------------------------------------
-// GTLRServiceManagement_Condition.iam
-
-/**
- *  An approver (distinct from the requester) that has authorized this
- *  request.
- *  When used with IN, the condition indicates that one of the approvers
- *  associated with the request matches the specified principal, or is a
- *  member of the specified group. Approvers can only grant additional
- *  access, and are thus only used in a strictly positive context
- *  (e.g. ALLOW/IN or DENY/NOT_IN).
- *
- *  Value: "APPROVER"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Iam_Approver;
-/**
- *  The principal (even if an authority selector is present), which
- *  must only be used for attribution, not authorization.
- *
- *  Value: "ATTRIBUTION"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Iam_Attribution;
-/**
- *  Either principal or (if present) authority selector.
- *
- *  Value: "AUTHORITY"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Iam_Authority;
-/**
- *  What types of justifications have been supplied with this request.
- *  String values should match enum names from tech.iam.JustificationType,
- *  e.g. "MANUAL_STRING". It is not permitted to grant access based on
- *  the *absence* of a justification, so justification conditions can only
- *  be used in a "positive" context (e.g., ALLOW/IN or DENY/NOT_IN).
- *  Multiple justifications, e.g., a Buganizer ID and a manually-entered
- *  reason, are normal and supported.
- *
- *  Value: "JUSTIFICATION_TYPE"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Iam_JustificationType;
-/**
- *  Default non-attribute.
- *
- *  Value: "NO_ATTR"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Iam_NoAttr;
-
-// ----------------------------------------------------------------------------
-// GTLRServiceManagement_Condition.op
-
-/**
- *  Subject is discharged
- *
- *  Value: "DISCHARGED"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Op_Discharged;
-/**
- *  DEPRECATED. Use IN instead.
- *
- *  Value: "EQUALS"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Op_Equals;
-/**
- *  The condition is true if the subject (or any element of it if it is
- *  a set) matches any of the supplied values.
- *
- *  Value: "IN"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Op_In;
-/**
- *  Default no-op.
- *
- *  Value: "NO_OP"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Op_NoOp;
-/**
- *  DEPRECATED. Use NOT_IN instead.
- *
- *  Value: "NOT_EQUALS"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Op_NotEquals;
-/**
- *  The condition is true if the subject (or every element of it if it is
- *  a set) matches none of the supplied values.
- *
- *  Value: "NOT_IN"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Op_NotIn;
-
-// ----------------------------------------------------------------------------
-// GTLRServiceManagement_Condition.sys
-
-/**
- *  IP address of the caller
- *
- *  Value: "IP"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Sys_Ip;
-/**
- *  Resource name
- *
- *  Value: "NAME"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Sys_Name;
-/**
- *  Default non-attribute type
- *
- *  Value: "NO_ATTR"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Sys_NoAttr;
-/**
- *  Region of the resource
- *
- *  Value: "REGION"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Sys_Region;
-/**
- *  Service name
- *
- *  Value: "SERVICE"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Condition_Sys_Service;
 
 // ----------------------------------------------------------------------------
 // GTLRServiceManagement_ConfigChange.changeType
@@ -364,6 +220,16 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_ConfigFile_FileType_OpenApiJ
  *  Value: "OPEN_API_YAML"
  */
 GTLR_EXTERN NSString * const kGTLRServiceManagement_ConfigFile_FileType_OpenApiYaml;
+/**
+ *  Uncompiled Proto file. Used for storage and display purposes only,
+ *  currently server-side compilation is not supported. Should match the
+ *  inputs to 'protoc' command used to generated FILE_DESCRIPTOR_SET_PROTO. A
+ *  file of this type can only be included if at least one file of type
+ *  FILE_DESCRIPTOR_SET_PROTO is included.
+ *
+ *  Value: "PROTO_FILE"
+ */
+GTLR_EXTERN NSString * const kGTLRServiceManagement_ConfigFile_FileType_ProtoFile;
 /**
  *  YAML-specification of service.
  *
@@ -574,6 +440,22 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_FlowOperationMetadata_Cancel
 GTLR_EXTERN NSString * const kGTLRServiceManagement_FlowOperationMetadata_CancelState_Uncancellable;
 
 // ----------------------------------------------------------------------------
+// GTLRServiceManagement_FlowOperationMetadata.surface
+
+/**
+ *  TenancyUnit, ServiceNetworking fall under this
+ *
+ *  Value: "SERVICE_CONSUMER_MANAGEMENT"
+ */
+GTLR_EXTERN NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceConsumerManagement;
+/** Value: "SERVICE_MANAGEMENT" */
+GTLR_EXTERN NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceManagement;
+/** Value: "SERVICE_USAGE" */
+GTLR_EXTERN NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceUsage;
+/** Value: "UNSPECIFIED_OP_SERVICE" */
+GTLR_EXTERN NSString * const kGTLRServiceManagement_FlowOperationMetadata_Surface_UnspecifiedOpService;
+
+// ----------------------------------------------------------------------------
 // GTLRServiceManagement_LabelDescriptor.valueType
 
 /**
@@ -740,48 +622,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Rollout_Status_RolloutStatus
 GTLR_EXTERN NSString * const kGTLRServiceManagement_Rollout_Status_Success;
 
 // ----------------------------------------------------------------------------
-// GTLRServiceManagement_Rule.action
-
-/**
- *  Matching 'Entries' grant access.
- *
- *  Value: "ALLOW"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Rule_Action_Allow;
-/**
- *  Matching 'Entries' grant access and the caller promises to log
- *  the request per the returned log_configs.
- *
- *  Value: "ALLOW_WITH_LOG"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Rule_Action_AllowWithLog;
-/**
- *  Matching 'Entries' deny access.
- *
- *  Value: "DENY"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Rule_Action_Deny;
-/**
- *  Matching 'Entries' deny access and the caller promises to log
- *  the request per the returned log_configs.
- *
- *  Value: "DENY_WITH_LOG"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Rule_Action_DenyWithLog;
-/**
- *  Matching 'Entries' tell IAM.Check callers to generate logs.
- *
- *  Value: "LOG"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Rule_Action_Log;
-/**
- *  Default no action.
- *
- *  Value: "NO_ACTION"
- */
-GTLR_EXTERN NSString * const kGTLRServiceManagement_Rule_Action_NoAction;
-
-// ----------------------------------------------------------------------------
 // GTLRServiceManagement_Step.status
 
 /**
@@ -856,23 +696,32 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 
 /**
- *  Api is a light-weight descriptor for a protocol buffer service.
+ *  Api is a light-weight descriptor for an API Interface.
+ *  Interfaces are also described as "protocol buffer services" in some
+ *  contexts,
+ *  such as by the "service" keyword in a .proto file, but they are different
+ *  from API Services, which represent a concrete implementation of an interface
+ *  as opposed to simply a description of methods and bindings. They are also
+ *  sometimes simply referred to as "APIs" in other contexts, such as the name
+ *  of
+ *  this message itself. See https://cloud.google.com/apis/design/glossary for
+ *  detailed terminology.
  */
 @interface GTLRServiceManagement_Api : GTLRObject
 
-/** The methods of this api, in unspecified order. */
+/** The methods of this interface, in unspecified order. */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_Method *> *methods;
 
-/** Included APIs. See Mixin. */
+/** Included interfaces. See Mixin. */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_Mixin *> *mixins;
 
 /**
- *  The fully qualified name of this api, including package name
- *  followed by the api's simple name.
+ *  The fully qualified name of this interface, including package name
+ *  followed by the interface's simple name.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/** Any metadata attached to the API. */
+/** Any metadata attached to the interface. */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_Option *> *options;
 
 /**
@@ -893,13 +742,12 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *syntax;
 
 /**
- *  A version string for this api. If specified, must have the form
- *  `major-version.minor-version`, as in `1.10`. If the minor version
- *  is omitted, it defaults to zero. If the entire version field is
- *  empty, the major version is derived from the package name, as
- *  outlined below. If the field is not empty, the version in the
- *  package name will be verified to be consistent with what is
- *  provided here.
+ *  A version string for this interface. If specified, must have the form
+ *  `major-version.minor-version`, as in `1.10`. If the minor version is
+ *  omitted, it defaults to zero. If the entire version field is empty, the
+ *  major version is derived from the package name, as outlined below. If the
+ *  field is not empty, the version in the package name will be verified to be
+ *  consistent with what is provided here.
  *  The versioning schema uses [semantic
  *  versioning](http://semver.org) where the major version number
  *  indicates a breaking change and the minor version an additive,
@@ -907,10 +755,10 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  what to expect from different versions, and should be carefully
  *  chosen based on the product plan.
  *  The major version is also reflected in the package name of the
- *  API, which must end in `v<major-version>`, as in
+ *  interface, which must end in `v<major-version>`, as in
  *  `google.feature.v1`. For major versions 0 and 1, the suffix can
  *  be omitted. Zero major versions must only be used for
- *  experimental, none-GA apis.
+ *  experimental, non-GA interfaces.
  */
 @property(nonatomic, copy, nullable) NSString *version;
 
@@ -1144,6 +992,12 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *audiences;
 
 /**
+ *  Redirect URL if JWT token is required but no present or is expired.
+ *  Implement authorizationUrl of securityDefinitions in OpenAPI spec.
+ */
+@property(nonatomic, copy, nullable) NSString *authorizationUrl;
+
+/**
  *  The unique identifier of the auth provider. It will be referred to by
  *  `AuthRequirement.provider_id`.
  *  Example: "bookstore_auth".
@@ -1236,8 +1090,8 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *address;
 
 /**
- *  The number of seconds to wait for a response from a request. The
- *  default depends on the deployment context.
+ *  The number of seconds to wait for a response from a request. The default
+ *  deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
  *
  *  Uses NSNumber of doubleValue.
  */
@@ -1256,6 +1110,61 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  Refer to selector for syntax details.
  */
 @property(nonatomic, copy, nullable) NSString *selector;
+
+@end
+
+
+/**
+ *  Billing related configuration of the service.
+ *  The following example shows how to configure monitored resources and metrics
+ *  for billing:
+ *  monitored_resources:
+ *  - type: library.googleapis.com/branch
+ *  labels:
+ *  - key: /city
+ *  description: The city where the library branch is located in.
+ *  - key: /name
+ *  description: The name of the branch.
+ *  metrics:
+ *  - name: library.googleapis.com/book/borrowed_count
+ *  metric_kind: DELTA
+ *  value_type: INT64
+ *  billing:
+ *  consumer_destinations:
+ *  - monitored_resource: library.googleapis.com/branch
+ *  metrics:
+ *  - library.googleapis.com/book/borrowed_count
+ */
+@interface GTLRServiceManagement_Billing : GTLRObject
+
+/**
+ *  Billing configurations for sending metrics to the consumer project.
+ *  There can be multiple consumer destinations per service, each one must have
+ *  a different monitored resource type. A metric can be used in at most
+ *  one consumer destination.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_BillingDestination *> *consumerDestinations;
+
+@end
+
+
+/**
+ *  Configuration of a specific billing destination (Currently only support
+ *  bill against consumer project).
+ */
+@interface GTLRServiceManagement_BillingDestination : GTLRObject
+
+/**
+ *  Names of the metrics to report to this billing destination.
+ *  Each name must be defined in Service.metrics section.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *metrics;
+
+/**
+ *  The monitored resource type. The type must be defined in
+ *  Service.monitored_resources section.
+ */
+@property(nonatomic, copy, nullable) NSString *monitoredResource;
 
 @end
 
@@ -1317,116 +1226,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_ConfigChange *> *configChanges;
-
-@end
-
-
-/**
- *  Write a Cloud Audit log
- */
-@interface GTLRServiceManagement_CloudAuditOptions : GTLRObject
-
-/**
- *  The log_name to populate in the Cloud Audit Record.
- *
- *  Likely values:
- *    @arg @c kGTLRServiceManagement_CloudAuditOptions_LogName_AdminActivity
- *        Corresponds to "cloudaudit.googleapis.com/activity" (Value:
- *        "ADMIN_ACTIVITY")
- *    @arg @c kGTLRServiceManagement_CloudAuditOptions_LogName_DataAccess
- *        Corresponds to "cloudaudit.googleapis.com/data_access" (Value:
- *        "DATA_ACCESS")
- *    @arg @c kGTLRServiceManagement_CloudAuditOptions_LogName_UnspecifiedLogName
- *        Default. Should not be used. (Value: "UNSPECIFIED_LOG_NAME")
- */
-@property(nonatomic, copy, nullable) NSString *logName;
-
-@end
-
-
-/**
- *  A condition to be met.
- */
-@interface GTLRServiceManagement_Condition : GTLRObject
-
-/**
- *  Trusted attributes supplied by the IAM system.
- *
- *  Likely values:
- *    @arg @c kGTLRServiceManagement_Condition_Iam_Approver An approver
- *        (distinct from the requester) that has authorized this
- *        request.
- *        When used with IN, the condition indicates that one of the approvers
- *        associated with the request matches the specified principal, or is a
- *        member of the specified group. Approvers can only grant additional
- *        access, and are thus only used in a strictly positive context
- *        (e.g. ALLOW/IN or DENY/NOT_IN). (Value: "APPROVER")
- *    @arg @c kGTLRServiceManagement_Condition_Iam_Attribution The principal
- *        (even if an authority selector is present), which
- *        must only be used for attribution, not authorization. (Value:
- *        "ATTRIBUTION")
- *    @arg @c kGTLRServiceManagement_Condition_Iam_Authority Either principal or
- *        (if present) authority selector. (Value: "AUTHORITY")
- *    @arg @c kGTLRServiceManagement_Condition_Iam_JustificationType What types
- *        of justifications have been supplied with this request.
- *        String values should match enum names from tech.iam.JustificationType,
- *        e.g. "MANUAL_STRING". It is not permitted to grant access based on
- *        the *absence* of a justification, so justification conditions can only
- *        be used in a "positive" context (e.g., ALLOW/IN or DENY/NOT_IN).
- *        Multiple justifications, e.g., a Buganizer ID and a manually-entered
- *        reason, are normal and supported. (Value: "JUSTIFICATION_TYPE")
- *    @arg @c kGTLRServiceManagement_Condition_Iam_NoAttr Default non-attribute.
- *        (Value: "NO_ATTR")
- */
-@property(nonatomic, copy, nullable) NSString *iam;
-
-/**
- *  An operator to apply the subject with.
- *
- *  Likely values:
- *    @arg @c kGTLRServiceManagement_Condition_Op_Discharged Subject is
- *        discharged (Value: "DISCHARGED")
- *    @arg @c kGTLRServiceManagement_Condition_Op_Equals DEPRECATED. Use IN
- *        instead. (Value: "EQUALS")
- *    @arg @c kGTLRServiceManagement_Condition_Op_In The condition is true if
- *        the subject (or any element of it if it is
- *        a set) matches any of the supplied values. (Value: "IN")
- *    @arg @c kGTLRServiceManagement_Condition_Op_NoOp Default no-op. (Value:
- *        "NO_OP")
- *    @arg @c kGTLRServiceManagement_Condition_Op_NotEquals DEPRECATED. Use
- *        NOT_IN instead. (Value: "NOT_EQUALS")
- *    @arg @c kGTLRServiceManagement_Condition_Op_NotIn The condition is true if
- *        the subject (or every element of it if it is
- *        a set) matches none of the supplied values. (Value: "NOT_IN")
- */
-@property(nonatomic, copy, nullable) NSString *op;
-
-/** Trusted attributes discharged by the service. */
-@property(nonatomic, copy, nullable) NSString *svc;
-
-/**
- *  Trusted attributes supplied by any service that owns resources and uses
- *  the IAM system for access control.
- *
- *  Likely values:
- *    @arg @c kGTLRServiceManagement_Condition_Sys_Ip IP address of the caller
- *        (Value: "IP")
- *    @arg @c kGTLRServiceManagement_Condition_Sys_Name Resource name (Value:
- *        "NAME")
- *    @arg @c kGTLRServiceManagement_Condition_Sys_NoAttr Default non-attribute
- *        type (Value: "NO_ATTR")
- *    @arg @c kGTLRServiceManagement_Condition_Sys_Region Region of the resource
- *        (Value: "REGION")
- *    @arg @c kGTLRServiceManagement_Condition_Sys_Service Service name (Value:
- *        "SERVICE")
- */
-@property(nonatomic, copy, nullable) NSString *sys;
-
-/** DEPRECATED. Use 'values' instead. */
-@property(nonatomic, copy, nullable) NSString *value;
-
-/** The objects of the condition. This is mutually exclusive with 'value'. */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *values;
 
 @end
 
@@ -1526,6 +1325,13 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *        specification, serialized in JSON. (Value: "OPEN_API_JSON")
  *    @arg @c kGTLRServiceManagement_ConfigFile_FileType_OpenApiYaml OpenAPI
  *        specification, serialized in YAML. (Value: "OPEN_API_YAML")
+ *    @arg @c kGTLRServiceManagement_ConfigFile_FileType_ProtoFile Uncompiled
+ *        Proto file. Used for storage and display purposes only,
+ *        currently server-side compilation is not supported. Should match the
+ *        inputs to 'protoc' command used to generated
+ *        FILE_DESCRIPTOR_SET_PROTO. A
+ *        file of this type can only be included if at least one file of type
+ *        FILE_DESCRIPTOR_SET_PROTO is included. (Value: "PROTO_FILE")
  *    @arg @c kGTLRServiceManagement_ConfigFile_FileType_ServiceConfigYaml
  *        YAML-specification of service. (Value: "SERVICE_CONFIG_YAML")
  */
@@ -1636,20 +1442,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 
 /**
- *  Options for counters
- */
-@interface GTLRServiceManagement_CounterOptions : GTLRObject
-
-/** The field value to attribute. */
-@property(nonatomic, copy, nullable) NSString *field;
-
-/** The metric to update. */
-@property(nonatomic, copy, nullable) NSString *metric;
-
-@end
-
-
-/**
  *  Configuration for a custom authentication provider.
  */
 @interface GTLRServiceManagement_CustomAuthRequirements : GTLRObject
@@ -1723,13 +1515,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 /** The path matched by this custom verb. */
 @property(nonatomic, copy, nullable) NSString *path;
 
-@end
-
-
-/**
- *  Write a Data Access (Gin) log
- */
-@interface GTLRServiceManagement_DataAccessOptions : GTLRObject
 @end
 
 
@@ -1950,8 +1735,8 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 /**
  *  DEPRECATED: This field is no longer supported. Instead of using aliases,
- *  please specify multiple google.api.Endpoint for each of the intented
- *  alias.
+ *  please specify multiple google.api.Endpoint for each of the intended
+ *  aliases.
  *  Additional names that this endpoint will be hosted on.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *aliases;
@@ -1967,13 +1752,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *allowCors;
-
-/**
- *  The list of APIs served by this endpoint.
- *  If no APIs are specified this translates to "all APIs" exported by the
- *  service, as defined in the top-level service configuration.
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *apis;
 
 /** The list of features enabled on this endpoint. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *features;
@@ -2246,12 +2024,37 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *flowName;
 
 /**
+ *  Operation type which is a flow type and subtype info as that is missing in
+ *  our datastore otherwise. This maps to the ordinal value of the enum:
+ *  jcg/api/tenant/operations/OperationNamespace.java
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *operationType;
+
+/**
  *  The full name of the resources that this flow is directly associated with.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *resourceNames;
 
 /** The start time of the operation. */
 @property(nonatomic, strong, nullable) GTLRDateTime *startTime;
+
+/**
+ *  surface
+ *
+ *  Likely values:
+ *    @arg @c kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceConsumerManagement
+ *        TenancyUnit, ServiceNetworking fall under this (Value:
+ *        "SERVICE_CONSUMER_MANAGEMENT")
+ *    @arg @c kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceManagement
+ *        Value "SERVICE_MANAGEMENT"
+ *    @arg @c kGTLRServiceManagement_FlowOperationMetadata_Surface_ServiceUsage
+ *        Value "SERVICE_USAGE"
+ *    @arg @c kGTLRServiceManagement_FlowOperationMetadata_Surface_UnspecifiedOpService
+ *        Value "UNSPECIFIED_OP_SERVICE"
+ */
+@property(nonatomic, copy, nullable) NSString *surface;
 
 @end
 
@@ -2632,41 +2435,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *responseBody;
 
 /**
- *  Optional. The REST collection name is by default derived from the URL
- *  pattern. If specified, this field overrides the default collection name.
- *  Example:
- *  rpc AddressesAggregatedList(AddressesAggregatedListRequest)
- *  returns (AddressesAggregatedListResponse) {
- *  option (google.api.http) = {
- *  get: "/v1/projects/{project_id}/aggregated/addresses"
- *  rest_collection: "projects.addresses"
- *  };
- *  }
- *  This method has the automatically derived collection name
- *  "projects.aggregated". Because, semantically, this rpc is actually an
- *  operation on the "projects.addresses" collection, the `rest_collection`
- *  field is configured to override the derived collection name.
- */
-@property(nonatomic, copy, nullable) NSString *restCollection;
-
-/**
- *  Optional. The rest method name is by default derived from the URL
- *  pattern. If specified, this field overrides the default method name.
- *  Example:
- *  rpc CreateResource(CreateResourceRequest)
- *  returns (CreateResourceResponse) {
- *  option (google.api.http) = {
- *  post: "/v1/resources",
- *  body: "resource",
- *  rest_method_name: "insert"
- *  };
- *  }
- *  This method has the automatically derived rest method name "create", but
- *  for backwards compatability with apiary, it is specified as insert.
- */
-@property(nonatomic, copy, nullable) NSString *restMethodName;
-
-/**
  *  Selects methods to which this rule applies.
  *  Refer to selector for syntax details.
  */
@@ -2798,40 +2566,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *        subscripting on this class.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_ManagedService *> *services;
-
-@end
-
-
-/**
- *  Specifies what kind of log the caller must write
- *  Increment a streamz counter with the specified metric and field names.
- *  Metric names should start with a '/', generally be lowercase-only,
- *  and end in "_count". Field names should not contain an initial slash.
- *  The actual exported metric names will have "/iam/policy" prepended.
- *  Field names correspond to IAM request parameters and field values are
- *  their respective values.
- *  At present the only supported field names are
- *  - "iam_principal", corresponding to IAMContext.principal;
- *  - "" (empty string), resulting in one aggretated counter with no field.
- *  Examples:
- *  counter { metric: "/debug_access_count" field: "iam_principal" }
- *  ==> increment counter /iam/policy/backend_debug_access_count
- *  {iam_principal=[value of IAMContext.principal]}
- *  At this time we do not support:
- *  * multiple field names (though this may be supported in the future)
- *  * decrementing the counter
- *  * incrementing it by anything other than 1
- */
-@interface GTLRServiceManagement_LogConfig : GTLRObject
-
-/** Cloud audit options. */
-@property(nonatomic, strong, nullable) GTLRServiceManagement_CloudAuditOptions *cloudAudit;
-
-/** Counter options. */
-@property(nonatomic, strong, nullable) GTLRServiceManagement_CounterOptions *counter;
-
-/** Data access options. */
-@property(nonatomic, strong, nullable) GTLRServiceManagement_DataAccessOptions *dataAccess;
 
 @end
 
@@ -3086,7 +2820,7 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 
 /**
- *  Method represents a method of an api.
+ *  Method represents a method of an API interface.
  */
 @interface GTLRServiceManagement_Method : GTLRObject
 
@@ -3147,6 +2881,8 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 /**
  *  A concise name for the metric, which can be displayed in user interfaces.
  *  Use sentence case without an ending period, for example "Request count".
+ *  This field is optional but it is recommended to be set for any metrics
+ *  associated with user-visible concepts, such as Quota.
  */
 @property(nonatomic, copy, nullable) NSString *displayName;
 
@@ -3180,15 +2916,7 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  */
 @property(nonatomic, copy, nullable) NSString *metricKind;
 
-/**
- *  The resource name of the metric descriptor. Depending on the
- *  implementation, the name typically includes: (1) the parent resource name
- *  that defines the scope of the metric type or of its data; and (2) the
- *  metric's URL-encoded type, which also appears in the `type` field of this
- *  descriptor. For example, following is the resource name of a custom
- *  metric within the GCP project `my-project-id`:
- *  "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
- */
+/** The resource name of the metric descriptor. */
 @property(nonatomic, copy, nullable) NSString *name;
 
 /**
@@ -3325,9 +3053,9 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 
 /**
- *  Declares an API to be included in this API. The including API must
- *  redeclare all the methods from the included API, but documentation
- *  and options are inherited as follows:
+ *  Declares an API Interface to be included in this interface. The including
+ *  interface must redeclare all the methods from the included interface, but
+ *  documentation and options are inherited as follows:
  *  - If after comment and whitespace stripping, the documentation
  *  string of the redeclared method is empty, it will be inherited
  *  from the original method.
@@ -3336,7 +3064,8 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  inherited.
  *  - If an http annotation is inherited, the path pattern will be
  *  modified as follows. Any version prefix will be replaced by the
- *  version of the including API plus the root path if specified.
+ *  version of the including interface plus the root path if
+ *  specified.
  *  Example of a simple mixin:
  *  package google.acl.v1;
  *  service AccessControl {
@@ -3389,7 +3118,7 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  */
 @interface GTLRServiceManagement_Mixin : GTLRObject
 
-/** The fully qualified name of the API which is included. */
+/** The fully qualified name of the interface which is included. */
 @property(nonatomic, copy, nullable) NSString *name;
 
 /**
@@ -3574,7 +3303,7 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 /**
  *  If the value is `false`, it means the operation is still in progress.
- *  If true, the operation is completed, and either `error` or `response` is
+ *  If `true`, the operation is completed, and either `error` or `response` is
  *  available.
  *
  *  Uses NSNumber of boolValue.
@@ -3820,19 +3549,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, strong, nullable) NSNumber *iamOwned;
 
 /**
- *  If more than one rule is specified, the rules are applied in the following
- *  manner:
- *  - All matching LOG rules are always applied.
- *  - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
- *  Logging will be applied if one or more matching rule requires logging.
- *  - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
- *  granted.
- *  Logging will be applied if one or more matching rule requires logging.
- *  - Otherwise, if no rule applies, permission is denied.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_Rule *> *rules;
-
-/**
  *  Version of the `Policy`. The default version is 0.
  *
  *  Uses NSNumber of intValue.
@@ -3974,22 +3690,14 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  The name of the metric this quota limit applies to. The quota limits with
  *  the same metric will be checked together during runtime. The metric must be
  *  defined within the service config.
- *  Used by metric-based quotas only.
  */
 @property(nonatomic, copy, nullable) NSString *metric;
 
 /**
- *  Name of the quota limit. The name is used to refer to the limit when
- *  overriding the default limit on per-consumer basis.
- *  For metric-based quota limits, the name must be provided, and it must be
- *  unique within the service. The name can only include alphanumeric
- *  characters as well as '-'.
+ *  Name of the quota limit.
+ *  The name must be provided, and it must be unique within the service. The
+ *  name can only include alphanumeric characters as well as '-'.
  *  The maximum length of the limit name is 64 characters.
- *  The name of a limit is used as a unique identifier for this limit.
- *  Therefore, once a limit has been put into use, its name should be
- *  immutable. You can use the display_name field to provide a user-friendly
- *  name for the limit. The display name can be evolved over time without
- *  affecting the identity of the limit.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
@@ -3997,30 +3705,27 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
  *  Specify the unit of the quota limit. It uses the same syntax as
  *  Metric.unit. The supported unit kinds are determined by the quota
  *  backend system.
- *  The [Google Service Control](https://cloud.google.com/service-control)
- *  supports the following unit components:
- *  * One of the time intevals:
- *  * "/min" for quota every minute.
- *  * "/d" for quota every 24 hours, starting 00:00 US Pacific Time.
- *  * Otherwise the quota won't be reset by time, such as storage limit.
- *  * One and only one of the granted containers:
- *  * "/{project}" quota for a project
  *  Here are some examples:
  *  * "1/min/{project}" for quota per minute per project.
  *  Note: the order of unit components is insignificant.
  *  The "1" at the beginning is required to follow the metric unit syntax.
- *  Used by metric-based quotas only.
  */
 @property(nonatomic, copy, nullable) NSString *unit;
 
-/** Tiered limit values, currently only STANDARD is supported. */
+/**
+ *  Tiered limit values. You must specify this as a key:value pair, with an
+ *  integer value that is the maximum number of requests allowed for the
+ *  specified unit. Currently only STANDARD is supported.
+ */
 @property(nonatomic, strong, nullable) GTLRServiceManagement_QuotaLimit_Values *values;
 
 @end
 
 
 /**
- *  Tiered limit values, currently only STANDARD is supported.
+ *  Tiered limit values. You must specify this as a key:value pair, with an
+ *  integer value that is the maximum number of requests allowed for the
+ *  specified unit. Currently only STANDARD is supported.
  *
  *  @note This class is documented as having more properties of NSNumber (Uses
  *        NSNumber of longLongValue.). Use @c -additionalJSONKeys and @c
@@ -4101,74 +3806,6 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 
 
 /**
- *  A rule to be applied in a Policy.
- */
-@interface GTLRServiceManagement_Rule : GTLRObject
-
-/**
- *  Required
- *
- *  Likely values:
- *    @arg @c kGTLRServiceManagement_Rule_Action_Allow Matching 'Entries' grant
- *        access. (Value: "ALLOW")
- *    @arg @c kGTLRServiceManagement_Rule_Action_AllowWithLog Matching 'Entries'
- *        grant access and the caller promises to log
- *        the request per the returned log_configs. (Value: "ALLOW_WITH_LOG")
- *    @arg @c kGTLRServiceManagement_Rule_Action_Deny Matching 'Entries' deny
- *        access. (Value: "DENY")
- *    @arg @c kGTLRServiceManagement_Rule_Action_DenyWithLog Matching 'Entries'
- *        deny access and the caller promises to log
- *        the request per the returned log_configs. (Value: "DENY_WITH_LOG")
- *    @arg @c kGTLRServiceManagement_Rule_Action_Log Matching 'Entries' tell
- *        IAM.Check callers to generate logs. (Value: "LOG")
- *    @arg @c kGTLRServiceManagement_Rule_Action_NoAction Default no action.
- *        (Value: "NO_ACTION")
- */
-@property(nonatomic, copy, nullable) NSString *action;
-
-/** Additional restrictions that must be met */
-@property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_Condition *> *conditions;
-
-/**
- *  Human-readable description of the rule.
- *
- *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
- */
-@property(nonatomic, copy, nullable) NSString *descriptionProperty;
-
-/**
- *  If one or more 'in' clauses are specified, the rule matches if
- *  the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
- *
- *  Remapped to 'inProperty' to avoid language reserved word 'in'.
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *inProperty;
-
-/**
- *  The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
- *  that match the LOG action.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_LogConfig *> *logConfig;
-
-/**
- *  If one or more 'not_in' clauses are specified, the rule matches
- *  if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
- *  The format for in and not_in entries is the same as for members in a
- *  Binding (see google/iam/v1/policy.proto).
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *notIn;
-
-/**
- *  A permission is a string of form '<service>.<resource type>.<verb>'
- *  (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
- *  and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
- */
-@property(nonatomic, strong, nullable) NSArray<NSString *> *permissions;
-
-@end
-
-
-/**
  *  `Service` is the root object of Google service configuration schema. It
  *  describes basic information about a service, such as the name and the
  *  title, and delegates other aspects to sub-sections. Each sub-section is
@@ -4209,11 +3846,14 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 /** API backend configuration. */
 @property(nonatomic, strong, nullable) GTLRServiceManagement_Backend *backend;
 
+/** Billing configuration. */
+@property(nonatomic, strong, nullable) GTLRServiceManagement_Billing *billing;
+
 /**
- *  The version of the service configuration. The config version may
- *  influence interpretation of the configuration, for example, to
- *  determine defaults. This is documented together with applicable
- *  options. The current default for the config version itself is `3`.
+ *  The semantic version of the service configuration. The config version
+ *  affects the interpretation of the service configuration. For example,
+ *  certain features are enabled by default for certain config versions.
+ *  The latest config version is `3`.
  *
  *  Uses NSNumber of unsignedIntValue.
  */
@@ -4453,8 +4093,8 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @property(nonatomic, strong, nullable) NSNumber *code;
 
 /**
- *  A list of messages that carry the error details. There will be a
- *  common set of message types for APIs to use.
+ *  A list of messages that carry the error details. There is a common set of
+ *  message types for APIs to use.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceManagement_Status_Details_Item *> *details;
 
@@ -4839,6 +4479,8 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 /**
  *  True, if the method should skip service control. If so, no control plane
  *  feature (like quota and billing) will be enabled.
+ *  This flag is used by ESP to allow some Endpoints customers to bypass
+ *  Google internal checks.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -4907,3 +4549,5 @@ GTLR_EXTERN NSString * const kGTLRServiceManagement_Type_Syntax_SyntaxProto3;
 @end
 
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop
