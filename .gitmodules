@@ -4,7 +4,7 @@
 	branch = master
 [submodule "Deps/GTMAppAuth"]
 	path = Deps/GTMAppAuth
-	url = https://stephangsch@github.com/boinx/GTMAppAuth
+	url = https://github.com/boinx/GTMAppAuth.git
 [submodule "Deps/AppAuth-iOS"]
 	path = Deps/AppAuth-iOS
-	url = https://stephangsch@github.com/boinx/AppAuth-iOS.git
+	url = https://github.com/boinx/AppAuth-iOS.git
