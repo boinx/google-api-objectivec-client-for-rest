@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Service Control API (servicecontrol/v1)
+//   Service Control API (servicecontrol/v1)
 // Description:
 //   Google Service Control provides control plane functionality to managed
 //   services, such as logging, monitoring, and status checks.
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    `"pubsub.googleapis.com"`.
  *    See google.api.Service for the definition of a service name.
  *
- *  @returns GTLRServiceControlQuery_ServicesAllocateQuota
+ *  @return GTLRServiceControlQuery_ServicesAllocateQuota
  */
 + (instancetype)queryWithObject:(GTLRServiceControl_AllocateQuotaRequest *)object
                     serviceName:(NSString *)serviceName;
@@ -99,16 +99,19 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
- *  Checks an operation with Google Service Control to decide whether
- *  the given operation should proceed. It should be called before the
- *  operation is executed.
+ *  Checks whether an operation on a service should be allowed to proceed
+ *  based on the configuration of the service and related policies. It must be
+ *  called before the operation is executed.
  *  If feasible, the client should cache the check results and reuse them for
- *  60 seconds. In case of server errors, the client can rely on the cached
- *  results for longer time.
+ *  60 seconds. In case of any server errors, the client should rely on the
+ *  cached results for much longer time to avoid outage.
+ *  WARNING: There is general 60s delay for the configuration and policy
+ *  propagation, therefore callers MUST NOT depend on the `Check` method having
+ *  the latest policy information.
  *  NOTE: the CheckRequest has the size limit of 64KB.
  *  This method requires the `servicemanagement.services.check` permission
  *  on the specified service. For more information, see
- *  [Google Cloud IAM](https://cloud.google.com/iam).
+ *  [Cloud IAM](https://cloud.google.com/iam).
  *
  *  Method: servicecontrol.services.check
  *
@@ -132,16 +135,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Fetches a @c GTLRServiceControl_CheckResponse.
  *
- *  Checks an operation with Google Service Control to decide whether
- *  the given operation should proceed. It should be called before the
- *  operation is executed.
+ *  Checks whether an operation on a service should be allowed to proceed
+ *  based on the configuration of the service and related policies. It must be
+ *  called before the operation is executed.
  *  If feasible, the client should cache the check results and reuse them for
- *  60 seconds. In case of server errors, the client can rely on the cached
- *  results for longer time.
+ *  60 seconds. In case of any server errors, the client should rely on the
+ *  cached results for much longer time to avoid outage.
+ *  WARNING: There is general 60s delay for the configuration and policy
+ *  propagation, therefore callers MUST NOT depend on the `Check` method having
+ *  the latest policy information.
  *  NOTE: the CheckRequest has the size limit of 64KB.
  *  This method requires the `servicemanagement.services.check` permission
  *  on the specified service. For more information, see
- *  [Google Cloud IAM](https://cloud.google.com/iam).
+ *  [Cloud IAM](https://cloud.google.com/iam).
  *
  *  @param object The @c GTLRServiceControl_CheckRequest to include in the
  *    query.
@@ -152,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
  *    for the definition of a service name.
  *
- *  @returns GTLRServiceControlQuery_ServicesCheck
+ *  @return GTLRServiceControlQuery_ServicesCheck
  */
 + (instancetype)queryWithObject:(GTLRServiceControl_CheckRequest *)object
                     serviceName:(NSString *)serviceName;
@@ -199,7 +205,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    `"pubsub.googleapis.com"`.
  *    See google.api.Service for the definition of a service name.
  *
- *  @returns GTLRServiceControlQuery_ServicesEndReconciliation
+ *  @return GTLRServiceControlQuery_ServicesEndReconciliation
  */
 + (instancetype)queryWithObject:(GTLRServiceControl_EndReconciliationRequest *)object
                     serviceName:(NSString *)serviceName;
@@ -252,7 +258,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    `"pubsub.googleapis.com"`.
  *    See google.api.Service for the definition of a service name.
  *
- *  @returns GTLRServiceControlQuery_ServicesReleaseQuota
+ *  @return GTLRServiceControlQuery_ServicesReleaseQuota
  */
 + (instancetype)queryWithObject:(GTLRServiceControl_ReleaseQuotaRequest *)object
                     serviceName:(NSString *)serviceName;
@@ -315,7 +321,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
  *    for the definition of a service name.
  *
- *  @returns GTLRServiceControlQuery_ServicesReport
+ *  @return GTLRServiceControlQuery_ServicesReport
  */
 + (instancetype)queryWithObject:(GTLRServiceControl_ReportRequest *)object
                     serviceName:(NSString *)serviceName;
@@ -398,7 +404,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    `"pubsub.googleapis.com"`.
  *    See google.api.Service for the definition of a service name.
  *
- *  @returns GTLRServiceControlQuery_ServicesStartReconciliation
+ *  @return GTLRServiceControlQuery_ServicesStartReconciliation
  */
 + (instancetype)queryWithObject:(GTLRServiceControl_StartReconciliationRequest *)object
                     serviceName:(NSString *)serviceName;

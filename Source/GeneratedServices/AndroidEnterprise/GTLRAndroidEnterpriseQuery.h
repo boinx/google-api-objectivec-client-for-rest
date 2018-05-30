@@ -105,7 +105,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_DevicesGet
+ *  @return GTLRAndroidEnterpriseQuery_DevicesGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -151,7 +151,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_DevicesGetState
+ *  @return GTLRAndroidEnterpriseQuery_DevicesGetState
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -185,7 +185,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_DevicesList
+ *  @return GTLRAndroidEnterpriseQuery_DevicesList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -231,7 +231,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_DevicesPatch
+ *  @return GTLRAndroidEnterpriseQuery_DevicesPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Device *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -280,7 +280,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_DevicesSetState
+ *  @return GTLRAndroidEnterpriseQuery_DevicesSetState
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_DeviceState *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -328,7 +328,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_DevicesUpdate
+ *  @return GTLRAndroidEnterpriseQuery_DevicesUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Device *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -365,7 +365,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  Enterprises.PullNotificationSet to prevent subsequent calls from returning
  *  the same notifications.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesAcknowledgeNotificationSet
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesAcknowledgeNotificationSet
  */
 + (instancetype)query;
 
@@ -398,7 +398,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  token. This request must not be called multiple times for a given Enterprise
  *  Token.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesCompleteSignup
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesCompleteSignup
  */
 + (instancetype)query;
 
@@ -434,7 +434,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *    include in the query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesCreateWebToken
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesCreateWebToken
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_AdministratorWebTokenSpec *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -468,7 +468,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesDelete
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -498,7 +498,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *    query.
  *  @param token The token provided by the enterprise to register the EMM.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesEnroll
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesEnroll
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Enterprise *)object
                           token:(NSString *)token;
@@ -533,7 +533,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  Generates a sign-up URL.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesGenerateSignupUrl
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesGenerateSignupUrl
  */
 + (instancetype)query;
 
@@ -561,14 +561,14 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesGet
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
 @end
 
 /**
- *  Returns the Android Device Policy config resource.
+ *  Deprecated and unused.
  *
  *  Method: androidenterprise.enterprises.getAndroidDevicePolicyConfig
  *
@@ -585,11 +585,11 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 /**
  *  Fetches a @c GTLRAndroidEnterprise_AndroidDevicePolicyConfig.
  *
- *  Returns the Android Device Policy config resource.
+ *  Deprecated and unused.
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesGetAndroidDevicePolicyConfig
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesGetAndroidDevicePolicyConfig
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -647,7 +647,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesGetServiceAccount
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesGetServiceAccount
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -677,7 +677,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesGetStoreLayout
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesGetStoreLayout
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -709,7 +709,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *    query.
  *  @param token The token provided by the enterprise to register the EMM.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesInsert
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesInsert
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Enterprise *)object
                           token:(NSString *)token;
@@ -746,7 +746,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param domain The exact primary domain name of the enterprise to look up.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesList
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesList
  */
 + (instancetype)queryWithDomain:(NSString *)domain;
 
@@ -816,7 +816,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  Subsequent requests may return more notifications once they become
  *  available.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesPullNotificationSet
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesPullNotificationSet
  */
 + (instancetype)query;
 
@@ -847,7 +847,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesSendTestPushNotification
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesSendTestPushNotification
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -879,7 +879,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *    the query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesSetAccount
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesSetAccount
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_EnterpriseAccount *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -887,10 +887,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 @end
 
 /**
- *  Sets the Android Device Policy config resource. EMM may use this method to
- *  enable or disable Android Device Policy support for the specified
- *  enterprise. To learn more about managing devices and apps with Android
- *  Device Policy, see the Android Management API.
+ *  Deprecated and unused.
  *
  *  Method: androidenterprise.enterprises.setAndroidDevicePolicyConfig
  *
@@ -907,16 +904,13 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
 /**
  *  Fetches a @c GTLRAndroidEnterprise_AndroidDevicePolicyConfig.
  *
- *  Sets the Android Device Policy config resource. EMM may use this method to
- *  enable or disable Android Device Policy support for the specified
- *  enterprise. To learn more about managing devices and apps with Android
- *  Device Policy, see the Android Management API.
+ *  Deprecated and unused.
  *
  *  @param object The @c GTLRAndroidEnterprise_AndroidDevicePolicyConfig to
  *    include in the query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesSetAndroidDevicePolicyConfig
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesSetAndroidDevicePolicyConfig
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_AndroidDevicePolicyConfig *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -959,7 +953,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *    query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesSetStoreLayout
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesSetStoreLayout
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StoreLayout *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -989,7 +983,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EnterprisesUnenroll
+ *  @return GTLRAndroidEnterpriseQuery_EnterprisesUnenroll
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -1029,7 +1023,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param entitlementId The ID of the entitlement (a product ID), e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_EntitlementsDelete
+ *  @return GTLRAndroidEnterpriseQuery_EntitlementsDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1070,7 +1064,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param entitlementId The ID of the entitlement (a product ID), e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_EntitlementsGet
+ *  @return GTLRAndroidEnterpriseQuery_EntitlementsGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1104,7 +1098,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_EntitlementsList
+ *  @return GTLRAndroidEnterpriseQuery_EntitlementsList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -1156,7 +1150,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param entitlementId The ID of the entitlement (a product ID), e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_EntitlementsPatch
+ *  @return GTLRAndroidEnterpriseQuery_EntitlementsPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Entitlement *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -1208,7 +1202,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param entitlementId The ID of the entitlement (a product ID), e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_EntitlementsUpdate
+ *  @return GTLRAndroidEnterpriseQuery_EntitlementsUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Entitlement *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -1247,7 +1241,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param groupLicenseId The ID of the product the group license is for, e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_GrouplicensesGet
+ *  @return GTLRAndroidEnterpriseQuery_GrouplicensesGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                        groupLicenseId:(NSString *)groupLicenseId;
@@ -1276,7 +1270,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_GrouplicensesList
+ *  @return GTLRAndroidEnterpriseQuery_GrouplicensesList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -1314,7 +1308,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param groupLicenseId The ID of the product the group license is for, e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_GrouplicenseusersList
+ *  @return GTLRAndroidEnterpriseQuery_GrouplicenseusersList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                        groupLicenseId:(NSString *)groupLicenseId;
@@ -1362,7 +1356,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param installId The ID of the product represented by the install, e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_InstallsDelete
+ *  @return GTLRAndroidEnterpriseQuery_InstallsDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1409,7 +1403,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param installId The ID of the product represented by the install, e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_InstallsGet
+ *  @return GTLRAndroidEnterpriseQuery_InstallsGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1448,7 +1442,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The Android ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_InstallsList
+ *  @return GTLRAndroidEnterpriseQuery_InstallsList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1499,7 +1493,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param installId The ID of the product represented by the install, e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_InstallsPatch
+ *  @return GTLRAndroidEnterpriseQuery_InstallsPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Install *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -1550,7 +1544,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param installId The ID of the product represented by the install, e.g.
  *    "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_InstallsUpdate
+ *  @return GTLRAndroidEnterpriseQuery_InstallsUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_Install *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -1601,7 +1595,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param managedConfigurationForDeviceId The ID of the managed configuration
  *    (a product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceDelete
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1648,7 +1642,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param managedConfigurationForDeviceId The ID of the managed configuration
  *    (a product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceGet
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1690,7 +1684,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param userId The ID of the user.
  *  @param deviceId The Android ID of the device.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceList
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1740,7 +1734,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidEnterpriseRequestModeWaitForNotificatio
  *  @param managedConfigurationForDeviceId The ID of the managed configuration
  *    (a product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordevicePatch
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordevicePatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ManagedConfiguration *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -1792,7 +1786,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param managedConfigurationForDeviceId The ID of the managed configuration
  *    (a product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceUpdate
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsfordeviceUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ManagedConfiguration *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -1837,7 +1831,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param managedConfigurationForUserId The ID of the managed configuration (a
  *    product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserDelete
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1881,7 +1875,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param managedConfigurationForUserId The ID of the managed configuration (a
  *    product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserGet
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId
@@ -1917,7 +1911,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserList
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -1970,7 +1964,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param managedConfigurationForUserId The ID of the managed configuration (a
  *    product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserPatch
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ManagedConfiguration *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2025,7 +2019,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param managedConfigurationForUserId The ID of the managed configuration (a
  *    product ID), e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserUpdate
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationsforuserUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ManagedConfiguration *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2067,7 +2061,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param productId The ID of the product for which the managed configurations
  *    settings applies to.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ManagedconfigurationssettingsList
+ *  @return GTLRAndroidEnterpriseQuery_ManagedconfigurationssettingsList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
@@ -2101,7 +2095,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *
  *  @param permissionId The ID of the permission.
  *
- *  @returns GTLRAndroidEnterpriseQuery_PermissionsGet
+ *  @return GTLRAndroidEnterpriseQuery_PermissionsGet
  */
 + (instancetype)queryWithPermissionId:(NSString *)permissionId;
 
@@ -2144,7 +2138,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param productId The ID of the product.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsApprove
+ *  @return GTLRAndroidEnterpriseQuery_ProductsApprove
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ProductsApproveRequest *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2200,7 +2194,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param productId The ID of the product.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsGenerateApprovalUrl
+ *  @return GTLRAndroidEnterpriseQuery_ProductsGenerateApprovalUrl
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
@@ -2236,7 +2230,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param productId The ID of the product, e.g. "app:com.google.android.gm".
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsGet
+ *  @return GTLRAndroidEnterpriseQuery_ProductsGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
@@ -2282,7 +2276,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param productId The ID of the product.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsGetAppRestrictionsSchema
+ *  @return GTLRAndroidEnterpriseQuery_ProductsGetAppRestrictionsSchema
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
@@ -2315,7 +2309,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param productId The ID of the product.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsGetPermissions
+ *  @return GTLRAndroidEnterpriseQuery_ProductsGetPermissions
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
@@ -2381,7 +2375,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsList
+ *  @return GTLRAndroidEnterpriseQuery_ProductsList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -2414,7 +2408,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param productId The ID of the product.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ProductsUnapprove
+ *  @return GTLRAndroidEnterpriseQuery_ProductsUnapprove
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                             productId:(NSString *)productId;
@@ -2454,7 +2448,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param keyId The ID of the key.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ServiceaccountkeysDelete
+ *  @return GTLRAndroidEnterpriseQuery_ServiceaccountkeysDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                 keyId:(NSString *)keyId;
@@ -2493,7 +2487,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *    the query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ServiceaccountkeysInsert
+ *  @return GTLRAndroidEnterpriseQuery_ServiceaccountkeysInsert
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ServiceAccountKey *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -2530,7 +2524,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_ServiceaccountkeysList
+ *  @return GTLRAndroidEnterpriseQuery_ServiceaccountkeysList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -2567,7 +2561,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param pageId The ID of the page.
  *  @param clusterId The ID of the cluster.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutclustersDelete
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutclustersDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                pageId:(NSString *)pageId
@@ -2605,7 +2599,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param pageId The ID of the page.
  *  @param clusterId The ID of the cluster.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutclustersGet
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutclustersGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                pageId:(NSString *)pageId
@@ -2641,7 +2635,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param pageId The ID of the page.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutclustersInsert
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutclustersInsert
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StoreCluster *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2675,7 +2669,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param pageId The ID of the page.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutclustersList
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutclustersList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                pageId:(NSString *)pageId;
@@ -2714,7 +2708,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param pageId The ID of the page.
  *  @param clusterId The ID of the cluster.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutclustersPatch
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutclustersPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StoreCluster *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2755,7 +2749,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param pageId The ID of the page.
  *  @param clusterId The ID of the cluster.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutclustersUpdate
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutclustersUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StoreCluster *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2791,7 +2785,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param pageId The ID of the page.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutpagesDelete
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutpagesDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                pageId:(NSString *)pageId;
@@ -2824,7 +2818,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param pageId The ID of the page.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutpagesGet
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutpagesGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                pageId:(NSString *)pageId;
@@ -2855,7 +2849,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *    query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutpagesInsert
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutpagesInsert
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StorePage *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -2884,7 +2878,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutpagesList
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutpagesList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId;
 
@@ -2918,7 +2912,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param pageId The ID of the page.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutpagesPatch
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutpagesPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StorePage *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2954,7 +2948,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param pageId The ID of the page.
  *
- *  @returns GTLRAndroidEnterpriseQuery_StorelayoutpagesUpdate
+ *  @return GTLRAndroidEnterpriseQuery_StorelayoutpagesUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_StorePage *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -2989,7 +2983,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersDelete
+ *  @return GTLRAndroidEnterpriseQuery_UsersDelete
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3028,7 +3022,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersGenerateAuthenticationToken
+ *  @return GTLRAndroidEnterpriseQuery_UsersGenerateAuthenticationToken
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3067,7 +3061,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersGenerateToken
+ *  @return GTLRAndroidEnterpriseQuery_UsersGenerateToken
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3100,7 +3094,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersGet
+ *  @return GTLRAndroidEnterpriseQuery_UsersGet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3133,7 +3127,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersGetAvailableProductSet
+ *  @return GTLRAndroidEnterpriseQuery_UsersGetAvailableProductSet
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3173,7 +3167,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param object The @c GTLRAndroidEnterprise_User to include in the query.
  *  @param enterpriseId The ID of the enterprise.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersInsert
+ *  @return GTLRAndroidEnterpriseQuery_UsersInsert
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_User *)object
                    enterpriseId:(NSString *)enterpriseId;
@@ -3210,7 +3204,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param email The exact primary email address of the user to look up.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersList
+ *  @return GTLRAndroidEnterpriseQuery_UsersList
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                 email:(NSString *)email;
@@ -3252,7 +3246,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersPatch
+ *  @return GTLRAndroidEnterpriseQuery_UsersPatch
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_User *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -3293,7 +3287,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersRevokeDeviceAccess
+ *  @return GTLRAndroidEnterpriseQuery_UsersRevokeDeviceAccess
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3327,7 +3321,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersRevokeToken
+ *  @return GTLRAndroidEnterpriseQuery_UsersRevokeToken
  */
 + (instancetype)queryWithEnterpriseId:(NSString *)enterpriseId
                                userId:(NSString *)userId;
@@ -3368,7 +3362,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersSetAvailableProductSet
+ *  @return GTLRAndroidEnterpriseQuery_UsersSetAvailableProductSet
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_ProductSet *)object
                    enterpriseId:(NSString *)enterpriseId
@@ -3411,7 +3405,7 @@ managedConfigurationForDeviceId:(NSString *)managedConfigurationForDeviceId;
  *  @param enterpriseId The ID of the enterprise.
  *  @param userId The ID of the user.
  *
- *  @returns GTLRAndroidEnterpriseQuery_UsersUpdate
+ *  @return GTLRAndroidEnterpriseQuery_UsersUpdate
  */
 + (instancetype)queryWithObject:(GTLRAndroidEnterprise_User *)object
                    enterpriseId:(NSString *)enterpriseId

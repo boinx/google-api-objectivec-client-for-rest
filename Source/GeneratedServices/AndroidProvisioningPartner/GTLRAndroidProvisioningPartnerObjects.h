@@ -4,8 +4,8 @@
 // API:
 //   Android Device Provisioning Partner API (androiddeviceprovisioning/v1)
 // Description:
-//   Automates reseller integration into zero-touch enrollment by assigning
-//   devices to customers and creating device reports.
+//   Automates Android zero-touch enrollment for device resellers, customers,
+//   and EMMs.
 // Documentation:
 //   https://developers.google.com/zero-touch/
 
@@ -20,11 +20,14 @@
 #endif
 
 @class GTLRAndroidProvisioningPartner_Company;
+@class GTLRAndroidProvisioningPartner_Configuration;
 @class GTLRAndroidProvisioningPartner_Device;
 @class GTLRAndroidProvisioningPartner_DeviceClaim;
 @class GTLRAndroidProvisioningPartner_DeviceIdentifier;
 @class GTLRAndroidProvisioningPartner_DeviceMetadata;
 @class GTLRAndroidProvisioningPartner_DeviceMetadata_Entries;
+@class GTLRAndroidProvisioningPartner_DeviceReference;
+@class GTLRAndroidProvisioningPartner_Dpc;
 @class GTLRAndroidProvisioningPartner_Operation_Metadata;
 @class GTLRAndroidProvisioningPartner_Operation_Response;
 @class GTLRAndroidProvisioningPartner_OperationPerDevice;
@@ -232,17 +235,17 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @interface GTLRAndroidProvisioningPartner_ClaimDeviceRequest : GTLRObject
 
 /**
- *  The customer to claim for.
+ *  Required. The ID of the customer for whom the device is being claimed.
  *
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *customerId;
 
-/** The device identifier of the device to claim. */
+/** Required. The device identifier of the device to claim. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
 
 /**
- *  The section to claim.
+ *  Required. The section type of the device's provisioning record.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_ClaimDeviceRequest_SectionType_SectionTypeUnspecified
@@ -277,11 +280,13 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 
 
 /**
- *  Request to claim devices asynchronously in batch.
+ *  Request to claim devices asynchronously in batch. Claiming a device adds the
+ *  device to zero-touch enrollment and shows the device in the customer's view
+ *  of the portal.
  */
 @interface GTLRAndroidProvisioningPartner_ClaimDevicesRequest : GTLRObject
 
-/** List of claims. */
+/** Required. A list of device claims. */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_PartnerClaim *> *claims;
 
 @end
@@ -330,6 +335,92 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 
 
 /**
+ *  A configuration collects the provisioning options for Android devices. Each
+ *  configuration combines the following:
+ *  * The EMM device policy controller (DPC) installed on the devices.
+ *  * EMM policies enforced on the devices.
+ *  * Metadata displayed on the device to help users during setup.
+ *  Customers can add as many configurations as they need. However, zero-touch
+ *  enrollment works best when a customer sets a default configuration that's
+ *  applied to any new devices the organization purchases.
+ */
+@interface GTLRAndroidProvisioningPartner_Configuration : GTLRObject
+
+/**
+ *  Required. The name of the organization. Zero-touch enrollment shows this
+ *  organization name to device users during device provisioning.
+ */
+@property(nonatomic, copy, nullable) NSString *companyName;
+
+/**
+ *  Output only. The ID of the configuration. Assigned by the server.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *configurationId;
+
+/**
+ *  Required. A short name that describes the configuration's purpose. For
+ *  example, _Sales team_ or _Temporary employees_. The zero-touch enrollment
+ *  portal displays this name to IT admins.
+ */
+@property(nonatomic, copy, nullable) NSString *configurationName;
+
+/**
+ *  Required. The email address that device users can contact to get help.
+ *  Zero-touch enrollment shows this email address to device users before
+ *  device provisioning. The value is validated on input.
+ */
+@property(nonatomic, copy, nullable) NSString *contactEmail;
+
+/**
+ *  Required. The telephone number that device users can call, using another
+ *  device, to get help. Zero-touch enrollment shows this number to device
+ *  users before device provisioning. Accepts numerals, spaces, the plus sign,
+ *  hyphens, and parentheses.
+ */
+@property(nonatomic, copy, nullable) NSString *contactPhone;
+
+/**
+ *  A message, containing one or two sentences, to help device users get help
+ *  or give them more details about what’s happening to their device.
+ *  Zero-touch enrollment shows this message before the device is provisioned.
+ */
+@property(nonatomic, copy, nullable) NSString *customMessage;
+
+/** The JSON-formatted EMM provisioning extras that are passed to the DPC. */
+@property(nonatomic, copy, nullable) NSString *dpcExtras;
+
+/**
+ *  Required. The resource name of the selected DPC (device policy controller)
+ *  in the format `customers/[CUSTOMER_ID]/dpcs/ *`. To list the supported DPCs,
+ *  call
+ *  `customers.dpcs.list`.
+ */
+@property(nonatomic, copy, nullable) NSString *dpcResourcePath;
+
+/**
+ *  Required. Whether this is the default configuration that zero-touch
+ *  enrollment applies to any new devices the organization purchases in the
+ *  future. Only one customer configuration can be the default. Setting this
+ *  value to `true`, changes the previous default configuration's `isDefault`
+ *  value to `false`.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *isDefault;
+
+/**
+ *  Output only. The API resource name in the format
+ *  `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`. Assigned by
+ *  the server.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+@end
+
+
+/**
  *  Request message to create a customer.
  */
 @interface GTLRAndroidProvisioningPartner_CreateCustomerRequest : GTLRObject
@@ -340,6 +431,124 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  *  with a Google Account. The values for `companyId` and `name` must be empty.
  */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_Company *customer;
+
+@end
+
+
+/**
+ *  Request message for customer to assign a configuration to device.
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerApplyConfigurationRequest : GTLRObject
+
+/**
+ *  Required. The configuration applied to the device in the format
+ *  `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`.
+ */
+@property(nonatomic, copy, nullable) NSString *configuration;
+
+/** Required. The device the configuration is applied to. */
+@property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceReference *device;
+
+@end
+
+
+/**
+ *  Response message of customer's listing configuration.
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerListConfigurationsResponse : GTLRObject
+
+/** The configurations. */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Configuration *> *configurations;
+
+@end
+
+
+/**
+ *  Response message for listing my customers.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "customers" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerListCustomersResponse : GTLRCollectionObject
+
+/**
+ *  The customer accounts the calling user is a member of.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Company *> *customers;
+
+/**
+ *  A token used to access the next page of results. Omitted if no further
+ *  results are available.
+ */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  Response message of customer's liting devices.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "devices" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerListDevicesResponse : GTLRCollectionObject
+
+/**
+ *  The customer's devices.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Device *> *devices;
+
+/**
+ *  A token used to access the next page of results. Omitted if no further
+ *  results are available.
+ */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+@end
+
+
+/**
+ *  Response message of customer's listing DPCs.
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerListDpcsResponse : GTLRObject
+
+/**
+ *  The list of DPCs available to the customer that support zero-touch
+ *  enrollment.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Dpc *> *dpcs;
+
+@end
+
+
+/**
+ *  Request message for customer to remove the configuration from device.
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerRemoveConfigurationRequest : GTLRObject
+
+/** Required. The device to remove the configuration from. */
+@property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceReference *device;
+
+@end
+
+
+/**
+ *  Request message for customer to unclaim a device.
+ */
+@interface GTLRAndroidProvisioningPartner_CustomerUnclaimDeviceRequest : GTLRObject
+
+/** Required. The device to unclaim. */
+@property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceReference *device;
 
 @end
 
@@ -473,19 +682,49 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 
 
 /**
- *  Long running operation metadata.
+ *  A `DeviceReference` is an API abstraction that lets you supply a _device_
+ *  argument to a method using one of the following identifier types:
+ *  * A numeric API resource ID.
+ *  * Real-world hardware IDs, such as IMEI number, belonging to the
+ *  manufactured
+ *  device.
+ *  Methods that operate on devices take a `DeviceReference` as a parameter type
+ *  because it's more flexible for the caller. To learn more about device
+ *  identifiers, read [Identifiers](/zero-touch/guides/identifiers).
+ */
+@interface GTLRAndroidProvisioningPartner_DeviceReference : GTLRObject
+
+/**
+ *  The ID of the device.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *deviceId;
+
+/** The hardware IDs of the device. */
+@property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
+
+@end
+
+
+/**
+ *  Tracks the status of a long-running operation to asynchronously update a
+ *  batch of reseller metadata attached to devices. To learn more, read
+ *  [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
  */
 @interface GTLRAndroidProvisioningPartner_DevicesLongRunningOperationMetadata : GTLRObject
 
 /**
- *  Number of devices parsed in your requests.
+ *  The number of metadata updates in the operation. This might be different
+ *  from the number of updates in the request if the API can't parse some of
+ *  the updates.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *devicesCount;
 
 /**
- *  The overall processing status.
+ *  The processing status of the operation.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_DevicesLongRunningOperationMetadata_ProcessingStatus_BatchProcessInProgress
@@ -504,7 +743,9 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @property(nonatomic, copy, nullable) NSString *processingStatus;
 
 /**
- *  Processing progress from 0 to 100.
+ *  The processing progress of the operation. Measured as a number from 0 to
+ *  100. A value of 10O doesnt always mean the operation completed—check for
+ *  the inclusion of a `done` field.
  *
  *  Uses NSNumber of intValue.
  */
@@ -514,22 +755,60 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 
 
 /**
- *  Long running operation response.
+ *  Tracks the status of a long-running operation to claim, unclaim, or attach
+ *  metadata to devices. To learn more, read
+ *  [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
  */
 @interface GTLRAndroidProvisioningPartner_DevicesLongRunningOperationResponse : GTLRObject
 
 /**
- *  Processing status for each device.
- *  One `PerDeviceStatus` per device. The order is the same as in your requests.
+ *  The processing status for each device in the operation.
+ *  One `PerDeviceStatus` per device. The list order matches the items in the
+ *  original request.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_OperationPerDevice *> *perDeviceStatus;
 
 /**
- *  Number of succeesfully processed ones.
+ *  A summary of how many items in the operation the server processed
+ *  successfully. Updated as the operation progresses.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *successCount;
+
+@end
+
+
+/**
+ *  An EMM's DPC ([device policy
+ *  controller](http://developer.android.com/work/dpc/build-dpc.html)).
+ *  Zero-touch enrollment installs a DPC (listed in the `Configuration`) on a
+ *  device to maintain the customer's mobile policies. All the DPCs listed by
+ *  the
+ *  API support zero-touch enrollment and are available in Google Play.
+ */
+@interface GTLRAndroidProvisioningPartner_Dpc : GTLRObject
+
+/**
+ *  Output only. The title of the DPC app in Google Play. For example, _Google
+ *  Apps Device Policy_. Useful in an application's user interface.
+ */
+@property(nonatomic, copy, nullable) NSString *dpcName;
+
+/**
+ *  Output only. The API resource name in the format
+ *  `customers/[CUSTOMER_ID]/dpcs/[DPC_ID]`. Assigned by
+ *  the server. To maintain a reference to a DPC across customer accounts,
+ *  persist and match the last path component (`DPC_ID`).
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Output only. The DPC's Android application ID that looks like a Java
+ *  package name. Zero-touch enrollment installs the DPC app onto a device
+ *  using this identifier.
+ */
+@property(nonatomic, copy, nullable) NSString *packageName;
 
 @end
 
@@ -552,17 +831,18 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  */
 @interface GTLRAndroidProvisioningPartner_FindDevicesByDeviceIdentifierRequest : GTLRObject
 
-/** The device identifier to search. */
+/** Required. The device identifier to search for. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
 
 /**
- *  Number of devices to show.
+ *  Required. The maximum number of devices to show in a page of results. Must
+ *  be between 1 and 100 inclusive.
  *
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *limit;
 
-/** Page token. */
+/** A token specifying which result page to return. */
 @property(nonatomic, copy, nullable) NSString *pageToken;
 
 @end
@@ -586,7 +866,10 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Device *> *devices;
 
-/** Page token of the next page. */
+/**
+ *  A token used to access the next page of results. Omitted if no further
+ *  results are available.
+ */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
 
 @end
@@ -598,24 +881,25 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @interface GTLRAndroidProvisioningPartner_FindDevicesByOwnerRequest : GTLRObject
 
 /**
- *  List of customer IDs to search for.
+ *  Required. The list of customer IDs to search for.
  *
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSArray<NSNumber *> *customerId;
 
 /**
- *  The number of devices to show in the result.
+ *  Required. The maximum number of devices to show in a page of results. Must
+ *  be between 1 and 100 inclusive.
  *
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *limit;
 
-/** Page token. */
+/** A token specifying which result page to return. */
 @property(nonatomic, copy, nullable) NSString *pageToken;
 
 /**
- *  The section type.
+ *  Required. The section type of the device's provisioning record.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_FindDevicesByOwnerRequest_SectionType_SectionTypeUnspecified
@@ -639,14 +923,17 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @interface GTLRAndroidProvisioningPartner_FindDevicesByOwnerResponse : GTLRCollectionObject
 
 /**
- *  Devices found.
+ *  The customer's devices.
  *
  *  @note This property is used to support NSFastEnumeration and indexed
  *        subscripting on this class.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Device *> *devices;
 
-/** Page token of the next page. */
+/**
+ *  A token used to access the next page of results.
+ *  Omitted if no further results are available.
+ */
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
 
 @end
@@ -657,7 +944,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  */
 @interface GTLRAndroidProvisioningPartner_ListCustomersResponse : GTLRObject
 
-/** List of customers related to this partner. */
+/** List of customers related to this reseller partner. */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_Company *> *customers;
 
 @end
@@ -739,20 +1026,21 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 
 
 /**
- *  Operation the server received for every device.
+ *  A task for each device in the operation. Corresponds to each device
+ *  change in the request.
  */
 @interface GTLRAndroidProvisioningPartner_OperationPerDevice : GTLRObject
 
-/** Request to claim a device. */
+/** A copy of the original device-claim request received by the server. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_PartnerClaim *claim;
 
-/** Processing result for every device. */
+/** The processing result for each device. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_PerDeviceStatusInBatch *result;
 
-/** Request to unclaim a device. */
+/** A copy of the original device-unclaim request received by the server. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_PartnerUnclaim *unclaim;
 
-/** Request to set metadata for a device. */
+/** A copy of the original metadata-update request received by the server. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_UpdateMetadataArguments *updateMetadata;
 
 @end
@@ -764,20 +1052,20 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @interface GTLRAndroidProvisioningPartner_PartnerClaim : GTLRObject
 
 /**
- *  Customer ID to claim for.
+ *  Required. The ID of the customer for whom the device is being claimed.
  *
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *customerId;
 
-/** Device identifier of the device. */
+/** Required. Device identifier of the device. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
 
-/** Metadata to set at claim. */
+/** Required. The metadata to attach to the device at claim. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceMetadata *deviceMetadata;
 
 /**
- *  Section type to claim.
+ *  Required. The section type of the device's provisioning record.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_PartnerClaim_SectionType_SectionTypeUnspecified
@@ -806,7 +1094,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
 
 /**
- *  Section type to unclaim.
+ *  Required. The section type of the device's provisioning record.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_PartnerUnclaim_SectionType_SectionTypeUnspecified
@@ -820,25 +1108,25 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 
 
 /**
- *  Stores the processing result for each device.
+ *  Captures the processing status for each device in the operation.
  */
 @interface GTLRAndroidProvisioningPartner_PerDeviceStatusInBatch : GTLRObject
 
 /**
- *  Device ID of the device if process succeeds.
+ *  If processing succeeds, the device ID of the device.
  *
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *deviceId;
 
-/** Error identifier. */
+/** If processing fails, the error type. */
 @property(nonatomic, copy, nullable) NSString *errorIdentifier;
 
-/** Error message. */
+/** If processing fails, a developer message explaining what went wrong. */
 @property(nonatomic, copy, nullable) NSString *errorMessage;
 
 /**
- *  Process result.
+ *  The result status of the device after processing.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_PerDeviceStatusInBatch_Status_SingleDeviceStatusInvalidDeviceIdentifier
@@ -969,7 +1257,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
 
 /**
- *  The section type to unclaim for.
+ *  Required. The section type of the device's provisioning record.
  *
  *  Likely values:
  *    @arg @c kGTLRAndroidProvisioningPartner_UnclaimDeviceRequest_SectionType_SectionTypeUnspecified
@@ -987,7 +1275,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  */
 @interface GTLRAndroidProvisioningPartner_UnclaimDevicesRequest : GTLRObject
 
-/** List of devices to unclaim. */
+/** Required. The list of devices to unclaim. */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_PartnerUnclaim *> *unclaims;
 
 @end
@@ -998,7 +1286,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  */
 @interface GTLRAndroidProvisioningPartner_UpdateDeviceMetadataInBatchRequest : GTLRObject
 
-/** List of metadata updates. */
+/** Required. The list of metadata updates. */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidProvisioningPartner_UpdateMetadataArguments *> *updates;
 
 @end
@@ -1009,7 +1297,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
  */
 @interface GTLRAndroidProvisioningPartner_UpdateDeviceMetadataRequest : GTLRObject
 
-/** The metdata to set. */
+/** Required. The metdata to attach to the device. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceMetadata *deviceMetadata;
 
 @end
@@ -1030,7 +1318,7 @@ GTLR_EXTERN NSString * const kGTLRAndroidProvisioningPartner_UnclaimDeviceReques
 /** Device identifier. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceIdentifier *deviceIdentifier;
 
-/** The metadata to update. */
+/** Required. The metadata to update. */
 @property(nonatomic, strong, nullable) GTLRAndroidProvisioningPartner_DeviceMetadata *deviceMetadata;
 
 @end

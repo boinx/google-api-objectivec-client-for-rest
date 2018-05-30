@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Service Control API (servicecontrol/v1)
+//   Service Control API (servicecontrol/v1)
 // Description:
 //   Google Service Control provides control plane functionality to managed
 //   services, such as logging, monitoring, and status checks.
@@ -27,6 +27,7 @@ NSString * const kGTLRServiceControl_CheckError_Code_ClientAppBlocked = @"CLIENT
 NSString * const kGTLRServiceControl_CheckError_Code_CloudResourceManagerBackendUnavailable = @"CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE";
 NSString * const kGTLRServiceControl_CheckError_Code_DenialOfServiceDetected = @"DENIAL_OF_SERVICE_DETECTED";
 NSString * const kGTLRServiceControl_CheckError_Code_ErrorCodeUnspecified = @"ERROR_CODE_UNSPECIFIED";
+NSString * const kGTLRServiceControl_CheckError_Code_InvalidCredential = @"INVALID_CREDENTIAL";
 NSString * const kGTLRServiceControl_CheckError_Code_IpAddressBlocked = @"IP_ADDRESS_BLOCKED";
 NSString * const kGTLRServiceControl_CheckError_Code_LoadShedding = @"LOAD_SHEDDING";
 NSString * const kGTLRServiceControl_CheckError_Code_LoasProjectDisabled = @"LOAS_PROJECT_DISABLED";
@@ -256,7 +257,7 @@ NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Release = @"RELEA
 //
 
 @implementation GTLRServiceControl_CheckError
-@dynamic code, detail;
+@dynamic code, detail, subject;
 @end
 
 

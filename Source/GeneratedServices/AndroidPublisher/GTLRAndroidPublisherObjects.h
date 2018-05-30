@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Play Developer API (androidpublisher/v2)
+//   Google Play Developer API (androidpublisher/v3)
 // Description:
 //   Lets Android application developers access their Google Play accounts.
 // Documentation:
@@ -20,12 +20,11 @@
 
 @class GTLRAndroidPublisher_Apk;
 @class GTLRAndroidPublisher_ApkBinary;
-@class GTLRAndroidPublisher_ApkListing;
+@class GTLRAndroidPublisher_Bundle;
 @class GTLRAndroidPublisher_Comment;
 @class GTLRAndroidPublisher_DeobfuscationFile;
 @class GTLRAndroidPublisher_DeveloperComment;
 @class GTLRAndroidPublisher_DeviceMetadata;
-@class GTLRAndroidPublisher_Entitlement;
 @class GTLRAndroidPublisher_ExpansionFile;
 @class GTLRAndroidPublisher_ExternallyHostedApk;
 @class GTLRAndroidPublisher_ExternallyHostedApkUsesPermission;
@@ -35,6 +34,7 @@
 @class GTLRAndroidPublisher_InAppProduct_Prices;
 @class GTLRAndroidPublisher_InAppProductListing;
 @class GTLRAndroidPublisher_Listing;
+@class GTLRAndroidPublisher_LocalizedText;
 @class GTLRAndroidPublisher_MonthDay;
 @class GTLRAndroidPublisher_PageInfo;
 @class GTLRAndroidPublisher_Price;
@@ -42,10 +42,12 @@
 @class GTLRAndroidPublisher_Review;
 @class GTLRAndroidPublisher_ReviewReplyResult;
 @class GTLRAndroidPublisher_Season;
+@class GTLRAndroidPublisher_SubscriptionCancelSurveyResult;
 @class GTLRAndroidPublisher_SubscriptionDeferralInfo;
 @class GTLRAndroidPublisher_Timestamp;
 @class GTLRAndroidPublisher_TokenPagination;
 @class GTLRAndroidPublisher_Track;
+@class GTLRAndroidPublisher_TrackRelease;
 @class GTLRAndroidPublisher_UserComment;
 @class GTLRAndroidPublisher_VoidedPurchase;
 
@@ -90,36 +92,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  output of the sha256sum command.
  */
 @property(nonatomic, copy, nullable) NSString *sha256;
-
-@end
-
-
-/**
- *  GTLRAndroidPublisher_ApkListing
- */
-@interface GTLRAndroidPublisher_ApkListing : GTLRObject
-
-/** The language code, in BCP 47 format (eg "en-US"). */
-@property(nonatomic, copy, nullable) NSString *language;
-
-/** Describe what's new in your APK. */
-@property(nonatomic, copy, nullable) NSString *recentChanges;
-
-@end
-
-
-/**
- *  GTLRAndroidPublisher_ApkListingsListResponse
- */
-@interface GTLRAndroidPublisher_ApkListingsListResponse : GTLRObject
-
-/**
- *  Identifies what kind of resource this is. Value: the fixed string
- *  "androidpublisher#apkListingsListResponse".
- */
-@property(nonatomic, copy, nullable) NSString *kind;
-
-@property(nonatomic, strong, nullable) NSArray<GTLRAndroidPublisher_ApkListing *> *listings;
 
 @end
 
@@ -200,6 +172,50 @@ NS_ASSUME_NONNULL_BEGIN
  *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
  */
 @property(nonatomic, copy, nullable) NSString *identifier;
+
+@end
+
+
+/**
+ *  GTLRAndroidPublisher_Bundle
+ */
+@interface GTLRAndroidPublisher_Bundle : GTLRObject
+
+/**
+ *  A sha1 hash of the upload payload, encoded as a hex string and matching the
+ *  output of the sha1sum command.
+ */
+@property(nonatomic, copy, nullable) NSString *sha1;
+
+/**
+ *  A sha256 hash of the upload payload, encoded as a hex string and matching
+ *  the output of the sha256sum command.
+ */
+@property(nonatomic, copy, nullable) NSString *sha256;
+
+/**
+ *  The version code of the Android App Bundle. As specified in the Android App
+ *  Bundle's base module APK manifest file.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *versionCode;
+
+@end
+
+
+/**
+ *  GTLRAndroidPublisher_BundlesListResponse
+ */
+@interface GTLRAndroidPublisher_BundlesListResponse : GTLRObject
+
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidPublisher_Bundle *> *bundles;
+
+/**
+ *  Identifies what kind of resource this is. Value: the fixed string
+ *  "androidpublisher#bundlesListResponse".
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
 
 @end
 
@@ -310,47 +326,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *screenWidthPx;
-
-@end
-
-
-/**
- *  An Entitlement resource indicates a user's current entitlement to an inapp
- *  item or subscription.
- */
-@interface GTLRAndroidPublisher_Entitlement : GTLRObject
-
-/**
- *  This kind represents an entitlement object in the androidpublisher service.
- */
-@property(nonatomic, copy, nullable) NSString *kind;
-
-/** The SKU of the product. */
-@property(nonatomic, copy, nullable) NSString *productId;
-
-/**
- *  The type of the inapp product. Possible values are:
- *  - In-app item: "inapp"
- *  - Subscription: "subs"
- */
-@property(nonatomic, copy, nullable) NSString *productType;
-
-/**
- *  The token which can be verified using the subscriptions or products API.
- */
-@property(nonatomic, copy, nullable) NSString *token;
-
-@end
-
-
-/**
- *  GTLRAndroidPublisher_EntitlementsListResponse
- */
-@interface GTLRAndroidPublisher_EntitlementsListResponse : GTLRObject
-
-@property(nonatomic, strong, nullable) GTLRAndroidPublisher_PageInfo *pageInfo;
-@property(nonatomic, strong, nullable) NSArray<GTLRAndroidPublisher_Entitlement *> *resources;
-@property(nonatomic, strong, nullable) GTLRAndroidPublisher_TokenPagination *tokenPagination;
 
 @end
 
@@ -705,6 +680,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ *  GTLRAndroidPublisher_LocalizedText
+ */
+@interface GTLRAndroidPublisher_LocalizedText : GTLRObject
+
+/** The language code, in BCP 47 format (eg "en-US"). */
+@property(nonatomic, copy, nullable) NSString *language;
+
+/** The text in the given `language`. */
+@property(nonatomic, copy, nullable) NSString *text;
+
+@end
+
+
+/**
  *  GTLRAndroidPublisher_MonthDay
  */
 @interface GTLRAndroidPublisher_MonthDay : GTLRObject
@@ -805,7 +794,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The purchase state of the order. Possible values are:
  *  - Purchased
- *  - Cancelled
+ *  - Canceled
  *
  *  Uses NSNumber of intValue.
  */
@@ -818,6 +807,17 @@ NS_ASSUME_NONNULL_BEGIN
  *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *purchaseTimeMillis;
+
+/**
+ *  The type of purchase of the inapp product. This field is only set if this
+ *  purchase was not made using the standard in-app billing flow. Possible
+ *  values are:
+ *  - Test (i.e. purchased from a license testing account)
+ *  - Promo (i.e. purchased using a promo code)
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *purchaseType;
 
 @end
 
@@ -931,6 +931,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ *  Information provided by the user when they complete the subscription
+ *  cancellation flow (cancellation reason survey).
+ */
+@interface GTLRAndroidPublisher_SubscriptionCancelSurveyResult : GTLRObject
+
+/**
+ *  The cancellation reason the user chose in the survey. Possible values are:
+ *  - Other
+ *  - I don't use this service enough
+ *  - Technical issues
+ *  - Cost-related reasons
+ *  - I found a better app
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *cancelSurveyReason;
+
+/**
+ *  The customized input cancel reason from the user. Only present when
+ *  cancelReason is 0.
+ */
+@property(nonatomic, copy, nullable) NSString *userInputCancelReason;
+
+@end
+
+
+/**
  *  A SubscriptionDeferralInfo contains the data needed to defer a subscription
  *  purchase to a future expiry time.
  */
@@ -972,16 +999,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) NSNumber *autoRenewing;
 
 /**
- *  The reason why a subscription was cancelled or is not auto-renewing.
- *  Possible values are:
- *  - User cancelled the subscription
- *  - Subscription was cancelled by the system, for example because of a billing
+ *  The reason why a subscription was canceled or is not auto-renewing. Possible
+ *  values are:
+ *  - User canceled the subscription
+ *  - Subscription was canceled by the system, for example because of a billing
  *  problem
  *  - Subscription was replaced with a new subscription
+ *  - Subscription was canceled by the developer
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *cancelReason;
+
+/**
+ *  Information provided by the user when they complete the subscription
+ *  cancellation flow (cancellation reason survey).
+ */
+@property(nonatomic, strong, nullable) GTLRAndroidPublisher_SubscriptionCancelSurveyResult *cancelSurveyResult;
 
 /**
  *  ISO 3166-1 alpha-2 billing country/region code of the user at the time the
@@ -996,6 +1030,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, nullable) NSString *developerPayload;
 
 /**
+ *  The email address of the user when the subscription was purchased. Only
+ *  present for purchases made with 'Subscribe with Google'.
+ */
+@property(nonatomic, copy, nullable) NSString *emailAddress;
+
+/**
  *  Time at which the subscription will expire, in milliseconds since the Epoch.
  *
  *  Uses NSNumber of longLongValue.
@@ -1003,10 +1043,37 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) NSNumber *expiryTimeMillis;
 
 /**
+ *  The family name of the user when the subscription was purchased. Only
+ *  present for purchases made with 'Subscribe with Google'.
+ */
+@property(nonatomic, copy, nullable) NSString *familyName;
+
+/**
+ *  The given name of the user when the subscription was purchased. Only present
+ *  for purchases made with 'Subscribe with Google'.
+ */
+@property(nonatomic, copy, nullable) NSString *givenName;
+
+/**
  *  This kind represents a subscriptionPurchase object in the androidpublisher
  *  service.
  */
 @property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  The purchase token of the originating purchase if this subscription is one
+ *  of the following:
+ *  - Re-signup of a canceled but non-lapsed subscription
+ *  - Upgrade/downgrade from a previous subscription For example, suppose a user
+ *  originally signs up and you receive purchase token X, then the user cancels
+ *  and goes through the resignup flow (before their subscription lapses) and
+ *  you receive purchase token Y, and finally the user upgrades their
+ *  subscription and you receive purchase token Z. If you call this API with
+ *  purchase token Z, this field will be set to Y. If you call this API with
+ *  purchase token Y, this field will be set to X. If you call this API with
+ *  purchase token X, this field will not be set.
+ */
+@property(nonatomic, copy, nullable) NSString *linkedPurchaseToken;
 
 /**
  *  The order id of the latest recurring order associated with the purchase of
@@ -1039,6 +1106,28 @@ NS_ASSUME_NONNULL_BEGIN
  *  is specified in British pounds sterling, price_currency_code is "GBP".
  */
 @property(nonatomic, copy, nullable) NSString *priceCurrencyCode;
+
+/**
+ *  The profile id of the user when the subscription was purchased. Only present
+ *  for purchases made with 'Subscribe with Google'.
+ */
+@property(nonatomic, copy, nullable) NSString *profileId;
+
+/**
+ *  The profile name of the user when the subscription was purchased. Only
+ *  present for purchases made with 'Subscribe with Google'.
+ */
+@property(nonatomic, copy, nullable) NSString *profileName;
+
+/**
+ *  The type of purchase of the subscription. This field is only set if this
+ *  purchase was not made using the standard in-app billing flow. Possible
+ *  values are:
+ *  - Test (i.e. purchased from a license testing account)
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *purchaseType;
 
 /**
  *  Time at which the subscription was granted, in milliseconds since the Epoch.
@@ -1133,19 +1222,54 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface GTLRAndroidPublisher_Track : GTLRObject
 
-@property(nonatomic, copy, nullable) NSString *track;
+/**
+ *  A list of all active releases in this track during a read request. On an
+ *  update request, it represents desired changes.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidPublisher_TrackRelease *> *releases;
 
 /**
- *  userFraction
+ *  Identifier for this track. One of "alpha", "beta", "production", "rollout"
+ *  or "internal".
+ */
+@property(nonatomic, copy, nullable) NSString *track;
+
+@end
+
+
+/**
+ *  GTLRAndroidPublisher_TrackRelease
+ */
+@interface GTLRAndroidPublisher_TrackRelease : GTLRObject
+
+/**
+ *  The release name, used to identify this release in the Play Console UI. Not
+ *  required to be unique. This is optional, if not set it will be generated
+ *  from the version_name in the APKs.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/** The description of what is new in the app in this release. */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidPublisher_LocalizedText *> *releaseNotes;
+
+/** The desired status of this release. */
+@property(nonatomic, copy, nullable) NSString *status;
+
+/**
+ *  Fraction of users who are eligible to receive the release. 0 <= fraction <
+ *  1. To be set, release status must be "inProgress" or "halted".
  *
  *  Uses NSNumber of doubleValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *userFraction;
 
 /**
- *  versionCodes
+ *  A list of all version codes of APKs that will be exposed to the users of
+ *  this track when this release is rolled out. Note that this list should
+ *  contain all versions you wish to be active, including those you wish to
+ *  retain from previous releases.
  *
- *  Uses NSNumber of intValue.
+ *  Uses NSNumber of longLongValue.
  */
 @property(nonatomic, strong, nullable) NSArray<NSNumber *> *versionCodes;
 
@@ -1250,7 +1374,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  A VoidedPurchase resource indicates a purchase that was either
- *  cancelled/refunded/charged-back.
+ *  canceled/refunded/charged-back.
  */
 @interface GTLRAndroidPublisher_VoidedPurchase : GTLRObject
 
@@ -1275,7 +1399,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, nullable) NSString *purchaseToken;
 
 /**
- *  The time at which the purchase was cancelled/refunded/charged-back, in
+ *  The time at which the purchase was canceled/refunded/charged-back, in
  *  milliseconds since the epoch (Jan 1, 1970).
  *
  *  Uses NSNumber of longLongValue.

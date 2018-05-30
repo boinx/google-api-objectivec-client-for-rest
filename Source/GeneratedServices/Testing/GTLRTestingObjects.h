@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Testing API (testing/v1)
+//   Cloud Testing API (testing/v1)
 // Description:
 //   Allows developers to run automated tests for their mobile applications on
 //   Google infrastructure.
@@ -30,6 +30,9 @@
 @class GTLRTesting_AndroidRuntimeConfiguration;
 @class GTLRTesting_AndroidTestLoop;
 @class GTLRTesting_AndroidVersion;
+@class GTLRTesting_Apk;
+@class GTLRTesting_ApkDetail;
+@class GTLRTesting_ApkManifest;
 @class GTLRTesting_ClientInfo;
 @class GTLRTesting_ClientInfoDetail;
 @class GTLRTesting_Date;
@@ -41,13 +44,18 @@
 @class GTLRTesting_FileReference;
 @class GTLRTesting_GoogleAuto;
 @class GTLRTesting_GoogleCloudStorage;
+@class GTLRTesting_IntentFilter;
+@class GTLRTesting_LauncherActivityIntent;
 @class GTLRTesting_Locale;
 @class GTLRTesting_NetworkConfiguration;
 @class GTLRTesting_NetworkConfigurationCatalog;
 @class GTLRTesting_ObbFile;
 @class GTLRTesting_Orientation;
+@class GTLRTesting_RegularFile;
 @class GTLRTesting_ResultStorage;
 @class GTLRTesting_RoboDirective;
+@class GTLRTesting_RoboStartingIntent;
+@class GTLRTesting_StartActivityIntent;
 @class GTLRTesting_TestDetails;
 @class GTLRTesting_TestExecution;
 @class GTLRTesting_TestSetup;
@@ -372,6 +380,14 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_InvalidMatrixDetails_Malfor
  */
 GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_InvalidMatrixDetails_MalformedTestApk;
 /**
+ *  APK contains no code.
+ *  See also
+ *  https://developer.android.com/guide/topics/manifest/application-element.html#code
+ *
+ *  Value: "NO_CODE_APK"
+ */
+GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_InvalidMatrixDetails_NoCodeApk;
+/**
  *  The test apk does not declare an instrumentation.
  *
  *  Value: "NO_INSTRUMENTATION"
@@ -441,6 +457,7 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_InvalidMatrixDetails_Scenar
 GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_InvalidMatrixDetails_TestLoopIntentFilterNotFound;
 /**
  *  The APK is marked as "testOnly".
+ *  NOT USED
  *
  *  Value: "TEST_ONLY_APK"
  */
@@ -858,6 +875,15 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *tags;
 
+/**
+ *  True if and only if tests with this model DO NOT have video output.
+ *  See also TestSpecification.disable_video_recording
+ *  \@OutputOnly
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *videoRecordingNotSupported;
+
 @end
 
 
@@ -911,6 +937,21 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  *  Optional
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRTesting_RoboDirective *> *roboDirectives;
+
+/**
+ *  A JSON file with a sequence of actions Robo should perform as a prologue
+ *  for the crawl.
+ *  Optional
+ */
+@property(nonatomic, strong, nullable) GTLRTesting_FileReference *roboScript;
+
+/**
+ *  The intents used to launch the app for the crawl.
+ *  If none are provided, then the main launcher activity is launched.
+ *  If some are provided, then only those provided are launched (the main
+ *  launcher activity must be provided explicitly).
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRTesting_RoboStartingIntent *> *startingIntents;
 
 @end
 
@@ -1031,6 +1072,71 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  *  \@OutputOnly
  */
 @property(nonatomic, copy, nullable) NSString *versionString;
+
+@end
+
+
+/**
+ *  An Android package file to install.
+ */
+@interface GTLRTesting_Apk : GTLRObject
+
+/**
+ *  The path to an APK to be installed on the device before the test begins.
+ *  Optional
+ */
+@property(nonatomic, strong, nullable) GTLRTesting_FileReference *location;
+
+/**
+ *  The java package for the APK to be installed.
+ *  Optional, value is determined by examining the application's manifest.
+ */
+@property(nonatomic, copy, nullable) NSString *packageName;
+
+@end
+
+
+/**
+ *  Android application details based on application manifest and apk archive
+ *  contents
+ */
+@interface GTLRTesting_ApkDetail : GTLRObject
+
+@property(nonatomic, strong, nullable) GTLRTesting_ApkManifest *apkManifest;
+
+@end
+
+
+/**
+ *  An Android app manifest. See
+ *  http://developer.android.com/guide/topics/manifest/manifest-intro.html
+ */
+@interface GTLRTesting_ApkManifest : GTLRObject
+
+/** User-readable name for the application. */
+@property(nonatomic, copy, nullable) NSString *applicationLabel;
+
+@property(nonatomic, strong, nullable) NSArray<GTLRTesting_IntentFilter *> *intentFilters;
+
+/**
+ *  Maximum API level on which the application is designed to run.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maxSdkVersion;
+
+/**
+ *  Minimum API level required for the application to run.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minSdkVersion;
+
+/**
+ *  Full Java-style package name for this application, e.g.
+ *  "com.example.foo".
+ */
+@property(nonatomic, copy, nullable) NSString *packageName;
 
 @end
 
@@ -1157,7 +1263,8 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 @property(nonatomic, strong, nullable) NSNumber *day;
 
 /**
- *  Month of year. Must be from 1 to 12.
+ *  Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+ *  month.
  *
  *  Uses NSNumber of intValue.
  */
@@ -1181,6 +1288,9 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 
 /** A reference to an opaque binary blob file */
 @property(nonatomic, strong, nullable) GTLRTesting_ObbFile *obbFile;
+
+/** A reference to a regular file */
+@property(nonatomic, strong, nullable) GTLRTesting_RegularFile *regularFile;
 
 @end
 
@@ -1265,6 +1375,17 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 
 
 /**
+ *  Response containing the details of the specified Android application APK.
+ */
+@interface GTLRTesting_GetApkDetailsResponse : GTLRObject
+
+/** Details of the Android APK. */
+@property(nonatomic, strong, nullable) GTLRTesting_ApkDetail *apkDetail;
+
+@end
+
+
+/**
  *  Enables automatic Google account login.
  *  If set, the service will automatically generate a Google test account and
  *  add
@@ -1293,6 +1414,31 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  */
 @property(nonatomic, copy, nullable) NSString *gcsPath;
 
+@end
+
+
+/**
+ *  The <intent-filter> section of an <activity> tag.
+ *  https://developer.android.com/guide/topics/manifest/intent-filter-element.html
+ */
+@interface GTLRTesting_IntentFilter : GTLRObject
+
+/** The android:name value of the <action> tag */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *actionNames;
+
+/** The android:name value of the <category> tag */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *categoryNames;
+
+/** The android:mimeType value of the <data> tag */
+@property(nonatomic, copy, nullable) NSString *mimeType;
+
+@end
+
+
+/**
+ *  Specifies an intent that starts the main launcher activity.
+ */
+@interface GTLRTesting_LauncherActivityIntent : GTLRObject
 @end
 
 
@@ -1422,6 +1568,38 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 
 
 /**
+ *  A file or directory to install on the device before the test starts
+ */
+@interface GTLRTesting_RegularFile : GTLRObject
+
+/** Required */
+@property(nonatomic, strong, nullable) GTLRTesting_FileReference *content;
+
+/**
+ *  Where to put the content on the device. Must be an absolute, whitelisted
+ *  path. If the file exists, it will be replaced.
+ *  The following device-side directories and any of their subdirectories are
+ *  whitelisted:
+ *  <p>${EXTERNAL_STORAGE}, or /sdcard</p>
+ *  <p>${ANDROID_DATA}/local/tmp, or /data/local/tmp</p>
+ *  <p>Specifying a path outside of these directory trees is invalid.
+ *  <p> The paths /sdcard and /data will be made available and treated as
+ *  implicit path substitutions. E.g. if /sdcard on a particular device does
+ *  not map to external storage, the system will replace it with the external
+ *  storage path prefix for that device and copy the file there.
+ *  <p> It is strongly advised to use the
+ *  <a href= 
+ "http://developer.android.com/reference/android/os/Environment.html">
+ *  Environment API</a> in app and test code to access files on the device in a
+ *  portable way.
+ *  Required
+ */
+@property(nonatomic, copy, nullable) NSString *devicePath;
+
+@end
+
+
+/**
  *  Locations where the results of running the test are stored.
  */
 @interface GTLRTesting_ResultStorage : GTLRObject
@@ -1491,6 +1669,43 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 
 
 /**
+ *  Message for specifying the start activities to crawl
+ */
+@interface GTLRTesting_RoboStartingIntent : GTLRObject
+
+@property(nonatomic, strong, nullable) GTLRTesting_LauncherActivityIntent *launcherActivity;
+@property(nonatomic, strong, nullable) GTLRTesting_StartActivityIntent *startActivity;
+
+@end
+
+
+/**
+ *  A starting intent specified by an action, uri, and categories.
+ */
+@interface GTLRTesting_StartActivityIntent : GTLRObject
+
+/**
+ *  Action name.
+ *  Required for START_ACTIVITY.
+ */
+@property(nonatomic, copy, nullable) NSString *action;
+
+/**
+ *  Intent categories to set on the intent.
+ *  Optional.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *categories;
+
+/**
+ *  URI for the action.
+ *  Optional.
+ */
+@property(nonatomic, copy, nullable) NSString *uri;
+
+@end
+
+
+/**
  *  Additional details about the progress of the running test.
  */
 @interface GTLRTesting_TestDetails : GTLRObject
@@ -1510,6 +1725,16 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  *  \@OutputOnly
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *progressMessages;
+
+/**
+ *  Indicates that video will not be recorded for this execution either because
+ *  the user chose to disable it or the device does not support it.
+ *  See AndroidModel.video_recording_not_supported
+ *  \@OutputOnly
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *videoRecordingDisabled;
 
 @end
 
@@ -1690,6 +1915,11 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  *        input app APK could not be parsed. (Value: "MALFORMED_APK")
  *    @arg @c kGTLRTesting_TestMatrix_InvalidMatrixDetails_MalformedTestApk The
  *        input test APK could not be parsed. (Value: "MALFORMED_TEST_APK")
+ *    @arg @c kGTLRTesting_TestMatrix_InvalidMatrixDetails_NoCodeApk APK
+ *        contains no code.
+ *        See also
+ *        https://developer.android.com/guide/topics/manifest/application-element.html#code
+ *        (Value: "NO_CODE_APK")
  *    @arg @c kGTLRTesting_TestMatrix_InvalidMatrixDetails_NoInstrumentation The
  *        test apk does not declare an instrumentation. (Value:
  *        "NO_INSTRUMENTATION")
@@ -1724,7 +1954,8 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  *        There there is no test loop intent filter, or the one that is given is
  *        not formatted correctly. (Value: "TEST_LOOP_INTENT_FILTER_NOT_FOUND")
  *    @arg @c kGTLRTesting_TestMatrix_InvalidMatrixDetails_TestOnlyApk The APK
- *        is marked as "testOnly". (Value: "TEST_ONLY_APK")
+ *        is marked as "testOnly".
+ *        NOT USED (Value: "TEST_ONLY_APK")
  *    @arg @c kGTLRTesting_TestMatrix_InvalidMatrixDetails_TestSameAsApp The
  *        test package and app package are the same. (Value: "TEST_SAME_AS_APP")
  */
@@ -1822,7 +2053,7 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 
 
 /**
- *  A description of how to set up the device prior to running the test
+ *  A description of how to set up the Android device prior to running the test.
  */
 @interface GTLRTesting_TestSetup : GTLRObject
 
@@ -1831,6 +2062,13 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
  *  Optional
  */
 @property(nonatomic, strong, nullable) GTLRTesting_Account *account;
+
+/**
+ *  APKs to install in addition to those being directly tested.
+ *  Currently capped at 100.
+ *  Optional
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRTesting_Apk *> *additionalApks;
 
 /**
  *  List of directories on the device to upload to GCS at the end of the test;
@@ -1909,7 +2147,8 @@ GTLR_EXTERN NSString * const kGTLRTesting_TestMatrix_State_Validating;
 @property(nonatomic, strong, nullable) NSNumber *disableVideoRecording;
 
 /**
- *  Test setup requirements e.g. files to install, bootstrap scripts
+ *  Test setup requirements for Android e.g. files to install, bootstrap
+ *  scripts.
  *  Optional
  */
 @property(nonatomic, strong, nullable) GTLRTesting_TestSetup *testSetup;

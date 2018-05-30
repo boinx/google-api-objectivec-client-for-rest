@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Pub/Sub API (pubsub/v1)
+//   Cloud Pub/Sub API (pubsub/v1)
 // Description:
 //   Provides reliable, many-to-many, asynchronous messaging between
 //   applications.
@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *  Creates a snapshot from the requested subscription.
  *  If the snapshot already exists, returns `ALREADY_EXISTS`.
  *  If the requested subscription doesn't exist, returns `NOT_FOUND`.
@@ -87,6 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Fetches a @c GTLRPubsub_Snapshot.
  *
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *  Creates a snapshot from the requested subscription.
  *  If the snapshot already exists, returns `ALREADY_EXISTS`.
  *  If the requested subscription doesn't exist, returns `NOT_FOUND`.
@@ -110,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Note that for REST API requests, you must specify a name.
  *    Format is `projects/{project}/snapshots/{snap}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsCreate
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsCreate
  */
 + (instancetype)queryWithObject:(GTLRPubsub_CreateSnapshotRequest *)object
                            name:(NSString *)name;
@@ -122,6 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  are immediately dropped. After a snapshot is deleted, a new one may be
  *  created with the same name, but the new one has no association with the old
  *  snapshot or its subscription, unless the same subscription is specified.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  Method: pubsub.projects.snapshots.delete
  *
@@ -146,11 +149,47 @@ NS_ASSUME_NONNULL_BEGIN
  *  are immediately dropped. After a snapshot is deleted, a new one may be
  *  created with the same name, but the new one has no association with the old
  *  snapshot or its subscription, unless the same subscription is specified.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  @param snapshot The name of the snapshot to delete.
  *    Format is `projects/{project}/snapshots/{snap}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsDelete
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsDelete
+ */
++ (instancetype)queryWithSnapshot:(NSString *)snapshot;
+
+@end
+
+/**
+ *  Gets the configuration details of a snapshot.
+ *  [ALPHA] This method is a part of a closed Alpha API.
+ *
+ *  Method: pubsub.projects.snapshots.get
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopePubsub
+ *    @c kGTLRAuthScopePubsubCloudPlatform
+ */
+@interface GTLRPubsubQuery_ProjectsSnapshotsGet : GTLRPubsubQuery
+// Previous library name was
+//   +[GTLQueryPubsub queryForProjectsSnapshotsGetWithsnapshot:]
+
+/**
+ *  The name of the snapshot to get.
+ *  Format is `projects/{project}/snapshots/{snap}`.
+ */
+@property(nonatomic, copy, nullable) NSString *snapshot;
+
+/**
+ *  Fetches a @c GTLRPubsub_Snapshot.
+ *
+ *  Gets the configuration details of a snapshot.
+ *  [ALPHA] This method is a part of a closed Alpha API.
+ *
+ *  @param snapshot The name of the snapshot to get.
+ *    Format is `projects/{project}/snapshots/{snap}`.
+ *
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsGet
  */
 + (instancetype)queryWithSnapshot:(NSString *)snapshot;
 
@@ -188,7 +227,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsGetIamPolicy
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsGetIamPolicy
  */
 + (instancetype)queryWithResource:(NSString *)resource;
 
@@ -196,6 +235,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Lists the existing snapshots.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  Method: pubsub.projects.snapshots.list
  *
@@ -227,11 +267,12 @@ NS_ASSUME_NONNULL_BEGIN
  *  Fetches a @c GTLRPubsub_ListSnapshotsResponse.
  *
  *  Lists the existing snapshots.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  @param project The name of the cloud project that snapshots belong to.
  *    Format is `projects/{project}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsList
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -244,6 +285,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Updates an existing snapshot. Note that certain properties of a
  *  snapshot are not modifiable.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  Method: pubsub.projects.snapshots.patch
  *
@@ -263,12 +305,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Updates an existing snapshot. Note that certain properties of a
  *  snapshot are not modifiable.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  @param object The @c GTLRPubsub_UpdateSnapshotRequest to include in the
  *    query.
  *  @param name The name of the snapshot.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsPatch
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsPatch
  */
 + (instancetype)queryWithObject:(GTLRPubsub_UpdateSnapshotRequest *)object
                            name:(NSString *)name;
@@ -306,7 +349,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    specified.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsSetIamPolicy
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsSetIamPolicy
  */
 + (instancetype)queryWithObject:(GTLRPubsub_SetIamPolicyRequest *)object
                        resource:(NSString *)resource;
@@ -353,7 +396,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsSnapshotsTestIamPermissions
+ *  @return GTLRPubsubQuery_ProjectsSnapshotsTestIamPermissions
  */
 + (instancetype)queryWithObject:(GTLRPubsub_TestIamPermissionsRequest *)object
                        resource:(NSString *)resource;
@@ -398,7 +441,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subscription The subscription whose message is being acknowledged.
  *    Format is `projects/{project}/subscriptions/{sub}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsAcknowledge
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsAcknowledge
  */
 + (instancetype)queryWithObject:(GTLRPubsub_AcknowledgeRequest *)object
                    subscription:(NSString *)subscription;
@@ -457,7 +500,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    plus (`+`) or percent signs (`%`). It must be between 3 and 255 characters
  *    in length, and it must not start with `"goog"`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsCreate
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsCreate
  */
 + (instancetype)queryWithObject:(GTLRPubsub_Subscription *)object
                            name:(NSString *)name;
@@ -499,7 +542,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subscription The subscription to delete.
  *    Format is `projects/{project}/subscriptions/{sub}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsDelete
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsDelete
  */
 + (instancetype)queryWithSubscription:(NSString *)subscription;
 
@@ -532,7 +575,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subscription The name of the subscription to get.
  *    Format is `projects/{project}/subscriptions/{sub}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsGet
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsGet
  */
 + (instancetype)queryWithSubscription:(NSString *)subscription;
 
@@ -570,7 +613,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsGetIamPolicy
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsGetIamPolicy
  */
 + (instancetype)queryWithResource:(NSString *)resource;
 
@@ -613,7 +656,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param project The name of the cloud project that subscriptions belong to.
  *    Format is `projects/{project}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsList
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -660,7 +703,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subscription The name of the subscription.
  *    Format is `projects/{project}/subscriptions/{sub}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsModifyAckDeadline
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsModifyAckDeadline
  */
 + (instancetype)queryWithObject:(GTLRPubsub_ModifyAckDeadlineRequest *)object
                    subscription:(NSString *)subscription;
@@ -704,7 +747,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subscription The name of the subscription.
  *    Format is `projects/{project}/subscriptions/{sub}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsModifyPushConfig
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsModifyPushConfig
  */
 + (instancetype)queryWithObject:(GTLRPubsub_ModifyPushConfigRequest *)object
                    subscription:(NSString *)subscription;
@@ -750,7 +793,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    plus (`+`) or percent signs (`%`). It must be between 3 and 255 characters
  *    in length, and it must not start with `"goog"`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsPatch
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsPatch
  */
 + (instancetype)queryWithObject:(GTLRPubsub_UpdateSubscriptionRequest *)object
                            name:(NSString *)name;
@@ -791,7 +834,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subscription The subscription from which messages should be pulled.
  *    Format is `projects/{project}/subscriptions/{sub}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsPull
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsPull
  */
 + (instancetype)queryWithObject:(GTLRPubsub_PullRequest *)object
                    subscription:(NSString *)subscription;
@@ -801,6 +844,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Seeks an existing subscription to a point in time or to a given snapshot,
  *  whichever is provided in the request.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  Method: pubsub.projects.subscriptions.seek
  *
@@ -820,11 +864,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Seeks an existing subscription to a point in time or to a given snapshot,
  *  whichever is provided in the request.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  @param object The @c GTLRPubsub_SeekRequest to include in the query.
  *  @param subscription The subscription to affect.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsSeek
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsSeek
  */
 + (instancetype)queryWithObject:(GTLRPubsub_SeekRequest *)object
                    subscription:(NSString *)subscription;
@@ -862,7 +907,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    specified.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsSetIamPolicy
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsSetIamPolicy
  */
 + (instancetype)queryWithObject:(GTLRPubsub_SetIamPolicyRequest *)object
                        resource:(NSString *)resource;
@@ -909,7 +954,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsSubscriptionsTestIamPermissions
+ *  @return GTLRPubsubQuery_ProjectsSubscriptionsTestIamPermissions
  */
 + (instancetype)queryWithObject:(GTLRPubsub_TestIamPermissionsRequest *)object
                        resource:(NSString *)resource;
@@ -952,7 +997,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    signs (`%`). It must be between 3 and 255 characters in length, and it
  *    must not start with `"goog"`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsCreate
+ *  @return GTLRPubsubQuery_ProjectsTopicsCreate
  */
 + (instancetype)queryWithObject:(GTLRPubsub_Topic *)object
                            name:(NSString *)name;
@@ -994,7 +1039,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param topic Name of the topic to delete.
  *    Format is `projects/{project}/topics/{topic}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsDelete
+ *  @return GTLRPubsubQuery_ProjectsTopicsDelete
  */
 + (instancetype)queryWithTopic:(NSString *)topic;
 
@@ -1027,7 +1072,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param topic The name of the topic to get.
  *    Format is `projects/{project}/topics/{topic}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsGet
+ *  @return GTLRPubsubQuery_ProjectsTopicsGet
  */
 + (instancetype)queryWithTopic:(NSString *)topic;
 
@@ -1065,7 +1110,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsGetIamPolicy
+ *  @return GTLRPubsubQuery_ProjectsTopicsGetIamPolicy
  */
 + (instancetype)queryWithResource:(NSString *)resource;
 
@@ -1108,7 +1153,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param project The name of the cloud project that topics belong to.
  *    Format is `projects/{project}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsList
+ *  @return GTLRPubsubQuery_ProjectsTopicsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1150,7 +1195,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param topic The messages in the request will be published on this topic.
  *    Format is `projects/{project}/topics/{topic}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsPublish
+ *  @return GTLRPubsubQuery_ProjectsTopicsPublish
  */
 + (instancetype)queryWithObject:(GTLRPubsub_PublishRequest *)object
                           topic:(NSString *)topic;
@@ -1188,7 +1233,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    specified.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsSetIamPolicy
+ *  @return GTLRPubsubQuery_ProjectsTopicsSetIamPolicy
  */
 + (instancetype)queryWithObject:(GTLRPubsub_SetIamPolicyRequest *)object
                        resource:(NSString *)resource;
@@ -1197,6 +1242,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Lists the names of the snapshots on this topic.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  Method: pubsub.projects.topics.snapshots.list
  *
@@ -1228,11 +1274,12 @@ NS_ASSUME_NONNULL_BEGIN
  *  Fetches a @c GTLRPubsub_ListTopicSnapshotsResponse.
  *
  *  Lists the names of the snapshots on this topic.
+ *  [ALPHA] This method is a part of a closed Alpha API.
  *
  *  @param topic The name of the topic that snapshots are attached to.
  *    Format is `projects/{project}/topics/{topic}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsSnapshotsList
+ *  @return GTLRPubsubQuery_ProjectsTopicsSnapshotsList
  */
 + (instancetype)queryWithTopic:(NSString *)topic;
 
@@ -1275,7 +1322,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param topic The name of the topic that subscriptions are attached to.
  *    Format is `projects/{project}/topics/{topic}`.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsSubscriptionsList
+ *  @return GTLRPubsubQuery_ProjectsTopicsSubscriptionsList
  */
 + (instancetype)queryWithTopic:(NSString *)topic;
 
@@ -1321,7 +1368,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRPubsubQuery_ProjectsTopicsTestIamPermissions
+ *  @return GTLRPubsubQuery_ProjectsTopicsTestIamPermissions
  */
 + (instancetype)queryWithObject:(GTLRPubsub_TestIamPermissionsRequest *)object
                        resource:(NSString *)resource;

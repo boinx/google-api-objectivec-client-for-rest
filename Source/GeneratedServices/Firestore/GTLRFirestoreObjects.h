@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Firestore API (firestore/v1beta1)
+//   Cloud Firestore API (firestore/v1beta1)
 // Documentation:
 //   https://cloud.google.com/firestore
 
@@ -577,7 +577,7 @@ GTLR_EXTERN NSString * const kGTLRFirestore_Value_NullValue_NullValue;
 
 /**
  *  Output only. The time at which the document was last changed.
- *  This value is initally set to the `create_time` then increases
+ *  This value is initially set to the `create_time` then increases
  *  monotonically with each change to the document. It can also be
  *  compared to values from other documents and the `read_time` of a query.
  */
@@ -1758,7 +1758,8 @@ GTLR_EXTERN NSString * const kGTLRFirestore_Value_NullValue_NullValue;
 
 /**
  *  An array value.
- *  Cannot contain another array value.
+ *  Cannot directly contain another array value, though can contain an
+ *  map which contains another array.
  */
 @property(nonatomic, strong, nullable) GTLRFirestore_ArrayValue *arrayValue;
 
@@ -1865,9 +1866,10 @@ GTLR_EXTERN NSString * const kGTLRFirestore_Value_NullValue_NullValue;
 /**
  *  The fields to update in this write.
  *  This field can be set only when the operation is `update`.
- *  None of the field paths in the mask may contain a reserved name.
- *  If the document exists on the server and has fields not referenced in the
- *  mask, they are left unchanged.
+ *  If the mask is not set for an `update` and the document exists, any
+ *  existing data will be overwritten.
+ *  If the mask is set and the document on the server has fields not covered by
+ *  the mask, they are left unchanged.
  *  Fields referenced in the mask, but not present in the input document, are
  *  deleted from the document on the server.
  *  The field paths in this mask must not contain a reserved field name.

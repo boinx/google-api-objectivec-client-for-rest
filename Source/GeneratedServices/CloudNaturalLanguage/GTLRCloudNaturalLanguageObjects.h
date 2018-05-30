@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Natural Language API (language/v1)
+//   Cloud Natural Language API (language/v1)
 // Description:
 //   Provides natural language understanding technologies to developers.
 //   Examples include sentiment analysis, entity recognition, entity sentiment
@@ -1699,7 +1699,10 @@ GTLR_EXTERN NSString * const kGTLRCloudNaturalLanguage_PartOfSpeech_Voice_VoiceU
  */
 @property(nonatomic, strong, nullable) NSNumber *confidence;
 
-/** The name of the category representing the document. */
+/**
+ *  The name of the category representing the document, from the [predefined
+ *  taxonomy](/natural-language/docs/categories).
+ */
 @property(nonatomic, copy, nullable) NSString *name;
 
 @end

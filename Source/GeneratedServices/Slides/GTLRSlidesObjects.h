@@ -90,6 +90,7 @@
 @class GTLRSlides_ReplaceAllShapesWithSheetsChartResponse;
 @class GTLRSlides_ReplaceAllTextRequest;
 @class GTLRSlides_ReplaceAllTextResponse;
+@class GTLRSlides_ReplaceImageRequest;
 @class GTLRSlides_Request;
 @class GTLRSlides_Response;
 @class GTLRSlides_RgbColor;
@@ -127,6 +128,7 @@
 @class GTLRSlides_UnmergeTableCellsRequest;
 @class GTLRSlides_UpdateImagePropertiesRequest;
 @class GTLRSlides_UpdateLinePropertiesRequest;
+@class GTLRSlides_UpdatePageElementAltTextRequest;
 @class GTLRSlides_UpdatePageElementTransformRequest;
 @class GTLRSlides_UpdatePagePropertiesRequest;
 @class GTLRSlides_UpdateParagraphStyleRequest;
@@ -1446,6 +1448,13 @@ GTLR_EXTERN NSString * const kGTLRSlides_Line_LineType_CurvedConnector5;
  */
 GTLR_EXTERN NSString * const kGTLRSlides_Line_LineType_StraightConnector1;
 /**
+ *  Straight line. Corresponds to ECMA-376 ST_ShapeType 'line'. This line
+ *  type is not a connector.
+ *
+ *  Value: "STRAIGHT_LINE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_Line_LineType_StraightLine;
+/**
  *  An unspecified line type.
  *
  *  Value: "TYPE_UNSPECIFIED"
@@ -2328,6 +2337,33 @@ GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_None;
 GTLR_EXTERN NSString * const kGTLRSlides_Recolor_Name_Sepia;
 
 // ----------------------------------------------------------------------------
+// GTLRSlides_ReplaceAllShapesWithImageRequest.imageReplaceMethod
+
+/**
+ *  Scales and centers the image to fill the bounds of the original shape.
+ *  The image may be cropped in order to fill the shape. The rendered size of
+ *  the image will be the same as that of the original shape.
+ *
+ *  Value: "CENTER_CROP"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CenterCrop;
+/**
+ *  Scales and centers the image to fit within the bounds of the original
+ *  shape and maintains the image's aspect ratio. The rendered size of the
+ *  image may be smaller than the size of the shape. This is the default
+ *  method when one is not specified.
+ *
+ *  Value: "CENTER_INSIDE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CenterInside;
+/**
+ *  Unspecified image replace method. This value must not be used.
+ *
+ *  Value: "IMAGE_REPLACE_METHOD_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithImageRequest_ImageReplaceMethod_ImageReplaceMethodUnspecified;
+
+// ----------------------------------------------------------------------------
 // GTLRSlides_ReplaceAllShapesWithImageRequest.replaceMethod
 
 /**
@@ -2365,6 +2401,33 @@ GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithSheetsChartRequest_
  *  Value: "NOT_LINKED_IMAGE"
  */
 GTLR_EXTERN NSString * const kGTLRSlides_ReplaceAllShapesWithSheetsChartRequest_LinkingMode_NotLinkedImage;
+
+// ----------------------------------------------------------------------------
+// GTLRSlides_ReplaceImageRequest.imageReplaceMethod
+
+/**
+ *  Scales and centers the image to fill the bounds of the original shape.
+ *  The image may be cropped in order to fill the shape. The rendered size of
+ *  the image will be the same as that of the original shape.
+ *
+ *  Value: "CENTER_CROP"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceImageRequest_ImageReplaceMethod_CenterCrop;
+/**
+ *  Scales and centers the image to fit within the bounds of the original
+ *  shape and maintains the image's aspect ratio. The rendered size of the
+ *  image may be smaller than the size of the shape. This is the default
+ *  method when one is not specified.
+ *
+ *  Value: "CENTER_INSIDE"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceImageRequest_ImageReplaceMethod_CenterInside;
+/**
+ *  Unspecified image replace method. This value must not be used.
+ *
+ *  Value: "IMAGE_REPLACE_METHOD_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRSlides_ReplaceImageRequest_ImageReplaceMethod_ImageReplaceMethodUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSlides_Shadow.alignment
@@ -3949,6 +4012,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSlides_Response *> *replies;
 
+/** The updated write control after applying the request. */
+@property(nonatomic, strong, nullable) GTLRSlides_WriteControl *writeControl;
+
 @end
 
 
@@ -4025,6 +4091,12 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *  ratio, the image is scaled and centered with respect to the size in order
  *  to maintain aspect ratio. The provided transform is applied after this
  *  operation.
+ *  The PageElementProperties.size property is
+ *  optional. If you don't specify the size, the default size of the image is
+ *  used.
+ *  The PageElementProperties.transform property is
+ *  optional. If you don't specify a transform, the image will be placed at the
+ *  top left corner of the page.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_PageElementProperties *elementProperties;
 
@@ -4044,9 +4116,10 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *  The image URL.
  *  The image is fetched once at insertion time and a copy is stored for
  *  display inside the presentation. Images must be less than 50MB in size,
- *  cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+ *  cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
  *  format.
- *  The provided URL can be at most 2 kB in length.
+ *  The provided URL can be at most 2 kB in length. The URL itself is saved
+ *  with the image, and exposed via the Image.source_url field.
  */
 @property(nonatomic, copy, nullable) NSString *url;
 
@@ -4650,7 +4723,7 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /**
  *  Creates an embedded Google Sheets chart.
  *  NOTE: Chart creation requires at least one of the spreadsheets.readonly,
- *  spreadsheets, drive.readonly, or drive OAuth scopes.
+ *  spreadsheets, drive.readonly, drive.file, or drive OAuth scopes.
  */
 @interface GTLRSlides_CreateSheetsChartRequest : GTLRObject
 
@@ -4831,7 +4904,16 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  */
 @interface GTLRSlides_CreateVideoRequest : GTLRObject
 
-/** The element properties for the video. */
+/**
+ *  The element properties for the video.
+ *  The PageElementProperties.size property is
+ *  optional. If you don't specify a size, a default size is chosen by the
+ *  server.
+ *  The PageElementProperties.transform property is
+ *  optional. The transform must not have shear components.
+ *  If you don't specify a transform, the video will be placed at the top left
+ *  corner of the page.
+ */
 @property(nonatomic, strong, nullable) GTLRSlides_PageElementProperties *elementProperties;
 
 /**
@@ -5240,6 +5322,12 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** The properties of the image. */
 @property(nonatomic, strong, nullable) GTLRSlides_ImageProperties *imageProperties;
 
+/**
+ *  The source URL is the URL used to insert the image. The source URL can be
+ *  empty.
+ */
+@property(nonatomic, copy, nullable) NSString *sourceUrl;
+
 @end
 
 
@@ -5518,7 +5606,7 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /**
  *  A PageElement kind representing a
- *  line, curved connector, or bent connector.
+ *  non-connector line, straight connector, curved connector, or bent connector.
  */
 @interface GTLRSlides_Line : GTLRObject
 
@@ -5556,6 +5644,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *    @arg @c kGTLRSlides_Line_LineType_StraightConnector1 Straight connector 1
  *        form. Corresponds to ECMA-376 ST_ShapeType
  *        'straightConnector1'. (Value: "STRAIGHT_CONNECTOR_1")
+ *    @arg @c kGTLRSlides_Line_LineType_StraightLine Straight line. Corresponds
+ *        to ECMA-376 ST_ShapeType 'line'. This line
+ *        type is not a connector. (Value: "STRAIGHT_LINE")
  *    @arg @c kGTLRSlides_Line_LineType_TypeUnspecified An unspecified line
  *        type. (Value: "TYPE_UNSPECIFIED")
  */
@@ -6631,6 +6722,8 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /**
  *  Replaces all shapes that match the given criteria with the provided image.
+ *  The images replacing the shapes are rectangular after being inserted into
+ *  the presentation and do not take on the forms of the shapes.
  */
 @interface GTLRSlides_ReplaceAllShapesWithImageRequest : GTLRObject
 
@@ -6641,12 +6734,40 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @property(nonatomic, strong, nullable) GTLRSlides_SubstringMatchCriteria *containsText;
 
 /**
+ *  The image replace method.
+ *  If you specify both a `replace_method` and an `image_replace_method`, the
+ *  `image_replace_method` takes precedence.
+ *  If you do not specify a value for `image_replace_method`, but specify a
+ *  value for `replace_method`, then the specified `replace_method` value is
+ *  used.
+ *  If you do not specify either, then CENTER_INSIDE is used.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSlides_ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CenterCrop
+ *        Scales and centers the image to fill the bounds of the original shape.
+ *        The image may be cropped in order to fill the shape. The rendered size
+ *        of
+ *        the image will be the same as that of the original shape. (Value:
+ *        "CENTER_CROP")
+ *    @arg @c kGTLRSlides_ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CenterInside
+ *        Scales and centers the image to fit within the bounds of the original
+ *        shape and maintains the image's aspect ratio. The rendered size of the
+ *        image may be smaller than the size of the shape. This is the default
+ *        method when one is not specified. (Value: "CENTER_INSIDE")
+ *    @arg @c kGTLRSlides_ReplaceAllShapesWithImageRequest_ImageReplaceMethod_ImageReplaceMethodUnspecified
+ *        Unspecified image replace method. This value must not be used. (Value:
+ *        "IMAGE_REPLACE_METHOD_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *imageReplaceMethod;
+
+/**
  *  The image URL.
  *  The image is fetched once at insertion time and a copy is stored for
  *  display inside the presentation. Images must be less than 50MB in size,
- *  cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+ *  cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
  *  format.
- *  The provided URL can be at most 2 kB in length.
+ *  The provided URL can be at most 2 kB in length. The URL itself is saved
+ *  with the image, and exposed via the Image.source_url field.
  */
 @property(nonatomic, copy, nullable) NSString *imageUrl;
 
@@ -6661,6 +6782,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /**
  *  The replace method.
+ *  Deprecated: use `image_replace_method` instead.
+ *  If you specify both a `replace_method` and an `image_replace_method`, the
+ *  `image_replace_method` takes precedence.
  *
  *  Likely values:
  *    @arg @c kGTLRSlides_ReplaceAllShapesWithImageRequest_ReplaceMethod_CenterCrop
@@ -6801,6 +6925,50 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  Replaces an existing image with a new image.
+ *  Replacing an image removes some image effects from the existing image.
+ */
+@interface GTLRSlides_ReplaceImageRequest : GTLRObject
+
+/** The ID of the existing image that will be replaced. */
+@property(nonatomic, copy, nullable) NSString *imageObjectId;
+
+/**
+ *  The replacement method.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSlides_ReplaceImageRequest_ImageReplaceMethod_CenterCrop
+ *        Scales and centers the image to fill the bounds of the original shape.
+ *        The image may be cropped in order to fill the shape. The rendered size
+ *        of
+ *        the image will be the same as that of the original shape. (Value:
+ *        "CENTER_CROP")
+ *    @arg @c kGTLRSlides_ReplaceImageRequest_ImageReplaceMethod_CenterInside
+ *        Scales and centers the image to fit within the bounds of the original
+ *        shape and maintains the image's aspect ratio. The rendered size of the
+ *        image may be smaller than the size of the shape. This is the default
+ *        method when one is not specified. (Value: "CENTER_INSIDE")
+ *    @arg @c kGTLRSlides_ReplaceImageRequest_ImageReplaceMethod_ImageReplaceMethodUnspecified
+ *        Unspecified image replace method. This value must not be used. (Value:
+ *        "IMAGE_REPLACE_METHOD_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *imageReplaceMethod;
+
+/**
+ *  The URL of the new image.
+ *  The image is fetched once at insertion time and a copy is stored for
+ *  display inside the presentation. Images must be less than 50MB in size,
+ *  cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
+ *  format.
+ *  The provided URL can be at most 2 kB in length. The URL itself is saved
+ *  with the image, and exposed via the Image.source_url field.
+ */
+@property(nonatomic, copy, nullable) NSString *url;
+
+@end
+
+
+/**
  *  A single kind of update to apply to a presentation.
  */
 @interface GTLRSlides_Request : GTLRObject
@@ -6874,6 +7042,9 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 /** Replaces all instances of specified text. */
 @property(nonatomic, strong, nullable) GTLRSlides_ReplaceAllTextRequest *replaceAllText;
 
+/** Replaces an existing image with a new image. */
+@property(nonatomic, strong, nullable) GTLRSlides_ReplaceImageRequest *replaceImage;
+
 /** Ungroups objects, such as groups. */
 @property(nonatomic, strong, nullable) GTLRSlides_UngroupObjectsRequest *ungroupObjects;
 
@@ -6885,6 +7056,12 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 /** Updates the properties of a Line. */
 @property(nonatomic, strong, nullable) GTLRSlides_UpdateLinePropertiesRequest *updateLineProperties;
+
+/**
+ *  Updates the alt text title and/or description of a
+ *  page element.
+ */
+@property(nonatomic, strong, nullable) GTLRSlides_UpdatePageElementAltTextRequest *updatePageElementAltText;
 
 /** Updates the transform of a page element. */
 @property(nonatomic, strong, nullable) GTLRSlides_UpdatePageElementTransformRequest *updatePageElementTransform;
@@ -7755,7 +7932,7 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
  *  Writing the content_url:
  *  The picture is fetched once at insertion time and a copy is stored for
  *  display inside the presentation. Pictures must be less than 50MB in size,
- *  cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+ *  cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF
  *  format.
  *  The provided URL can be at most 2 kB in length.
  */
@@ -8575,6 +8752,36 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 
 
 /**
+ *  Updates the alt text title and/or description of a
+ *  page element.
+ */
+@interface GTLRSlides_UpdatePageElementAltTextRequest : GTLRObject
+
+/**
+ *  The updated alt text description of the page element. If unset the existing
+ *  value will be maintained. The description is exposed to screen readers
+ *  and other accessibility interfaces. Only use human readable values related
+ *  to the content of the page element.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/** The object ID of the page element the updates are applied to. */
+@property(nonatomic, copy, nullable) NSString *objectId;
+
+/**
+ *  The updated alt text title of the page element. If unset the
+ *  existing value will be maintained. The title is exposed to screen readers
+ *  and other accessibility interfaces. Only use human readable values related
+ *  to the content of the page element.
+ */
+@property(nonatomic, copy, nullable) NSString *title;
+
+@end
+
+
+/**
  *  Updates the transform of a page element.
  *  Updating the transform of a group will change the absolute transform of the
  *  page elements in that group, which can change their visual appearance. See
@@ -9019,10 +9226,48 @@ GTLR_EXTERN NSString * const kGTLRSlides_Video_Source_Youtube;
 @interface GTLRSlides_VideoProperties : GTLRObject
 
 /**
+ *  Whether to enable video autoplay when the page is displayed in present
+ *  mode. Defaults to false.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *autoPlay;
+
+/**
+ *  The time at which to end playback, measured in seconds from the beginning
+ *  of the video.
+ *  If set, the end time should be after the start time.
+ *  If not set or if you set this to a value that exceeds the video's length,
+ *  the video will be played until its end.
+ *
+ *  Uses NSNumber of unsignedIntValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *end;
+
+/**
+ *  Whether to mute the audio during video playback. Defaults to false.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *mute;
+
+/**
  *  The outline of the video. The default outline matches the defaults for new
  *  videos created in the Slides editor.
  */
 @property(nonatomic, strong, nullable) GTLRSlides_Outline *outline;
+
+/**
+ *  The time at which to start playback, measured in seconds from the beginning
+ *  of the video.
+ *  If set, the start time should be before the end time.
+ *  If you set this to a value that exceeds the video's length in seconds, the
+ *  video will be played from the last second.
+ *  If not set, the video will be played from the beginning.
+ *
+ *  Uses NSNumber of unsignedIntValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *start;
 
 @end
 

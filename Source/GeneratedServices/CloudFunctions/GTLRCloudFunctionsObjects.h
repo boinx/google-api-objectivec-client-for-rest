@@ -4,8 +4,7 @@
 // API:
 //   Google Cloud Functions API (cloudfunctions/v1)
 // Description:
-//   API for managing lightweight user-provided functions executed in response
-//   to events.
+//   Manages lightweight user-provided functions executed in response to events.
 // Documentation:
 //   https://cloud.google.com/functions
 
@@ -311,20 +310,17 @@ GTLR_EXTERN NSString * const kGTLRCloudFunctions_OperationMetadataV1Beta2_Type_U
 
 /**
  *  Required. The type of event to observe. For example:
- *  `google.storage.object.finalized` and
- *  `google.firebase.analytics.event.log`.
- *  Event type consists of three parts:
- *  1. namespace: The domain name of the organization in reverse-domain
- *  notation (e.g. `acme.net` appears as `net.acme`) and any orginization
- *  specific subdivisions. If the organization's top-level domain is `com`,
- *  the top-level domain is ommited (e.g. `google.com` appears as
- *  `google`). For example, `google.storage` and
+ *  `providers/cloud.storage/eventTypes/object.change` and
+ *  `providers/cloud.pubsub/eventTypes/topic.publish`.
+ *  Event types match pattern `providers/ * /eventTypes/ *.*`.
+ *  The pattern contains:
+ *  1. namespace: For example, `cloud.storage` and
  *  `google.firebase.analytics`.
- *  2. resource type: The type of resource on which event ocurs. For
+ *  2. resource type: The type of resource on which event occurs. For
  *  example, the Google Cloud Storage API includes the type `object`.
- *  3. action: The action that generates the event. For example, actions for
- *  a Google Cloud Storage Object include 'finalize' and 'delete'.
- *  These parts are lower case and joined by '.'.
+ *  3. action: The action that generates the event. For example, action for
+ *  a Google Cloud Storage Object is 'change'.
+ *  These parts are lower case.
  */
 @property(nonatomic, copy, nullable) NSString *eventType;
 
@@ -517,6 +513,12 @@ GTLR_EXTERN NSString * const kGTLRCloudFunctions_OperationMetadataV1Beta2_Type_U
  *  A resource that represents Google Cloud Platform location.
  */
 @interface GTLRCloudFunctions_Location : GTLRObject
+
+/**
+ *  The friendly name for this location, typically a nearby city name.
+ *  For example, "Tokyo".
+ */
+@property(nonatomic, copy, nullable) NSString *displayName;
 
 /**
  *  Cross-service attributes for the location. For example

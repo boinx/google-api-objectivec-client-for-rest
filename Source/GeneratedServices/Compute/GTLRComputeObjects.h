@@ -41,6 +41,7 @@
 @class GTLRCompute_AliasIpRange;
 @class GTLRCompute_AttachedDisk;
 @class GTLRCompute_AttachedDiskInitializeParams;
+@class GTLRCompute_AttachedDiskInitializeParams_Labels;
 @class GTLRCompute_Autoscaler;
 @class GTLRCompute_AutoscalerAggregatedList_Items;
 @class GTLRCompute_AutoscalerAggregatedList_Warning;
@@ -166,6 +167,8 @@
 @class GTLRCompute_InstanceGroupsScopedList_Warning_Data_Item;
 @class GTLRCompute_InstanceList_Warning;
 @class GTLRCompute_InstanceList_Warning_Data_Item;
+@class GTLRCompute_InstanceListReferrers_Warning;
+@class GTLRCompute_InstanceListReferrers_Warning_Data_Item;
 @class GTLRCompute_InstanceProperties;
 @class GTLRCompute_InstanceProperties_Labels;
 @class GTLRCompute_InstanceReference;
@@ -196,6 +199,11 @@
 @class GTLRCompute_InterconnectLocationList_Warning_Data_Item;
 @class GTLRCompute_InterconnectLocationRegionInfo;
 @class GTLRCompute_InterconnectOutageNotification;
+@class GTLRCompute_License;
+@class GTLRCompute_LicenseCodeLicenseAlias;
+@class GTLRCompute_LicenseResourceRequirements;
+@class GTLRCompute_LicensesListResponse_Warning;
+@class GTLRCompute_LicensesListResponse_Warning_Data_Item;
 @class GTLRCompute_MachineType;
 @class GTLRCompute_MachineType_ScratchDisks_Item;
 @class GTLRCompute_MachineTypeAggregatedList_Items;
@@ -236,6 +244,7 @@
 @class GTLRCompute_PathRule;
 @class GTLRCompute_Project;
 @class GTLRCompute_Quota;
+@class GTLRCompute_Reference;
 @class GTLRCompute_Region;
 @class GTLRCompute_RegionAutoscalerList_Warning;
 @class GTLRCompute_RegionAutoscalerList_Warning_Data_Item;
@@ -254,6 +263,7 @@
 @class GTLRCompute_RouteList_Warning;
 @class GTLRCompute_RouteList_Warning_Data_Item;
 @class GTLRCompute_Router;
+@class GTLRCompute_RouterAdvertisedIpRange;
 @class GTLRCompute_RouterAggregatedList_Items;
 @class GTLRCompute_RouterAggregatedList_Warning;
 @class GTLRCompute_RouterAggregatedList_Warning_Data_Item;
@@ -277,6 +287,11 @@
 @class GTLRCompute_SslCertificateList_Warning;
 @class GTLRCompute_SslCertificateList_Warning_Data_Item;
 @class GTLRCompute_SSLHealthCheck;
+@class GTLRCompute_SslPoliciesList_Warning;
+@class GTLRCompute_SslPoliciesList_Warning_Data_Item;
+@class GTLRCompute_SslPolicy;
+@class GTLRCompute_SslPolicy_Warnings_Item;
+@class GTLRCompute_SslPolicy_Warnings_Item_Data_Item;
 @class GTLRCompute_Subnetwork;
 @class GTLRCompute_SubnetworkAggregatedList_Items;
 @class GTLRCompute_SubnetworkAggregatedList_Warning;
@@ -1917,6 +1932,12 @@ GTLR_EXTERN NSString * const kGTLRCompute_ForwardingRulesScopedList_Warning_Code
 
 /** Value: "FEATURE_TYPE_UNSPECIFIED" */
 GTLR_EXTERN NSString * const kGTLRCompute_GuestOsFeature_Type_FeatureTypeUnspecified;
+/** Value: "MULTI_IP_SUBNET" */
+GTLR_EXTERN NSString * const kGTLRCompute_GuestOsFeature_Type_MultiIpSubnet;
+/** Value: "SECURE_BOOT" */
+GTLR_EXTERN NSString * const kGTLRCompute_GuestOsFeature_Type_SecureBoot;
+/** Value: "UEFI_COMPATIBLE" */
+GTLR_EXTERN NSString * const kGTLRCompute_GuestOsFeature_Type_UefiCompatible;
 /** Value: "VIRTIO_SCSI_MULTIQUEUE" */
 GTLR_EXTERN NSString * const kGTLRCompute_GuestOsFeature_Type_VirtioScsiMultiqueue;
 /** Value: "WINDOWS" */
@@ -2661,6 +2682,56 @@ GTLR_EXTERN NSString * const kGTLRCompute_InstanceList_Warning_Code_UndeclaredPr
 GTLR_EXTERN NSString * const kGTLRCompute_InstanceList_Warning_Code_Unreachable;
 
 // ----------------------------------------------------------------------------
+// GTLRCompute_InstanceListReferrers_Warning.code
+
+/** Value: "CLEANUP_FAILED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_CleanupFailed;
+/** Value: "DEPRECATED_RESOURCE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_DeprecatedResourceUsed;
+/** Value: "DEPRECATED_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_DeprecatedTypeUsed;
+/** Value: "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_DiskSizeLargerThanImageSize;
+/** Value: "EXPERIMENTAL_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_ExperimentalTypeUsed;
+/** Value: "EXTERNAL_API_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_ExternalApiWarning;
+/** Value: "FIELD_VALUE_OVERRIDEN" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_FieldValueOverriden;
+/** Value: "INJECTED_KERNELS_DEPRECATED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_InjectedKernelsDeprecated;
+/** Value: "MISSING_TYPE_DEPENDENCY" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_MissingTypeDependency;
+/** Value: "NEXT_HOP_ADDRESS_NOT_ASSIGNED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopAddressNotAssigned;
+/** Value: "NEXT_HOP_CANNOT_IP_FORWARD" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopCannotIpForward;
+/** Value: "NEXT_HOP_INSTANCE_NOT_FOUND" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopInstanceNotFound;
+/** Value: "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopInstanceNotOnNetwork;
+/** Value: "NEXT_HOP_NOT_RUNNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopNotRunning;
+/** Value: "NO_RESULTS_ON_PAGE" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NoResultsOnPage;
+/** Value: "NOT_CRITICAL_ERROR" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_NotCriticalError;
+/** Value: "REQUIRED_TOS_AGREEMENT" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_ResourceInUseByOtherResourceWarning;
+/** Value: "RESOURCE_NOT_DELETED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_ResourceNotDeleted;
+/** Value: "SCHEMA_VALIDATION_IGNORED" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_SchemaValidationIgnored;
+/** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_SingleInstancePropertyTemplate;
+/** Value: "UNDECLARED_PROPERTIES" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_UndeclaredProperties;
+/** Value: "UNREACHABLE" */
+GTLR_EXTERN NSString * const kGTLRCompute_InstanceListReferrers_Warning_Code_Unreachable;
+
+// ----------------------------------------------------------------------------
 // GTLRCompute_InstancesScopedList_Warning.code
 
 /** Value: "CLEANUP_FAILED" */
@@ -3127,6 +3198,70 @@ GTLR_EXTERN NSString * const kGTLRCompute_InterconnectOutageNotification_State_C
 GTLR_EXTERN NSString * const kGTLRCompute_InterconnectOutageNotification_State_NsActive;
 /** Value: "NS_CANCELED" */
 GTLR_EXTERN NSString * const kGTLRCompute_InterconnectOutageNotification_State_NsCanceled;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_LicenseCode.state
+
+/** Value: "DISABLED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicenseCode_State_Disabled;
+/** Value: "ENABLED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicenseCode_State_Enabled;
+/** Value: "RESTRICTED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicenseCode_State_Restricted;
+/** Value: "STATE_UNSPECIFIED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicenseCode_State_StateUnspecified;
+/** Value: "TERMINATED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicenseCode_State_Terminated;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_LicensesListResponse_Warning.code
+
+/** Value: "CLEANUP_FAILED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_CleanupFailed;
+/** Value: "DEPRECATED_RESOURCE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_DeprecatedResourceUsed;
+/** Value: "DEPRECATED_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_DeprecatedTypeUsed;
+/** Value: "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_DiskSizeLargerThanImageSize;
+/** Value: "EXPERIMENTAL_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_ExperimentalTypeUsed;
+/** Value: "EXTERNAL_API_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_ExternalApiWarning;
+/** Value: "FIELD_VALUE_OVERRIDEN" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_FieldValueOverriden;
+/** Value: "INJECTED_KERNELS_DEPRECATED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_InjectedKernelsDeprecated;
+/** Value: "MISSING_TYPE_DEPENDENCY" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_MissingTypeDependency;
+/** Value: "NEXT_HOP_ADDRESS_NOT_ASSIGNED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NextHopAddressNotAssigned;
+/** Value: "NEXT_HOP_CANNOT_IP_FORWARD" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NextHopCannotIpForward;
+/** Value: "NEXT_HOP_INSTANCE_NOT_FOUND" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NextHopInstanceNotFound;
+/** Value: "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NextHopInstanceNotOnNetwork;
+/** Value: "NEXT_HOP_NOT_RUNNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NextHopNotRunning;
+/** Value: "NO_RESULTS_ON_PAGE" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NoResultsOnPage;
+/** Value: "NOT_CRITICAL_ERROR" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_NotCriticalError;
+/** Value: "REQUIRED_TOS_AGREEMENT" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_ResourceInUseByOtherResourceWarning;
+/** Value: "RESOURCE_NOT_DELETED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_ResourceNotDeleted;
+/** Value: "SCHEMA_VALIDATION_IGNORED" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_SchemaValidationIgnored;
+/** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_SingleInstancePropertyTemplate;
+/** Value: "UNDECLARED_PROPERTIES" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_UndeclaredProperties;
+/** Value: "UNREACHABLE" */
+GTLR_EXTERN NSString * const kGTLRCompute_LicensesListResponse_Warning_Code_Unreachable;
 
 // ----------------------------------------------------------------------------
 // GTLRCompute_MachineTypeAggregatedList_Warning.code
@@ -3649,6 +3784,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_Networks;
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_NvidiaK80Gpus;
 /** Value: "NVIDIA_P100_GPUS" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_NvidiaP100Gpus;
+/** Value: "NVIDIA_V100_GPUS" */
+GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_NvidiaV100Gpus;
 /** Value: "PREEMPTIBLE_CPUS" */
 GTLR_EXTERN NSString * const kGTLRCompute_Quota_Metric_PreemptibleCpus;
 /** Value: "PREEMPTIBLE_LOCAL_SSD_GB" */
@@ -4125,6 +4262,34 @@ GTLR_EXTERN NSString * const kGTLRCompute_RouterAggregatedList_Warning_Code_Unde
 GTLR_EXTERN NSString * const kGTLRCompute_RouterAggregatedList_Warning_Code_Unreachable;
 
 // ----------------------------------------------------------------------------
+// GTLRCompute_RouterBgp.advertisedGroups
+
+/** Value: "ALL_SUBNETS" */
+GTLR_EXTERN NSString * const kGTLRCompute_RouterBgp_AdvertisedGroups_AllSubnets;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_RouterBgp.advertiseMode
+
+/** Value: "CUSTOM" */
+GTLR_EXTERN NSString * const kGTLRCompute_RouterBgp_AdvertiseMode_Custom;
+/** Value: "DEFAULT" */
+GTLR_EXTERN NSString * const kGTLRCompute_RouterBgp_AdvertiseMode_Default;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_RouterBgpPeer.advertisedGroups
+
+/** Value: "ALL_SUBNETS" */
+GTLR_EXTERN NSString * const kGTLRCompute_RouterBgpPeer_AdvertisedGroups_AllSubnets;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_RouterBgpPeer.advertiseMode
+
+/** Value: "CUSTOM" */
+GTLR_EXTERN NSString * const kGTLRCompute_RouterBgpPeer_AdvertiseMode_Custom;
+/** Value: "DEFAULT" */
+GTLR_EXTERN NSString * const kGTLRCompute_RouterBgpPeer_AdvertiseMode_Default;
+
+// ----------------------------------------------------------------------------
 // GTLRCompute_RouterList_Warning.code
 
 /** Value: "CLEANUP_FAILED" */
@@ -4371,6 +4536,128 @@ GTLR_EXTERN NSString * const kGTLRCompute_SslCertificateList_Warning_Code_Unreac
 GTLR_EXTERN NSString * const kGTLRCompute_SSLHealthCheck_ProxyHeader_None;
 /** Value: "PROXY_V1" */
 GTLR_EXTERN NSString * const kGTLRCompute_SSLHealthCheck_ProxyHeader_ProxyV1;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_SslPoliciesList_Warning.code
+
+/** Value: "CLEANUP_FAILED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_CleanupFailed;
+/** Value: "DEPRECATED_RESOURCE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_DeprecatedResourceUsed;
+/** Value: "DEPRECATED_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_DeprecatedTypeUsed;
+/** Value: "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_DiskSizeLargerThanImageSize;
+/** Value: "EXPERIMENTAL_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_ExperimentalTypeUsed;
+/** Value: "EXTERNAL_API_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_ExternalApiWarning;
+/** Value: "FIELD_VALUE_OVERRIDEN" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_FieldValueOverriden;
+/** Value: "INJECTED_KERNELS_DEPRECATED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_InjectedKernelsDeprecated;
+/** Value: "MISSING_TYPE_DEPENDENCY" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_MissingTypeDependency;
+/** Value: "NEXT_HOP_ADDRESS_NOT_ASSIGNED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NextHopAddressNotAssigned;
+/** Value: "NEXT_HOP_CANNOT_IP_FORWARD" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NextHopCannotIpForward;
+/** Value: "NEXT_HOP_INSTANCE_NOT_FOUND" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NextHopInstanceNotFound;
+/** Value: "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NextHopInstanceNotOnNetwork;
+/** Value: "NEXT_HOP_NOT_RUNNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NextHopNotRunning;
+/** Value: "NO_RESULTS_ON_PAGE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NoResultsOnPage;
+/** Value: "NOT_CRITICAL_ERROR" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_NotCriticalError;
+/** Value: "REQUIRED_TOS_AGREEMENT" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_ResourceInUseByOtherResourceWarning;
+/** Value: "RESOURCE_NOT_DELETED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_ResourceNotDeleted;
+/** Value: "SCHEMA_VALIDATION_IGNORED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_SchemaValidationIgnored;
+/** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_SingleInstancePropertyTemplate;
+/** Value: "UNDECLARED_PROPERTIES" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_UndeclaredProperties;
+/** Value: "UNREACHABLE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPoliciesList_Warning_Code_Unreachable;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_SslPolicy.minTlsVersion
+
+/** Value: "TLS_1_0" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_MinTlsVersion_Tls10;
+/** Value: "TLS_1_1" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_MinTlsVersion_Tls11;
+/** Value: "TLS_1_2" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_MinTlsVersion_Tls12;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_SslPolicy.profile
+
+/** Value: "COMPATIBLE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Profile_Compatible;
+/** Value: "CUSTOM" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Profile_Custom;
+/** Value: "MODERN" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Profile_Modern;
+/** Value: "RESTRICTED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Profile_Restricted;
+
+// ----------------------------------------------------------------------------
+// GTLRCompute_SslPolicy_Warnings_Item.code
+
+/** Value: "CLEANUP_FAILED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_CleanupFailed;
+/** Value: "DEPRECATED_RESOURCE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_DeprecatedResourceUsed;
+/** Value: "DEPRECATED_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_DeprecatedTypeUsed;
+/** Value: "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_DiskSizeLargerThanImageSize;
+/** Value: "EXPERIMENTAL_TYPE_USED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_ExperimentalTypeUsed;
+/** Value: "EXTERNAL_API_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_ExternalApiWarning;
+/** Value: "FIELD_VALUE_OVERRIDEN" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_FieldValueOverriden;
+/** Value: "INJECTED_KERNELS_DEPRECATED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_InjectedKernelsDeprecated;
+/** Value: "MISSING_TYPE_DEPENDENCY" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_MissingTypeDependency;
+/** Value: "NEXT_HOP_ADDRESS_NOT_ASSIGNED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopAddressNotAssigned;
+/** Value: "NEXT_HOP_CANNOT_IP_FORWARD" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopCannotIpForward;
+/** Value: "NEXT_HOP_INSTANCE_NOT_FOUND" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopInstanceNotFound;
+/** Value: "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopInstanceNotOnNetwork;
+/** Value: "NEXT_HOP_NOT_RUNNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopNotRunning;
+/** Value: "NO_RESULTS_ON_PAGE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NoResultsOnPage;
+/** Value: "NOT_CRITICAL_ERROR" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_NotCriticalError;
+/** Value: "REQUIRED_TOS_AGREEMENT" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_RequiredTosAgreement;
+/** Value: "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_ResourceInUseByOtherResourceWarning;
+/** Value: "RESOURCE_NOT_DELETED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_ResourceNotDeleted;
+/** Value: "SCHEMA_VALIDATION_IGNORED" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_SchemaValidationIgnored;
+/** Value: "SINGLE_INSTANCE_PROPERTY_TEMPLATE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_SingleInstancePropertyTemplate;
+/** Value: "UNDECLARED_PROPERTIES" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_UndeclaredProperties;
+/** Value: "UNREACHABLE" */
+GTLR_EXTERN NSString * const kGTLRCompute_SslPolicy_Warnings_Item_Code_Unreachable;
 
 // ----------------------------------------------------------------------------
 // GTLRCompute_SubnetworkAggregatedList_Warning.code
@@ -5602,8 +5889,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) NSNumber *acceleratorCount;
 
 /**
- *  Full or partial URL of the accelerator type resource to expose to this
- *  instance.
+ *  Full or partial URL of the accelerator type resource to attach to this
+ *  instance. If you are creating an instance template, specify only the
+ *  accelerator name.
  */
 @property(nonatomic, copy, nullable) NSString *acceleratorType;
 
@@ -5611,7 +5899,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  An Accelerator Type resource.
+ *  An Accelerator Type resource. (== resource_for beta.acceleratorTypes ==) (==
+ *  resource_for v1.acceleratorTypes ==)
  */
 @interface GTLRCompute_AcceleratorType : GTLRObject
 
@@ -5661,7 +5950,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] The name of the zone where the accelerator type resides, such
- *  as us-central1-a.
+ *  as us-central1-a. You must specify this field as part of the HTTP request
+ *  URL. It is not settable as a field in the request body.
  *
  *  Remapped to 'zoneProperty' to avoid NSObject's 'zone'.
  */
@@ -5961,7 +6251,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_AcceleratorTypesScopedList : GTLRObject
 
-/** [Output Only] List of accelerator types contained in this scope. */
+/** [Output Only] A list of accelerator types contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_AcceleratorType *> *acceleratorTypes;
 
 /**
@@ -6096,6 +6386,20 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *natIP;
 
 /**
+ *  The DNS domain name for the public PTR record. This field can only be set
+ *  when the set_public_ptr field is enabled.
+ */
+@property(nonatomic, copy, nullable) NSString *publicPtrDomainName;
+
+/**
+ *  Specifies whether a public DNS ?PTR? record should be created to map the
+ *  external IP address of the instance to a DNS domain name.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *setPublicPtr;
+
+/**
  *  The type of configuration. The default and only option is ONE_TO_ONE_NAT.
  *
  *  Likely values:
@@ -6107,7 +6411,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A reserved address resource.
+ *  A reserved address resource. (== resource_for beta.addresses ==) (==
+ *  resource_for v1.addresses ==) (== resource_for beta.globalAddresses ==) (==
+ *  resource_for v1.globalAddresses ==)
  */
 @interface GTLRCompute_Address : GTLRObject
 
@@ -6168,7 +6474,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -6177,7 +6483,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] URL of the region where the regional address resides. This
- *  field is not applicable to global addresses.
+ *  field is not applicable to global addresses. You must specify this field as
+ *  part of the HTTP request URL. You cannot set this field in the request body.
  */
 @property(nonatomic, copy, nullable) NSString *region;
 
@@ -6198,9 +6505,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *status;
 
 /**
- *  For external addresses, this field should not be used.
  *  The URL of the subnetwork in which to reserve the address. If an IP address
- *  is specified, it must be within the subnetwork's IP range.
+ *  is specified, it must be within the subnetwork's IP range. This field can
+ *  only be used with INTERNAL type with GCE_ENDPOINT/DNS_RESOLVER purposes.
  */
 @property(nonatomic, copy, nullable) NSString *subnetwork;
 
@@ -6359,7 +6666,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_AddressesScopedList : GTLRObject
 
-/** [Output Only] List of addresses contained in this scope. */
+/** [Output Only] A list of addresses contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Address *> *addresses;
 
 /**
@@ -6682,6 +6989,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) GTLRCompute_CustomerEncryptionKey *diskEncryptionKey;
 
 /**
+ *  A list of features to enable on the guest operating system. Applicable only
+ *  for bootable images. Read Enabling guest operating system features to see a
+ *  list of available options.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_GuestOsFeature *> *guestOsFeatures;
+
+/**
  *  [Output Only] A zero-based index to this disk, where 0 is reserved for the
  *  boot disk. If you have many disks attached to an instance, each disk would
  *  have a unique index number.
@@ -6793,6 +7107,12 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *diskType;
 
 /**
+ *  Labels to apply to this disk. These can be later modified by the
+ *  disks.setLabels method. This field is only applicable for persistent disks.
+ */
+@property(nonatomic, strong, nullable) GTLRCompute_AttachedDiskInitializeParams_Labels *labels;
+
+/**
  *  The source image to create this disk. When creating a new instance, one of
  *  initializeParams.sourceImage or disks.source is required except for local
  *  SSD.
@@ -6826,10 +7146,25 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
+ *  Labels to apply to this disk. These can be later modified by the
+ *  disks.setLabels method. This field is only applicable for persistent disks.
+ *
+ *  @note This class is documented as having more properties of NSString. Use @c
+ *        -additionalJSONKeys and @c -additionalPropertyForName: to get the list
+ *        of properties and then fetch them; or @c -additionalProperties to
+ *        fetch them all at once.
+ */
+@interface GTLRCompute_AttachedDiskInitializeParams_Labels : GTLRObject
+@end
+
+
+/**
  *  Represents an Autoscaler resource. Autoscalers allow you to automatically
  *  scale virtual machine instances in managed instance groups according to an
  *  autoscaling policy that you define. For more information, read Autoscaling
- *  Groups of Instances.
+ *  Groups of Instances. (== resource_for beta.autoscalers ==) (== resource_for
+ *  v1.autoscalers ==) (== resource_for beta.regionAutoscalers ==) (==
+ *  resource_for v1.regionAutoscalers ==)
  */
 @interface GTLRCompute_Autoscaler : GTLRObject
 
@@ -6873,7 +7208,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -7212,7 +7547,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_AutoscalersScopedList : GTLRObject
 
-/** [Output Only] List of autoscalers contained in this scope. */
+/** [Output Only] A list of autoscalers contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Autoscaler *> *autoscalers;
 
 /**
@@ -7648,7 +7983,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -7802,7 +8137,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  A BackendService resource. This resource defines a group of backend virtual
- *  machines and their serving capacity.
+ *  machines and their serving capacity. (== resource_for v1.backendService ==)
+ *  (== resource_for beta.backendService ==)
  */
 @interface GTLRCompute_BackendService : GTLRObject
 
@@ -7903,7 +8239,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -7944,7 +8280,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] URL of the region where the regional backend service resides.
- *  This field is not applicable to global backend services.
+ *  This field is not applicable to global backend services. You must specify
+ *  this field as part of the HTTP request URL. It is not settable as a field in
+ *  the request body.
  */
 @property(nonatomic, copy, nullable) NSString *region;
 
@@ -8321,7 +8659,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_BackendServicesScopedList : GTLRObject
 
-/** List of BackendServices contained in this scope. */
+/** A list of BackendServices contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_BackendService *> *backendServices;
 
 /**
@@ -8501,7 +8839,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Committed use discounts are subject to Google Cloud Platform's Service
  *  Specific Terms. By purchasing a committed use discount, you agree to these
  *  terms. Committed use discounts will not renew, so you must purchase a new
- *  commitment to continue receiving discounts.
+ *  commitment to continue receiving discounts. (== resource_for
+ *  beta.commitments ==) (== resource_for v1.commitments ==)
  */
 @interface GTLRCompute_Commitment : GTLRObject
 
@@ -8539,7 +8878,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -8563,7 +8902,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *region;
 
 /**
- *  List of commitment amounts for particular resources. Note that VCPU and
+ *  A list of commitment amounts for particular resources. Note that VCPU and
  *  MEMORY resource commitments must occur together.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_ResourceCommitment *> *resources;
@@ -8884,7 +9223,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_CommitmentsScopedList : GTLRObject
 
-/** [Output Only] List of commitments contained in this scope. */
+/** [Output Only] A list of commitments contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Commitment *> *commitments;
 
 /**
@@ -9097,7 +9436,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A Disk resource.
+ *  A Disk resource. (== resource_for beta.disks ==) (== resource_for v1.disks
+ *  ==)
  */
 @interface GTLRCompute_Disk : GTLRObject
 
@@ -9124,6 +9464,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  need to provide a key to use the disk later.
  */
 @property(nonatomic, strong, nullable) GTLRCompute_CustomerEncryptionKey *diskEncryptionKey;
+
+/**
+ *  A list of features to enable on the guest operating system. Applicable only
+ *  for bootable images. Read Enabling guest operating system features to see a
+ *  list of available options.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_GuestOsFeature *> *guestOsFeatures;
 
 /**
  *  [Output Only] The unique identifier for the resource. This identifier is
@@ -9163,6 +9510,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /** [Output Only] Last detach timestamp in RFC3339 text format. */
 @property(nonatomic, copy, nullable) NSString *lastDetachTimestamp;
 
+/**
+ *  Integer license codes indicating which licenses are attached to this disk.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSNumber *> *licenseCodes;
+
 /** Any applicable publicly visible licenses. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *licenses;
 
@@ -9170,7 +9524,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -9268,7 +9622,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  URL of the disk type resource describing which disk type to use to create
- *  the disk. Provide this when creating the disk.
+ *  the disk. Provide this when creating the disk. For example:
+ *  project/zones/zone/diskTypes/pd-standard or pd-ssd
  */
 @property(nonatomic, copy, nullable) NSString *type;
 
@@ -9279,7 +9634,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) NSArray<NSString *> *users;
 
 /**
- *  [Output Only] URL of the zone where the disk resides.
+ *  [Output Only] URL of the zone where the disk resides. You must specify this
+ *  field as part of the HTTP request URL. It is not settable as a field in the
+ *  request body.
  *
  *  Remapped to 'zoneProperty' to avoid NSObject's 'zone'.
  */
@@ -9632,7 +9989,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_DisksScopedList : GTLRObject
 
-/** [Output Only] List of disks contained in this scope. */
+/** [Output Only] A list of disks contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Disk *> *disks;
 
 /**
@@ -9739,7 +10096,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A DiskType resource.
+ *  A DiskType resource. (== resource_for beta.diskTypes ==) (== resource_for
+ *  v1.diskTypes ==)
  */
 @interface GTLRCompute_DiskType : GTLRObject
 
@@ -9791,7 +10149,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *validDiskSize;
 
 /**
- *  [Output Only] URL of the zone where the disk type resides.
+ *  [Output Only] URL of the zone where the disk type resides. You must specify
+ *  this field as part of the HTTP request URL. It is not settable as a field in
+ *  the request body.
  *
  *  Remapped to 'zoneProperty' to avoid NSObject's 'zone'.
  */
@@ -10087,7 +10447,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_DiskTypesScopedList : GTLRObject
 
-/** [Output Only] List of disk types contained in this scope. */
+/** [Output Only] A list of disk types contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_DiskType *> *diskTypes;
 
 /**
@@ -10209,7 +10569,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  The list of DENY rules specified by this firewall. Each rule specifies a
- *  protocol and port-range tuple that describes a permitted connection.
+ *  protocol and port-range tuple that describes a denied connection.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Firewall_Denied_Item *> *denied;
 
@@ -10260,7 +10620,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource; provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -10551,7 +10911,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /**
  *  A ForwardingRule resource. A ForwardingRule resource specifies which pool of
  *  target virtual machines to forward a packet to if it matches the given
- *  [IPAddress, IPProtocol, ports] tuple.
+ *  [IPAddress, IPProtocol, ports] tuple. (== resource_for beta.forwardingRules
+ *  ==) (== resource_for v1.forwardingRules ==) (== resource_for
+ *  beta.globalForwardingRules ==) (== resource_for v1.globalForwardingRules ==)
+ *  (== resource_for beta.regionForwardingRules ==) (== resource_for
+ *  v1.regionForwardingRules ==)
  */
 @interface GTLRCompute_ForwardingRule : GTLRObject
 
@@ -10665,7 +11029,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource; provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -10691,12 +11055,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Some types of forwarding target have constraints on the acceptable ports:
  *  - TargetHttpProxy: 80, 8080
  *  - TargetHttpsProxy: 443
- *  - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883,
- *  5222
- *  - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883,
- *  5222
+ *  - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1688,
+ *  1883, 5222
+ *  - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1688,
+ *  1883, 5222
  *  - TargetVpnGateway: 500, 4500
- *  -
  */
 @property(nonatomic, copy, nullable) NSString *portRange;
 
@@ -10713,7 +11076,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] URL of the region where the regional forwarding rule resides.
- *  This field is not applicable to global forwarding rules.
+ *  This field is not applicable to global forwarding rules. You must specify
+ *  this field as part of the HTTP request URL. It is not settable as a field in
+ *  the request body.
  */
 @property(nonatomic, copy, nullable) NSString *region;
 
@@ -10736,7 +11101,6 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  rule. For global forwarding rules, this target must be a global load
  *  balancing resource. The forwarded traffic must be of a type appropriate to
  *  the target object.
- *  This field is not used for internal load balancing.
  */
 @property(nonatomic, copy, nullable) NSString *target;
 
@@ -11031,7 +11395,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_ForwardingRulesScopedList : GTLRObject
 
-/** List of forwarding rules contained in this scope. */
+/** A list of forwarding rules contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_ForwardingRule *> *forwardingRules;
 
 /**
@@ -11157,7 +11521,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /**
  *  A list of labels to apply for this resource. Each label key & value must
  *  comply with RFC1035. Specifically, the name must be 1-63 characters long and
- *  match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the
+ *  match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the
  *  first character must be a lowercase letter, and all following characters
  *  must be a dash, lowercase letter, or digit, except the last character, which
  *  cannot be a dash. For example, "webserver-frontend": "images". A label value
@@ -11171,7 +11535,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /**
  *  A list of labels to apply for this resource. Each label key & value must
  *  comply with RFC1035. Specifically, the name must be 1-63 characters long and
- *  match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the
+ *  match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the
  *  first character must be a lowercase letter, and all following characters
  *  must be a dash, lowercase letter, or digit, except the last character, which
  *  cannot be a dash. For example, "webserver-frontend": "images". A label value
@@ -11192,13 +11556,17 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @interface GTLRCompute_GuestOsFeature : GTLRObject
 
 /**
- *  The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is
- *  supported. For newer Windows images, the server might also populate this
- *  property with the value WINDOWS to indicate that this is a Windows image.
+ *  The ID of a supported feature. Read Enabling guest operating system features
+ *  to see a list of available options.
  *
  *  Likely values:
  *    @arg @c kGTLRCompute_GuestOsFeature_Type_FeatureTypeUnspecified Value
  *        "FEATURE_TYPE_UNSPECIFIED"
+ *    @arg @c kGTLRCompute_GuestOsFeature_Type_MultiIpSubnet Value
+ *        "MULTI_IP_SUBNET"
+ *    @arg @c kGTLRCompute_GuestOsFeature_Type_SecureBoot Value "SECURE_BOOT"
+ *    @arg @c kGTLRCompute_GuestOsFeature_Type_UefiCompatible Value
+ *        "UEFI_COMPATIBLE"
  *    @arg @c kGTLRCompute_GuestOsFeature_Type_VirtioScsiMultiqueue Value
  *        "VIRTIO_SCSI_MULTIQUEUE"
  *    @arg @c kGTLRCompute_GuestOsFeature_Type_Windows Value "WINDOWS"
@@ -11262,7 +11630,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -11583,7 +11951,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -11910,7 +12278,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -12094,7 +12462,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  An Image resource.
+ *  An Image resource. (== resource_for beta.images ==) (== resource_for
+ *  v1.images ==)
  */
 @interface GTLRCompute_Image : GTLRObject
 
@@ -12135,14 +12504,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *family;
 
 /**
- *  A list of features to enable on the guest OS. Applicable for bootable images
- *  only. Currently, only one feature can be enabled, VIRTIO_SCSI_MULTIQUEUE,
- *  which allows each virtual CPU to have its own queue. For Windows images, you
- *  can only enable VIRTIO_SCSI_MULTIQUEUE on images with driver version
- *  1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will
- *  support VIRTIO_SCSI_MULTIQUEUE.
- *  For newer Windows images, the server might also populate this property with
- *  the value WINDOWS to indicate that this is a Windows image.
+ *  A list of features to enable on the guest operating system. Applicable only
+ *  for bootable images. Read Enabling guest operating system features to see a
+ *  list of available options.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_GuestOsFeature *> *guestOsFeatures;
 
@@ -12191,6 +12555,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @property(nonatomic, strong, nullable) GTLRCompute_Image_Labels *labels;
 
+/**
+ *  Integer license codes indicating which licenses are attached to this image.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSNumber *> *licenseCodes;
+
 /** Any applicable license URI. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *licenses;
 
@@ -12198,7 +12569,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource; provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -12257,6 +12628,29 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  or a previous instance of a given image name.
  */
 @property(nonatomic, copy, nullable) NSString *sourceImageId;
+
+/**
+ *  URL of the source snapshot used to create this image. This can be a full or
+ *  valid partial URL. You must provide exactly one of:
+ *  - this property, or
+ *  - the sourceImage property, or
+ *  - the rawDisk.source property, or
+ *  - the sourceDisk property in order to create an image.
+ */
+@property(nonatomic, copy, nullable) NSString *sourceSnapshot;
+
+/**
+ *  The customer-supplied encryption key of the source snapshot. Required if the
+ *  source snapshot is protected by a customer-supplied encryption key.
+ */
+@property(nonatomic, strong, nullable) GTLRCompute_CustomerEncryptionKey *sourceSnapshotEncryptionKey;
+
+/**
+ *  [Output Only] The ID value of the snapshot used to create this image. This
+ *  value may be used to determine whether the snapshot was taken from the
+ *  current or a previous instance of a given snapshot name.
+ */
+@property(nonatomic, copy, nullable) NSString *sourceSnapshotId;
 
 /**
  *  The type of the image used to create this disk. The default and only value
@@ -12466,7 +12860,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  An Instance resource.
+ *  An Instance resource. (== resource_for beta.instances ==) (== resource_for
+ *  v1.instances ==)
  */
 @interface GTLRCompute_Instance : GTLRObject
 
@@ -12507,7 +12902,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_AttachedDisk *> *disks;
 
 /**
- *  List of the type and count of accelerator cards attached to the instance.
+ *  A list of the type and count of accelerator cards attached to the instance.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_AcceleratorConfig *> *guestAccelerators;
 
@@ -12527,11 +12922,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *kind;
 
 /**
- *  A fingerprint for this request, which is essentially a hash of the
- *  metadata's contents and used for optimistic locking. The fingerprint is
- *  initially generated by Compute Engine and changes after every request to
- *  modify or update metadata. You must always provide an up-to-date fingerprint
- *  hash in order to update or change metadata.
+ *  A fingerprint for this request, which is essentially a hash of the label's
+ *  contents and used for optimistic locking. The fingerprint is initially
+ *  generated by Compute Engine and changes after every request to modify or
+ *  update labels. You must always provide an up-to-date fingerprint hash in
+ *  order to update or change labels.
  *  To see the latest fingerprint, make get() request to the instance.
  *
  *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
@@ -12580,7 +12975,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  The name of the resource, provided by the client when initially creating the
  *  resource. The resource name must be 1-63 characters long, and comply with
  *  RFC1035. Specifically, the name must be 1-63 characters long and match the
- *  regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+ *  regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first
  *  character must be a lowercase letter, and all following characters must be a
  *  dash, lowercase letter, or digit, except the last character, which cannot be
  *  a dash.
@@ -12646,7 +13041,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) GTLRCompute_Tags *tags;
 
 /**
- *  [Output Only] URL of the zone where the instance resides.
+ *  [Output Only] URL of the zone where the instance resides. You must specify
+ *  this field as part of the HTTP request URL. It is not settable as a field in
+ *  the request body.
  *
  *  Remapped to 'zoneProperty' to avoid NSObject's 'zone'.
  */
@@ -12813,7 +13210,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  GTLRCompute_InstanceGroup
+ *  InstanceGroups (== resource_for beta.instanceGroups ==) (== resource_for
+ *  v1.instanceGroups ==) (== resource_for beta.regionInstanceGroups ==) (==
+ *  resource_for v1.regionInstanceGroups ==)
  */
 @interface GTLRCompute_InstanceGroup : GTLRObject
 
@@ -12878,8 +13277,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *network;
 
 /**
- *  The URL of the region where the instance group is located (for regional
- *  resources).
+ *  [Output Only] The URL of the region where the instance group is located (for
+ *  regional resources).
  */
 @property(nonatomic, copy, nullable) NSString *region;
 
@@ -12897,8 +13296,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) NSNumber *size;
 
 /**
- *  The URL of the subnetwork to which all instances in the instance group
- *  belong.
+ *  [Output Only] The URL of the subnetwork to which all instances in the
+ *  instance group belong.
  */
 @property(nonatomic, copy, nullable) NSString *subnetwork;
 
@@ -13200,7 +13599,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  An Instance Group Manager resource.
+ *  An Instance Group Manager resource. (== resource_for
+ *  beta.instanceGroupManagers ==) (== resource_for v1.instanceGroupManagers ==)
+ *  (== resource_for beta.regionInstanceGroupManagers ==) (== resource_for
+ *  v1.regionInstanceGroupManagers ==)
  */
 @interface GTLRCompute_InstanceGroupManager : GTLRObject
 
@@ -13233,8 +13635,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *descriptionProperty;
 
 /**
- *  [Output Only] The fingerprint of the resource data. You can use this
- *  optional field for optimistic locking when you update the resource.
+ *  Fingerprint of this resource. This field may be used in optimistic locking.
+ *  It will be ignored when inserting an InstanceGroupManager. An up-to-date
+ *  fingerprint must be provided in order to update the InstanceGroupManager or
+ *  the field need to be unset.
  *
  *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
  *  web-safe format).
@@ -14365,6 +14769,148 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
+ *  Contains a list of instance referrers.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "items" property. If returned as the result of a query, it should
+ *        support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRCompute_InstanceListReferrers : GTLRCollectionObject
+
+/**
+ *  [Output Only] Unique identifier for the resource; defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  A list of Reference resources.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_Reference *> *items;
+
+/**
+ *  [Output Only] Type of resource. Always compute#instanceListReferrers for
+ *  lists of Instance referrers.
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  [Output Only] This token allows you to get the next page of results for list
+ *  requests. If the number of results is larger than maxResults, use the
+ *  nextPageToken as a value for the query parameter pageToken in the next list
+ *  request. Subsequent list requests will have their own nextPageToken to
+ *  continue paging through the results.
+ */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+/** [Output Only] Server-defined URL for this resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+/** [Output Only] Informational warning message. */
+@property(nonatomic, strong, nullable) GTLRCompute_InstanceListReferrers_Warning *warning;
+
+@end
+
+
+/**
+ *  [Output Only] Informational warning message.
+ */
+@interface GTLRCompute_InstanceListReferrers_Warning : GTLRObject
+
+/**
+ *  [Output Only] A warning code, if applicable. For example, Compute Engine
+ *  returns NO_RESULTS_ON_PAGE if there are no results in the response.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_CleanupFailed
+ *        Value "CLEANUP_FAILED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_DeprecatedResourceUsed
+ *        Value "DEPRECATED_RESOURCE_USED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_DeprecatedTypeUsed
+ *        Value "DEPRECATED_TYPE_USED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_DiskSizeLargerThanImageSize
+ *        Value "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_ExperimentalTypeUsed
+ *        Value "EXPERIMENTAL_TYPE_USED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_ExternalApiWarning
+ *        Value "EXTERNAL_API_WARNING"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_FieldValueOverriden
+ *        Value "FIELD_VALUE_OVERRIDEN"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_InjectedKernelsDeprecated
+ *        Value "INJECTED_KERNELS_DEPRECATED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_MissingTypeDependency
+ *        Value "MISSING_TYPE_DEPENDENCY"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopAddressNotAssigned
+ *        Value "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopCannotIpForward
+ *        Value "NEXT_HOP_CANNOT_IP_FORWARD"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopInstanceNotFound
+ *        Value "NEXT_HOP_INSTANCE_NOT_FOUND"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopInstanceNotOnNetwork
+ *        Value "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NextHopNotRunning
+ *        Value "NEXT_HOP_NOT_RUNNING"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NoResultsOnPage
+ *        Value "NO_RESULTS_ON_PAGE"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_NotCriticalError
+ *        Value "NOT_CRITICAL_ERROR"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_RequiredTosAgreement
+ *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_ResourceNotDeleted
+ *        Value "RESOURCE_NOT_DELETED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_SchemaValidationIgnored
+ *        Value "SCHEMA_VALIDATION_IGNORED"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_SingleInstancePropertyTemplate
+ *        Value "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_UndeclaredProperties
+ *        Value "UNDECLARED_PROPERTIES"
+ *    @arg @c kGTLRCompute_InstanceListReferrers_Warning_Code_Unreachable Value
+ *        "UNREACHABLE"
+ */
+@property(nonatomic, copy, nullable) NSString *code;
+
+/**
+ *  [Output Only] Metadata about this warning in key: value format. For example:
+ *  "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_InstanceListReferrers_Warning_Data_Item *> *data;
+
+/** [Output Only] A human-readable description of the warning code. */
+@property(nonatomic, copy, nullable) NSString *message;
+
+@end
+
+
+/**
+ *  GTLRCompute_InstanceListReferrers_Warning_Data_Item
+ */
+@interface GTLRCompute_InstanceListReferrers_Warning_Data_Item : GTLRObject
+
+/**
+ *  [Output Only] A key that provides more detail on the warning being returned.
+ *  For example, for warnings where there are no results in a list request for a
+ *  particular zone, this key might be scope and the key value might be the zone
+ *  name. Other examples might be a key indicating a deprecated resource and a
+ *  suggested replacement, or a warning about invalid network settings (for
+ *  example, if an instance attempts to perform IP forwarding but is not enabled
+ *  for IP forwarding).
+ */
+@property(nonatomic, copy, nullable) NSString *key;
+
+/** [Output Only] A warning data value corresponding to the key. */
+@property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
  *  GTLRCompute_InstanceMoveRequest
  */
 @interface GTLRCompute_InstanceMoveRequest : GTLRObject
@@ -14508,7 +15054,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_InstancesScopedList : GTLRObject
 
-/** [Output Only] List of instances contained in this scope. */
+/** [Output Only] A list of instances contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Instance *> *instances;
 
 /**
@@ -14652,7 +15198,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @interface GTLRCompute_InstancesSetMachineResourcesRequest : GTLRObject
 
 /**
- *  List of the type and count of accelerator cards attached to the instance.
+ *  A list of the type and count of accelerator cards attached to the instance.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_AcceleratorConfig *> *guestAccelerators;
 
@@ -14718,7 +15264,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  An Instance Template resource.
+ *  An Instance Template resource. (== resource_for beta.instanceTemplates ==)
+ *  (== resource_for v1.instanceTemplates ==)
  */
 @interface GTLRCompute_InstanceTemplate : GTLRObject
 
@@ -14756,7 +15303,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource; provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -14954,7 +15501,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /**
  *  Represents an Interconnects resource. The Interconnects resource is a
  *  dedicated connection between Google's network and your on-premises network.
- *  For more information, see the Dedicated overview page.
+ *  For more information, see the Dedicated overview page. (== resource_for
+ *  v1.interconnects ==) (== resource_for beta.interconnects ==)
  */
 @interface GTLRCompute_Interconnect : GTLRObject
 
@@ -14969,7 +15517,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) NSNumber *adminEnabled;
 
 /**
- *  [Output Only] List of CircuitInfo objects, that describe the individual
+ *  [Output Only] A list of CircuitInfo objects, that describe the individual
  *  circuits in this LAG.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_InterconnectCircuitInfo *> *circuitInfos;
@@ -14991,7 +15539,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @property(nonatomic, copy, nullable) NSString *descriptionProperty;
 
-/** [Output Only] List of outages expected for this Interconnect. */
+/** [Output Only] A list of outages expected for this Interconnect. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_InterconnectOutageNotification *> *expectedOutages;
 
 /**
@@ -15061,7 +15609,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -15118,7 +15666,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  Represents an InterconnectAttachment (VLAN attachment) resource. For more
- *  information, see Creating VLAN Attachments.
+ *  information, see Creating VLAN Attachments. (== resource_for
+ *  beta.interconnectAttachments ==) (== resource_for v1.interconnectAttachments
+ *  ==)
  */
 @interface GTLRCompute_InterconnectAttachment : GTLRObject
 
@@ -15176,7 +15726,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -15204,7 +15754,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] URL of the region where the regional interconnect attachment
- *  resides.
+ *  resides. You must specify this field as part of the HTTP request URL. It is
+ *  not settable as a field in the request body.
  */
 @property(nonatomic, copy, nullable) NSString *region;
 
@@ -15533,7 +16084,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_InterconnectAttachmentsScopedList : GTLRObject
 
-/** List of interconnect attachments contained in this scope. */
+/** A list of interconnect attachments contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_InterconnectAttachment *> *interconnectAttachments;
 
 /**
@@ -16100,7 +16651,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @interface GTLRCompute_InterconnectOutageNotification : GTLRObject
 
 /**
- *  Iff issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs
+ *  If issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs
  *  that will be affected.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *affectedCircuits;
@@ -16189,8 +16740,37 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @property(nonatomic, strong, nullable) NSNumber *chargesUseFee;
 
+/** [Output Only] Creation timestamp in RFC3339 text format. */
+@property(nonatomic, copy, nullable) NSString *creationTimestamp;
+
+/**
+ *  An optional textual description of the resource; provided by the client when
+ *  the resource is created.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/**
+ *  [Output Only] The unique identifier for the resource. This identifier is
+ *  defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ *
+ *  Uses NSNumber of unsignedLongLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *identifier;
+
 /** [Output Only] Type of resource. Always compute#license for licenses. */
 @property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  [Output Only] The unique code used to attach this license to images,
+ *  snapshots, and disks.
+ *
+ *  Uses NSNumber of unsignedLongLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *licenseCode;
 
 /**
  *  [Output Only] Name of the resource. The name is 1-63 characters long and
@@ -16198,14 +16778,272 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
+@property(nonatomic, strong, nullable) GTLRCompute_LicenseResourceRequirements *resourceRequirements;
+
 /** [Output Only] Server-defined URL for the resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+/**
+ *  If false, licenses will not be copied from the source resource when creating
+ *  an image from a disk, disk from snapshot, or snapshot from disk.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *transferable;
+
+@end
+
+
+/**
+ *  GTLRCompute_LicenseCode
+ */
+@interface GTLRCompute_LicenseCode : GTLRObject
+
+/** [Output Only] Creation timestamp in RFC3339 text format. */
+@property(nonatomic, copy, nullable) NSString *creationTimestamp;
+
+/**
+ *  [Output Only] Description of this License Code.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/**
+ *  [Output Only] The unique identifier for the resource. This identifier is
+ *  defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ *
+ *  Uses NSNumber of unsignedLongLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *identifier;
+
+/**
+ *  [Output Only] Type of resource. Always compute#licenseCode for licenses.
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  [Output Only] URL and description aliases of Licenses with the same License
+ *  Code.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_LicenseCodeLicenseAlias *> *licenseAlias;
+
+/**
+ *  [Output Only] Name of the resource. The name is 1-20 characters long and
+ *  must be a valid 64 bit integer.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/** [Output Only] Server-defined URL for the resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+/**
+ *  [Output Only] Current state of this License Code.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_LicenseCode_State_Disabled Value "DISABLED"
+ *    @arg @c kGTLRCompute_LicenseCode_State_Enabled Value "ENABLED"
+ *    @arg @c kGTLRCompute_LicenseCode_State_Restricted Value "RESTRICTED"
+ *    @arg @c kGTLRCompute_LicenseCode_State_StateUnspecified Value
+ *        "STATE_UNSPECIFIED"
+ *    @arg @c kGTLRCompute_LicenseCode_State_Terminated Value "TERMINATED"
+ */
+@property(nonatomic, copy, nullable) NSString *state;
+
+/**
+ *  [Output Only] If true, the license will remain attached when creating images
+ *  or snapshots from disks. Otherwise, the license is not transferred.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *transferable;
+
+@end
+
+
+/**
+ *  GTLRCompute_LicenseCodeLicenseAlias
+ */
+@interface GTLRCompute_LicenseCodeLicenseAlias : GTLRObject
+
+/**
+ *  [Output Only] Description of this License Code.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/** [Output Only] URL of license corresponding to this License Code. */
 @property(nonatomic, copy, nullable) NSString *selfLink;
 
 @end
 
 
 /**
- *  A Machine Type resource.
+ *  GTLRCompute_LicenseResourceRequirements
+ */
+@interface GTLRCompute_LicenseResourceRequirements : GTLRObject
+
+/**
+ *  Minimum number of guest cpus required to use the Instance. Enforced at
+ *  Instance creation and Instance start.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minGuestCpuCount;
+
+/**
+ *  Minimum memory required to use the Instance. Enforced at Instance creation
+ *  and Instance start.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minMemoryMb;
+
+@end
+
+
+/**
+ *  GTLRCompute_LicensesListResponse
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "items" property. If returned as the result of a query, it should
+ *        support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRCompute_LicensesListResponse : GTLRCollectionObject
+
+/**
+ *  [Output Only] Unique identifier for the resource; defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  A list of License resources.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_License *> *items;
+
+/**
+ *  [Output Only] This token allows you to get the next page of results for list
+ *  requests. If the number of results is larger than maxResults, use the
+ *  nextPageToken as a value for the query parameter pageToken in the next list
+ *  request. Subsequent list requests will have their own nextPageToken to
+ *  continue paging through the results.
+ */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+/** [Output Only] Server-defined URL for this resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+/** [Output Only] Informational warning message. */
+@property(nonatomic, strong, nullable) GTLRCompute_LicensesListResponse_Warning *warning;
+
+@end
+
+
+/**
+ *  [Output Only] Informational warning message.
+ */
+@interface GTLRCompute_LicensesListResponse_Warning : GTLRObject
+
+/**
+ *  [Output Only] A warning code, if applicable. For example, Compute Engine
+ *  returns NO_RESULTS_ON_PAGE if there are no results in the response.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_CleanupFailed Value
+ *        "CLEANUP_FAILED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_DeprecatedResourceUsed
+ *        Value "DEPRECATED_RESOURCE_USED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_DeprecatedTypeUsed
+ *        Value "DEPRECATED_TYPE_USED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_DiskSizeLargerThanImageSize
+ *        Value "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_ExperimentalTypeUsed
+ *        Value "EXPERIMENTAL_TYPE_USED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_ExternalApiWarning
+ *        Value "EXTERNAL_API_WARNING"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_FieldValueOverriden
+ *        Value "FIELD_VALUE_OVERRIDEN"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_InjectedKernelsDeprecated
+ *        Value "INJECTED_KERNELS_DEPRECATED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_MissingTypeDependency
+ *        Value "MISSING_TYPE_DEPENDENCY"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NextHopAddressNotAssigned
+ *        Value "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NextHopCannotIpForward
+ *        Value "NEXT_HOP_CANNOT_IP_FORWARD"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NextHopInstanceNotFound
+ *        Value "NEXT_HOP_INSTANCE_NOT_FOUND"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NextHopInstanceNotOnNetwork
+ *        Value "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NextHopNotRunning
+ *        Value "NEXT_HOP_NOT_RUNNING"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NoResultsOnPage
+ *        Value "NO_RESULTS_ON_PAGE"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_NotCriticalError
+ *        Value "NOT_CRITICAL_ERROR"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_RequiredTosAgreement
+ *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_ResourceNotDeleted
+ *        Value "RESOURCE_NOT_DELETED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_SchemaValidationIgnored
+ *        Value "SCHEMA_VALIDATION_IGNORED"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_SingleInstancePropertyTemplate
+ *        Value "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_UndeclaredProperties
+ *        Value "UNDECLARED_PROPERTIES"
+ *    @arg @c kGTLRCompute_LicensesListResponse_Warning_Code_Unreachable Value
+ *        "UNREACHABLE"
+ */
+@property(nonatomic, copy, nullable) NSString *code;
+
+/**
+ *  [Output Only] Metadata about this warning in key: value format. For example:
+ *  "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_LicensesListResponse_Warning_Data_Item *> *data;
+
+/** [Output Only] A human-readable description of the warning code. */
+@property(nonatomic, copy, nullable) NSString *message;
+
+@end
+
+
+/**
+ *  GTLRCompute_LicensesListResponse_Warning_Data_Item
+ */
+@interface GTLRCompute_LicensesListResponse_Warning_Data_Item : GTLRObject
+
+/**
+ *  [Output Only] A key that provides more detail on the warning being returned.
+ *  For example, for warnings where there are no results in a list request for a
+ *  particular zone, this key might be scope and the key value might be the zone
+ *  name. Other examples might be a key indicating a deprecated resource and a
+ *  suggested replacement, or a warning about invalid network settings (for
+ *  example, if an instance attempts to perform IP forwarding but is not enabled
+ *  for IP forwarding).
+ */
+@property(nonatomic, copy, nullable) NSString *key;
+
+/** [Output Only] A warning data value corresponding to the key. */
+@property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
+ *  A Machine Type resource. (== resource_for v1.machineTypes ==) (==
+ *  resource_for beta.machineTypes ==)
  */
 @interface GTLRCompute_MachineType : GTLRObject
 
@@ -16286,7 +17124,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /** [Output Only] Name of the resource. */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/** [Output Only] List of extended scratch disks assigned to the instance. */
+/**
+ *  [Output Only] A list of extended scratch disks assigned to the instance.
+ */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_MachineType_ScratchDisks_Item *> *scratchDisks;
 
 /** [Output Only] Server-defined URL for the resource. */
@@ -16609,7 +17449,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_MachineTypesScopedList : GTLRObject
 
-/** [Output Only] List of machine types contained in this scope. */
+/** [Output Only] A list of machine types contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_MachineType *> *machineTypes;
 
 /**
@@ -16716,7 +17556,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  GTLRCompute_ManagedInstance
+ *  Next available tag: 12
  */
 @interface GTLRCompute_ManagedInstance : GTLRObject
 
@@ -16740,6 +17580,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  - REFRESHING The managed instance group is applying configuration changes to
  *  the instance without stopping it. For example, the group can update the
  *  target pool list for an instance without stopping that instance.
+ *  - VERIFYING The managed instance group has created the instance and it is in
+ *  the process of being verified.
  *
  *  Likely values:
  *    @arg @c kGTLRCompute_ManagedInstance_CurrentAction_Abandoning Value
@@ -16942,7 +17784,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  Represents a Network resource. Read Networks and Firewalls for more
- *  information.
+ *  information. (== resource_for v1.networks ==) (== resource_for beta.networks
+ *  ==)
  */
 @interface GTLRCompute_Network : GTLRObject
 
@@ -17000,14 +17843,14 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/** [Output Only] List of network peerings for the resource. */
+/** [Output Only] A list of network peerings for the resource. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_NetworkPeering *> *peerings;
 
 /**
@@ -17045,6 +17888,17 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  specified for network interfaces on subnet-mode networks.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_AliasIpRange *> *aliasIpRanges;
+
+/**
+ *  Fingerprint hash of contents stored in this network interface. This field
+ *  will be ignored when inserting an Instance or adding a NetworkInterface. An
+ *  up-to-date fingerprint must be provided in order to update the
+ *  NetworkInterface.
+ *
+ *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
+ *  web-safe format).
+ */
+@property(nonatomic, copy, nullable) NSString *fingerprint;
 
 /**
  *  [Output Only] Type of the resource. Always compute#networkInterface for
@@ -17260,7 +18114,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /**
  *  Name of this peering. Provided by the client when the peering is created.
  *  The name must comply with RFC1035. Specifically, the name must be 1-63
- *  characters long and match regular expression [a-z]([-a-z0-9]*[a-z0-9])?
+ *  characters long and match regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`
  *  which means the first character must be a lowercase letter, and all the
  *  following characters must be a dash, lowercase letter, or digit, except the
  *  last character, which cannot be a dash.
@@ -17353,7 +18207,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  An Operation resource, used to manage asynchronous API requests.
+ *  An Operation resource, used to manage asynchronous API requests. (==
+ *  resource_for v1.globalOperations ==) (== resource_for beta.globalOperations
+ *  ==) (== resource_for v1.regionOperations ==) (== resource_for
+ *  beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (==
+ *  resource_for beta.zoneOperations ==)
  */
 @interface GTLRCompute_Operation : GTLRObject
 
@@ -17442,7 +18300,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] The URL of the region where the operation resides. Only
- *  available when performing regional operations.
+ *  available when performing regional operations. You must specify this field
+ *  as part of the HTTP request URL. It is not settable as a field in the
+ *  request body.
  */
 @property(nonatomic, copy, nullable) NSString *region;
 
@@ -17501,7 +18361,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  [Output Only] The URL of the zone where the operation resides. Only
- *  available when performing per-zone operations.
+ *  available when performing per-zone operations. You must specify this field
+ *  as part of the HTTP request URL. It is not settable as a field in the
+ *  request body.
  *
  *  Remapped to 'zoneProperty' to avoid NSObject's 'zone'.
  */
@@ -17931,7 +18793,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_OperationsScopedList : GTLRObject
 
-/** [Output Only] List of operations contained in this scope. */
+/** [Output Only] A list of operations contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Operation *> *operations;
 
 /**
@@ -18094,9 +18956,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A Project resource. Projects can only be created in the Google Cloud
- *  Platform Console. Unless marked otherwise, values can only be modified in
- *  the console.
+ *  A Project resource. For an overview of projects, see Cloud Platform Resource
+ *  Hierarchy. (== resource_for v1.projects ==) (== resource_for beta.projects
+ *  ==)
  */
 @interface GTLRCompute_Project : GTLRObject
 
@@ -18288,6 +19150,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *    @arg @c kGTLRCompute_Quota_Metric_Networks Value "NETWORKS"
  *    @arg @c kGTLRCompute_Quota_Metric_NvidiaK80Gpus Value "NVIDIA_K80_GPUS"
  *    @arg @c kGTLRCompute_Quota_Metric_NvidiaP100Gpus Value "NVIDIA_P100_GPUS"
+ *    @arg @c kGTLRCompute_Quota_Metric_NvidiaV100Gpus Value "NVIDIA_V100_GPUS"
  *    @arg @c kGTLRCompute_Quota_Metric_PreemptibleCpus Value "PREEMPTIBLE_CPUS"
  *    @arg @c kGTLRCompute_Quota_Metric_PreemptibleLocalSsdGb Value
  *        "PREEMPTIBLE_LOCAL_SSD_GB"
@@ -18338,7 +19201,34 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  Region resource.
+ *  Represents a reference to a resource.
+ */
+@interface GTLRCompute_Reference : GTLRObject
+
+/**
+ *  [Output Only] Type of the resource. Always compute#reference for references.
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  A description of the reference type with no implied semantics. Possible
+ *  values include:
+ *  - MEMBER_OF
+ */
+@property(nonatomic, copy, nullable) NSString *referenceType;
+
+/** URL of the resource which refers to the target. */
+@property(nonatomic, copy, nullable) NSString *referrer;
+
+/** URL of the resource to which this reference points. */
+@property(nonatomic, copy, nullable) NSString *target;
+
+@end
+
+
+/**
+ *  Region resource. (== resource_for beta.regions ==) (== resource_for
+ *  v1.regions ==)
  */
 @interface GTLRCompute_Region : GTLRObject
 
@@ -18849,7 +19739,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_RegionInstanceGroupManagersListInstancesResponse : GTLRObject
 
-/** List of managed instances. */
+/** A list of managed instances. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_ManagedInstance *> *managedInstances;
 
 @end
@@ -19298,7 +20188,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  winning route - either to another instance destination, an instance gateway,
  *  or a Google Compute Engine-operated gateway.
  *  Packets that do not match any route in the sending instance's routing table
- *  are dropped.
+ *  are dropped. (== resource_for beta.routes ==) (== resource_for v1.routes ==)
  */
 @interface GTLRCompute_Route : GTLRObject
 
@@ -19339,7 +20229,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -19688,7 +20578,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -19698,11 +20588,33 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /** URI of the network to which this router belongs. */
 @property(nonatomic, copy, nullable) NSString *network;
 
-/** [Output Only] URI of the region where the router resides. */
+/**
+ *  [Output Only] URI of the region where the router resides. You must specify
+ *  this field as part of the HTTP request URL. It is not settable as a field in
+ *  the request body.
+ */
 @property(nonatomic, copy, nullable) NSString *region;
 
 /** [Output Only] Server-defined URL for the resource. */
 @property(nonatomic, copy, nullable) NSString *selfLink;
+
+@end
+
+
+/**
+ *  Description-tagged IP ranges for the router to advertise.
+ */
+@interface GTLRCompute_RouterAdvertisedIpRange : GTLRObject
+
+/**
+ *  User-specified description for the IP range.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/** The IP range to advertise. The value must be a CIDR-formatted string. */
+@property(nonatomic, copy, nullable) NSString *range;
 
 @end
 
@@ -19854,6 +20766,32 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @interface GTLRCompute_RouterBgp : GTLRObject
 
 /**
+ *  User-specified list of prefix groups to advertise in custom mode. This field
+ *  can only be populated if advertise_mode is CUSTOM and is advertised to all
+ *  peers of the router. These groups will be advertised in addition to any
+ *  specified prefixes. Leave this field blank to advertise no custom groups.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *advertisedGroups;
+
+/**
+ *  User-specified list of individual IP ranges to advertise in custom mode.
+ *  This field can only be populated if advertise_mode is CUSTOM and is
+ *  advertised to all peers of the router. These IP ranges will be advertised in
+ *  addition to any specified groups. Leave this field blank to advertise no
+ *  custom IP ranges.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_RouterAdvertisedIpRange *> *advertisedIpRanges;
+
+/**
+ *  User-specified flag to indicate which mode to use for advertisement.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_RouterBgp_AdvertiseMode_Custom Value "CUSTOM"
+ *    @arg @c kGTLRCompute_RouterBgp_AdvertiseMode_Default Value "DEFAULT"
+ */
+@property(nonatomic, copy, nullable) NSString *advertiseMode;
+
+/**
  *  Local BGP Autonomous System Number (ASN). Must be an RFC6996 private ASN,
  *  either 16-bit or 32-bit. The value will be fixed for this router resource.
  *  All VPN tunnels that link to this router will have the same local ASN.
@@ -19871,6 +20809,24 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @interface GTLRCompute_RouterBgpPeer : GTLRObject
 
 /**
+ *  User-specified list of prefix groups to advertise in custom mode. This field
+ *  can only be populated if advertise_mode is CUSTOM and overrides the list
+ *  defined for the router (in Bgp message). These groups will be advertised in
+ *  addition to any specified prefixes. Leave this field blank to advertise no
+ *  custom groups.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *advertisedGroups;
+
+/**
+ *  User-specified list of individual IP ranges to advertise in custom mode.
+ *  This field can only be populated if advertise_mode is CUSTOM and overrides
+ *  the list defined for the router (in Bgp message). These IP ranges will be
+ *  advertised in addition to any specified groups. Leave this field blank to
+ *  advertise no custom IP ranges.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_RouterAdvertisedIpRange *> *advertisedIpRanges;
+
+/**
  *  The priority of routes advertised to this BGP peer. In the case where there
  *  is more than one matching route of maximum length, the routes with lowest
  *  priority value win.
@@ -19878,6 +20834,15 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Uses NSNumber of unsignedIntValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *advertisedRoutePriority;
+
+/**
+ *  User-specified flag to indicate which mode to use for advertisement.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_RouterBgpPeer_AdvertiseMode_Custom Value "CUSTOM"
+ *    @arg @c kGTLRCompute_RouterBgpPeer_AdvertiseMode_Default Value "DEFAULT"
+ */
+@property(nonatomic, copy, nullable) NSString *advertiseMode;
 
 /** Name of the interface the BGP peer is associated with. */
 @property(nonatomic, copy, nullable) NSString *interfaceName;
@@ -20102,7 +21067,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_RoutersScopedList : GTLRObject
 
-/** List of routers contained in this scope. */
+/** A list of routers contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Router *> *routers;
 
 /**
@@ -20388,7 +21353,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A persistent disk snapshot resource.
+ *  A persistent disk snapshot resource. (== resource_for beta.snapshots ==) (==
+ *  resource_for v1.snapshots ==)
  */
 @interface GTLRCompute_Snapshot : GTLRObject
 
@@ -20446,6 +21412,14 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, strong, nullable) GTLRCompute_Snapshot_Labels *labels;
 
 /**
+ *  Integer license codes indicating which licenses are attached to this
+ *  snapshot.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSNumber *> *licenseCodes;
+
+/**
  *  [Output Only] A list of public visible licenses that apply to this snapshot.
  *  This can be because the original image had licenses attached (such as a
  *  Windows image).
@@ -20456,7 +21430,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource; provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -20688,7 +21662,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /**
  *  An SslCertificate resource. This resource provides a mechanism to upload an
  *  SSL key and certificate to the load balancer to serve secure connections
- *  from the user.
+ *  from the user. (== resource_for beta.sslCertificates ==) (== resource_for
+ *  v1.sslCertificates ==)
  */
 @interface GTLRCompute_SslCertificate : GTLRObject
 
@@ -20730,7 +21705,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -20936,7 +21911,371 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A Subnetwork resource.
+ *  GTLRCompute_SslPoliciesList
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "items" property. If returned as the result of a query, it should
+ *        support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRCompute_SslPoliciesList : GTLRCollectionObject
+
+/**
+ *  [Output Only] Unique identifier for the resource; defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ */
+@property(nonatomic, copy, nullable) NSString *identifier;
+
+/**
+ *  A list of SslPolicy resources.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_SslPolicy *> *items;
+
+/**
+ *  [Output Only] Type of the resource. Always compute#sslPoliciesList for lists
+ *  of sslPolicies.
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  [Output Only] This token allows you to get the next page of results for list
+ *  requests. If the number of results is larger than maxResults, use the
+ *  nextPageToken as a value for the query parameter pageToken in the next list
+ *  request. Subsequent list requests will have their own nextPageToken to
+ *  continue paging through the results.
+ */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+/** [Output Only] Server-defined URL for this resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+/** [Output Only] Informational warning message. */
+@property(nonatomic, strong, nullable) GTLRCompute_SslPoliciesList_Warning *warning;
+
+@end
+
+
+/**
+ *  [Output Only] Informational warning message.
+ */
+@interface GTLRCompute_SslPoliciesList_Warning : GTLRObject
+
+/**
+ *  [Output Only] A warning code, if applicable. For example, Compute Engine
+ *  returns NO_RESULTS_ON_PAGE if there are no results in the response.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_CleanupFailed Value
+ *        "CLEANUP_FAILED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_DeprecatedResourceUsed
+ *        Value "DEPRECATED_RESOURCE_USED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_DeprecatedTypeUsed Value
+ *        "DEPRECATED_TYPE_USED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_DiskSizeLargerThanImageSize
+ *        Value "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_ExperimentalTypeUsed
+ *        Value "EXPERIMENTAL_TYPE_USED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_ExternalApiWarning Value
+ *        "EXTERNAL_API_WARNING"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_FieldValueOverriden
+ *        Value "FIELD_VALUE_OVERRIDEN"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_InjectedKernelsDeprecated
+ *        Value "INJECTED_KERNELS_DEPRECATED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_MissingTypeDependency
+ *        Value "MISSING_TYPE_DEPENDENCY"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NextHopAddressNotAssigned
+ *        Value "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NextHopCannotIpForward
+ *        Value "NEXT_HOP_CANNOT_IP_FORWARD"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NextHopInstanceNotFound
+ *        Value "NEXT_HOP_INSTANCE_NOT_FOUND"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NextHopInstanceNotOnNetwork
+ *        Value "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NextHopNotRunning Value
+ *        "NEXT_HOP_NOT_RUNNING"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NoResultsOnPage Value
+ *        "NO_RESULTS_ON_PAGE"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_NotCriticalError Value
+ *        "NOT_CRITICAL_ERROR"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_RequiredTosAgreement
+ *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_ResourceNotDeleted Value
+ *        "RESOURCE_NOT_DELETED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_SchemaValidationIgnored
+ *        Value "SCHEMA_VALIDATION_IGNORED"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_SingleInstancePropertyTemplate
+ *        Value "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_UndeclaredProperties
+ *        Value "UNDECLARED_PROPERTIES"
+ *    @arg @c kGTLRCompute_SslPoliciesList_Warning_Code_Unreachable Value
+ *        "UNREACHABLE"
+ */
+@property(nonatomic, copy, nullable) NSString *code;
+
+/**
+ *  [Output Only] Metadata about this warning in key: value format. For example:
+ *  "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_SslPoliciesList_Warning_Data_Item *> *data;
+
+/** [Output Only] A human-readable description of the warning code. */
+@property(nonatomic, copy, nullable) NSString *message;
+
+@end
+
+
+/**
+ *  GTLRCompute_SslPoliciesList_Warning_Data_Item
+ */
+@interface GTLRCompute_SslPoliciesList_Warning_Data_Item : GTLRObject
+
+/**
+ *  [Output Only] A key that provides more detail on the warning being returned.
+ *  For example, for warnings where there are no results in a list request for a
+ *  particular zone, this key might be scope and the key value might be the zone
+ *  name. Other examples might be a key indicating a deprecated resource and a
+ *  suggested replacement, or a warning about invalid network settings (for
+ *  example, if an instance attempts to perform IP forwarding but is not enabled
+ *  for IP forwarding).
+ */
+@property(nonatomic, copy, nullable) NSString *key;
+
+/** [Output Only] A warning data value corresponding to the key. */
+@property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
+ *  GTLRCompute_SslPoliciesListAvailableFeaturesResponse
+ */
+@interface GTLRCompute_SslPoliciesListAvailableFeaturesResponse : GTLRObject
+
+@property(nonatomic, strong, nullable) NSArray<NSString *> *features;
+
+@end
+
+
+/**
+ *  A SSL policy specifies the server-side support for SSL features. This can be
+ *  attached to a TargetHttpsProxy or a TargetSslProxy. This affects connections
+ *  between clients and the HTTPS or SSL proxy load balancer. They do not affect
+ *  the connection between the load balancers and the backends.
+ */
+@interface GTLRCompute_SslPolicy : GTLRObject
+
+/** [Output Only] Creation timestamp in RFC3339 text format. */
+@property(nonatomic, copy, nullable) NSString *creationTimestamp;
+
+/**
+ *  A list of features enabled when the selected profile is CUSTOM. The
+ *  - method returns the set of features that can be specified in this list.
+ *  This field must be empty if the profile is not CUSTOM.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *customFeatures;
+
+/**
+ *  An optional description of this resource. Provide this property when you
+ *  create the resource.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/** [Output Only] The list of features enabled in the SSL policy. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *enabledFeatures;
+
+/**
+ *  Fingerprint of this resource. A hash of the contents stored in this object.
+ *  This field is used in optimistic locking. This field will be ignored when
+ *  inserting a SslPolicy. An up-to-date fingerprint must be provided in order
+ *  to update the SslPolicy.
+ *
+ *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
+ *  web-safe format).
+ */
+@property(nonatomic, copy, nullable) NSString *fingerprint;
+
+/**
+ *  [Output Only] The unique identifier for the resource. This identifier is
+ *  defined by the server.
+ *
+ *  identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
+ *
+ *  Uses NSNumber of unsignedLongLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *identifier;
+
+/**
+ *  [Output only] Type of the resource. Always compute#sslPolicyfor SSL
+ *  policies.
+ */
+@property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  The minimum version of SSL protocol that can be used by the clients to
+ *  establish a connection with the load balancer. This can be one of TLS_1_0,
+ *  TLS_1_1, TLS_1_2.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_SslPolicy_MinTlsVersion_Tls10 Value "TLS_1_0"
+ *    @arg @c kGTLRCompute_SslPolicy_MinTlsVersion_Tls11 Value "TLS_1_1"
+ *    @arg @c kGTLRCompute_SslPolicy_MinTlsVersion_Tls12 Value "TLS_1_2"
+ */
+@property(nonatomic, copy, nullable) NSString *minTlsVersion;
+
+/**
+ *  Name of the resource. The name must be 1-63 characters long, and comply with
+ *  RFC1035. Specifically, the name must be 1-63 characters long and match the
+ *  regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first
+ *  character must be a lowercase letter, and all following characters must be a
+ *  dash, lowercase letter, or digit, except the last character, which cannot be
+ *  a dash.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/**
+ *  Profile specifies the set of SSL features that can be used by the load
+ *  balancer when negotiating SSL with clients. This can be one of COMPATIBLE,
+ *  MODERN, RESTRICTED, or CUSTOM. If using CUSTOM, the set of SSL features to
+ *  enable must be specified in the customFeatures field.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_SslPolicy_Profile_Compatible Value "COMPATIBLE"
+ *    @arg @c kGTLRCompute_SslPolicy_Profile_Custom Value "CUSTOM"
+ *    @arg @c kGTLRCompute_SslPolicy_Profile_Modern Value "MODERN"
+ *    @arg @c kGTLRCompute_SslPolicy_Profile_Restricted Value "RESTRICTED"
+ */
+@property(nonatomic, copy, nullable) NSString *profile;
+
+/** [Output Only] Server-defined URL for the resource. */
+@property(nonatomic, copy, nullable) NSString *selfLink;
+
+/**
+ *  [Output Only] If potential misconfigurations are detected for this SSL
+ *  policy, this field will be populated with warning messages.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_SslPolicy_Warnings_Item *> *warnings;
+
+@end
+
+
+/**
+ *  GTLRCompute_SslPolicy_Warnings_Item
+ */
+@interface GTLRCompute_SslPolicy_Warnings_Item : GTLRObject
+
+/**
+ *  [Output Only] A warning code, if applicable. For example, Compute Engine
+ *  returns NO_RESULTS_ON_PAGE if there are no results in the response.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_CleanupFailed Value
+ *        "CLEANUP_FAILED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_DeprecatedResourceUsed
+ *        Value "DEPRECATED_RESOURCE_USED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_DeprecatedTypeUsed Value
+ *        "DEPRECATED_TYPE_USED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_DiskSizeLargerThanImageSize
+ *        Value "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_ExperimentalTypeUsed
+ *        Value "EXPERIMENTAL_TYPE_USED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_ExternalApiWarning Value
+ *        "EXTERNAL_API_WARNING"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_FieldValueOverriden
+ *        Value "FIELD_VALUE_OVERRIDEN"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_InjectedKernelsDeprecated
+ *        Value "INJECTED_KERNELS_DEPRECATED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_MissingTypeDependency
+ *        Value "MISSING_TYPE_DEPENDENCY"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopAddressNotAssigned
+ *        Value "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopCannotIpForward
+ *        Value "NEXT_HOP_CANNOT_IP_FORWARD"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopInstanceNotFound
+ *        Value "NEXT_HOP_INSTANCE_NOT_FOUND"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopInstanceNotOnNetwork
+ *        Value "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NextHopNotRunning Value
+ *        "NEXT_HOP_NOT_RUNNING"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NoResultsOnPage Value
+ *        "NO_RESULTS_ON_PAGE"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_NotCriticalError Value
+ *        "NOT_CRITICAL_ERROR"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_RequiredTosAgreement
+ *        Value "REQUIRED_TOS_AGREEMENT"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_ResourceInUseByOtherResourceWarning
+ *        Value "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_ResourceNotDeleted Value
+ *        "RESOURCE_NOT_DELETED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_SchemaValidationIgnored
+ *        Value "SCHEMA_VALIDATION_IGNORED"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_SingleInstancePropertyTemplate
+ *        Value "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_UndeclaredProperties
+ *        Value "UNDECLARED_PROPERTIES"
+ *    @arg @c kGTLRCompute_SslPolicy_Warnings_Item_Code_Unreachable Value
+ *        "UNREACHABLE"
+ */
+@property(nonatomic, copy, nullable) NSString *code;
+
+/**
+ *  [Output Only] Metadata about this warning in key: value format. For example:
+ *  "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCompute_SslPolicy_Warnings_Item_Data_Item *> *data;
+
+/** [Output Only] A human-readable description of the warning code. */
+@property(nonatomic, copy, nullable) NSString *message;
+
+@end
+
+
+/**
+ *  GTLRCompute_SslPolicy_Warnings_Item_Data_Item
+ */
+@interface GTLRCompute_SslPolicy_Warnings_Item_Data_Item : GTLRObject
+
+/**
+ *  [Output Only] A key that provides more detail on the warning being returned.
+ *  For example, for warnings where there are no results in a list request for a
+ *  particular zone, this key might be scope and the key value might be the zone
+ *  name. Other examples might be a key indicating a deprecated resource and a
+ *  suggested replacement, or a warning about invalid network settings (for
+ *  example, if an instance attempts to perform IP forwarding but is not enabled
+ *  for IP forwarding).
+ */
+@property(nonatomic, copy, nullable) NSString *key;
+
+/** [Output Only] A warning data value corresponding to the key. */
+@property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
+ *  GTLRCompute_SslPolicyReference
+ */
+@interface GTLRCompute_SslPolicyReference : GTLRObject
+
+/**
+ *  URL of the SSL policy resource. Set this to empty string to clear any
+ *  existing SSL policy associated with the target proxy resource.
+ */
+@property(nonatomic, copy, nullable) NSString *sslPolicy;
+
+@end
+
+
+/**
+ *  A Subnetwork resource. (== resource_for beta.subnetworks ==) (==
+ *  resource_for v1.subnetworks ==)
  */
 @interface GTLRCompute_Subnetwork : GTLRObject
 
@@ -20952,9 +22291,19 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *descriptionProperty;
 
 /**
+ *  Fingerprint of this resource. A hash of the contents stored in this object.
+ *  This field is used in optimistic locking. This field will be ignored when
+ *  inserting a Subnetwork. An up-to-date fingerprint must be provided in order
+ *  to update the Subnetwork.
+ *
+ *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
+ *  web-safe format).
+ */
+@property(nonatomic, copy, nullable) NSString *fingerprint;
+
+/**
  *  [Output Only] The gateway address for default routes to reach destination
- *  addresses outside this subnetwork. This field can be set only at resource
- *  creation time.
+ *  addresses outside this subnetwork.
  */
 @property(nonatomic, copy, nullable) NSString *gatewayAddress;
 
@@ -20987,7 +22336,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  The name of the resource, provided by the client when initially creating the
  *  resource. The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -21361,7 +22710,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_SubnetworksScopedList : GTLRObject
 
-/** List of subnetworks contained in this scope. */
+/** A list of subnetworks contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_Subnetwork *> *subnetworks;
 
 /**
@@ -21487,10 +22836,10 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  Specifies a fingerprint for this request, which is essentially a hash of the
- *  metadata's contents and used for optimistic locking. The fingerprint is
- *  initially generated by Compute Engine and changes after every request to
- *  modify or update metadata. You must always provide an up-to-date fingerprint
- *  hash in order to update or change metadata.
+ *  tags' contents and used for optimistic locking. The fingerprint is initially
+ *  generated by Compute Engine and changes after every request to modify or
+ *  update tags. You must always provide an up-to-date fingerprint hash in order
+ *  to update or change tags.
  *  To see the latest fingerprint, make get() request to the instance.
  *
  *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
@@ -21508,7 +22857,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A TargetHttpProxy resource. This resource defines an HTTP proxy.
+ *  A TargetHttpProxy resource. This resource defines an HTTP proxy. (==
+ *  resource_for beta.targetHttpProxies ==) (== resource_for
+ *  v1.targetHttpProxies ==)
  */
 @interface GTLRCompute_TargetHttpProxy : GTLRObject
 
@@ -21543,7 +22894,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -21719,7 +23070,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
+ *  A TargetHttpsProxy resource. This resource defines an HTTPS proxy. (==
+ *  resource_for beta.targetHttpsProxies ==) (== resource_for
+ *  v1.targetHttpsProxies ==)
  */
 @interface GTLRCompute_TargetHttpsProxy : GTLRObject
 
@@ -21754,7 +23107,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -21770,6 +23123,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  must be specified.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *sslCertificates;
+
+/**
+ *  URL of SslPolicy resource that will be associated with the TargetHttpsProxy
+ *  resource. If not set, the TargetHttpsProxy resource will not have any SSL
+ *  policy configured.
+ */
+@property(nonatomic, copy, nullable) NSString *sslPolicy;
 
 /**
  *  A fully-qualified or valid partial URL to the UrlMap resource that defines
@@ -21928,7 +23288,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  A TargetInstance resource. This resource defines an endpoint instance that
- *  terminates traffic of certain protocols.
+ *  terminates traffic of certain protocols. (== resource_for
+ *  beta.targetInstances ==) (== resource_for v1.targetInstances ==)
  */
 @interface GTLRCompute_TargetInstance : GTLRObject
 
@@ -21975,7 +23336,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -21995,7 +23356,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *selfLink;
 
 /**
- *  [Output Only] URL of the zone where the target instance resides.
+ *  [Output Only] URL of the zone where the target instance resides. You must
+ *  specify this field as part of the HTTP request URL. It is not settable as a
+ *  field in the request body.
  *
  *  Remapped to 'zoneProperty' to avoid NSObject's 'zone'.
  */
@@ -22289,7 +23652,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_TargetInstancesScopedList : GTLRObject
 
-/** List of target instances contained in this scope. */
+/** A list of target instances contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_TargetInstance *> *targetInstances;
 
 /**
@@ -22397,7 +23760,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 /**
  *  A TargetPool resource. This resource defines a pool of instances, an
- *  associated HttpHealthCheck resource, and the fallback target pool.
+ *  associated HttpHealthCheck resource, and the fallback target pool. (==
+ *  resource_for beta.targetPools ==) (== resource_for v1.targetPools ==)
  */
 @interface GTLRCompute_TargetPool : GTLRObject
 
@@ -22479,7 +23843,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -22882,7 +24246,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_TargetPoolsScopedList : GTLRObject
 
-/** List of target pools contained in this scope. */
+/** A list of target pools contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_TargetPool *> *targetPools;
 
 /**
@@ -23044,7 +24408,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A TargetSslProxy resource. This resource defines an SSL proxy.
+ *  A TargetSslProxy resource. This resource defines an SSL proxy. (==
+ *  resource_for beta.targetSslProxies ==) (== resource_for v1.targetSslProxies
+ *  ==)
  */
 @interface GTLRCompute_TargetSslProxy : GTLRObject
 
@@ -23079,7 +24445,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -23107,6 +24473,13 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  to Backends. Currently exactly one SSL certificate must be specified.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *sslCertificates;
+
+/**
+ *  URL of SslPolicy resource that will be associated with the TargetSslProxy
+ *  resource. If not set, the TargetSslProxy resource will not have any SSL
+ *  policy configured.
+ */
+@property(nonatomic, copy, nullable) NSString *sslPolicy;
 
 @end
 
@@ -23282,7 +24655,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A TargetTcpProxy resource. This resource defines a TCP proxy.
+ *  A TargetTcpProxy resource. This resource defines a TCP proxy. (==
+ *  resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies
+ *  ==)
  */
 @interface GTLRCompute_TargetTcpProxy : GTLRObject
 
@@ -23317,7 +24692,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -23483,7 +24858,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  Represents a Target VPN gateway resource.
+ *  Represents a Target VPN gateway resource. (== resource_for
+ *  beta.targetVpnGateways ==) (== resource_for v1.targetVpnGateways ==)
  */
 @interface GTLRCompute_TargetVpnGateway : GTLRObject
 
@@ -23525,7 +24901,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -23538,7 +24914,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @property(nonatomic, copy, nullable) NSString *network;
 
-/** [Output Only] URL of the region where the target VPN gateway resides. */
+/**
+ *  [Output Only] URL of the region where the target VPN gateway resides. You
+ *  must specify this field as part of the HTTP request URL. It is not settable
+ *  as a field in the request body.
+ */
 @property(nonatomic, copy, nullable) NSString *region;
 
 /** [Output Only] Server-defined URL for the resource. */
@@ -23856,7 +25236,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_TargetVpnGatewaysScopedList : GTLRObject
 
-/** [Output Only] List of target vpn gateways contained in this scope. */
+/** [Output Only] A list of target vpn gateways contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_TargetVpnGateway *> *targetVpnGateways;
 
 /**
@@ -24023,6 +25403,33 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
+ *  GTLRCompute_TestPermissionsRequest
+ */
+@interface GTLRCompute_TestPermissionsRequest : GTLRObject
+
+/**
+ *  The set of permissions to check for the 'resource'. Permissions with
+ *  wildcards (such as '*' or 'storage.*') are not allowed.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *permissions;
+
+@end
+
+
+/**
+ *  GTLRCompute_TestPermissionsResponse
+ */
+@interface GTLRCompute_TestPermissionsResponse : GTLRObject
+
+/**
+ *  A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *permissions;
+
+@end
+
+
+/**
  *  A UrlMap resource. This resource defines the mapping from URL to the
  *  BackendService resource, based on the "longest-match" of the URL's host and
  *  path.
@@ -24076,7 +25483,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -24090,8 +25497,9 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *selfLink;
 
 /**
- *  The list of expected URL mappings. Request to update this UrlMap will
- *  succeed only if all of the test cases pass.
+ *  The list of expected URL mapping tests. Request to update this UrlMap will
+ *  succeed only if all of the test cases pass. You can specify a maximum of 100
+ *  tests per UrlMap.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_UrlMapTest *> *tests;
 
@@ -24348,7 +25756,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  GTLRCompute_VpnTunnel
+ *  VPN tunnel resource. (== resource_for beta.vpnTunnels ==) (== resource_for
+ *  v1.vpnTunnels ==)
  */
 @interface GTLRCompute_VpnTunnel : GTLRObject
 
@@ -24400,7 +25809,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  *  Name of the resource. Provided by the client when the resource is created.
  *  The name must be 1-63 characters long, and comply with RFC1035.
  *  Specifically, the name must be 1-63 characters long and match the regular
- *  expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must
+ *  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must
  *  be a lowercase letter, and all following characters must be a dash,
  *  lowercase letter, or digit, except the last character, which cannot be a
  *  dash.
@@ -24410,7 +25819,11 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 /** IP address of the peer VPN gateway. Only IPv4 is supported. */
 @property(nonatomic, copy, nullable) NSString *peerIp;
 
-/** [Output Only] URL of the region where the VPN tunnel resides. */
+/**
+ *  [Output Only] URL of the region where the VPN tunnel resides. You must
+ *  specify this field as part of the HTTP request URL. It is not settable as a
+ *  field in the request body.
+ */
 @property(nonatomic, copy, nullable) NSString *region;
 
 /**
@@ -24462,8 +25875,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 @property(nonatomic, copy, nullable) NSString *status;
 
 /**
- *  URL of the VPN gateway with which this VPN tunnel is associated. Provided by
- *  the client when the VPN tunnel is created.
+ *  URL of the Target VPN gateway with which this VPN tunnel is associated.
+ *  Provided by the client when the VPN tunnel is created.
  */
 @property(nonatomic, copy, nullable) NSString *targetVpnGateway;
 
@@ -24759,7 +26172,7 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
  */
 @interface GTLRCompute_VpnTunnelsScopedList : GTLRObject
 
-/** List of vpn tunnels contained in this scope. */
+/** A list of vpn tunnels contained in this scope. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCompute_VpnTunnel *> *vpnTunnels;
 
 /**
@@ -25034,7 +26447,8 @@ GTLR_EXTERN NSString * const kGTLRCompute_ZoneList_Warning_Code_Unreachable;
 
 
 /**
- *  A Zone resource.
+ *  A Zone resource. (== resource_for beta.zones ==) (== resource_for v1.zones
+ *  ==)
  */
 @interface GTLRCompute_Zone : GTLRObject
 

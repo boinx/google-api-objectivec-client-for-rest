@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google People API (people/v1)
+//   People API (people/v1)
 // Description:
 //   Provides access to information about profiles and contacts.
 // Documentation:
@@ -633,7 +633,8 @@ GTLR_EXTERN NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecifie
 @property(nonatomic, strong, nullable) NSNumber *day;
 
 /**
- *  Month of year. Must be from 1 to 12.
+ *  Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+ *  month.
  *
  *  Uses NSNumber of intValue.
  */
@@ -857,7 +858,6 @@ GTLR_EXTERN NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecifie
 
 /**
  *  One of the person's interests.
- *  **DEPRECATED** (Message will not be returned.)
  */
 @interface GTLRPeopleService_Interest : GTLRObject
 
@@ -982,7 +982,9 @@ GTLR_EXTERN NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecifie
 
 
 /**
- *  A request to modify an existing contact group's members.
+ *  A request to modify an existing contact group's members. Contacts can be
+ *  removed from any group but they can only be added to a user group or
+ *  myContacts or starred system groups.
  */
 @interface GTLRPeopleService_ModifyContactGroupMembersRequest : GTLRObject
 
@@ -1246,10 +1248,7 @@ GTLR_EXTERN NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecifie
 /** The person's instant messaging clients. */
 @property(nonatomic, strong, nullable) NSArray<GTLRPeopleService_ImClient *> *imClients;
 
-/**
- *  The person's interests.
- *  **DEPRECATED** (No values will be returned.)
- */
+/** The person's interests. */
 @property(nonatomic, strong, nullable) NSArray<GTLRPeopleService_Interest *> *interests;
 
 /** The person's locale preferences. */
@@ -1782,7 +1781,8 @@ GTLR_EXTERN NSString * const kGTLRPeopleService_Source_Type_SourceTypeUnspecifie
 
 
 /**
- *  A request to update an existing contact group. Only the name can be updated.
+ *  A request to update an existing user contact group. All updated fields will
+ *  be replaced.
  */
 @interface GTLRPeopleService_UpdateContactGroupRequest : GTLRObject
 

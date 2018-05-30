@@ -18,6 +18,44 @@
 
 @end
 
+@implementation GTLRTPUQuery_ProjectsLocationsAcceleratorTypesGet
+
+@dynamic name;
+
++ (instancetype)queryWithName:(NSString *)name {
+  NSArray *pathParams = @[ @"name" ];
+  NSString *pathURITemplate = @"v1alpha1/{+name}";
+  GTLRTPUQuery_ProjectsLocationsAcceleratorTypesGet *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.name = name;
+  query.expectedObjectClass = [GTLRTPU_AcceleratorType class];
+  query.loggingName = @"tpu.projects.locations.acceleratorTypes.get";
+  return query;
+}
+
+@end
+
+@implementation GTLRTPUQuery_ProjectsLocationsAcceleratorTypesList
+
+@dynamic filter, orderBy, pageSize, pageToken, parent;
+
++ (instancetype)queryWithParent:(NSString *)parent {
+  NSArray *pathParams = @[ @"parent" ];
+  NSString *pathURITemplate = @"v1alpha1/{+parent}/acceleratorTypes";
+  GTLRTPUQuery_ProjectsLocationsAcceleratorTypesList *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.parent = parent;
+  query.expectedObjectClass = [GTLRTPU_ListAcceleratorTypesResponse class];
+  query.loggingName = @"tpu.projects.locations.acceleratorTypes.list";
+  return query;
+}
+
+@end
+
 @implementation GTLRTPUQuery_ProjectsLocationsGet
 
 @dynamic name;
@@ -188,6 +226,56 @@
 
 @end
 
+@implementation GTLRTPUQuery_ProjectsLocationsNodesStart
+
+@dynamic name;
+
++ (instancetype)queryWithObject:(GTLRTPU_StartNodeRequest *)object
+                           name:(NSString *)name {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[ @"name" ];
+  NSString *pathURITemplate = @"v1alpha1/{+name}:start";
+  GTLRTPUQuery_ProjectsLocationsNodesStart *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.name = name;
+  query.expectedObjectClass = [GTLRTPU_Operation class];
+  query.loggingName = @"tpu.projects.locations.nodes.start";
+  return query;
+}
+
+@end
+
+@implementation GTLRTPUQuery_ProjectsLocationsNodesStop
+
+@dynamic name;
+
++ (instancetype)queryWithObject:(GTLRTPU_StopNodeRequest *)object
+                           name:(NSString *)name {
+  if (object == nil) {
+    GTLR_DEBUG_ASSERT(object != nil, @"Got a nil object");
+    return nil;
+  }
+  NSArray *pathParams = @[ @"name" ];
+  NSString *pathURITemplate = @"v1alpha1/{+name}:stop";
+  GTLRTPUQuery_ProjectsLocationsNodesStop *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:@"POST"
+                       pathParameterNames:pathParams];
+  query.bodyObject = object;
+  query.name = name;
+  query.expectedObjectClass = [GTLRTPU_Operation class];
+  query.loggingName = @"tpu.projects.locations.nodes.stop";
+  return query;
+}
+
+@end
+
 @implementation GTLRTPUQuery_ProjectsLocationsOperationsCancel
 
 @dynamic name;
@@ -259,6 +347,44 @@
   query.name = name;
   query.expectedObjectClass = [GTLRTPU_ListOperationsResponse class];
   query.loggingName = @"tpu.projects.locations.operations.list";
+  return query;
+}
+
+@end
+
+@implementation GTLRTPUQuery_ProjectsLocationsTensorflowVersionsGet
+
+@dynamic name;
+
++ (instancetype)queryWithName:(NSString *)name {
+  NSArray *pathParams = @[ @"name" ];
+  NSString *pathURITemplate = @"v1alpha1/{+name}";
+  GTLRTPUQuery_ProjectsLocationsTensorflowVersionsGet *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.name = name;
+  query.expectedObjectClass = [GTLRTPU_TensorFlowVersion class];
+  query.loggingName = @"tpu.projects.locations.tensorflowVersions.get";
+  return query;
+}
+
+@end
+
+@implementation GTLRTPUQuery_ProjectsLocationsTensorflowVersionsList
+
+@dynamic filter, orderBy, pageSize, pageToken, parent;
+
++ (instancetype)queryWithParent:(NSString *)parent {
+  NSArray *pathParams = @[ @"parent" ];
+  NSString *pathURITemplate = @"v1alpha1/{+parent}/tensorflowVersions";
+  GTLRTPUQuery_ProjectsLocationsTensorflowVersionsList *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.parent = parent;
+  query.expectedObjectClass = [GTLRTPU_ListTensorFlowVersionsResponse class];
+  query.loggingName = @"tpu.projects.locations.tensorflowVersions.list";
   return query;
 }
 

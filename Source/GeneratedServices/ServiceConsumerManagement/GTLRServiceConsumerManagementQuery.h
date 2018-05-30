@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    include in the query.
  *  @param name The name of the operation resource to be cancelled.
  *
- *  @returns GTLRServiceConsumerManagementQuery_OperationsCancel
+ *  @return GTLRServiceConsumerManagementQuery_OperationsCancel
  */
 + (instancetype)queryWithObject:(GTLRServiceConsumerManagement_CancelOperationRequest *)object
                            name:(NSString *)name;
@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation resource to be deleted.
  *
- *  @returns GTLRServiceConsumerManagementQuery_OperationsDelete
+ *  @return GTLRServiceConsumerManagementQuery_OperationsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation resource.
  *
- *  @returns GTLRServiceConsumerManagementQuery_OperationsGet
+ *  @return GTLRServiceConsumerManagementQuery_OperationsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -207,7 +207,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation's parent resource.
  *
- *  @returns GTLRServiceConsumerManagementQuery_OperationsList
+ *  @return GTLRServiceConsumerManagementQuery_OperationsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -231,8 +231,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The maximum number of results returned by this request. Currently, the
- *  default maximum is set to 1000. If page_size is not provided or provided a
- *  number larger than 1000, it will be automatically set to 1000.
+ *  default maximum is set to 1000. If page_size is not provided or the size
+ *  provided is a number larger than 1000, it will be automatically set to
+ *  1000.
  *  Optional.
  */
 @property(nonatomic, assign) NSInteger pageSize;
@@ -256,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set a query `{expression}` for querying tenancy units. Your `{expression}`
  *  must be in the format: `field_name=literal_string`. The `field_name` is the
  *  name of the field you want to compare. Supported fields are
- *  `tenant_resources.tag` and`tenant_resources.resource`.
+ *  `tenant_resources.tag` and `tenant_resources.resource`.
  *  For example, to search tenancy units that contain at least one tenant
  *  resource with given tag 'xyz', use query `tenant_resources.tag=xyz`.
  *  To search tenancy units that contain at least one tenant resource with
@@ -278,7 +279,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    services/{service}
  *    {service} the name of a service, for example 'service.googleapis.com'.
  *
- *  @returns GTLRServiceConsumerManagementQuery_ServicesSearch
+ *  @return GTLRServiceConsumerManagementQuery_ServicesSearch
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -290,9 +291,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Add a new tenant project to the tenancy unit.
- *  If there are previously failed AddTenantProject calls, you might need to
- *  call RemoveTenantProject first to clean them before you can make another
- *  AddTenantProject with the same tag.
+ *  There can be at most 512 tenant projects in a tenancy unit.
+ *  If there are previously failed `AddTenantProject` calls, you might need to
+ *  call `RemoveTenantProject` first to clean them before you can make another
+ *  `AddTenantProject` with the same tag.
  *  Operation<response: Empty>.
  *
  *  Method: serviceconsumermanagement.services.tenancyUnits.addProject
@@ -311,16 +313,17 @@ NS_ASSUME_NONNULL_BEGIN
  *  Fetches a @c GTLRServiceConsumerManagement_Operation.
  *
  *  Add a new tenant project to the tenancy unit.
- *  If there are previously failed AddTenantProject calls, you might need to
- *  call RemoveTenantProject first to clean them before you can make another
- *  AddTenantProject with the same tag.
+ *  There can be at most 512 tenant projects in a tenancy unit.
+ *  If there are previously failed `AddTenantProject` calls, you might need to
+ *  call `RemoveTenantProject` first to clean them before you can make another
+ *  `AddTenantProject` with the same tag.
  *  Operation<response: Empty>.
  *
  *  @param object The @c GTLRServiceConsumerManagement_AddTenantProjectRequest
  *    to include in the query.
  *  @param parent Name of the tenancy unit.
  *
- *  @returns GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsAddProject
+ *  @return GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsAddProject
  */
 + (instancetype)queryWithObject:(GTLRServiceConsumerManagement_AddTenantProjectRequest *)object
                          parent:(NSString *)parent;
@@ -364,7 +367,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    {service} the name of a service, for example 'service.googleapis.com'.
  *    Enabled service binding using the new tenancy unit.
  *
- *  @returns GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsCreate
+ *  @return GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsCreate
  */
 + (instancetype)queryWithObject:(GTLRServiceConsumerManagement_CreateTenancyUnitRequest *)object
                          parent:(NSString *)parent;
@@ -372,8 +375,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
- *  Delete tenancy unit. Before the tenancy unit is deleted, there should be
- *  no tenant resource in it.
+ *  Delete a tenancy unit. Before the tenancy unit is deleted, there should be
+ *  no tenant resources in it.
  *  Operation<response: Empty>.
  *
  *  Method: serviceconsumermanagement.services.tenancyUnits.delete
@@ -391,23 +394,23 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Fetches a @c GTLRServiceConsumerManagement_Operation.
  *
- *  Delete tenancy unit. Before the tenancy unit is deleted, there should be
- *  no tenant resource in it.
+ *  Delete a tenancy unit. Before the tenancy unit is deleted, there should be
+ *  no tenant resources in it.
  *  Operation<response: Empty>.
  *
  *  @param name Name of the tenancy unit to be deleted.
  *
- *  @returns GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsDelete
+ *  @return GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
 @end
 
 /**
- *  Find tenancy unit for a service and consumer.
- *  This method should not be used in producers' runtime path, e.g. finding
- *  the tenant project number when creating VMs. Producers should persist
- *  the tenant project information after the project is created.
+ *  Find the tenancy unit for a service and consumer.
+ *  This method should not be used in producers' runtime path, for example
+ *  finding the tenant project number when creating VMs. Producers should
+ *  persist the tenant project information after the project is created.
  *
  *  Method: serviceconsumermanagement.services.tenancyUnits.list
  *
@@ -444,10 +447,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Fetches a @c GTLRServiceConsumerManagement_ListTenancyUnitsResponse.
  *
- *  Find tenancy unit for a service and consumer.
- *  This method should not be used in producers' runtime path, e.g. finding
- *  the tenant project number when creating VMs. Producers should persist
- *  the tenant project information after the project is created.
+ *  Find the tenancy unit for a service and consumer.
+ *  This method should not be used in producers' runtime path, for example
+ *  finding the tenant project number when creating VMs. Producers should
+ *  persist the tenant project information after the project is created.
  *
  *  @param parent Service and consumer. Required.
  *    services/{service}/{collection id}/{resource id}
@@ -457,7 +460,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    '123456'.
  *    {service} the name of a service, for example 'service.googleapis.com'.
  *
- *  @returns GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsList
+ *  @return GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -505,7 +508,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Such as
  *    'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
  *
- *  @returns GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsRemoveProject
+ *  @return GTLRServiceConsumerManagementQuery_ServicesTenancyUnitsRemoveProject
  */
 + (instancetype)queryWithObject:(GTLRServiceConsumerManagement_RemoveTenantProjectRequest *)object
                            name:(NSString *)name;

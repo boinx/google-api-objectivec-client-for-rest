@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Service User API (serviceuser/v1)
+//   Service User API (serviceuser/v1)
 // Description:
 //   Enables services that service consumers want to use on Google Cloud
 //   Platform, lists the available or enabled services, or disables services
@@ -83,8 +83,6 @@
 @class GTLRServiceUser_Type;
 @class GTLRServiceUser_Usage;
 @class GTLRServiceUser_UsageRule;
-@class GTLRServiceUser_Visibility;
-@class GTLRServiceUser_VisibilityRule;
 
 // Generated comments include content from the discovery document; avoid them
 // causing warnings since clang's checks are some what arbitrary.
@@ -559,12 +557,7 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
 @interface GTLRServiceUser_AuthenticationRule : GTLRObject
 
 /**
- *  Whether to allow requests without a credential. The credential can be
- *  an OAuth token, Google cookies (first-party auth) or EndUserCreds.
- *  For requests without credentials, if the service control environment is
- *  specified, each incoming request **must** be associated with a service
- *  consumer. This can be done by passing an API key that belongs to a consumer
- *  project.
+ *  If true, the service accepts API keys without any other credential.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -822,6 +815,22 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
  *  `google.rpc.context.OriginContext`.
  *  Available context types are defined in package
  *  `google.rpc.context`.
+ *  This also provides mechanism to whitelist any protobuf message extension
+ *  that
+ *  can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+ *  “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+ *  specific protobuf types that can appear in grpc metadata as follows in your
+ *  yaml file:
+ *  Example:
+ *  context:
+ *  rules:
+ *  - selector: "google.example.library.v1.LibraryService.CreateBook"
+ *  allowed_request_extensions:
+ *  - google.foo.v1.NewExtension
+ *  allowed_response_extensions:
+ *  - google.foo.v1.NewExtension
+ *  You can also specify extension ID instead of fully qualified extension name
+ *  here.
  */
 @interface GTLRServiceUser_Context : GTLRObject
 
@@ -839,6 +848,18 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
  *  element.
  */
 @interface GTLRServiceUser_ContextRule : GTLRObject
+
+/**
+ *  A list of full type names or extension IDs of extensions allowed in grpc
+ *  side channel from client to backend.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *allowedRequestExtensions;
+
+/**
+ *  A list of full type names or extension IDs of extensions allowed in grpc
+ *  side channel from backend to client.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *allowedResponseExtensions;
 
 /** A list of full type names of provided contexts. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *provided;
@@ -995,9 +1016,6 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
  *  <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
  *  Text can be excluded from doc using the following notation:
  *  <pre><code>&#40;-- internal comment --&#41;</code></pre>
- *  Comments can be made conditional using a visibility label. The below
- *  text will be only rendered if the `BETA` label is available:
- *  <pre><code>&#40;--BETA: comment for BETA users --&#41;</code></pre>
  *  A few directives are available in documentation. Note that
  *  directives must appear on a single line to be properly
  *  identified. The `include` directive includes a markdown file from
@@ -1589,15 +1607,6 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *put;
 
 /**
- *  The name of the response field whose value is mapped to the HTTP body of
- *  response. Other response fields are ignored. This field is optional. When
- *  not set, the response message will be used as HTTP body of response.
- *  NOTE: the referred field must be not a repeated field and must be present
- *  at the top-level of response message type.
- */
-@property(nonatomic, copy, nullable) NSString *responseBody;
-
-/**
  *  Selects methods to which this rule applies.
  *  Refer to selector for syntax details.
  */
@@ -2039,13 +2048,12 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
  *  * `Gi` gibi (2**30)
  *  * `Ti` tebi (2**40)
  *  **Grammar**
- *  The grammar includes the dimensionless unit `1`, such as `1/s`.
  *  The grammar also includes these connectors:
  *  * `/` division (as an infix operator, e.g. `1/s`).
  *  * `.` multiplication (as an infix operator, e.g. `GBy.d`)
  *  The grammar for a unit is as follows:
  *  Expression = Component { "." Component } { "/" Component } ;
- *  Component = [ PREFIX ] UNIT [ Annotation ]
+ *  Component = ( [ PREFIX ] UNIT | "%" ) [ Annotation ]
  *  | Annotation
  *  | "1"
  *  ;
@@ -2056,6 +2064,9 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
  *  `{requests}/s == 1/s`, `By{transmitted}/s == By/s`.
  *  * `NAME` is a sequence of non-blank printable ASCII characters not
  *  containing '{' or '}'.
+ *  * `1` represents dimensionless value 1, such as in `1/s`.
+ *  * `%` represents dimensionless value 1/100, and annotates values giving
+ *  a percentage.
  */
 @property(nonatomic, copy, nullable) NSString *unit;
 
@@ -2946,9 +2957,6 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
 /** Configuration controlling usage of this service. */
 @property(nonatomic, strong, nullable) GTLRServiceUser_Usage *usage;
 
-/** API visibility configuration. */
-@property(nonatomic, strong, nullable) GTLRServiceUser_Visibility *visibility;
-
 @end
 
 
@@ -3289,7 +3297,8 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
 @interface GTLRServiceUser_UsageRule : GTLRObject
 
 /**
- *  True, if the method allows unregistered calls; false otherwise.
+ *  If true, the selected method allows unregistered calls, e.g. calls
+ *  that don't identify any user or application.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -3303,74 +3312,14 @@ GTLR_EXTERN NSString * const kGTLRServiceUser_Type_Syntax_SyntaxProto3;
 @property(nonatomic, copy, nullable) NSString *selector;
 
 /**
- *  True, if the method should skip service control. If so, no control plane
- *  feature (like quota and billing) will be enabled.
- *  This flag is used by ESP to allow some Endpoints customers to bypass
- *  Google internal checks.
+ *  If true, the selected method should skip service control and the control
+ *  plane features, such as quota and billing, will not be available.
+ *  This flag is used by Google Cloud Endpoints to bypass checks for internal
+ *  methods, such as service health check methods.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *skipServiceControl;
-
-@end
-
-
-/**
- *  `Visibility` defines restrictions for the visibility of service
- *  elements. Restrictions are specified using visibility labels
- *  (e.g., TRUSTED_TESTER) that are elsewhere linked to users and projects.
- *  Users and projects can have access to more than one visibility label. The
- *  effective visibility for multiple labels is the union of each label's
- *  elements, plus any unrestricted elements.
- *  If an element and its parents have no restrictions, visibility is
- *  unconditionally granted.
- *  Example:
- *  visibility:
- *  rules:
- *  - selector: google.calendar.Calendar.EnhancedSearch
- *  restriction: TRUSTED_TESTER
- *  - selector: google.calendar.Calendar.Delegate
- *  restriction: GOOGLE_INTERNAL
- *  Here, all methods are publicly visible except for the restricted methods
- *  EnhancedSearch and Delegate.
- */
-@interface GTLRServiceUser_Visibility : GTLRObject
-
-/**
- *  A list of visibility rules that apply to individual API elements.
- *  **NOTE:** All service configuration rules follow "last one wins" order.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRServiceUser_VisibilityRule *> *rules;
-
-@end
-
-
-/**
- *  A visibility rule provides visibility configuration for an individual API
- *  element.
- */
-@interface GTLRServiceUser_VisibilityRule : GTLRObject
-
-/**
- *  A comma-separated list of visibility labels that apply to the `selector`.
- *  Any of the listed labels can be used to grant the visibility.
- *  If a rule has multiple labels, removing one of the labels but not all of
- *  them can break clients.
- *  Example:
- *  visibility:
- *  rules:
- *  - selector: google.calendar.Calendar.EnhancedSearch
- *  restriction: GOOGLE_INTERNAL, TRUSTED_TESTER
- *  Removing GOOGLE_INTERNAL from this restriction will break clients that
- *  rely on this method and only had access to it through GOOGLE_INTERNAL.
- */
-@property(nonatomic, copy, nullable) NSString *restriction;
-
-/**
- *  Selects methods, messages, fields, enums, etc. to which this rule applies.
- *  Refer to selector for syntax details.
- */
-@property(nonatomic, copy, nullable) NSString *selector;
 
 @end
 

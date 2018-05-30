@@ -89,8 +89,6 @@
 @class GTLRServiceConsumerManagement_Type;
 @class GTLRServiceConsumerManagement_Usage;
 @class GTLRServiceConsumerManagement_UsageRule;
-@class GTLRServiceConsumerManagement_Visibility;
-@class GTLRServiceConsumerManagement_VisibilityRule;
 
 // Generated comments include content from the discovery document; avoid them
 // causing warnings since clang's checks are some what arbitrary.
@@ -449,7 +447,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxProto3;
 
 /**
- *  Request to add a newly created and configured tenant project to tenancy
+ *  Request to add a newly created and configured tenant project to a tenancy
  *  unit.
  */
 @interface GTLRServiceConsumerManagement_AddTenantProjectRequest : GTLRObject
@@ -576,12 +574,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @interface GTLRServiceConsumerManagement_AuthenticationRule : GTLRObject
 
 /**
- *  Whether to allow requests without a credential. The credential can be
- *  an OAuth token, Google cookies (first-party auth) or EndUserCreds.
- *  For requests without credentials, if the service control environment is
- *  specified, each incoming request **must** be associated with a service
- *  consumer. This can be done by passing an API key that belongs to a consumer
- *  project.
+ *  If true, the service accepts API keys without any other credential.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -841,7 +834,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 
 
 /**
- *  Describes billing configuration for new a Tenant Project
+ *  Describes billing configuration for a new tenant project.
  */
 @interface GTLRServiceConsumerManagement_BillingConfig : GTLRObject
 
@@ -896,6 +889,22 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  *  `google.rpc.context.OriginContext`.
  *  Available context types are defined in package
  *  `google.rpc.context`.
+ *  This also provides mechanism to whitelist any protobuf message extension
+ *  that
+ *  can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+ *  “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+ *  specific protobuf types that can appear in grpc metadata as follows in your
+ *  yaml file:
+ *  Example:
+ *  context:
+ *  rules:
+ *  - selector: "google.example.library.v1.LibraryService.CreateBook"
+ *  allowed_request_extensions:
+ *  - google.foo.v1.NewExtension
+ *  allowed_response_extensions:
+ *  - google.foo.v1.NewExtension
+ *  You can also specify extension ID instead of fully qualified extension name
+ *  here.
  */
 @interface GTLRServiceConsumerManagement_Context : GTLRObject
 
@@ -913,6 +922,18 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  *  element.
  */
 @interface GTLRServiceConsumerManagement_ContextRule : GTLRObject
+
+/**
+ *  A list of full type names or extension IDs of extensions allowed in grpc
+ *  side channel from client to backend.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *allowedRequestExtensions;
+
+/**
+ *  A list of full type names or extension IDs of extensions allowed in grpc
+ *  side channel from backend to client.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *allowedResponseExtensions;
 
 /** A list of full type names of provided contexts. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *provided;
@@ -951,13 +972,13 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @interface GTLRServiceConsumerManagement_CreateTenancyUnitRequest : GTLRObject
 
 /**
- *  Optional producer provided identifier of the tenancy unit
- *  Must be no longer than 40 characters and preferably URI friendly
- *  If it is not provided, UID for the tenancy unit will be auto generated
+ *  Optional producer provided identifier of the tenancy unit.
+ *  Must be no longer than 40 characters and preferably URI friendly.
+ *  If it is not provided, a UID for the tenancy unit will be auto generated.
  *  It must be unique across a service.
  *  If the tenancy unit already exists for the service and consumer pair,
- *  CreateTenancyUnit will return existing tenancy unit if provided identifier
- *  is identical or empty, otherwise the call will fail.
+ *  `CreateTenancyUnit` will return the existing tenancy unit if the provided
+ *  identifier is identical or empty, otherwise the call will fail.
  */
 @property(nonatomic, copy, nullable) NSString *tenancyUnitId;
 
@@ -1081,9 +1102,6 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  *  <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
  *  Text can be excluded from doc using the following notation:
  *  <pre><code>&#40;-- internal comment --&#41;</code></pre>
- *  Comments can be made conditional using a visibility label. The below
- *  text will be only rendered if the `BETA` label is available:
- *  <pre><code>&#40;--BETA: comment for BETA users --&#41;</code></pre>
  *  A few directives are available in documentation. Note that
  *  directives must appear on a single line to be properly
  *  identified. The `include` directive includes a markdown file from
@@ -1690,15 +1708,6 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @property(nonatomic, copy, nullable) NSString *put;
 
 /**
- *  The name of the response field whose value is mapped to the HTTP body of
- *  response. Other response fields are ignored. This field is optional. When
- *  not set, the response message will be used as HTTP body of response.
- *  NOTE: the referred field must be not a repeated field and must be present
- *  at the top-level of response message type.
- */
-@property(nonatomic, copy, nullable) NSString *responseBody;
-
-/**
  *  DO NOT USE. This is an experimental field.
  *  Optional. The REST collection name is by default derived from the URL
  *  pattern. If specified, this field overrides the default collection name.
@@ -1814,7 +1823,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @property(nonatomic, copy, nullable) NSString *nextPageToken;
 
 /**
- *  Tenancy Units matching the request.
+ *  Tenancy units matching the request.
  *
  *  @note This property is used to support NSFastEnumeration and indexed
  *        subscripting on this class.
@@ -2199,13 +2208,12 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  *  * `Gi` gibi (2**30)
  *  * `Ti` tebi (2**40)
  *  **Grammar**
- *  The grammar includes the dimensionless unit `1`, such as `1/s`.
  *  The grammar also includes these connectors:
  *  * `/` division (as an infix operator, e.g. `1/s`).
  *  * `.` multiplication (as an infix operator, e.g. `GBy.d`)
  *  The grammar for a unit is as follows:
  *  Expression = Component { "." Component } { "/" Component } ;
- *  Component = [ PREFIX ] UNIT [ Annotation ]
+ *  Component = ( [ PREFIX ] UNIT | "%" ) [ Annotation ]
  *  | Annotation
  *  | "1"
  *  ;
@@ -2216,6 +2224,9 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  *  `{requests}/s == 1/s`, `By{transmitted}/s == By/s`.
  *  * `NAME` is a sequence of non-blank printable ASCII characters not
  *  containing '{' or '}'.
+ *  * `1` represents dimensionless value 1, such as in `1/s`.
+ *  * `%` represents dimensionless value 1/100, and annotates values giving
+ *  a percentage.
  */
 @property(nonatomic, copy, nullable) NSString *unit;
 
@@ -2701,7 +2712,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 
 /**
  *  Uses the same format as in IAM policy.
- *  `member` must include both prefix and id. E.g., `user:{emailId}`,
+ *  `member` must include both prefix and ID. For example, `user:{emailId}`,
  *  `serviceAccount:{emailId}`, `group:{emailId}`.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *members;
@@ -3090,9 +3101,6 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 /** Configuration controlling usage of this service. */
 @property(nonatomic, strong, nullable) GTLRServiceConsumerManagement_Usage *usage;
 
-/** API visibility configuration. */
-@property(nonatomic, strong, nullable) GTLRServiceConsumerManagement_Visibility *visibility;
-
 @end
 
 
@@ -3106,11 +3114,12 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  *  The email format of the service account will be
  *  "<account-id>\@<tenant-project-id>.iam.gserviceaccount.com".
  *  This account id has to be unique within tenant project and producers
- *  have to guarantee it.
+ *  have to guarantee it. And it must be 6-30 characters long, and matches the
+ *  regular expression `[a-z]([-a-z0-9]*[a-z0-9])`.
  */
 @property(nonatomic, copy, nullable) NSString *accountId;
 
-/** Roles for the service account above on tenant project. */
+/** Roles for the associated service account for the tenant project. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *tenantProjectRoles;
 
 @end
@@ -3333,8 +3342,8 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @interface GTLRServiceConsumerManagement_TenancyUnit : GTLRObject
 
 /**
- *  \@OutputOnly Cloud resource One Platform Name of the consumer of this
- *  service. For example 'projects/123456'.
+ *  \@OutputOnly Cloud resource name of the consumer of this service.
+ *  For example 'projects/123456'.
  */
 @property(nonatomic, copy, nullable) NSString *consumer;
 
@@ -3353,7 +3362,10 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
  */
 @property(nonatomic, copy, nullable) NSString *service;
 
-/** Resources constituting the tenancy unit. */
+/**
+ *  Resources constituting the tenancy unit.
+ *  There can be at most 512 tenant resources in a tenancy unit.
+ */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceConsumerManagement_TenantResource *> *tenantResources;
 
 @end
@@ -3370,7 +3382,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 
 /**
  *  Billing account properties.
- *  It may be specified explicitly, or created from the specified group
+ *  It might be specified explicitly, or created from the specified group
  *  during provisioning
  */
 @property(nonatomic, strong, nullable) GTLRServiceConsumerManagement_BillingConfig *billingConfig;
@@ -3393,7 +3405,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 /**
  *  Google Cloud API names of services that will be activated on this project
  *  during provisioning. If any of these services can not be activated,
- *  addTenantProject method will fail.
+ *  request will fail.
  *  For example: 'compute.googleapis.com','cloudfunctions.googleapis.com'
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *services;
@@ -3418,15 +3430,17 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 
 /**
  *  Describes policy settings that need to be applied to a newly
- *  created Tenant Project.
+ *  created tenant project.
  */
 @interface GTLRServiceConsumerManagement_TenantProjectPolicy : GTLRObject
 
 /**
- *  Additional policy bindings to be applied on the tenant
- *  project.
- *  At least one owner must be set in the bindings. Among the list of members
- *  as owners, at least one of them must be either `user` or `group` based.
+ *  Policy bindings to be applied to the tenant project, in addition to the
+ *  'roles/owner' role granted to the Service Consumer Management service
+ *  account.
+ *  At least one binding must have the role `roles/owner`. Among the list of
+ *  members for `roles/owner`, at least one of them must be either `user` or
+ *  `group` type.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceConsumerManagement_PolicyBinding *> *policyBindings;
 
@@ -3440,7 +3454,7 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 
 /**
  *  \@OutputOnly Identifier of the tenant resource.
- *  For cloud projects it is in the form 'projects/{number}'.
+ *  For cloud projects, it is in the form 'projects/{number}'.
  *  For example 'projects/123456'.
  */
 @property(nonatomic, copy, nullable) NSString *resource;
@@ -3559,7 +3573,8 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @interface GTLRServiceConsumerManagement_UsageRule : GTLRObject
 
 /**
- *  True, if the method allows unregistered calls; false otherwise.
+ *  If true, the selected method allows unregistered calls, e.g. calls
+ *  that don't identify any user or application.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -3573,74 +3588,14 @@ GTLR_EXTERN NSString * const kGTLRServiceConsumerManagement_Type_Syntax_SyntaxPr
 @property(nonatomic, copy, nullable) NSString *selector;
 
 /**
- *  True, if the method should skip service control. If so, no control plane
- *  feature (like quota and billing) will be enabled.
- *  This flag is used by ESP to allow some Endpoints customers to bypass
- *  Google internal checks.
+ *  If true, the selected method should skip service control and the control
+ *  plane features, such as quota and billing, will not be available.
+ *  This flag is used by Google Cloud Endpoints to bypass checks for internal
+ *  methods, such as service health check methods.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *skipServiceControl;
-
-@end
-
-
-/**
- *  `Visibility` defines restrictions for the visibility of service
- *  elements. Restrictions are specified using visibility labels
- *  (e.g., TRUSTED_TESTER) that are elsewhere linked to users and projects.
- *  Users and projects can have access to more than one visibility label. The
- *  effective visibility for multiple labels is the union of each label's
- *  elements, plus any unrestricted elements.
- *  If an element and its parents have no restrictions, visibility is
- *  unconditionally granted.
- *  Example:
- *  visibility:
- *  rules:
- *  - selector: google.calendar.Calendar.EnhancedSearch
- *  restriction: TRUSTED_TESTER
- *  - selector: google.calendar.Calendar.Delegate
- *  restriction: GOOGLE_INTERNAL
- *  Here, all methods are publicly visible except for the restricted methods
- *  EnhancedSearch and Delegate.
- */
-@interface GTLRServiceConsumerManagement_Visibility : GTLRObject
-
-/**
- *  A list of visibility rules that apply to individual API elements.
- *  **NOTE:** All service configuration rules follow "last one wins" order.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRServiceConsumerManagement_VisibilityRule *> *rules;
-
-@end
-
-
-/**
- *  A visibility rule provides visibility configuration for an individual API
- *  element.
- */
-@interface GTLRServiceConsumerManagement_VisibilityRule : GTLRObject
-
-/**
- *  A comma-separated list of visibility labels that apply to the `selector`.
- *  Any of the listed labels can be used to grant the visibility.
- *  If a rule has multiple labels, removing one of the labels but not all of
- *  them can break clients.
- *  Example:
- *  visibility:
- *  rules:
- *  - selector: google.calendar.Calendar.EnhancedSearch
- *  restriction: GOOGLE_INTERNAL, TRUSTED_TESTER
- *  Removing GOOGLE_INTERNAL from this restriction will break clients that
- *  rely on this method and only had access to it through GOOGLE_INTERNAL.
- */
-@property(nonatomic, copy, nullable) NSString *restriction;
-
-/**
- *  Selects methods, messages, fields, enums, etc. to which this rule applies.
- *  Refer to selector for syntax details.
- */
-@property(nonatomic, copy, nullable) NSString *selector;
 
 @end
 

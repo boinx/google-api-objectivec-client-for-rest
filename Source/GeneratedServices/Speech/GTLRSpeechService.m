@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Speech API (speech/v1)
+//   Cloud Speech API (speech/v1)
 // Description:
 //   Converts audio to text by applying powerful neural network models.
 // Documentation:
@@ -11,10 +11,9 @@
 #import "GTLRSpeech.h"
 
 // ----------------------------------------------------------------------------
-// Authorization scopes
+// Authorization scope
 
 NSString * const kGTLRAuthScopeSpeechCloudPlatform = @"https://www.googleapis.com/auth/cloud-platform";
-NSString * const kGTLRAuthScopeSpeechCloudSpeech   = @"https://www.googleapis.com/auth/cloud-speech";
 
 // ----------------------------------------------------------------------------
 //   GTLRSpeechService

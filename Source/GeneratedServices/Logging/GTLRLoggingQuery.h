@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsExclusionsCreate
+ *  @return GTLRLoggingQuery_BillingAccountsExclusionsCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                          parent:(NSString *)parent;
@@ -124,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsExclusionsDelete
+ *  @return GTLRLoggingQuery_BillingAccountsExclusionsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -167,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsExclusionsGet
+ *  @return GTLRLoggingQuery_BillingAccountsExclusionsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -224,7 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_BillingAccountsExclusionsList
+ *  @return GTLRLoggingQuery_BillingAccountsExclusionsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -282,7 +282,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsExclusionsPatch
+ *  @return GTLRLoggingQuery_BillingAccountsExclusionsPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                            name:(NSString *)name;
@@ -334,7 +334,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
  *    For more information about log names, see LogEntry.
  *
- *  @returns GTLRLoggingQuery_BillingAccountsLogsDelete
+ *  @return GTLRLoggingQuery_BillingAccountsLogsDelete
  */
 + (instancetype)queryWithLogName:(NSString *)logName;
 
@@ -392,7 +392,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_BillingAccountsLogsList
+ *  @return GTLRLoggingQuery_BillingAccountsLogsList
  */
 + (instancetype)queryWithParent:(NSString *)parent;
 
@@ -453,7 +453,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsSinksCreate
+ *  @return GTLRLoggingQuery_BillingAccountsSinksCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                          parent:(NSString *)parent;
@@ -499,7 +499,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsSinksDelete
+ *  @return GTLRLoggingQuery_BillingAccountsSinksDelete
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -542,7 +542,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsSinksGet
+ *  @return GTLRLoggingQuery_BillingAccountsSinksGet
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -598,7 +598,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_BillingAccountsSinksList
+ *  @return GTLRLoggingQuery_BillingAccountsSinksList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -680,7 +680,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsSinksPatch
+ *  @return GTLRLoggingQuery_BillingAccountsSinksPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -759,7 +759,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_BillingAccountsSinksUpdate
+ *  @return GTLRLoggingQuery_BillingAccountsSinksUpdate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -791,17 +791,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRLogging_ListLogEntriesRequest to include in the
  *    query.
  *
- *  @returns GTLRLoggingQuery_EntriesList
+ *  @return GTLRLoggingQuery_EntriesList
  */
 + (instancetype)queryWithObject:(GTLRLogging_ListLogEntriesRequest *)object;
 
 @end
 
 /**
- *  Log entry resourcesWrites log entries to Stackdriver Logging. This API
- *  method is the only way to send log entries to Stackdriver Logging. This
- *  method is used, directly or indirectly, by the Stackdriver Logging agent
- *  (fluentd) and all logging libraries configured to use Stackdriver Logging.
+ *  Writes log entries to Stackdriver Logging. This API method is the only way
+ *  to send log entries to Stackdriver Logging. This method is used, directly or
+ *  indirectly, by the Stackdriver Logging agent (fluentd) and all logging
+ *  libraries configured to use Stackdriver Logging. A single request may
+ *  contain log entries for a maximum of 1000 different resources (projects,
+ *  organizations, billing accounts or folders)
  *
  *  Method: logging.entries.write
  *
@@ -817,15 +819,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Fetches a @c GTLRLogging_WriteLogEntriesResponse.
  *
- *  Log entry resourcesWrites log entries to Stackdriver Logging. This API
- *  method is the only way to send log entries to Stackdriver Logging. This
- *  method is used, directly or indirectly, by the Stackdriver Logging agent
- *  (fluentd) and all logging libraries configured to use Stackdriver Logging.
+ *  Writes log entries to Stackdriver Logging. This API method is the only way
+ *  to send log entries to Stackdriver Logging. This method is used, directly or
+ *  indirectly, by the Stackdriver Logging agent (fluentd) and all logging
+ *  libraries configured to use Stackdriver Logging. A single request may
+ *  contain log entries for a maximum of 1000 different resources (projects,
+ *  organizations, billing accounts or folders)
  *
  *  @param object The @c GTLRLogging_WriteLogEntriesRequest to include in the
  *    query.
  *
- *  @returns GTLRLoggingQuery_EntriesWrite
+ *  @return GTLRLoggingQuery_EntriesWrite
  */
 + (instancetype)queryWithObject:(GTLRLogging_WriteLogEntriesRequest *)object;
 
@@ -872,7 +876,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_ExclusionsCreate
+ *  @return GTLRLoggingQuery_ExclusionsCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                          parent:(NSString *)parent;
@@ -914,7 +918,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_ExclusionsDelete
+ *  @return GTLRLoggingQuery_ExclusionsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -957,7 +961,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_ExclusionsGet
+ *  @return GTLRLoggingQuery_ExclusionsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -1014,7 +1018,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_ExclusionsList
+ *  @return GTLRLoggingQuery_ExclusionsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1072,7 +1076,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_ExclusionsPatch
+ *  @return GTLRLoggingQuery_ExclusionsPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                            name:(NSString *)name;
@@ -1120,7 +1124,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_FoldersExclusionsCreate
+ *  @return GTLRLoggingQuery_FoldersExclusionsCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                          parent:(NSString *)parent;
@@ -1162,7 +1166,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_FoldersExclusionsDelete
+ *  @return GTLRLoggingQuery_FoldersExclusionsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -1205,7 +1209,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_FoldersExclusionsGet
+ *  @return GTLRLoggingQuery_FoldersExclusionsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -1262,7 +1266,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_FoldersExclusionsList
+ *  @return GTLRLoggingQuery_FoldersExclusionsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1320,7 +1324,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_FoldersExclusionsPatch
+ *  @return GTLRLoggingQuery_FoldersExclusionsPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                            name:(NSString *)name;
@@ -1372,7 +1376,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
  *    For more information about log names, see LogEntry.
  *
- *  @returns GTLRLoggingQuery_FoldersLogsDelete
+ *  @return GTLRLoggingQuery_FoldersLogsDelete
  */
 + (instancetype)queryWithLogName:(NSString *)logName;
 
@@ -1430,7 +1434,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_FoldersLogsList
+ *  @return GTLRLoggingQuery_FoldersLogsList
  */
 + (instancetype)queryWithParent:(NSString *)parent;
 
@@ -1491,7 +1495,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_FoldersSinksCreate
+ *  @return GTLRLoggingQuery_FoldersSinksCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                          parent:(NSString *)parent;
@@ -1537,7 +1541,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_FoldersSinksDelete
+ *  @return GTLRLoggingQuery_FoldersSinksDelete
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -1580,7 +1584,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_FoldersSinksGet
+ *  @return GTLRLoggingQuery_FoldersSinksGet
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -1636,7 +1640,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_FoldersSinksList
+ *  @return GTLRLoggingQuery_FoldersSinksList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1718,7 +1722,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_FoldersSinksPatch
+ *  @return GTLRLoggingQuery_FoldersSinksPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -1797,7 +1801,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_FoldersSinksUpdate
+ *  @return GTLRLoggingQuery_FoldersSinksUpdate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -1849,7 +1853,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
  *    For more information about log names, see LogEntry.
  *
- *  @returns GTLRLoggingQuery_LogsDelete
+ *  @return GTLRLoggingQuery_LogsDelete
  */
 + (instancetype)queryWithLogName:(NSString *)logName;
 
@@ -1907,7 +1911,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_LogsList
+ *  @return GTLRLoggingQuery_LogsList
  */
 + (instancetype)queryWithParent:(NSString *)parent;
 
@@ -1950,7 +1954,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Lists the descriptors for monitored resource types used by Stackdriver
  *  Logging.
  *
- *  @returns GTLRLoggingQuery_MonitoredResourceDescriptorsList
+ *  @return GTLRLoggingQuery_MonitoredResourceDescriptorsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2001,7 +2005,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_OrganizationsExclusionsCreate
+ *  @return GTLRLoggingQuery_OrganizationsExclusionsCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                          parent:(NSString *)parent;
@@ -2043,7 +2047,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsExclusionsDelete
+ *  @return GTLRLoggingQuery_OrganizationsExclusionsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -2086,7 +2090,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsExclusionsGet
+ *  @return GTLRLoggingQuery_OrganizationsExclusionsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -2143,7 +2147,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_OrganizationsExclusionsList
+ *  @return GTLRLoggingQuery_OrganizationsExclusionsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2201,7 +2205,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsExclusionsPatch
+ *  @return GTLRLoggingQuery_OrganizationsExclusionsPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                            name:(NSString *)name;
@@ -2253,7 +2257,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
  *    For more information about log names, see LogEntry.
  *
- *  @returns GTLRLoggingQuery_OrganizationsLogsDelete
+ *  @return GTLRLoggingQuery_OrganizationsLogsDelete
  */
 + (instancetype)queryWithLogName:(NSString *)logName;
 
@@ -2311,7 +2315,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_OrganizationsLogsList
+ *  @return GTLRLoggingQuery_OrganizationsLogsList
  */
 + (instancetype)queryWithParent:(NSString *)parent;
 
@@ -2372,7 +2376,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_OrganizationsSinksCreate
+ *  @return GTLRLoggingQuery_OrganizationsSinksCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                          parent:(NSString *)parent;
@@ -2418,7 +2422,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsSinksDelete
+ *  @return GTLRLoggingQuery_OrganizationsSinksDelete
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -2461,7 +2465,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsSinksGet
+ *  @return GTLRLoggingQuery_OrganizationsSinksGet
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -2517,7 +2521,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_OrganizationsSinksList
+ *  @return GTLRLoggingQuery_OrganizationsSinksList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2599,7 +2603,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsSinksPatch
+ *  @return GTLRLoggingQuery_OrganizationsSinksPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -2678,7 +2682,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_OrganizationsSinksUpdate
+ *  @return GTLRLoggingQuery_OrganizationsSinksUpdate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -2726,7 +2730,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_ProjectsExclusionsCreate
+ *  @return GTLRLoggingQuery_ProjectsExclusionsCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                          parent:(NSString *)parent;
@@ -2768,7 +2772,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsExclusionsDelete
+ *  @return GTLRLoggingQuery_ProjectsExclusionsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -2811,7 +2815,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsExclusionsGet
+ *  @return GTLRLoggingQuery_ProjectsExclusionsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -2868,7 +2872,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_ProjectsExclusionsList
+ *  @return GTLRLoggingQuery_ProjectsExclusionsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2926,7 +2930,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
  *    Example: "projects/my-project-id/exclusions/my-exclusion-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsExclusionsPatch
+ *  @return GTLRLoggingQuery_ProjectsExclusionsPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogExclusion *)object
                            name:(NSString *)name;
@@ -2978,7 +2982,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity".
  *    For more information about log names, see LogEntry.
  *
- *  @returns GTLRLoggingQuery_ProjectsLogsDelete
+ *  @return GTLRLoggingQuery_ProjectsLogsDelete
  */
 + (instancetype)queryWithLogName:(NSString *)logName;
 
@@ -3036,7 +3040,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_ProjectsLogsList
+ *  @return GTLRLoggingQuery_ProjectsLogsList
  */
 + (instancetype)queryWithParent:(NSString *)parent;
 
@@ -3074,7 +3078,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "projects/[PROJECT_ID]"
  *    The new metric must be provided in the request.
  *
- *  @returns GTLRLoggingQuery_ProjectsMetricsCreate
+ *  @return GTLRLoggingQuery_ProjectsMetricsCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogMetric *)object
                          parent:(NSString *)parent;
@@ -3109,7 +3113,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metricName The resource name of the metric to delete:
  *    "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
  *
- *  @returns GTLRLoggingQuery_ProjectsMetricsDelete
+ *  @return GTLRLoggingQuery_ProjectsMetricsDelete
  */
 + (instancetype)queryWithMetricName:(NSString *)metricName;
 
@@ -3144,7 +3148,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metricName The resource name of the desired metric:
  *    "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
  *
- *  @returns GTLRLoggingQuery_ProjectsMetricsGet
+ *  @return GTLRLoggingQuery_ProjectsMetricsGet
  */
 + (instancetype)queryWithMetricName:(NSString *)metricName;
 
@@ -3194,7 +3198,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param parent Required. The name of the project containing the metrics:
  *    "projects/[PROJECT_ID]"
  *
- *  @returns GTLRLoggingQuery_ProjectsMetricsList
+ *  @return GTLRLoggingQuery_ProjectsMetricsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -3239,7 +3243,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    must be the same as [METRIC_ID] If the metric does not exist in
  *    [PROJECT_ID], then a new metric is created.
  *
- *  @returns GTLRLoggingQuery_ProjectsMetricsUpdate
+ *  @return GTLRLoggingQuery_ProjectsMetricsUpdate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogMetric *)object
                      metricName:(NSString *)metricName;
@@ -3301,7 +3305,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_ProjectsSinksCreate
+ *  @return GTLRLoggingQuery_ProjectsSinksCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                          parent:(NSString *)parent;
@@ -3347,7 +3351,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsSinksDelete
+ *  @return GTLRLoggingQuery_ProjectsSinksDelete
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -3390,7 +3394,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsSinksGet
+ *  @return GTLRLoggingQuery_ProjectsSinksGet
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -3446,7 +3450,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_ProjectsSinksList
+ *  @return GTLRLoggingQuery_ProjectsSinksList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -3528,7 +3532,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsSinksPatch
+ *  @return GTLRLoggingQuery_ProjectsSinksPatch
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -3607,7 +3611,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_ProjectsSinksUpdate
+ *  @return GTLRLoggingQuery_ProjectsSinksUpdate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;
@@ -3669,7 +3673,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]"
  *    Examples: "projects/my-logging-project", "organizations/123456789".
  *
- *  @returns GTLRLoggingQuery_SinksCreate
+ *  @return GTLRLoggingQuery_SinksCreate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                          parent:(NSString *)parent;
@@ -3715,7 +3719,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_SinksDelete
+ *  @return GTLRLoggingQuery_SinksDelete
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -3758,7 +3762,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_SinksGet
+ *  @return GTLRLoggingQuery_SinksGet
  */
 + (instancetype)queryWithSinkName:(NSString *)sinkName;
 
@@ -3814,7 +3818,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "billingAccounts/[BILLING_ACCOUNT_ID]"
  *    "folders/[FOLDER_ID]"
  *
- *  @returns GTLRLoggingQuery_SinksList
+ *  @return GTLRLoggingQuery_SinksList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -3896,7 +3900,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    "folders/[FOLDER_ID]/sinks/[SINK_ID]"
  *    Example: "projects/my-project-id/sinks/my-sink-id".
  *
- *  @returns GTLRLoggingQuery_SinksUpdate
+ *  @return GTLRLoggingQuery_SinksUpdate
  */
 + (instancetype)queryWithObject:(GTLRLogging_LogSink *)object
                        sinkName:(NSString *)sinkName;

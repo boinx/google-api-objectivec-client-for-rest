@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Cloud Video Intelligence API (videointelligence/v1beta1)
+//   Cloud Video Intelligence API (videointelligence/v1)
 // Description:
 //   Cloud Video Intelligence API.
 // Documentation:
@@ -23,7 +23,6 @@
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1SafeSearchAnnotation;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoAnnotationProgress;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoAnnotationResults;
-@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoSegment;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta2Entity;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta2ExplicitContentAnnotation;
@@ -36,13 +35,36 @@
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta2VideoSegment;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1Entity;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentAnnotation;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentDetectionConfig;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentFrame;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelAnnotation;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelFrame;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelSegment;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1Entity;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentAnnotation;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionAnnotation;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionAttribute;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionFrame;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceSegment;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelAnnotation;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelFrame;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelSegment;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1NormalizedBoundingBox;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1SpeechRecognitionAlternative;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1SpeechTranscription;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoAnnotationProgress;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoAnnotationResults;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoSegment;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1WordInfo;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ShotChangeDetectionConfig;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoAnnotationProgress;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoAnnotationResults;
+@class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoContext;
 @class GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoSegment;
+@class GTLRCloudVideoIntelligence_GoogleLongrunningOperation;
 @class GTLRCloudVideoIntelligence_GoogleLongrunningOperation_Metadata;
 @class GTLRCloudVideoIntelligence_GoogleLongrunningOperation_Response;
 @class GTLRCloudVideoIntelligence_GoogleRpcStatus;
@@ -59,16 +81,16 @@ NS_ASSUME_NONNULL_BEGIN
 // Constants - For some of the classes' properties below.
 
 // ----------------------------------------------------------------------------
-// GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest.features
+// GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoRequest.features
 
+/** Value: "EXPLICIT_CONTENT_DETECTION" */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoRequest_Features_ExplicitContentDetection;
 /** Value: "FEATURE_UNSPECIFIED" */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest_Features_FeatureUnspecified;
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoRequest_Features_FeatureUnspecified;
 /** Value: "LABEL_DETECTION" */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest_Features_LabelDetection;
-/** Value: "SAFE_SEARCH_DETECTION" */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest_Features_SafeSearchDetection;
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoRequest_Features_LabelDetection;
 /** Value: "SHOT_CHANGE_DETECTION" */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest_Features_ShotChangeDetection;
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoRequest_Features_ShotChangeDetection;
 
 // ----------------------------------------------------------------------------
 // GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1LabelLocation.level
@@ -306,34 +328,6 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1SafeSearchAnnotation_Violent_VeryUnlikely;
 
 // ----------------------------------------------------------------------------
-// GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext.labelDetectionMode
-
-/**
- *  Detect frame-level labels.
- *
- *  Value: "FRAME_MODE"
- */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_FrameMode;
-/**
- *  Unspecified.
- *
- *  Value: "LABEL_DETECTION_MODE_UNSPECIFIED"
- */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_LabelDetectionModeUnspecified;
-/**
- *  Detect both shot-level and frame-level labels.
- *
- *  Value: "SHOT_AND_FRAME_MODE"
- */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_ShotAndFrameMode;
-/**
- *  Detect shot-level labels.
- *
- *  Value: "SHOT_MODE"
- */
-GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_ShotMode;
-
-// ----------------------------------------------------------------------------
 // GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta2ExplicitContentFrame.pornographyLikelihood
 
 /**
@@ -413,6 +407,162 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
  */
 GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentFrame_PornographyLikelihood_VeryUnlikely;
 
+// ----------------------------------------------------------------------------
+// GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig.labelDetectionMode
+
+/**
+ *  Detect frame-level labels.
+ *
+ *  Value: "FRAME_MODE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_FrameMode;
+/**
+ *  Unspecified.
+ *
+ *  Value: "LABEL_DETECTION_MODE_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_LabelDetectionModeUnspecified;
+/**
+ *  Detect both shot-level and frame-level labels.
+ *
+ *  Value: "SHOT_AND_FRAME_MODE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_ShotAndFrameMode;
+/**
+ *  Detect shot-level labels.
+ *
+ *  Value: "SHOT_MODE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_ShotMode;
+
+// ----------------------------------------------------------------------------
+// GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute.emotion
+
+/**
+ *  Amusement.
+ *
+ *  Value: "AMUSEMENT"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Amusement;
+/**
+ *  Anger.
+ *
+ *  Value: "ANGER"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Anger;
+/**
+ *  Concentration.
+ *
+ *  Value: "CONCENTRATION"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Concentration;
+/**
+ *  Contentment.
+ *
+ *  Value: "CONTENTMENT"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Contentment;
+/**
+ *  Desire.
+ *
+ *  Value: "DESIRE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Desire;
+/**
+ *  Disappointment.
+ *
+ *  Value: "DISAPPOINTMENT"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Disappointment;
+/**
+ *  Disgust.
+ *
+ *  Value: "DISGUST"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Disgust;
+/**
+ *  Elation.
+ *
+ *  Value: "ELATION"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Elation;
+/**
+ *  Embarrassment.
+ *
+ *  Value: "EMBARRASSMENT"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Embarrassment;
+/**
+ *  Unspecified emotion.
+ *
+ *  Value: "EMOTION_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_EmotionUnspecified;
+/**
+ *  Interest.
+ *
+ *  Value: "INTEREST"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Interest;
+/**
+ *  Pride.
+ *
+ *  Value: "PRIDE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Pride;
+/**
+ *  Sadness.
+ *
+ *  Value: "SADNESS"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Sadness;
+/**
+ *  Surprise.
+ *
+ *  Value: "SURPRISE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Surprise;
+
+// ----------------------------------------------------------------------------
+// GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame.pornographyLikelihood
+
+/**
+ *  Unspecified likelihood.
+ *
+ *  Value: "LIKELIHOOD_UNSPECIFIED"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_LikelihoodUnspecified;
+/**
+ *  Likely.
+ *
+ *  Value: "LIKELY"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_Likely;
+/**
+ *  Possible.
+ *
+ *  Value: "POSSIBLE"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_Possible;
+/**
+ *  Unlikely.
+ *
+ *  Value: "UNLIKELY"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_Unlikely;
+/**
+ *  Very likely.
+ *
+ *  Value: "VERY_LIKELY"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_VeryLikely;
+/**
+ *  Very unlikely.
+ *
+ *  Value: "VERY_UNLIKELY"
+ */
+GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_VeryUnlikely;
+
 /**
  *  Video annotation progress. Included in the `metadata`
  *  field of the `Operation` returned by the `GetOperation`
@@ -427,42 +577,20 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 
 
 /**
- *  Video annotation response. Included in the `response`
- *  field of the `Operation` returned by the `GetOperation`
- *  call of the `google::longrunning::Operations` service.
- */
-@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoResponse : GTLRObject
-
-/** Annotation results for all videos specified in `AnnotateVideoRequest`. */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoAnnotationResults *> *annotationResults;
-
-@end
-
-
-/**
- *  Video annotation progress. Included in the `metadata`
- *  field of the `Operation` returned by the `GetOperation`
- *  call of the `google::longrunning::Operations` service.
- */
-@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoProgress : GTLRObject
-
-/** Progress metadata for all videos specified in `AnnotateVideoRequest`. */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoAnnotationProgress *> *annotationProgress;
-
-@end
-
-
-/**
  *  Video annotation request.
  */
-@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoRequest : GTLRObject
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoRequest : GTLRObject
 
 /** Requested video annotation features. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *features;
 
 /**
- *  The video data bytes. Encoding: base64. If unset, the input video(s)
- *  should be specified via `input_uri`. If set, `input_uri` should be unset.
+ *  The video data bytes.
+ *  If unset, the input video(s) should be specified via `input_uri`.
+ *  If set, `input_uri` should be unset.
+ *
+ *  Contains encoded binary data; GTLRBase64 can encode/decode (probably
+ *  web-safe format).
  */
 @property(nonatomic, copy, nullable) NSString *inputContent;
 
@@ -498,7 +626,33 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 @property(nonatomic, copy, nullable) NSString *outputUri;
 
 /** Additional video context and/or feature-specific parameters. */
-@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext *videoContext;
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoContext *videoContext;
+
+@end
+
+
+/**
+ *  Video annotation response. Included in the `response`
+ *  field of the `Operation` returned by the `GetOperation`
+ *  call of the `google::longrunning::Operations` service.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1AnnotateVideoResponse : GTLRObject
+
+/** Annotation results for all videos specified in `AnnotateVideoRequest`. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoAnnotationResults *> *annotationResults;
+
+@end
+
+
+/**
+ *  Video annotation progress. Included in the `metadata`
+ *  field of the `Operation` returned by the `GetOperation`
+ *  call of the `google::longrunning::Operations` service.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1AnnotateVideoProgress : GTLRObject
+
+/** Progress metadata for all videos specified in `AnnotateVideoRequest`. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoAnnotationProgress *> *annotationProgress;
 
 @end
 
@@ -749,65 +903,6 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 
 /** Shot annotations. Each shot is represented as a video segment. */
 @property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoSegment *> *shotAnnotations;
-
-@end
-
-
-/**
- *  Video context and/or feature-specific parameters.
- */
-@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext : GTLRObject
-
-/**
- *  If label detection has been requested, what labels should be detected
- *  in addition to video-level labels or segment-level labels. If unspecified,
- *  defaults to `SHOT_MODE`.
- *
- *  Likely values:
- *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_FrameMode
- *        Detect frame-level labels. (Value: "FRAME_MODE")
- *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_LabelDetectionModeUnspecified
- *        Unspecified. (Value: "LABEL_DETECTION_MODE_UNSPECIFIED")
- *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_ShotAndFrameMode
- *        Detect both shot-level and frame-level labels. (Value:
- *        "SHOT_AND_FRAME_MODE")
- *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoContext_LabelDetectionMode_ShotMode
- *        Detect shot-level labels. (Value: "SHOT_MODE")
- */
-@property(nonatomic, copy, nullable) NSString *labelDetectionMode;
-
-/**
- *  Model to use for label detection.
- *  Supported values: "latest" and "stable" (the default).
- */
-@property(nonatomic, copy, nullable) NSString *labelDetectionModel;
-
-/**
- *  Model to use for safe search detection.
- *  Supported values: "latest" and "stable" (the default).
- */
-@property(nonatomic, copy, nullable) NSString *safeSearchDetectionModel;
-
-/**
- *  Video segments to annotate. The segments may overlap and are not required
- *  to be contiguous or span the whole video. If unspecified, each video
- *  is treated as a single segment.
- */
-@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1beta1VideoSegment *> *segments;
-
-/**
- *  Model to use for shot change detection.
- *  Supported values: "latest" and "stable" (the default).
- */
-@property(nonatomic, copy, nullable) NSString *shotChangeDetectionModel;
-
-/**
- *  Whether the video has been shot from a stationary (i.e. non-moving) camera.
- *  When set to true, might improve detection accuracy for moving objects.
- *
- *  Uses NSNumber of boolValue.
- */
-@property(nonatomic, strong, nullable) NSNumber *stationaryCamera;
 
 @end
 
@@ -1126,6 +1221,21 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 
 
 /**
+ *  Config for EXPLICIT_CONTENT_DETECTION.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentDetectionConfig : GTLRObject
+
+/**
+ *  Model to use for explicit content detection.
+ *  Supported values: "builtin/stable" (the default if unset) and
+ *  "builtin/latest".
+ */
+@property(nonatomic, copy, nullable) NSString *model;
+
+@end
+
+
+/**
  *  Video frame level annotation results for explicit content.
  */
 @interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentFrame : GTLRObject
@@ -1184,6 +1294,48 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 
 
 /**
+ *  Config for LABEL_DETECTION.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig : GTLRObject
+
+/**
+ *  What labels should be detected with LABEL_DETECTION, in addition to
+ *  video-level labels or segment-level labels.
+ *  If unspecified, defaults to `SHOT_MODE`.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_FrameMode
+ *        Detect frame-level labels. (Value: "FRAME_MODE")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_LabelDetectionModeUnspecified
+ *        Unspecified. (Value: "LABEL_DETECTION_MODE_UNSPECIFIED")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_ShotAndFrameMode
+ *        Detect both shot-level and frame-level labels. (Value:
+ *        "SHOT_AND_FRAME_MODE")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig_LabelDetectionMode_ShotMode
+ *        Detect shot-level labels. (Value: "SHOT_MODE")
+ */
+@property(nonatomic, copy, nullable) NSString *labelDetectionMode;
+
+/**
+ *  Model to use for label detection.
+ *  Supported values: "builtin/stable" (the default if unset) and
+ *  "builtin/latest".
+ */
+@property(nonatomic, copy, nullable) NSString *model;
+
+/**
+ *  Whether the video has been shot from a stationary (i.e. non-moving) camera.
+ *  When set to true, might improve detection accuracy for moving objects.
+ *  Should be used with `SHOT_AND_FRAME_MODE` enabled.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *stationaryCamera;
+
+@end
+
+
+/**
  *  Video frame level annotation results for label detection.
  */
 @interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelFrame : GTLRObject
@@ -1218,6 +1370,503 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 
 /** Video segment where a label was detected. */
 @property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoSegment *segment;
+
+@end
+
+
+/**
+ *  Video annotation progress. Included in the `metadata`
+ *  field of the `Operation` returned by the `GetOperation`
+ *  call of the `google::longrunning::Operations` service.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1AnnotateVideoProgress : GTLRObject
+
+/** Progress metadata for all videos specified in `AnnotateVideoRequest`. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoAnnotationProgress *> *annotationProgress;
+
+@end
+
+
+/**
+ *  Video annotation response. Included in the `response`
+ *  field of the `Operation` returned by the `GetOperation`
+ *  call of the `google::longrunning::Operations` service.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1AnnotateVideoResponse : GTLRObject
+
+/** Annotation results for all videos specified in `AnnotateVideoRequest`. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoAnnotationResults *> *annotationResults;
+
+@end
+
+
+/**
+ *  Emotion attribute.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute : GTLRObject
+
+/**
+ *  Emotion entry.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Amusement
+ *        Amusement. (Value: "AMUSEMENT")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Anger
+ *        Anger. (Value: "ANGER")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Concentration
+ *        Concentration. (Value: "CONCENTRATION")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Contentment
+ *        Contentment. (Value: "CONTENTMENT")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Desire
+ *        Desire. (Value: "DESIRE")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Disappointment
+ *        Disappointment. (Value: "DISAPPOINTMENT")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Disgust
+ *        Disgust. (Value: "DISGUST")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Elation
+ *        Elation. (Value: "ELATION")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Embarrassment
+ *        Embarrassment. (Value: "EMBARRASSMENT")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_EmotionUnspecified
+ *        Unspecified emotion. (Value: "EMOTION_UNSPECIFIED")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Interest
+ *        Interest. (Value: "INTEREST")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Pride
+ *        Pride. (Value: "PRIDE")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Sadness
+ *        Sadness. (Value: "SADNESS")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute_Emotion_Surprise
+ *        Surprise. (Value: "SURPRISE")
+ */
+@property(nonatomic, copy, nullable) NSString *emotion;
+
+/**
+ *  Confidence score.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *score;
+
+@end
+
+
+/**
+ *  Detected entity from video analysis.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1Entity : GTLRObject
+
+/**
+ *  Textual description, e.g. `Fixed-gear bicycle`.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/**
+ *  Opaque entity ID. Some IDs may be available in
+ *  [Google Knowledge Graph Search
+ *  API](https://developers.google.com/knowledge-graph/).
+ */
+@property(nonatomic, copy, nullable) NSString *entityId;
+
+/** Language code for `description` in BCP-47 format. */
+@property(nonatomic, copy, nullable) NSString *languageCode;
+
+@end
+
+
+/**
+ *  Explicit content annotation (based on per-frame visual signals only).
+ *  If no explicit content has been detected in a frame, no annotations are
+ *  present for that frame.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentAnnotation : GTLRObject
+
+/** All video frames where explicit content was detected. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame *> *frames;
+
+@end
+
+
+/**
+ *  Video frame level annotation results for explicit content.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame : GTLRObject
+
+/**
+ *  Likelihood of the pornography content..
+ *
+ *  Likely values:
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_LikelihoodUnspecified
+ *        Unspecified likelihood. (Value: "LIKELIHOOD_UNSPECIFIED")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_Likely
+ *        Likely. (Value: "LIKELY")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_Possible
+ *        Possible. (Value: "POSSIBLE")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_Unlikely
+ *        Unlikely. (Value: "UNLIKELY")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_VeryLikely
+ *        Very likely. (Value: "VERY_LIKELY")
+ *    @arg @c kGTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentFrame_PornographyLikelihood_VeryUnlikely
+ *        Very unlikely. (Value: "VERY_UNLIKELY")
+ */
+@property(nonatomic, copy, nullable) NSString *pornographyLikelihood;
+
+/**
+ *  Time-offset, relative to the beginning of the video, corresponding to the
+ *  video frame for this location.
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *timeOffset;
+
+@end
+
+
+/**
+ *  Face detection annotation.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionAnnotation : GTLRObject
+
+/** All video frames where a face was detected. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionFrame *> *frames;
+
+/** All video segments where a face was detected. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceSegment *> *segments;
+
+@end
+
+
+/**
+ *  Face detection attribute.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionAttribute : GTLRObject
+
+/** Emotion attributes. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1EmotionAttribute *> *emotions;
+
+/** Normalized Bounding box. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1NormalizedBoundingBox *normalizedBoundingBox;
+
+@end
+
+
+/**
+ *  Video frame level annotation results for face detection.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionFrame : GTLRObject
+
+/**
+ *  Face attributes in a frame.
+ *  There can be more than one attributes if the same face is detected in
+ *  multiple locations within the current frame.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionAttribute *> *attributes;
+
+/**
+ *  Time-offset, relative to the beginning of the video,
+ *  corresponding to the video frame for this location.
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *timeOffset;
+
+@end
+
+
+/**
+ *  Video segment level annotation results for face detection.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceSegment : GTLRObject
+
+/** Video segment where a face was detected. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoSegment *segment;
+
+@end
+
+
+/**
+ *  Label annotation.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelAnnotation : GTLRObject
+
+/**
+ *  Common categories for the detected entity.
+ *  E.g. when the label is `Terrier` the category is likely `dog`. And in some
+ *  cases there might be more than one categories e.g. `Terrier` could also be
+ *  a `pet`.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1Entity *> *categoryEntities;
+
+/** Detected entity. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1Entity *entity;
+
+/** All video frames where a label was detected. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelFrame *> *frames;
+
+/** All video segments where a label was detected. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelSegment *> *segments;
+
+@end
+
+
+/**
+ *  Video frame level annotation results for label detection.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelFrame : GTLRObject
+
+/**
+ *  Confidence that the label is accurate. Range: [0, 1].
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *confidence;
+
+/**
+ *  Time-offset, relative to the beginning of the video, corresponding to the
+ *  video frame for this location.
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *timeOffset;
+
+@end
+
+
+/**
+ *  Video segment level annotation results for label detection.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelSegment : GTLRObject
+
+/**
+ *  Confidence that the label is accurate. Range: [0, 1].
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *confidence;
+
+/** Video segment where a label was detected. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoSegment *segment;
+
+@end
+
+
+/**
+ *  Normalized bounding box.
+ *  The normalized vertex coordinates are relative to the original image.
+ *  Range: [0, 1].
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1NormalizedBoundingBox : GTLRObject
+
+/**
+ *  Bottom Y coordinate.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *bottom;
+
+/**
+ *  Left X coordinate.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *left;
+
+/**
+ *  Right X coordinate.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *right;
+
+/**
+ *  Top Y coordinate.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *top;
+
+@end
+
+
+/**
+ *  Alternative hypotheses (a.k.a. n-best list).
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1SpeechRecognitionAlternative : GTLRObject
+
+/**
+ *  Output only. The confidence estimate between 0.0 and 1.0. A higher number
+ *  indicates an estimated greater likelihood that the recognized words are
+ *  correct. This field is typically provided only for the top hypothesis, and
+ *  only for `is_final=true` results. Clients should not rely on the
+ *  `confidence` field as it is not guaranteed to be accurate or consistent.
+ *  The default of 0.0 is a sentinel value indicating `confidence` was not set.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *confidence;
+
+/**
+ *  Output only. Transcript text representing the words that the user spoke.
+ */
+@property(nonatomic, copy, nullable) NSString *transcript;
+
+/**
+ *  Output only. A list of word-specific information for each recognized word.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1WordInfo *> *words;
+
+@end
+
+
+/**
+ *  A speech recognition result corresponding to a portion of the audio.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1SpeechTranscription : GTLRObject
+
+/**
+ *  Output only. May contain one or more recognition hypotheses (up to the
+ *  maximum specified in `max_alternatives`).
+ *  These alternatives are ordered in terms of accuracy, with the top (first)
+ *  alternative being the most probable, as ranked by the recognizer.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1SpeechRecognitionAlternative *> *alternatives;
+
+@end
+
+
+/**
+ *  Annotation progress for a single video.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoAnnotationProgress : GTLRObject
+
+/**
+ *  Video file location in
+ *  [Google Cloud Storage](https://cloud.google.com/storage/).
+ */
+@property(nonatomic, copy, nullable) NSString *inputUri;
+
+/**
+ *  Approximate percentage processed thus far.
+ *  Guaranteed to be 100 when fully processed.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *progressPercent;
+
+/** Time when the request was received. */
+@property(nonatomic, strong, nullable) GTLRDateTime *startTime;
+
+/** Time of the most recent update. */
+@property(nonatomic, strong, nullable) GTLRDateTime *updateTime;
+
+@end
+
+
+/**
+ *  Annotation results for a single video.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoAnnotationResults : GTLRObject
+
+/**
+ *  If set, indicates an error. Note that for a single `AnnotateVideoRequest`
+ *  some videos may succeed and some may fail.
+ */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleRpcStatus *error;
+
+/** Explicit content annotation. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1ExplicitContentAnnotation *explicitAnnotation;
+
+/** Face detection annotations. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1FaceDetectionAnnotation *> *faceDetectionAnnotations;
+
+/**
+ *  Label annotations on frame level.
+ *  There is exactly one element for each unique label.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelAnnotation *> *frameLabelAnnotations;
+
+/**
+ *  Video file location in
+ *  [Google Cloud Storage](https://cloud.google.com/storage/).
+ */
+@property(nonatomic, copy, nullable) NSString *inputUri;
+
+/**
+ *  Label annotations on video level or user specified segment level.
+ *  There is exactly one element for each unique label.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelAnnotation *> *segmentLabelAnnotations;
+
+/** Shot annotations. Each shot is represented as a video segment. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoSegment *> *shotAnnotations;
+
+/**
+ *  Label annotations on shot level.
+ *  There is exactly one element for each unique label.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1LabelAnnotation *> *shotLabelAnnotations;
+
+/** Speech transcription. */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1SpeechTranscription *> *speechTranscriptions;
+
+@end
+
+
+/**
+ *  Video segment.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1VideoSegment : GTLRObject
+
+/**
+ *  Time-offset, relative to the beginning of the video,
+ *  corresponding to the end of the segment (inclusive).
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *endTimeOffset;
+
+/**
+ *  Time-offset, relative to the beginning of the video,
+ *  corresponding to the start of the segment (inclusive).
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *startTimeOffset;
+
+@end
+
+
+/**
+ *  Word-specific information for recognized words. Word information is only
+ *  included in the response when certain request parameters are set, such
+ *  as `enable_word_time_offsets`.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1p1beta1WordInfo : GTLRObject
+
+/**
+ *  Output only. Time offset relative to the beginning of the audio, and
+ *  corresponding to the end of the spoken word. This field is only set if
+ *  `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+ *  experimental feature and the accuracy of the time offset can vary.
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *endTime;
+
+/**
+ *  Output only. Time offset relative to the beginning of the audio, and
+ *  corresponding to the start of the spoken word. This field is only set if
+ *  `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+ *  experimental feature and the accuracy of the time offset can vary.
+ */
+@property(nonatomic, strong, nullable) GTLRDuration *startTime;
+
+/** Output only. The word corresponding to this set of information. */
+@property(nonatomic, copy, nullable) NSString *word;
+
+@end
+
+
+/**
+ *  Config for SHOT_CHANGE_DETECTION.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ShotChangeDetectionConfig : GTLRObject
+
+/**
+ *  Model to use for shot change detection.
+ *  Supported values: "builtin/stable" (the default if unset) and
+ *  "builtin/latest".
+ */
+@property(nonatomic, copy, nullable) NSString *model;
 
 @end
 
@@ -1295,6 +1944,30 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
 
 
 /**
+ *  Video context and/or feature-specific parameters.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoContext : GTLRObject
+
+/** Config for EXPLICIT_CONTENT_DETECTION. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ExplicitContentDetectionConfig *explicitContentDetectionConfig;
+
+/** Config for LABEL_DETECTION. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1LabelDetectionConfig *labelDetectionConfig;
+
+/**
+ *  Video segments to annotate. The segments may overlap and are not required
+ *  to be contiguous or span the whole video. If unspecified, each video
+ *  is treated as a single segment.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoSegment *> *segments;
+
+/** Config for SHOT_CHANGE_DETECTION. */
+@property(nonatomic, strong, nullable) GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1ShotChangeDetectionConfig *shotChangeDetectionConfig;
+
+@end
+
+
+/**
  *  Video segment.
  */
 @interface GTLRCloudVideoIntelligence_GoogleCloudVideointelligenceV1VideoSegment : GTLRObject
@@ -1310,6 +1983,37 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
  *  corresponding to the start of the segment (inclusive).
  */
 @property(nonatomic, strong, nullable) GTLRDuration *startTimeOffset;
+
+@end
+
+
+/**
+ *  The request message for Operations.CancelOperation.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleLongrunningCancelOperationRequest : GTLRObject
+@end
+
+
+/**
+ *  The response message for Operations.ListOperations.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "operations" property. If returned as the result of a query, it
+ *        should support automatic pagination (when @c shouldFetchNextPages is
+ *        enabled).
+ */
+@interface GTLRCloudVideoIntelligence_GoogleLongrunningListOperationsResponse : GTLRCollectionObject
+
+/** The standard List next-page token. */
+@property(nonatomic, copy, nullable) NSString *nextPageToken;
+
+/**
+ *  A list of operations that matches the specified filter in the request.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRCloudVideoIntelligence_GoogleLongrunningOperation *> *operations;
 
 @end
 
@@ -1393,6 +2097,19 @@ GTLR_EXTERN NSString * const kGTLRCloudVideoIntelligence_GoogleCloudVideointelli
  *        -additionalProperties to fetch them all at once.
  */
 @interface GTLRCloudVideoIntelligence_GoogleLongrunningOperation_Response : GTLRObject
+@end
+
+
+/**
+ *  A generic empty message that you can re-use to avoid defining duplicated
+ *  empty messages in your APIs. A typical example is to use it as the request
+ *  or the response type of an API method. For instance:
+ *  service Foo {
+ *  rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+ *  }
+ *  The JSON representation for `Empty` is empty JSON object `{}`.
+ */
+@interface GTLRCloudVideoIntelligence_GoogleProtobufEmpty : GTLRObject
 @end
 
 

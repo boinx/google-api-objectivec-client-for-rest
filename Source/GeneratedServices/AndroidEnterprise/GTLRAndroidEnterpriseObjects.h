@@ -33,6 +33,7 @@
 @class GTLRAndroidEnterprise_Install;
 @class GTLRAndroidEnterprise_InstallFailureEvent;
 @class GTLRAndroidEnterprise_LocalizedText;
+@class GTLRAndroidEnterprise_MaintenanceWindow;
 @class GTLRAndroidEnterprise_ManagedConfiguration;
 @class GTLRAndroidEnterprise_ManagedConfigurationsSettings;
 @class GTLRAndroidEnterprise_ManagedProperty;
@@ -125,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- *  The Android Device Policy configuration of an enterprise.
+ *  Deprecated and unused.
  */
 @interface GTLRAndroidEnterprise_AndroidDevicePolicyConfig : GTLRObject
 
@@ -135,11 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSString *kind;
 
-/**
- *  The state of Android Device Policy. "enabled" indicates that Android Device
- *  Policy is enabled for the enterprise and the EMM is allowed to manage
- *  devices with Android Device Policy, while "disabled" means that it cannot.
- */
+/** Deprecated and unused. */
 @property(nonatomic, copy, nullable) NSString *state;
 
 @end
@@ -857,6 +854,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ *  Maintenance window for managed Google Play Accounts. This allows Play store
+ *  to update the apps on the foreground in the designated window.
+ */
+@interface GTLRAndroidEnterprise_MaintenanceWindow : GTLRObject
+
+/**
+ *  Duration of the maintenance window, in milliseconds. The duration must be
+ *  between 30 minutes and 24 hours (inclusive).
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *durationMs;
+
+/**
+ *  Start time of the maintenance window, in milliseconds after midnight on the
+ *  device. Windows can span midnight.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *startTimeAfterMidnightMs;
+
+@end
+
+
+/**
  *  A managed configuration resource contains the set of managed properties
  *  defined by the app developer in the app's managed configurations schema, as
  *  well as any configuration variables defined for the user.
@@ -934,6 +956,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  "androidenterprise#managedConfigurationsSettings".
  */
 @property(nonatomic, copy, nullable) NSString *kind;
+
+/**
+ *  The last updated time of the managed configuration settings in milliseconds
+ *  since 1970-01-01T00:00:00Z.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *lastUpdatedTimestampMillis;
 
 /** The set of managed properties for this configuration. */
 @property(nonatomic, strong, nullable) NSArray<GTLRAndroidEnterprise_ManagedProperty *> *managedProperty;
@@ -1039,6 +1069,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** The Android ID of the device. This field will always be present. */
 @property(nonatomic, copy, nullable) NSString *deviceId;
+
+/** Policy app on the device. */
+@property(nonatomic, copy, nullable) NSString *dpcPackageName;
 
 /**
  *  Identifies the extent to which the device is controlled by an Android EMM in
@@ -1223,15 +1256,28 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GTLRAndroidEnterprise_Policy : GTLRObject
 
 /**
+ *  The auto-update policy for apps installed on the device. "choiceToTheUser"
+ *  allows the device's user to configure the app update policy. "always"
+ *  enables auto updates. "never" disables auto updates. "wifiOnly" enables auto
+ *  updates only when the device is connected to wifi.
+ */
+@property(nonatomic, copy, nullable) NSString *autoUpdatePolicy;
+
+/**
+ *  The maintenance window defining when apps running in the foreground should
+ *  be updated.
+ */
+@property(nonatomic, strong, nullable) GTLRAndroidEnterprise_MaintenanceWindow *maintenanceWindow;
+
+/**
  *  The availability granted to the device for the specified products. "all"
  *  gives the device access to all products, regardless of approval status.
- *  "allApproved" entitles the device to access all products that are approved
- *  for the enterprise. "allApproved" and "all" do not enable automatic
- *  visibility of "alpha" or "beta" tracks. "whitelist" grants the device access
- *  the products specified in productPolicy[]. Only products that are approved
- *  or products that were previously approved (products with revoked approval)
- *  by the enterprise can be whitelisted. If no value is provided, the
- *  availability set at the user level is applied by default.
+ *  "all" does not enable automatic visibility of "alpha" or "beta" tracks.
+ *  "whitelist" grants the device access the products specified in
+ *  productPolicy[]. Only products that are approved or products that were
+ *  previously approved (products with revoked approval) by the enterprise can
+ *  be whitelisted. If no value is provided, the availability set at the user
+ *  level is applied by default.
  */
 @property(nonatomic, copy, nullable) NSString *productAvailabilityPolicy;
 
@@ -1258,8 +1304,24 @@ NS_ASSUME_NONNULL_BEGIN
 /** The name of the author of the product (for example, the app developer). */
 @property(nonatomic, copy, nullable) NSString *authorName;
 
+/** The countries which this app is available in. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *availableCountries;
+
 /** The tracks that are visible to the enterprise. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *availableTracks;
+
+/** The app category (e.g. RACING, SOCIAL, etc.) */
+@property(nonatomic, copy, nullable) NSString *category;
+
+/** The content rating for this app. */
+@property(nonatomic, copy, nullable) NSString *contentRating;
+
+/**
+ *  The localized promotional description, if available.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
 
 /** A link to the (consumer) Google Play details page for the product. */
 @property(nonatomic, copy, nullable) NSString *detailsUrl;
@@ -1287,6 +1349,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, nullable) NSString *kind;
 
 /**
+ *  The approximate time (within 7 days) the app was last published, expressed
+ *  in milliseconds since epoch.
+ *
+ *  Uses NSNumber of longLongValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *lastUpdatedTimestampMillis;
+
+/**
+ *  The minimum Android SDK necessary to run the app.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minAndroidSdkVersion;
+
+/** A list of permissions required by the app. */
+@property(nonatomic, strong, nullable) NSArray<GTLRAndroidEnterprise_ProductPermission *> *permissions;
+
+/**
  *  A string of the form app:<package name>. For example,
  *  app:com.google.android.gm represents the Gmail app.
  */
@@ -1299,12 +1379,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSString *productPricing;
 
+/** A description of the recent changes made to the app. */
+@property(nonatomic, copy, nullable) NSString *recentChanges;
+
 /**
  *  Deprecated.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *requiresContainerApp;
+
+/** A list of screenshot links representing the app. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *screenshotUrls;
 
 /** The certificate used to sign this product. */
 @property(nonatomic, strong, nullable) GTLRAndroidEnterprise_ProductSigningCertificate *signingCertificate;

@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Service Control API (servicecontrol/v1)
+//   Service Control API (servicecontrol/v1)
 // Description:
 //   Google Service Control provides control plane functionality to managed
 //   services, such as logging, monitoring, and status checks.
@@ -146,6 +146,12 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_CheckError_Code_DenialOfService
  */
 GTLR_EXTERN NSString * const kGTLRServiceControl_CheckError_Code_ErrorCodeUnspecified;
 /**
+ *  The credential in the request can not be verified.
+ *
+ *  Value: "INVALID_CREDENTIAL"
+ */
+GTLR_EXTERN NSString * const kGTLRServiceControl_CheckError_Code_InvalidCredential;
+/**
  *  The IP address of the consumer is invalid for the specific consumer
  *  project.
  *
@@ -190,8 +196,8 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_CheckError_Code_NamespaceLookup
  */
 GTLR_EXTERN NSString * const kGTLRServiceControl_CheckError_Code_NoLoasProject;
 /**
- *  The consumer's project id was not found.
- *  Same as google.rpc.Code.NOT_FOUND.
+ *  The consumer's project id, network container, or resource container was
+ *  not found. Same as google.rpc.Code.NOT_FOUND.
  *
  *  Value: "NOT_FOUND"
  */
@@ -855,6 +861,9 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Relea
  *        "DENIAL_OF_SERVICE_DETECTED")
  *    @arg @c kGTLRServiceControl_CheckError_Code_ErrorCodeUnspecified This is
  *        never used in `CheckResponse`. (Value: "ERROR_CODE_UNSPECIFIED")
+ *    @arg @c kGTLRServiceControl_CheckError_Code_InvalidCredential The
+ *        credential in the request can not be verified. (Value:
+ *        "INVALID_CREDENTIAL")
  *    @arg @c kGTLRServiceControl_CheckError_Code_IpAddressBlocked The IP
  *        address of the consumer is invalid for the specific consumer
  *        project. (Value: "IP_ADDRESS_BLOCKED")
@@ -875,8 +884,8 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Relea
  *    @arg @c kGTLRServiceControl_CheckError_Code_NoLoasProject The consumer's
  *        LOAS role has no associated project. (Value: "NO_LOAS_PROJECT")
  *    @arg @c kGTLRServiceControl_CheckError_Code_NotFound The consumer's
- *        project id was not found.
- *        Same as google.rpc.Code.NOT_FOUND. (Value: "NOT_FOUND")
+ *        project id, network container, or resource container was
+ *        not found. Same as google.rpc.Code.NOT_FOUND. (Value: "NOT_FOUND")
  *    @arg @c kGTLRServiceControl_CheckError_Code_PermissionDenied The consumer
  *        doesn't have access to the specified resource.
  *        Same as google.rpc.Code.PERMISSION_DENIED. (Value:
@@ -919,6 +928,15 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Relea
 
 /** Free-form text providing details on the error cause of the error. */
 @property(nonatomic, copy, nullable) NSString *detail;
+
+/**
+ *  Subject to whom this error applies. See the specific code enum for more
+ *  details on this field. For example:
+ *  - “project:<project-id or project-number>”
+ *  - “folder:<folder-id>”
+ *  - “organization:<organization-id>”
+ */
+@property(nonatomic, copy, nullable) NSString *subject;
 
 @end
 
@@ -1554,7 +1572,8 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Relea
  *  - `servicecontrol.googleapis.com/service_agent` describing the service
  *  used to handle the API request (e.g. ESP),
  *  - `servicecontrol.googleapis.com/platform` describing the platform
- *  where the API is served (e.g. GAE, GCE, GKE).
+ *  where the API is served, such as App Engine, Compute Engine, or
+ *  Kubernetes Engine.
  */
 @property(nonatomic, strong, nullable) GTLRServiceControl_Operation_Labels *labels;
 
@@ -1606,7 +1625,10 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Relea
  */
 @property(nonatomic, copy, nullable) NSString *resourceContainer;
 
-/** The resources that are involved in the operation. */
+/**
+ *  The resources that are involved in the operation.
+ *  The maximum supported number of entries in this field is 100.
+ */
 @property(nonatomic, strong, nullable) NSArray<GTLRServiceControl_ResourceInfo *> *resources;
 
 /** Required. Start time of the operation. */
@@ -1636,7 +1658,8 @@ GTLR_EXTERN NSString * const kGTLRServiceControl_QuotaProperties_QuotaMode_Relea
  *  - `servicecontrol.googleapis.com/service_agent` describing the service
  *  used to handle the API request (e.g. ESP),
  *  - `servicecontrol.googleapis.com/platform` describing the platform
- *  where the API is served (e.g. GAE, GCE, GKE).
+ *  where the API is served, such as App Engine, Compute Engine, or
+ *  Kubernetes Engine.
  *
  *  @note This class is documented as having more properties of NSString. Use @c
  *        -additionalJSONKeys and @c -additionalPropertyForName: to get the list

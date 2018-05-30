@@ -2,10 +2,11 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Container Engine API (container/v1)
+//   Kubernetes Engine API (container/v1)
 // Description:
-//   The Google Container Engine API is used for building and managing container
-//   based applications, powered by the open source Kubernetes technology.
+//   The Google Kubernetes Engine API is used for building and managing
+//   container based applications, powered by the open source Kubernetes
+//   technology.
 // Documentation:
 //   https://cloud.google.com/container-engine/
 
@@ -15,6 +16,7 @@
 // Constants
 
 // GTLRContainer_Cluster.status
+NSString * const kGTLRContainer_Cluster_Status_Degraded        = @"DEGRADED";
 NSString * const kGTLRContainer_Cluster_Status_Error           = @"ERROR";
 NSString * const kGTLRContainer_Cluster_Status_Provisioning    = @"PROVISIONING";
 NSString * const kGTLRContainer_Cluster_Status_Reconciling     = @"RECONCILING";
@@ -109,6 +111,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_CancelOperationRequest
+@dynamic name, operationId, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -142,7 +150,7 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
          currentNodeCount, currentNodeVersion, descriptionProperty,
          enableKubernetesAlpha, endpoint, expireTime, initialClusterVersion,
          initialNodeCount, instanceGroupUrls, ipAllocationPolicy,
-         labelFingerprint, legacyAbac, locations, loggingService,
+         labelFingerprint, legacyAbac, location, locations, loggingService,
          maintenancePolicy, masterAuth, masterAuthorizedNetworksConfig,
          monitoringService, name, network, networkPolicy, nodeConfig,
          nodeIpv4CidrSize, nodePools, resourceLabels, selfLink,
@@ -209,6 +217,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_CompleteIPRotationRequest
+@dynamic clusterId, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -218,7 +232,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_CreateClusterRequest
-@dynamic cluster;
+@dynamic cluster, parent, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -228,7 +247,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_CreateNodePoolRequest
-@dynamic nodePool;
+@dynamic clusterId, nodePool, parent, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -524,8 +548,8 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_Operation
-@dynamic detail, endTime, name, operationType, selfLink, startTime, status,
-         statusMessage, targetLink, zoneProperty;
+@dynamic detail, endTime, location, name, operationType, selfLink, startTime,
+         status, statusMessage, targetLink, zoneProperty;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"zoneProperty" : @"zone" };
@@ -540,6 +564,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_RollbackNodePoolUpgradeRequest
+@dynamic clusterId, name, nodePoolId, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -570,7 +600,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetAddonsConfigRequest
-@dynamic addonsConfig;
+@dynamic addonsConfig, clusterId, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -580,7 +615,13 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetLabelsRequest
-@dynamic labelFingerprint, resourceLabels;
+@dynamic clusterId, labelFingerprint, name, projectId, resourceLabels,
+         zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -604,7 +645,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetLegacyAbacRequest
-@dynamic enabled;
+@dynamic clusterId, enabled, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -614,7 +660,11 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetLocationsRequest
-@dynamic locations;
+@dynamic clusterId, locations, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
 
 + (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
   NSDictionary<NSString *, Class> *map = @{
@@ -632,7 +682,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetLoggingServiceRequest
-@dynamic loggingService;
+@dynamic clusterId, loggingService, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -642,7 +697,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetMaintenancePolicyRequest
-@dynamic maintenancePolicy;
+@dynamic clusterId, maintenancePolicy, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -652,7 +712,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetMasterAuthRequest
-@dynamic action, update;
+@dynamic action, clusterId, name, projectId, update, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -662,7 +727,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetMonitoringServiceRequest
-@dynamic monitoringService;
+@dynamic clusterId, monitoringService, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -672,7 +742,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetNetworkPolicyRequest
-@dynamic networkPolicy;
+@dynamic clusterId, name, networkPolicy, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -682,7 +757,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetNodePoolAutoscalingRequest
-@dynamic autoscaling;
+@dynamic autoscaling, clusterId, name, nodePoolId, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -692,7 +772,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetNodePoolManagementRequest
-@dynamic management;
+@dynamic clusterId, management, name, nodePoolId, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -702,7 +787,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_SetNodePoolSizeRequest
-@dynamic nodeCount;
+@dynamic clusterId, name, nodeCount, nodePoolId, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -712,6 +802,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_StartIPRotationRequest
+@dynamic clusterId, name, projectId, rotateCredentials, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -721,7 +817,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_UpdateClusterRequest
-@dynamic update;
+@dynamic clusterId, name, projectId, update, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -731,7 +832,12 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_UpdateMasterRequest
-@dynamic masterVersion;
+@dynamic clusterId, masterVersion, name, projectId, zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end
 
 
@@ -741,5 +847,11 @@ NSString * const kGTLRContainer_SetMasterAuthRequest_Action_Unknown = @"UNKNOWN"
 //
 
 @implementation GTLRContainer_UpdateNodePoolRequest
-@dynamic imageType, nodeVersion;
+@dynamic clusterId, imageType, name, nodePoolId, nodeVersion, projectId,
+         zoneProperty;
+
++ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
+  return @{ @"zoneProperty" : @"zone" };
+}
+
 @end

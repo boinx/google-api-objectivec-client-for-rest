@@ -29,16 +29,27 @@
 @class GTLRShoppingContent_DatafeedstatusesCustomBatchRequest;
 @class GTLRShoppingContent_InventoryCustomBatchRequest;
 @class GTLRShoppingContent_InventorySetRequest;
+@class GTLRShoppingContent_LiaSettings;
+@class GTLRShoppingContent_LiasettingsCustomBatchRequest;
 @class GTLRShoppingContent_OrdersAcknowledgeRequest;
 @class GTLRShoppingContent_OrdersCancelLineItemRequest;
 @class GTLRShoppingContent_OrdersCancelRequest;
 @class GTLRShoppingContent_OrdersCreateTestOrderRequest;
 @class GTLRShoppingContent_OrdersCustomBatchRequest;
+@class GTLRShoppingContent_OrdersInStoreRefundLineItemRequest;
 @class GTLRShoppingContent_OrdersRefundRequest;
+@class GTLRShoppingContent_OrdersRejectReturnLineItemRequest;
 @class GTLRShoppingContent_OrdersReturnLineItemRequest;
+@class GTLRShoppingContent_OrdersReturnRefundLineItemRequest;
+@class GTLRShoppingContent_OrdersSetLineItemMetadataRequest;
 @class GTLRShoppingContent_OrdersShipLineItemsRequest;
+@class GTLRShoppingContent_OrdersUpdateLineItemShippingDetailsRequest;
 @class GTLRShoppingContent_OrdersUpdateMerchantOrderIdRequest;
 @class GTLRShoppingContent_OrdersUpdateShipmentRequest;
+@class GTLRShoppingContent_PosCustomBatchRequest;
+@class GTLRShoppingContent_PosInventoryRequest;
+@class GTLRShoppingContent_PosSaleRequest;
+@class GTLRShoppingContent_PosStore;
 @class GTLRShoppingContent_Product;
 @class GTLRShoppingContent_ProductsCustomBatchRequest;
 @class GTLRShoppingContent_ProductstatusesCustomBatchRequest;
@@ -132,7 +143,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *
  *  Returns information about the authenticated user.
  *
- *  @returns GTLRShoppingContentQuery_AccountsAuthinfo
+ *  @return GTLRShoppingContentQuery_AccountsAuthinfo
  */
 + (instancetype)query;
 
@@ -177,7 +188,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    and accountId must be the ID of a sub-account of this account.
  *  @param accountId The ID of the account whose website is claimed.
  *
- *  @returns GTLRShoppingContentQuery_AccountsClaimwebsite
+ *  @return GTLRShoppingContentQuery_AccountsClaimwebsite
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId;
@@ -209,7 +220,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_AccountsCustomBatchRequest to
  *    include in the query.
  *
- *  @returns GTLRShoppingContentQuery_AccountsCustombatch
+ *  @return GTLRShoppingContentQuery_AccountsCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_AccountsCustomBatchRequest *)object;
 
@@ -257,7 +268,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    this account.
  *  @param accountId The ID of the account.
  *
- *  @returns GTLRShoppingContentQuery_AccountsDelete
+ *  @return GTLRShoppingContentQuery_AccountsDelete
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId;
@@ -296,7 +307,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    and accountId must be the ID of a sub-account of this account.
  *  @param accountId The ID of the account.
  *
- *  @returns GTLRShoppingContentQuery_AccountsGet
+ *  @return GTLRShoppingContentQuery_AccountsGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId;
@@ -330,7 +341,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the managing account. This must be a
  *    multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_AccountsInsert
+ *  @return GTLRShoppingContentQuery_AccountsInsert
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Account *)object
                      merchantId:(unsigned long long)merchantId;
@@ -368,7 +379,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the managing account. This must be a
  *    multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_AccountsList
+ *  @return GTLRShoppingContentQuery_AccountsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -414,7 +425,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    and accountId must be the ID of a sub-account of this account.
  *  @param accountId The ID of the account.
  *
- *  @returns GTLRShoppingContentQuery_AccountsPatch
+ *  @return GTLRShoppingContentQuery_AccountsPatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Account *)object
                      merchantId:(unsigned long long)merchantId
@@ -440,7 +451,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_AccountstatusesCustomBatchRequest
  *    to include in the query.
  *
- *  @returns GTLRShoppingContentQuery_AccountstatusesCustombatch
+ *  @return GTLRShoppingContentQuery_AccountstatusesCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_AccountstatusesCustomBatchRequest *)object;
 
@@ -462,6 +473,12 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
 @property(nonatomic, assign) unsigned long long accountId;
 
 /**
+ *  If set, only issues for the specified destinations are returned, otherwise
+ *  only issues for the Shopping destination.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *destinations;
+
+/**
  *  The ID of the managing account. If this parameter is not the same as
  *  accountId, then this account must be a multi-client account and accountId
  *  must be the ID of a sub-account of this account.
@@ -478,7 +495,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    and accountId must be the ID of a sub-account of this account.
  *  @param accountId The ID of the account.
  *
- *  @returns GTLRShoppingContentQuery_AccountstatusesGet
+ *  @return GTLRShoppingContentQuery_AccountstatusesGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId;
@@ -496,6 +513,12 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
 @interface GTLRShoppingContentQuery_AccountstatusesList : GTLRShoppingContentQuery
 // Previous library name was
 //   +[GTLQueryShoppingContent queryForAccountstatusesListWithmerchantId:]
+
+/**
+ *  If set, only issues for the specified destinations are returned, otherwise
+ *  only issues for the Shopping destination.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *destinations;
 
 /**
  *  The maximum number of account statuses to return in the response, used for
@@ -517,7 +540,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the managing account. This must be a
  *    multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_AccountstatusesList
+ *  @return GTLRShoppingContentQuery_AccountstatusesList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -563,7 +586,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    and accountId must be the ID of a sub-account of this account.
  *  @param accountId The ID of the account.
  *
- *  @returns GTLRShoppingContentQuery_AccountsUpdate
+ *  @return GTLRShoppingContentQuery_AccountsUpdate
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Account *)object
                      merchantId:(unsigned long long)merchantId
@@ -594,7 +617,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_AccounttaxCustomBatchRequest to
  *    include in the query.
  *
- *  @returns GTLRShoppingContentQuery_AccounttaxCustombatch
+ *  @return GTLRShoppingContentQuery_AccounttaxCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_AccounttaxCustomBatchRequest *)object;
 
@@ -633,7 +656,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param accountId The ID of the account for which to get/update account tax
  *    settings.
  *
- *  @returns GTLRShoppingContentQuery_AccounttaxGet
+ *  @return GTLRShoppingContentQuery_AccounttaxGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId;
@@ -672,7 +695,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the managing account. This must be a
  *    multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_AccounttaxList
+ *  @return GTLRShoppingContentQuery_AccounttaxList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -721,7 +744,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param accountId The ID of the account for which to get/update account tax
  *    settings.
  *
- *  @returns GTLRShoppingContentQuery_AccounttaxPatch
+ *  @return GTLRShoppingContentQuery_AccounttaxPatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_AccountTax *)object
                      merchantId:(unsigned long long)merchantId
@@ -766,7 +789,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param accountId The ID of the account for which to get/update account tax
  *    settings.
  *
- *  @returns GTLRShoppingContentQuery_AccounttaxUpdate
+ *  @return GTLRShoppingContentQuery_AccounttaxUpdate
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_AccountTax *)object
                      merchantId:(unsigned long long)merchantId
@@ -795,7 +818,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_DatafeedsCustomBatchRequest to
  *    include in the query.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsCustombatch
+ *  @return GTLRShoppingContentQuery_DatafeedsCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_DatafeedsCustomBatchRequest *)object;
 
@@ -835,7 +858,47 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param datafeedId The ID of the datafeed.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsDelete
+ *  @return GTLRShoppingContentQuery_DatafeedsDelete
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                         datafeedId:(unsigned long long)datafeedId;
+
+@end
+
+/**
+ *  Invokes a fetch for the datafeed in your Merchant Center account.
+ *
+ *  Method: content.datafeeds.fetchnow
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_DatafeedsFetchnow : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForDatafeedsFetchnowWithmerchantId:datafeedId:]
+
+/** The ID of the datafeed to be fetched. */
+@property(nonatomic, assign) unsigned long long datafeedId;
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/**
+ *  The ID of the account that manages the datafeed. This account cannot be a
+ *  multi-client account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_DatafeedsFetchNowResponse.
+ *
+ *  Invokes a fetch for the datafeed in your Merchant Center account.
+ *
+ *  @param merchantId The ID of the account that manages the datafeed. This
+ *    account cannot be a multi-client account.
+ *  @param datafeedId The ID of the datafeed to be fetched.
+ *
+ *  @return GTLRShoppingContentQuery_DatafeedsFetchnow
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                          datafeedId:(unsigned long long)datafeedId;
@@ -872,7 +935,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param datafeedId The ID of the datafeed.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsGet
+ *  @return GTLRShoppingContentQuery_DatafeedsGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                          datafeedId:(unsigned long long)datafeedId;
@@ -909,7 +972,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that manages the datafeed. This
  *    account cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsInsert
+ *  @return GTLRShoppingContentQuery_DatafeedsInsert
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Datafeed *)object
                      merchantId:(unsigned long long)merchantId;
@@ -917,7 +980,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
 @end
 
 /**
- *  Lists the datafeeds in your Merchant Center account.
+ *  Lists the configurations for datafeeds in your Merchant Center account.
  *
  *  Method: content.datafeeds.list
  *
@@ -945,12 +1008,12 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
 /**
  *  Fetches a @c GTLRShoppingContent_DatafeedsListResponse.
  *
- *  Lists the datafeeds in your Merchant Center account.
+ *  Lists the configurations for datafeeds in your Merchant Center account.
  *
  *  @param merchantId The ID of the account that manages the datafeeds. This
  *    account cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsList
+ *  @return GTLRShoppingContentQuery_DatafeedsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -996,7 +1059,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param datafeedId The ID of the datafeed.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsPatch
+ *  @return GTLRShoppingContentQuery_DatafeedsPatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Datafeed *)object
                      merchantId:(unsigned long long)merchantId
@@ -1022,7 +1085,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_DatafeedstatusesCustomBatchRequest
  *    to include in the query.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedstatusesCustombatch
+ *  @return GTLRShoppingContentQuery_DatafeedstatusesCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_DatafeedstatusesCustomBatchRequest *)object;
 
@@ -1074,7 +1137,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param datafeedId The ID of the datafeed.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedstatusesGet
+ *  @return GTLRShoppingContentQuery_DatafeedstatusesGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                          datafeedId:(unsigned long long)datafeedId;
@@ -1115,7 +1178,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that manages the datafeeds. This
  *    account cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedstatusesList
+ *  @return GTLRShoppingContentQuery_DatafeedstatusesList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1159,7 +1222,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param datafeedId The ID of the datafeed.
  *
- *  @returns GTLRShoppingContentQuery_DatafeedsUpdate
+ *  @return GTLRShoppingContentQuery_DatafeedsUpdate
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Datafeed *)object
                      merchantId:(unsigned long long)merchantId
@@ -1192,7 +1255,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_InventoryCustomBatchRequest to
  *    include in the query.
  *
- *  @returns GTLRShoppingContentQuery_InventoryCustombatch
+ *  @return GTLRShoppingContentQuery_InventoryCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_InventoryCustomBatchRequest *)object;
 
@@ -1243,12 +1306,410 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param productId The REST id of the product for which to update price and
  *    availability.
  *
- *  @returns GTLRShoppingContentQuery_InventorySet
+ *  @return GTLRShoppingContentQuery_InventorySet
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_InventorySetRequest *)object
                      merchantId:(unsigned long long)merchantId
                       storeCode:(NSString *)storeCode
                       productId:(NSString *)productId;
+
+@end
+
+/**
+ *  Retrieves and/or updates the LIA settings of multiple accounts in a single
+ *  request.
+ *
+ *  Method: content.liasettings.custombatch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsCustombatch : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsCustombatchWithObject:]
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_LiasettingsCustomBatchResponse.
+ *
+ *  Retrieves and/or updates the LIA settings of multiple accounts in a single
+ *  request.
+ *
+ *  @param object The @c GTLRShoppingContent_LiasettingsCustomBatchRequest to
+ *    include in the query.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsCustombatch
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_LiasettingsCustomBatchRequest *)object;
+
+@end
+
+/**
+ *  Retrieves the LIA settings of the account.
+ *
+ *  Method: content.liasettings.get
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsGet : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsGetWithmerchantId:accountId:]
+
+/** The ID of the account for which to get or update LIA settings. */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_LiaSettings.
+ *
+ *  Retrieves the LIA settings of the account.
+ *
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account for which to get or update LIA
+ *    settings.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsGet
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                          accountId:(unsigned long long)accountId;
+
+@end
+
+/**
+ *  Retrieves the list of accessible Google My Business accounts.
+ *
+ *  Method: content.liasettings.getaccessiblegmbaccounts
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsGetaccessiblegmbaccounts : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsGetaccessiblegmbaccountsWithmerchantId:accountId:]
+
+/**
+ *  The ID of the account for which to retrieve accessible Google My Business
+ *  accounts.
+ */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c
+ *  GTLRShoppingContent_LiasettingsGetAccessibleGmbAccountsResponse.
+ *
+ *  Retrieves the list of accessible Google My Business accounts.
+ *
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account for which to retrieve accessible
+ *    Google My Business accounts.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsGetaccessiblegmbaccounts
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                          accountId:(unsigned long long)accountId;
+
+@end
+
+/**
+ *  Lists the LIA settings of the sub-accounts in your Merchant Center account.
+ *
+ *  Method: content.liasettings.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsList : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsListWithmerchantId:]
+
+/**
+ *  The maximum number of LIA settings to return in the response, used for
+ *  paging.
+ */
+@property(nonatomic, assign) NSUInteger maxResults;
+
+/** The ID of the managing account. This must be a multi-client account. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The token returned by the previous request. */
+@property(nonatomic, copy, nullable) NSString *pageToken;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_LiasettingsListResponse.
+ *
+ *  Lists the LIA settings of the sub-accounts in your Merchant Center account.
+ *
+ *  @param merchantId The ID of the managing account. This must be a
+ *    multi-client account.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsList
+ *
+ *  @note Automatic pagination will be done when @c shouldFetchNextPages is
+ *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
+ *        information.
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId;
+
+@end
+
+/**
+ *  Updates the LIA settings of the account. This method supports patch
+ *  semantics.
+ *
+ *  Method: content.liasettings.patch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsPatch : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsPatchWithObject:merchantId:accountId:]
+
+/** The ID of the account for which to get or update LIA settings. */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_LiaSettings.
+ *
+ *  Updates the LIA settings of the account. This method supports patch
+ *  semantics.
+ *
+ *  @param object The @c GTLRShoppingContent_LiaSettings to include in the
+ *    query.
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account for which to get or update LIA
+ *    settings.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsPatch
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_LiaSettings *)object
+                     merchantId:(unsigned long long)merchantId
+                      accountId:(unsigned long long)accountId;
+
+@end
+
+/**
+ *  Requests access to a specified Google My Business account.
+ *
+ *  Method: content.liasettings.requestgmbaccess
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsRequestgmbaccess : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsRequestgmbaccessWithmerchantId:accountId:]
+
+/** The ID of the account for which GMB access is requested. */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/** The email of the Google My Business account. */
+@property(nonatomic, copy, nullable) NSString *gmbEmail;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_LiasettingsRequestGmbAccessResponse.
+ *
+ *  Requests access to a specified Google My Business account.
+ *
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account for which GMB access is requested.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsRequestgmbaccess
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                          accountId:(unsigned long long)accountId;
+
+@end
+
+/**
+ *  Requests inventory validation for the specified country.
+ *
+ *  Method: content.liasettings.requestinventoryverification
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsRequestinventoryverification : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsRequestinventoryverificationWithmerchantId:accountId:country:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/** The country for which inventory validation is requested. */
+@property(nonatomic, copy, nullable) NSString *country;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c
+ *  GTLRShoppingContent_LiasettingsRequestInventoryVerificationResponse.
+ *
+ *  Requests inventory validation for the specified country.
+ *
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *  @param country The country for which inventory validation is requested.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsRequestinventoryverification
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                          accountId:(unsigned long long)accountId
+                            country:(NSString *)country;
+
+@end
+
+/**
+ *  Sets the inventory verification contract for the specified country.
+ *
+ *  Method: content.liasettings.setinventoryverificationcontact
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsSetinventoryverificationcontact : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsSetinventoryverificationcontactWithmerchantId:accountId:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/** The email of the inventory verification contact. */
+@property(nonatomic, copy, nullable) NSString *contactEmail;
+
+/** The name of the inventory verification contact. */
+@property(nonatomic, copy, nullable) NSString *contactName;
+
+/** The country for which inventory verification is requested. */
+@property(nonatomic, copy, nullable) NSString *country;
+
+/** The language for which inventory verification is requested. */
+@property(nonatomic, copy, nullable) NSString *language;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c
+ *  GTLRShoppingContent_LiasettingsSetInventoryVerificationContactResponse.
+ *
+ *  Sets the inventory verification contract for the specified country.
+ *
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsSetinventoryverificationcontact
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                          accountId:(unsigned long long)accountId;
+
+@end
+
+/**
+ *  Updates the LIA settings of the account.
+ *
+ *  Method: content.liasettings.update
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_LiasettingsUpdate : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForLiasettingsUpdateWithObject:merchantId:accountId:]
+
+/** The ID of the account for which to get or update LIA settings. */
+@property(nonatomic, assign) unsigned long long accountId;
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/**
+ *  The ID of the managing account. If this parameter is not the same as
+ *  accountId, then this account must be a multi-client account and accountId
+ *  must be the ID of a sub-account of this account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_LiaSettings.
+ *
+ *  Updates the LIA settings of the account.
+ *
+ *  @param object The @c GTLRShoppingContent_LiaSettings to include in the
+ *    query.
+ *  @param merchantId The ID of the managing account. If this parameter is not
+ *    the same as accountId, then this account must be a multi-client account
+ *    and accountId must be the ID of a sub-account of this account.
+ *  @param accountId The ID of the account for which to get or update LIA
+ *    settings.
+ *
+ *  @return GTLRShoppingContentQuery_LiasettingsUpdate
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_LiaSettings *)object
+                     merchantId:(unsigned long long)merchantId
+                      accountId:(unsigned long long)accountId;
 
 @end
 
@@ -1284,7 +1745,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersAcknowledge
+ *  @return GTLRShoppingContentQuery_OrdersAcknowledge
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersAcknowledgeRequest *)object
                      merchantId:(unsigned long long)merchantId
@@ -1324,7 +1785,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the test order to modify.
  *
- *  @returns GTLRShoppingContentQuery_OrdersAdvancetestorder
+ *  @return GTLRShoppingContentQuery_OrdersAdvancetestorder
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                             orderId:(NSString *)orderId;
@@ -1363,7 +1824,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order to cancel.
  *
- *  @returns GTLRShoppingContentQuery_OrdersCancel
+ *  @return GTLRShoppingContentQuery_OrdersCancel
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersCancelRequest *)object
                      merchantId:(unsigned long long)merchantId
@@ -1403,7 +1864,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersCancellineitem
+ *  @return GTLRShoppingContentQuery_OrdersCancellineitem
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersCancelLineItemRequest *)object
                      merchantId:(unsigned long long)merchantId
@@ -1439,7 +1900,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that should manage the order. This
  *    cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_OrdersCreatetestorder
+ *  @return GTLRShoppingContentQuery_OrdersCreatetestorder
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersCreateTestOrderRequest *)object
                      merchantId:(unsigned long long)merchantId;
@@ -1466,7 +1927,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_OrdersCustomBatchRequest to include
  *    in the query.
  *
- *  @returns GTLRShoppingContentQuery_OrdersCustombatch
+ *  @return GTLRShoppingContentQuery_OrdersCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersCustomBatchRequest *)object;
 
@@ -1502,7 +1963,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersGet
+ *  @return GTLRShoppingContentQuery_OrdersGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                             orderId:(NSString *)orderId;
@@ -1539,7 +2000,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param merchantOrderId The merchant order id to be looked for.
  *
- *  @returns GTLRShoppingContentQuery_OrdersGetbymerchantorderid
+ *  @return GTLRShoppingContentQuery_OrdersGetbymerchantorderid
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                     merchantOrderId:(NSString *)merchantOrderId;
@@ -1592,10 +2053,50 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    @arg @c kGTLRShoppingContentTemplateNameTemplate1b Value "template1b"
  *    @arg @c kGTLRShoppingContentTemplateNameTemplate2 Value "template2"
  *
- *  @returns GTLRShoppingContentQuery_OrdersGettestordertemplate
+ *  @return GTLRShoppingContentQuery_OrdersGettestordertemplate
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                        templateName:(NSString *)templateName;
+
+@end
+
+/**
+ *  Notifies that item return and refund was handled directly in store.
+ *
+ *  Method: content.orders.instorerefundlineitem
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_OrdersInstorerefundlineitem : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForOrdersInstorerefundlineitemWithObject:merchantId:orderId:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the order. */
+@property(nonatomic, copy, nullable) NSString *orderId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_OrdersInStoreRefundLineItemResponse.
+ *
+ *  Notifies that item return and refund was handled directly in store.
+ *
+ *  @param object The @c GTLRShoppingContent_OrdersInStoreRefundLineItemRequest
+ *    to include in the query.
+ *  @param merchantId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *  @param orderId The ID of the order.
+ *
+ *  @return GTLRShoppingContentQuery_OrdersInstorerefundlineitem
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_OrdersInStoreRefundLineItemRequest *)object
+                     merchantId:(unsigned long long)merchantId
+                        orderId:(NSString *)orderId;
 
 @end
 
@@ -1696,7 +2197,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that manages the order. This cannot
  *    be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_OrdersList
+ *  @return GTLRShoppingContentQuery_OrdersList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1738,9 +2239,49 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order to refund.
  *
- *  @returns GTLRShoppingContentQuery_OrdersRefund
+ *  @return GTLRShoppingContentQuery_OrdersRefund
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersRefundRequest *)object
+                     merchantId:(unsigned long long)merchantId
+                        orderId:(NSString *)orderId;
+
+@end
+
+/**
+ *  Rejects return on an line item.
+ *
+ *  Method: content.orders.rejectreturnlineitem
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_OrdersRejectreturnlineitem : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForOrdersRejectreturnlineitemWithObject:merchantId:orderId:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the order. */
+@property(nonatomic, copy, nullable) NSString *orderId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_OrdersRejectReturnLineItemResponse.
+ *
+ *  Rejects return on an line item.
+ *
+ *  @param object The @c GTLRShoppingContent_OrdersRejectReturnLineItemRequest
+ *    to include in the query.
+ *  @param merchantId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *  @param orderId The ID of the order.
+ *
+ *  @return GTLRShoppingContentQuery_OrdersRejectreturnlineitem
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_OrdersRejectReturnLineItemRequest *)object
                      merchantId:(unsigned long long)merchantId
                         orderId:(NSString *)orderId;
 
@@ -1778,9 +2319,91 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersReturnlineitem
+ *  @return GTLRShoppingContentQuery_OrdersReturnlineitem
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersReturnLineItemRequest *)object
+                     merchantId:(unsigned long long)merchantId
+                        orderId:(NSString *)orderId;
+
+@end
+
+/**
+ *  Returns and refunds a line item. Note that this method can only be called on
+ *  fully shipped orders.
+ *
+ *  Method: content.orders.returnrefundlineitem
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_OrdersReturnrefundlineitem : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForOrdersReturnrefundlineitemWithObject:merchantId:orderId:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the order. */
+@property(nonatomic, copy, nullable) NSString *orderId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_OrdersReturnRefundLineItemResponse.
+ *
+ *  Returns and refunds a line item. Note that this method can only be called on
+ *  fully shipped orders.
+ *
+ *  @param object The @c GTLRShoppingContent_OrdersReturnRefundLineItemRequest
+ *    to include in the query.
+ *  @param merchantId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *  @param orderId The ID of the order.
+ *
+ *  @return GTLRShoppingContentQuery_OrdersReturnrefundlineitem
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_OrdersReturnRefundLineItemRequest *)object
+                     merchantId:(unsigned long long)merchantId
+                        orderId:(NSString *)orderId;
+
+@end
+
+/**
+ *  Sets (overrides) merchant provided annotations on the line item.
+ *
+ *  Method: content.orders.setlineitemmetadata
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_OrdersSetlineitemmetadata : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForOrdersSetlineitemmetadataWithObject:merchantId:orderId:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the order. */
+@property(nonatomic, copy, nullable) NSString *orderId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_OrdersSetLineItemMetadataResponse.
+ *
+ *  Sets (overrides) merchant provided annotations on the line item.
+ *
+ *  @param object The @c GTLRShoppingContent_OrdersSetLineItemMetadataRequest to
+ *    include in the query.
+ *  @param merchantId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *  @param orderId The ID of the order.
+ *
+ *  @return GTLRShoppingContentQuery_OrdersSetlineitemmetadata
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_OrdersSetLineItemMetadataRequest *)object
                      merchantId:(unsigned long long)merchantId
                         orderId:(NSString *)orderId;
 
@@ -1818,9 +2441,51 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersShiplineitems
+ *  @return GTLRShoppingContentQuery_OrdersShiplineitems
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersShipLineItemsRequest *)object
+                     merchantId:(unsigned long long)merchantId
+                        orderId:(NSString *)orderId;
+
+@end
+
+/**
+ *  Updates ship by and delivery by dates for a line item.
+ *
+ *  Method: content.orders.updatelineitemshippingdetails
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_OrdersUpdatelineitemshippingdetails : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForOrdersUpdatelineitemshippingdetailsWithObject:merchantId:orderId:]
+
+/**
+ *  The ID of the account that manages the order. This cannot be a multi-client
+ *  account.
+ */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the order. */
+@property(nonatomic, copy, nullable) NSString *orderId;
+
+/**
+ *  Fetches a @c
+ *  GTLRShoppingContent_OrdersUpdateLineItemShippingDetailsResponse.
+ *
+ *  Updates ship by and delivery by dates for a line item.
+ *
+ *  @param object The @c
+ *    GTLRShoppingContent_OrdersUpdateLineItemShippingDetailsRequest to include
+ *    in the query.
+ *  @param merchantId The ID of the account that manages the order. This cannot
+ *    be a multi-client account.
+ *  @param orderId The ID of the order.
+ *
+ *  @return GTLRShoppingContentQuery_OrdersUpdatelineitemshippingdetails
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_OrdersUpdateLineItemShippingDetailsRequest *)object
                      merchantId:(unsigned long long)merchantId
                         orderId:(NSString *)orderId;
 
@@ -1858,7 +2523,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersUpdatemerchantorderid
+ *  @return GTLRShoppingContentQuery_OrdersUpdatemerchantorderid
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersUpdateMerchantOrderIdRequest *)object
                      merchantId:(unsigned long long)merchantId
@@ -1898,11 +2563,269 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    be a multi-client account.
  *  @param orderId The ID of the order.
  *
- *  @returns GTLRShoppingContentQuery_OrdersUpdateshipment
+ *  @return GTLRShoppingContentQuery_OrdersUpdateshipment
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_OrdersUpdateShipmentRequest *)object
                      merchantId:(unsigned long long)merchantId
                         orderId:(NSString *)orderId;
+
+@end
+
+/**
+ *  Batches multiple POS-related calls in a single request.
+ *
+ *  Method: content.pos.custombatch
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosCustombatch : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosCustombatchWithObject:]
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_PosCustomBatchResponse.
+ *
+ *  Batches multiple POS-related calls in a single request.
+ *
+ *  @param object The @c GTLRShoppingContent_PosCustomBatchRequest to include in
+ *    the query.
+ *
+ *  @return GTLRShoppingContentQuery_PosCustombatch
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_PosCustomBatchRequest *)object;
+
+@end
+
+/**
+ *  Deletes a store for the given merchant.
+ *
+ *  Method: content.pos.delete
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosDelete : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosDeleteWithmerchantId:targetMerchantId:storeCode:]
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/** The ID of the POS or inventory data provider. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** A store code that is unique per merchant. */
+@property(nonatomic, copy, nullable) NSString *storeCode;
+
+/** The ID of the target merchant. */
+@property(nonatomic, assign) unsigned long long targetMerchantId;
+
+/**
+ *  Upon successful completion, the callback's object and error parameters will
+ *  be nil. This query does not fetch an object.
+ *
+ *  Deletes a store for the given merchant.
+ *
+ *  @param merchantId The ID of the POS or inventory data provider.
+ *  @param targetMerchantId The ID of the target merchant.
+ *  @param storeCode A store code that is unique per merchant.
+ *
+ *  @return GTLRShoppingContentQuery_PosDelete
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                   targetMerchantId:(unsigned long long)targetMerchantId
+                          storeCode:(NSString *)storeCode;
+
+@end
+
+/**
+ *  Retrieves information about the given store.
+ *
+ *  Method: content.pos.get
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosGet : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosGetWithmerchantId:targetMerchantId:storeCode:]
+
+/** The ID of the POS or inventory data provider. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** A store code that is unique per merchant. */
+@property(nonatomic, copy, nullable) NSString *storeCode;
+
+/** The ID of the target merchant. */
+@property(nonatomic, assign) unsigned long long targetMerchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_PosStore.
+ *
+ *  Retrieves information about the given store.
+ *
+ *  @param merchantId The ID of the POS or inventory data provider.
+ *  @param targetMerchantId The ID of the target merchant.
+ *  @param storeCode A store code that is unique per merchant.
+ *
+ *  @return GTLRShoppingContentQuery_PosGet
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                   targetMerchantId:(unsigned long long)targetMerchantId
+                          storeCode:(NSString *)storeCode;
+
+@end
+
+/**
+ *  Creates a store for the given merchant.
+ *
+ *  Method: content.pos.insert
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosInsert : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosInsertWithObject:merchantId:targetMerchantId:]
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/** The ID of the POS or inventory data provider. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the target merchant. */
+@property(nonatomic, assign) unsigned long long targetMerchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_PosStore.
+ *
+ *  Creates a store for the given merchant.
+ *
+ *  @param object The @c GTLRShoppingContent_PosStore to include in the query.
+ *  @param merchantId The ID of the POS or inventory data provider.
+ *  @param targetMerchantId The ID of the target merchant.
+ *
+ *  @return GTLRShoppingContentQuery_PosInsert
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_PosStore *)object
+                     merchantId:(unsigned long long)merchantId
+               targetMerchantId:(unsigned long long)targetMerchantId;
+
+@end
+
+/**
+ *  Submit inventory for the given merchant.
+ *
+ *  Method: content.pos.inventory
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosInventory : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosInventoryWithObject:merchantId:targetMerchantId:]
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/** The ID of the POS or inventory data provider. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the target merchant. */
+@property(nonatomic, assign) unsigned long long targetMerchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_PosInventoryResponse.
+ *
+ *  Submit inventory for the given merchant.
+ *
+ *  @param object The @c GTLRShoppingContent_PosInventoryRequest to include in
+ *    the query.
+ *  @param merchantId The ID of the POS or inventory data provider.
+ *  @param targetMerchantId The ID of the target merchant.
+ *
+ *  @return GTLRShoppingContentQuery_PosInventory
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_PosInventoryRequest *)object
+                     merchantId:(unsigned long long)merchantId
+               targetMerchantId:(unsigned long long)targetMerchantId;
+
+@end
+
+/**
+ *  Lists the stores of the target merchant.
+ *
+ *  Method: content.pos.list
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosList : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosListWithmerchantId:targetMerchantId:]
+
+/** The ID of the POS or inventory data provider. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the target merchant. */
+@property(nonatomic, assign) unsigned long long targetMerchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_PosListResponse.
+ *
+ *  Lists the stores of the target merchant.
+ *
+ *  @param merchantId The ID of the POS or inventory data provider.
+ *  @param targetMerchantId The ID of the target merchant.
+ *
+ *  @return GTLRShoppingContentQuery_PosList
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId
+                   targetMerchantId:(unsigned long long)targetMerchantId;
+
+@end
+
+/**
+ *  Submit a sale event for the given merchant.
+ *
+ *  Method: content.pos.sale
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_PosSale : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForPosSaleWithObject:merchantId:targetMerchantId:]
+
+/** Flag to run the request in dry-run mode. */
+@property(nonatomic, assign) BOOL dryRun;
+
+/** The ID of the POS or inventory data provider. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/** The ID of the target merchant. */
+@property(nonatomic, assign) unsigned long long targetMerchantId;
+
+/**
+ *  Fetches a @c GTLRShoppingContent_PosSaleResponse.
+ *
+ *  Submit a sale event for the given merchant.
+ *
+ *  @param object The @c GTLRShoppingContent_PosSaleRequest to include in the
+ *    query.
+ *  @param merchantId The ID of the POS or inventory data provider.
+ *  @param targetMerchantId The ID of the target merchant.
+ *
+ *  @return GTLRShoppingContentQuery_PosSale
+ */
++ (instancetype)queryWithObject:(GTLRShoppingContent_PosSaleRequest *)object
+                     merchantId:(unsigned long long)merchantId
+               targetMerchantId:(unsigned long long)targetMerchantId;
 
 @end
 
@@ -1929,7 +2852,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_ProductsCustomBatchRequest to
  *    include in the query.
  *
- *  @returns GTLRShoppingContentQuery_ProductsCustombatch
+ *  @return GTLRShoppingContentQuery_ProductsCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_ProductsCustomBatchRequest *)object;
 
@@ -1969,7 +2892,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param productId The REST id of the product.
  *
- *  @returns GTLRShoppingContentQuery_ProductsDelete
+ *  @return GTLRShoppingContentQuery_ProductsDelete
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           productId:(NSString *)productId;
@@ -2006,7 +2929,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param productId The REST id of the product.
  *
- *  @returns GTLRShoppingContentQuery_ProductsGet
+ *  @return GTLRShoppingContentQuery_ProductsGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           productId:(NSString *)productId;
@@ -2047,7 +2970,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that contains the product. This
  *    account cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_ProductsInsert
+ *  @return GTLRShoppingContentQuery_ProductsInsert
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_Product *)object
                      merchantId:(unsigned long long)merchantId;
@@ -2095,7 +3018,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that contains the products. This
  *    account cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_ProductsList
+ *  @return GTLRShoppingContentQuery_ProductsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2131,7 +3054,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_ProductstatusesCustomBatchRequest
  *    to include in the query.
  *
- *  @returns GTLRShoppingContentQuery_ProductstatusesCustombatch
+ *  @return GTLRShoppingContentQuery_ProductstatusesCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_ProductstatusesCustomBatchRequest *)object;
 
@@ -2148,6 +3071,12 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
 @interface GTLRShoppingContentQuery_ProductstatusesGet : GTLRShoppingContentQuery
 // Previous library name was
 //   +[GTLQueryShoppingContent queryForProductstatusesGetWithmerchantId:productId:]
+
+/**
+ *  If set, only issues for the specified destinations are returned, otherwise
+ *  only issues for the Shopping destination.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *destinations;
 
 /**
  *  Flag to include full product data in the result of this get request. The
@@ -2173,7 +3102,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *    account cannot be a multi-client account.
  *  @param productId The REST id of the product.
  *
- *  @returns GTLRShoppingContentQuery_ProductstatusesGet
+ *  @return GTLRShoppingContentQuery_ProductstatusesGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           productId:(NSString *)productId;
@@ -2191,6 +3120,12 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
 @interface GTLRShoppingContentQuery_ProductstatusesList : GTLRShoppingContentQuery
 // Previous library name was
 //   +[GTLQueryShoppingContent queryForProductstatusesListWithmerchantId:]
+
+/**
+ *  If set, only issues for the specified destinations are returned, otherwise
+ *  only issues for the Shopping destination.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *destinations;
 
 /**
  *  Flag to include full product data in the results of the list request. The
@@ -2228,7 +3163,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account that contains the products. This
  *    account cannot be a multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_ProductstatusesList
+ *  @return GTLRShoppingContentQuery_ProductstatusesList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2263,7 +3198,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param object The @c GTLRShoppingContent_ShippingsettingsCustomBatchRequest
  *    to include in the query.
  *
- *  @returns GTLRShoppingContentQuery_ShippingsettingsCustombatch
+ *  @return GTLRShoppingContentQuery_ShippingsettingsCustombatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_ShippingsettingsCustomBatchRequest *)object;
 
@@ -2302,7 +3237,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param accountId The ID of the account for which to get/update shipping
  *    settings.
  *
- *  @returns GTLRShoppingContentQuery_ShippingsettingsGet
+ *  @return GTLRShoppingContentQuery_ShippingsettingsGet
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId
                           accountId:(unsigned long long)accountId;
@@ -2333,7 +3268,37 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the account for which to retrieve the supported
  *    carriers.
  *
- *  @returns GTLRShoppingContentQuery_ShippingsettingsGetsupportedcarriers
+ *  @return GTLRShoppingContentQuery_ShippingsettingsGetsupportedcarriers
+ */
++ (instancetype)queryWithMerchantId:(unsigned long long)merchantId;
+
+@end
+
+/**
+ *  Retrieves supported holidays for an account.
+ *
+ *  Method: content.shippingsettings.getsupportedholidays
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeShoppingContent
+ */
+@interface GTLRShoppingContentQuery_ShippingsettingsGetsupportedholidays : GTLRShoppingContentQuery
+// Previous library name was
+//   +[GTLQueryShoppingContent queryForShippingsettingsGetsupportedholidaysWithmerchantId:]
+
+/** The ID of the account for which to retrieve the supported holidays. */
+@property(nonatomic, assign) unsigned long long merchantId;
+
+/**
+ *  Fetches a @c
+ *  GTLRShoppingContent_ShippingsettingsGetSupportedHolidaysResponse.
+ *
+ *  Retrieves supported holidays for an account.
+ *
+ *  @param merchantId The ID of the account for which to retrieve the supported
+ *    holidays.
+ *
+ *  @return GTLRShoppingContentQuery_ShippingsettingsGetsupportedholidays
  */
 + (instancetype)queryWithMerchantId:(unsigned long long)merchantId;
 
@@ -2373,7 +3338,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param merchantId The ID of the managing account. This must be a
  *    multi-client account.
  *
- *  @returns GTLRShoppingContentQuery_ShippingsettingsList
+ *  @return GTLRShoppingContentQuery_ShippingsettingsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -2423,7 +3388,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param accountId The ID of the account for which to get/update shipping
  *    settings.
  *
- *  @returns GTLRShoppingContentQuery_ShippingsettingsPatch
+ *  @return GTLRShoppingContentQuery_ShippingsettingsPatch
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_ShippingSettings *)object
                      merchantId:(unsigned long long)merchantId
@@ -2469,7 +3434,7 @@ GTLR_EXTERN NSString * const kGTLRShoppingContentTemplateNameTemplate2;
  *  @param accountId The ID of the account for which to get/update shipping
  *    settings.
  *
- *  @returns GTLRShoppingContentQuery_ShippingsettingsUpdate
+ *  @return GTLRShoppingContentQuery_ShippingsettingsUpdate
  */
 + (instancetype)queryWithObject:(GTLRShoppingContent_ShippingSettings *)object
                      merchantId:(unsigned long long)merchantId

@@ -122,6 +122,7 @@ NSString * const kGTLRYouTube_ChannelStatus_LongUploadsStatus_LongUploadsUnspeci
 NSString * const kGTLRYouTube_ChannelStatus_PrivacyStatus_Private = @"private";
 NSString * const kGTLRYouTube_ChannelStatus_PrivacyStatus_Public = @"public";
 NSString * const kGTLRYouTube_ChannelStatus_PrivacyStatus_Unlisted = @"unlisted";
+NSString * const kGTLRYouTube_ChannelStatus_PrivacyStatus_UnlistedNew = @"unlisted_new";
 
 // GTLRYouTube_CommentSnippet.moderationStatus
 NSString * const kGTLRYouTube_CommentSnippet_ModerationStatus_HeldForReview = @"heldForReview";
@@ -453,6 +454,7 @@ NSString * const kGTLRYouTube_ContentRating_IfcoRating_IfcoUnrated = @"ifcoUnrat
 
 // GTLRYouTube_ContentRating.ilfilmRating
 NSString * const kGTLRYouTube_ContentRating_IlfilmRating_Ilfilm12 = @"ilfilm12";
+NSString * const kGTLRYouTube_ContentRating_IlfilmRating_Ilfilm14 = @"ilfilm14";
 NSString * const kGTLRYouTube_ContentRating_IlfilmRating_Ilfilm16 = @"ilfilm16";
 NSString * const kGTLRYouTube_ContentRating_IlfilmRating_Ilfilm18 = @"ilfilm18";
 NSString * const kGTLRYouTube_ContentRating_IlfilmRating_IlfilmAa = @"ilfilmAa";
@@ -781,6 +783,11 @@ NSString * const kGTLRYouTube_LiveBroadcastContentDetails_Projection_Mesh = @"me
 NSString * const kGTLRYouTube_LiveBroadcastContentDetails_Projection_Rectangular = @"rectangular";
 NSString * const kGTLRYouTube_LiveBroadcastContentDetails_Projection_X360 = @"360";
 
+// GTLRYouTube_LiveBroadcastContentDetails.stereoLayout
+NSString * const kGTLRYouTube_LiveBroadcastContentDetails_StereoLayout_LeftRight = @"left_right";
+NSString * const kGTLRYouTube_LiveBroadcastContentDetails_StereoLayout_Mono = @"mono";
+NSString * const kGTLRYouTube_LiveBroadcastContentDetails_StereoLayout_TopBottom = @"top_bottom";
+
 // GTLRYouTube_LiveBroadcastStatus.lifeCycleStatus
 NSString * const kGTLRYouTube_LiveBroadcastStatus_LifeCycleStatus_Abandoned = @"abandoned";
 NSString * const kGTLRYouTube_LiveBroadcastStatus_LifeCycleStatus_Complete = @"complete";
@@ -803,6 +810,7 @@ NSString * const kGTLRYouTube_LiveBroadcastStatus_LiveBroadcastPriority_Normal =
 NSString * const kGTLRYouTube_LiveBroadcastStatus_PrivacyStatus_Private = @"private";
 NSString * const kGTLRYouTube_LiveBroadcastStatus_PrivacyStatus_Public = @"public";
 NSString * const kGTLRYouTube_LiveBroadcastStatus_PrivacyStatus_Unlisted = @"unlisted";
+NSString * const kGTLRYouTube_LiveBroadcastStatus_PrivacyStatus_UnlistedNew = @"unlisted_new";
 
 // GTLRYouTube_LiveBroadcastStatus.recordingStatus
 NSString * const kGTLRYouTube_LiveBroadcastStatus_RecordingStatus_NotRecording = @"notRecording";
@@ -893,11 +901,13 @@ NSString * const kGTLRYouTube_LiveStreamStatus_StreamStatus_Ready = @"ready";
 NSString * const kGTLRYouTube_PlaylistItemStatus_PrivacyStatus_Private = @"private";
 NSString * const kGTLRYouTube_PlaylistItemStatus_PrivacyStatus_Public = @"public";
 NSString * const kGTLRYouTube_PlaylistItemStatus_PrivacyStatus_Unlisted = @"unlisted";
+NSString * const kGTLRYouTube_PlaylistItemStatus_PrivacyStatus_UnlistedNew = @"unlisted_new";
 
 // GTLRYouTube_PlaylistStatus.privacyStatus
 NSString * const kGTLRYouTube_PlaylistStatus_PrivacyStatus_Private = @"private";
 NSString * const kGTLRYouTube_PlaylistStatus_PrivacyStatus_Public = @"public";
 NSString * const kGTLRYouTube_PlaylistStatus_PrivacyStatus_Unlisted = @"unlisted";
+NSString * const kGTLRYouTube_PlaylistStatus_PrivacyStatus_UnlistedNew = @"unlisted_new";
 
 // GTLRYouTube_PromotedItemId.type
 NSString * const kGTLRYouTube_PromotedItemId_Type_RecentUpload = @"recentUpload";
@@ -986,6 +996,7 @@ NSString * const kGTLRYouTube_VideoStatus_License_Youtube      = @"youtube";
 NSString * const kGTLRYouTube_VideoStatus_PrivacyStatus_Private = @"private";
 NSString * const kGTLRYouTube_VideoStatus_PrivacyStatus_Public = @"public";
 NSString * const kGTLRYouTube_VideoStatus_PrivacyStatus_Unlisted = @"unlisted";
+NSString * const kGTLRYouTube_VideoStatus_PrivacyStatus_UnlistedNew = @"unlisted_new";
 
 // GTLRYouTube_VideoStatus.rejectionReason
 NSString * const kGTLRYouTube_VideoStatus_RejectionReason_Claim = @"claim";
@@ -1855,59 +1866,6 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 
 // ----------------------------------------------------------------------------
 //
-//   GTLRYouTube_FanFundingEvent
-//
-
-@implementation GTLRYouTube_FanFundingEvent
-@dynamic ETag, identifier, kind, snippet;
-
-+ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
-  NSDictionary<NSString *, NSString *> *map = @{
-    @"ETag" : @"etag",
-    @"identifier" : @"id"
-  };
-  return map;
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRYouTube_FanFundingEventListResponse
-//
-
-@implementation GTLRYouTube_FanFundingEventListResponse
-@dynamic ETag, eventId, items, kind, nextPageToken, pageInfo, tokenPagination,
-         visitorId;
-
-+ (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
-  return @{ @"ETag" : @"etag" };
-}
-
-+ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
-  NSDictionary<NSString *, Class> *map = @{
-    @"items" : [GTLRYouTube_FanFundingEvent class]
-  };
-  return map;
-}
-
-@end
-
-
-// ----------------------------------------------------------------------------
-//
-//   GTLRYouTube_FanFundingEventSnippet
-//
-
-@implementation GTLRYouTube_FanFundingEventSnippet
-@dynamic amountMicros, channelId, commentText, createdAt, currency,
-         displayString, supporterDetails;
-@end
-
-
-// ----------------------------------------------------------------------------
-//
 //   GTLRYouTube_GeoPoint
 //
 
@@ -2184,7 +2142,8 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 @dynamic boundStreamId, boundStreamLastUpdateTimeMs, closedCaptionsType,
          enableAutoStart, enableClosedCaptions, enableContentEncryption,
          enableDvr, enableEmbed, enableLowLatency, latencyPreference, mesh,
-         monitorStream, projection, recordFromStart, startWithSlate;
+         monitorStream, projection, recordFromStart, startWithSlate,
+         stereoLayout;
 @end
 
 
@@ -2689,6 +2648,26 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRYouTube_Nonprofit
+//
+
+@implementation GTLRYouTube_Nonprofit
+@dynamic nonprofitId, nonprofitLegalName;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRYouTube_NonprofitId
+//
+
+@implementation GTLRYouTube_NonprofitId
+@dynamic value;
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRYouTube_PageInfo
 //
 
@@ -3016,14 +2995,10 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 //
 
 @implementation GTLRYouTube_Sponsor
-@dynamic ETag, identifier, kind, snippet;
+@dynamic ETag, kind, snippet;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
-  NSDictionary<NSString *, NSString *> *map = @{
-    @"ETag" : @"etag",
-    @"identifier" : @"id"
-  };
-  return map;
+  return @{ @"ETag" : @"etag" };
 }
 
 @end
@@ -3058,7 +3033,7 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 //
 
 @implementation GTLRYouTube_SponsorSnippet
-@dynamic channelId, sponsorDetails, sponsorSince;
+@dynamic channelId, cumulativeDurationMonths, sponsorDetails, sponsorSince;
 @end
 
 
@@ -3194,7 +3169,8 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 
 @implementation GTLRYouTube_SuperChatEventSnippet
 @dynamic amountMicros, channelId, commentText, createdAt, currency,
-         displayString, messageType, supporterDetails;
+         displayString, isSuperChatForGood, messageType, nonprofit,
+         supporterDetails;
 @end
 
 
@@ -3260,8 +3236,8 @@ NSString * const kGTLRYouTube_VideoSuggestions_ProcessingWarnings_UnsupportedVrS
 //
 
 @implementation GTLRYouTube_Video
-@dynamic accessToken, ageGating, contentDetails, ETag, fileDetails, identifier,
-         kind, liveStreamingDetails, localizations, monetizationDetails, player,
+@dynamic ageGating, contentDetails, ETag, fileDetails, identifier, kind,
+         liveStreamingDetails, localizations, monetizationDetails, player,
          processingDetails, projectDetails, recordingDetails, snippet,
          statistics, status, suggestions, topicDetails;
 

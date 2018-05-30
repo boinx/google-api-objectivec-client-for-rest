@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Datastore API (datastore/v1)
+//   Cloud Datastore API (datastore/v1)
 // Description:
 //   Accesses the schemaless NoSQL database to provide fully managed, robust,
 //   scalable storage for your application.
@@ -22,6 +22,8 @@
 @class GTLRDatastore_AllocateIdsRequest;
 @class GTLRDatastore_BeginTransactionRequest;
 @class GTLRDatastore_CommitRequest;
+@class GTLRDatastore_GoogleDatastoreAdminV1ExportEntitiesRequest;
+@class GTLRDatastore_GoogleDatastoreAdminV1ImportEntitiesRequest;
 @class GTLRDatastore_LookupRequest;
 @class GTLRDatastore_ReserveIdsRequest;
 @class GTLRDatastore_RollbackRequest;
@@ -71,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsAllocateIds
+ *  @return GTLRDatastoreQuery_ProjectsAllocateIds
  */
 + (instancetype)queryWithObject:(GTLRDatastore_AllocateIdsRequest *)object
                       projectId:(NSString *)projectId;
@@ -103,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsBeginTransaction
+ *  @return GTLRDatastoreQuery_ProjectsBeginTransaction
  */
 + (instancetype)queryWithObject:(GTLRDatastore_BeginTransactionRequest *)object
                       projectId:(NSString *)projectId;
@@ -136,9 +138,97 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRDatastore_CommitRequest to include in the query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsCommit
+ *  @return GTLRDatastoreQuery_ProjectsCommit
  */
 + (instancetype)queryWithObject:(GTLRDatastore_CommitRequest *)object
+                      projectId:(NSString *)projectId;
+
+@end
+
+/**
+ *  Exports a copy of all or a subset of entities from Google Cloud Datastore
+ *  to another storage system, such as Google Cloud Storage. Recent updates to
+ *  entities may not be reflected in the export. The export occurs in the
+ *  background and its progress can be monitored and managed via the
+ *  Operation resource that is created. The output of an export may only be
+ *  used once the associated operation is done. If an export operation is
+ *  cancelled before completion it may leave partial data behind in Google
+ *  Cloud Storage.
+ *
+ *  Method: datastore.projects.export
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeDatastore
+ *    @c kGTLRAuthScopeDatastoreCloudPlatform
+ */
+@interface GTLRDatastoreQuery_ProjectsExport : GTLRDatastoreQuery
+// Previous library name was
+//   +[GTLQueryDatastore queryForProjectsExportWithObject:projectId:]
+
+/** Project ID against which to make the request. */
+@property(nonatomic, copy, nullable) NSString *projectId;
+
+/**
+ *  Fetches a @c GTLRDatastore_GoogleLongrunningOperation.
+ *
+ *  Exports a copy of all or a subset of entities from Google Cloud Datastore
+ *  to another storage system, such as Google Cloud Storage. Recent updates to
+ *  entities may not be reflected in the export. The export occurs in the
+ *  background and its progress can be monitored and managed via the
+ *  Operation resource that is created. The output of an export may only be
+ *  used once the associated operation is done. If an export operation is
+ *  cancelled before completion it may leave partial data behind in Google
+ *  Cloud Storage.
+ *
+ *  @param object The @c
+ *    GTLRDatastore_GoogleDatastoreAdminV1ExportEntitiesRequest to include in
+ *    the query.
+ *  @param projectId Project ID against which to make the request.
+ *
+ *  @return GTLRDatastoreQuery_ProjectsExport
+ */
++ (instancetype)queryWithObject:(GTLRDatastore_GoogleDatastoreAdminV1ExportEntitiesRequest *)object
+                      projectId:(NSString *)projectId;
+
+@end
+
+/**
+ *  Imports entities into Google Cloud Datastore. Existing entities with the
+ *  same key are overwritten. The import occurs in the background and its
+ *  progress can be monitored and managed via the Operation resource that is
+ *  created. If an ImportEntities operation is cancelled, it is possible
+ *  that a subset of the data has already been imported to Cloud Datastore.
+ *
+ *  Method: datastore.projects.import
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeDatastore
+ *    @c kGTLRAuthScopeDatastoreCloudPlatform
+ */
+@interface GTLRDatastoreQuery_ProjectsImport : GTLRDatastoreQuery
+// Previous library name was
+//   +[GTLQueryDatastore queryForProjectsImportWithObject:projectId:]
+
+/** Project ID against which to make the request. */
+@property(nonatomic, copy, nullable) NSString *projectId;
+
+/**
+ *  Fetches a @c GTLRDatastore_GoogleLongrunningOperation.
+ *
+ *  Imports entities into Google Cloud Datastore. Existing entities with the
+ *  same key are overwritten. The import occurs in the background and its
+ *  progress can be monitored and managed via the Operation resource that is
+ *  created. If an ImportEntities operation is cancelled, it is possible
+ *  that a subset of the data has already been imported to Cloud Datastore.
+ *
+ *  @param object The @c
+ *    GTLRDatastore_GoogleDatastoreAdminV1ImportEntitiesRequest to include in
+ *    the query.
+ *  @param projectId Project ID against which to make the request.
+ *
+ *  @return GTLRDatastoreQuery_ProjectsImport
+ */
++ (instancetype)queryWithObject:(GTLRDatastore_GoogleDatastoreAdminV1ImportEntitiesRequest *)object
                       projectId:(NSString *)projectId;
 
 @end
@@ -167,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRDatastore_LookupRequest to include in the query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsLookup
+ *  @return GTLRDatastoreQuery_ProjectsLookup
  */
 + (instancetype)queryWithObject:(GTLRDatastore_LookupRequest *)object
                       projectId:(NSString *)projectId;
@@ -215,7 +305,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation resource to be cancelled.
  *
- *  @returns GTLRDatastoreQuery_ProjectsOperationsCancel
+ *  @return GTLRDatastoreQuery_ProjectsOperationsCancel
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -250,7 +340,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation resource to be deleted.
  *
- *  @returns GTLRDatastoreQuery_ProjectsOperationsDelete
+ *  @return GTLRDatastoreQuery_ProjectsOperationsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -283,7 +373,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation resource.
  *
- *  @returns GTLRDatastoreQuery_ProjectsOperationsGet
+ *  @return GTLRDatastoreQuery_ProjectsOperationsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -337,7 +427,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param name The name of the operation's parent resource.
  *
- *  @returns GTLRDatastoreQuery_ProjectsOperationsList
+ *  @return GTLRDatastoreQuery_ProjectsOperationsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -374,7 +464,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsReserveIds
+ *  @return GTLRDatastoreQuery_ProjectsReserveIds
  */
 + (instancetype)queryWithObject:(GTLRDatastore_ReserveIdsRequest *)object
                       projectId:(NSString *)projectId;
@@ -405,7 +495,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRDatastore_RollbackRequest to include in the query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsRollback
+ *  @return GTLRDatastoreQuery_ProjectsRollback
  */
 + (instancetype)queryWithObject:(GTLRDatastore_RollbackRequest *)object
                       projectId:(NSString *)projectId;
@@ -436,7 +526,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object The @c GTLRDatastore_RunQueryRequest to include in the query.
  *  @param projectId The ID of the project against which to make the request.
  *
- *  @returns GTLRDatastoreQuery_ProjectsRunQuery
+ *  @return GTLRDatastoreQuery_ProjectsRunQuery
  */
 + (instancetype)queryWithObject:(GTLRDatastore_RunQueryRequest *)object
                       projectId:(NSString *)projectId;

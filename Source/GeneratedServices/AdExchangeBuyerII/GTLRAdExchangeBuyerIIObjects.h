@@ -552,6 +552,12 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_Dangerous
  */
 GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_DangerousProductsWeapons;
 /**
+ *  Unacceptable landing page.
+ *
+ *  Value: "DESTINATION_EXPERIENCE"
+ */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_DestinationExperience;
+/**
  *  Broken back button.
  *
  *  Value: "DESTINATION_SITE_DOES_NOT_ALLOW_GOING_BACK"
@@ -807,6 +813,12 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_Misleadin
  */
 GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_MisleadingPromotions;
 /**
+ *  Misuse by an Open Measurement SDK script.
+ *
+ *  Value: "MISUSE_BY_OMID_SCRIPT"
+ */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_MisuseByOmidScript;
+/**
  *  Misuse of personal information.
  *
  *  Value: "MISUSE_OF_PERSONAL_INFORMATION"
@@ -824,6 +836,12 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_NeedCerti
  *  Value: "NO_BORDER"
  */
 GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_NoBorder;
+/**
+ *  Use of an Open Measurement SDK vendor not on approved whitelist.
+ *
+ *  Value: "NON_WHITELISTED_OMID_VENDOR"
+ */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_Disapproval_Reason_NonWhitelistedOmidVendor;
 /**
  *  Non-family safe or adult content.
  *
@@ -1044,27 +1062,18 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Environment_Enviro
 GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Environment_Web;
 
 // ----------------------------------------------------------------------------
-// GTLRAdExchangeBuyerII_FilterSet.format
+// GTLRAdExchangeBuyerII_FilterSet.formats
 
-/**
- *  The ad impression is display format (i.e. an image).
- *
- *  Value: "DISPLAY"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Format_Display;
-/**
- *  A placeholder for an undefined format; indicates that no format filter
- *  will be applied.
- *
- *  Value: "FORMAT_UNSPECIFIED"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Format_FormatUnspecified;
-/**
- *  The ad impression is video format.
- *
- *  Value: "VIDEO"
- */
-GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Format_Video;
+/** Value: "FORMAT_UNSPECIFIED" */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Formats_FormatUnspecified;
+/** Value: "NATIVE_DISPLAY" */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Formats_NativeDisplay;
+/** Value: "NATIVE_VIDEO" */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Formats_NativeVideo;
+/** Value: "NON_NATIVE_DISPLAY" */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Formats_NonNativeDisplay;
+/** Value: "NON_NATIVE_VIDEO" */
+GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_FilterSet_Formats_NonNativeVideo;
 
 // ----------------------------------------------------------------------------
 // GTLRAdExchangeBuyerII_FilterSet.platforms
@@ -1680,6 +1689,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 
 /**
  *  A creative and its classification data.
+ *  Next ID: 35
  */
 @interface GTLRAdExchangeBuyerII_Creative : GTLRObject
 
@@ -1931,7 +1941,8 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @property(nonatomic, strong, nullable) NSNumber *day;
 
 /**
- *  Month of year. Must be from 1 to 12.
+ *  Month of year. Must be from 1 to 12, or 0 if specifying a date without a
+ *  month.
  *
  *  Uses NSNumber of intValue.
  */
@@ -2002,6 +2013,8 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *        "DANGEROUS_PRODUCTS_TOBACCO")
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_DangerousProductsWeapons
  *        The ad promotes weapons. (Value: "DANGEROUS_PRODUCTS_WEAPONS")
+ *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_DestinationExperience
+ *        Unacceptable landing page. (Value: "DESTINATION_EXPERIENCE")
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_DestinationSiteDoesNotAllowGoingBack
  *        Broken back button. (Value:
  *        "DESTINATION_SITE_DOES_NOT_ALLOW_GOING_BACK")
@@ -2121,6 +2134,9 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *        "MISLEADING_CLAIMS_IN_AD")
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_MisleadingPromotions
  *        Misleading or unrealistic promotions. (Value: "MISLEADING_PROMOTIONS")
+ *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_MisuseByOmidScript
+ *        Misuse by an Open Measurement SDK script. (Value:
+ *        "MISUSE_BY_OMID_SCRIPT")
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_MisuseOfPersonalInformation
  *        Misuse of personal information. (Value:
  *        "MISUSE_OF_PERSONAL_INFORMATION")
@@ -2130,6 +2146,9 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_NoBorder Ads with a
  *        white background require a border, which was missing. (Value:
  *        "NO_BORDER")
+ *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_NonWhitelistedOmidVendor
+ *        Use of an Open Measurement SDK vendor not on approved whitelist.
+ *        (Value: "NON_WHITELISTED_OMID_VENDOR")
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_NotFamilySafe Non-family
  *        safe or adult content. (Value: "NOT_FAMILY_SAFE")
  *    @arg @c kGTLRAdExchangeBuyerII_Disapproval_Reason_OmissionOfRelevantInformation
@@ -2315,15 +2334,17 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 
 /**
  *  The ID of the creative on which to filter; optional. This field may be set
- *  only for a filter set that accesses buyer-level troubleshooting data, i.e.
- *  one whose name matches the `bidders/ * /accounts/ * /filterSets/ *` pattern.
+ *  only for a filter set that accesses account-level troubleshooting data,
+ *  i.e. one whose name matches the `bidders/ * /accounts/ * /filterSets/ *`
+ *  pattern.
  */
 @property(nonatomic, copy, nullable) NSString *creativeId;
 
 /**
  *  The ID of the deal on which to filter; optional. This field may be set
- *  only for a filter set that accesses buyer-level troubleshooting data, i.e.
- *  one whose name matches the `bidders/ * /accounts/ * /filterSets/ *` pattern.
+ *  only for a filter set that accesses account-level troubleshooting data,
+ *  i.e. one whose name matches the `bidders/ * /accounts/ * /filterSets/ *`
+ *  pattern.
  *
  *  Uses NSNumber of longLongValue.
  */
@@ -2345,25 +2366,18 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @property(nonatomic, copy, nullable) NSString *environment;
 
 /**
- *  The format on which to filter; optional.
- *
- *  Likely values:
- *    @arg @c kGTLRAdExchangeBuyerII_FilterSet_Format_Display The ad impression
- *        is display format (i.e. an image). (Value: "DISPLAY")
- *    @arg @c kGTLRAdExchangeBuyerII_FilterSet_Format_FormatUnspecified A
- *        placeholder for an undefined format; indicates that no format filter
- *        will be applied. (Value: "FORMAT_UNSPECIFIED")
- *    @arg @c kGTLRAdExchangeBuyerII_FilterSet_Format_Video The ad impression is
- *        video format. (Value: "VIDEO")
+ *  The list of formats on which to filter; may be empty. The filters
+ *  represented by multiple formats are ORed together (i.e. if non-empty,
+ *  results must match any one of the formats).
  */
-@property(nonatomic, copy, nullable) NSString *format;
+@property(nonatomic, strong, nullable) NSArray<NSString *> *formats;
 
 /**
  *  A user-defined name of the filter set. Filter set names must be unique
  *  globally and match one of the patterns:
  *  - `bidders/ * /filterSets/ *` (for accessing bidder-level troubleshooting
  *  data)
- *  - `bidders/ * /accounts/ * /filterSets/ *` (for accessing buyer-level
+ *  - `bidders/ * /accounts/ * /filterSets/ *` (for accessing account-level
  *  troubleshooting data)
  *  This field is required in create operations.
  */
@@ -2375,6 +2389,14 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
  *  results must match any one of the platforms).
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *platforms;
+
+/**
+ *  For Exchange Bidding buyers only.
+ *  The list of publisher identifiers on which to filter; may be empty.
+ *  The filters represented by multiple publisher identifiers are ORed
+ *  together.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *publisherIdentifiers;
 
 /**
  *  An open-ended realtime time range, defined by the aggregation start
@@ -2389,6 +2411,7 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 @property(nonatomic, strong, nullable) GTLRAdExchangeBuyerII_RelativeDateRange *relativeDateRange;
 
 /**
+ *  For Ad Exchange buyers only.
  *  The list of IDs of the seller (publisher) networks on which to filter;
  *  may be empty. The filters represented by multiple seller network IDs are
  *  ORed together (i.e. if non-empty, results must match any one of the
@@ -3400,6 +3423,12 @@ GTLR_EXTERN NSString * const kGTLRAdExchangeBuyerII_ServingRestriction_Status_St
 
 /** The URL to fetch a video ad. */
 @property(nonatomic, copy, nullable) NSString *videoUrl;
+
+/**
+ *  The contents of a VAST document for a video ad.
+ *  This document should conform to the VAST 2.0 or 3.0 standard.
+ */
+@property(nonatomic, copy, nullable) NSString *videoVastXml;
 
 @end
 

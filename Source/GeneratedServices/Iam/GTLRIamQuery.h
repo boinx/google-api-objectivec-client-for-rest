@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Identity and Access Management (IAM) API (iam/v1)
+//   Identity and Access Management (IAM) API (iam/v1)
 // Description:
 //   Manages identity and access control for Google Cloud Platform resources,
 //   including the creation of service accounts, which you can use to
@@ -23,6 +23,7 @@
 @class GTLRIam_CreateRoleRequest;
 @class GTLRIam_CreateServiceAccountKeyRequest;
 @class GTLRIam_CreateServiceAccountRequest;
+@class GTLRIam_QueryAuditableServicesRequest;
 @class GTLRIam_QueryGrantableRolesRequest;
 @class GTLRIam_QueryTestablePermissionsRequest;
 @class GTLRIam_Role;
@@ -86,6 +87,34 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
 @end
 
 /**
+ *  Returns a list of services that support service level audit logging
+ *  configuration for the given resource.
+ *
+ *  Method: iam.iamPolicies.queryAuditableServices
+ *
+ *  Authorization scope(s):
+ *    @c kGTLRAuthScopeIamCloudPlatform
+ */
+@interface GTLRIamQuery_IamPoliciesQueryAuditableServices : GTLRIamQuery
+// Previous library name was
+//   +[GTLQueryIam queryForIamPoliciesQueryAuditableServicesWithObject:]
+
+/**
+ *  Fetches a @c GTLRIam_QueryAuditableServicesResponse.
+ *
+ *  Returns a list of services that support service level audit logging
+ *  configuration for the given resource.
+ *
+ *  @param object The @c GTLRIam_QueryAuditableServicesRequest to include in the
+ *    query.
+ *
+ *  @return GTLRIamQuery_IamPoliciesQueryAuditableServices
+ */
++ (instancetype)queryWithObject:(GTLRIam_QueryAuditableServicesRequest *)object;
+
+@end
+
+/**
  *  Creates a new Role.
  *
  *  Method: iam.organizations.roles.create
@@ -115,7 +144,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}`
  *    `projects/{PROJECT_ID}`
  *
- *  @returns GTLRIamQuery_OrganizationsRolesCreate
+ *  @return GTLRIamQuery_OrganizationsRolesCreate
  */
 + (instancetype)queryWithObject:(GTLRIam_CreateRoleRequest *)object
                          parent:(NSString *)parent;
@@ -170,7 +199,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_OrganizationsRolesDelete
+ *  @return GTLRIamQuery_OrganizationsRolesDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -206,7 +235,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_OrganizationsRolesGet
+ *  @return GTLRIamQuery_OrganizationsRolesGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -261,7 +290,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}`
  *    `projects/{PROJECT_ID}`
  *
- *  @returns GTLRIamQuery_OrganizationsRolesList
+ *  @return GTLRIamQuery_OrganizationsRolesList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -309,7 +338,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_OrganizationsRolesPatch
+ *  @return GTLRIamQuery_OrganizationsRolesPatch
  */
 + (instancetype)queryWithObject:(GTLRIam_Role *)object
                            name:(NSString *)name;
@@ -345,7 +374,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_OrganizationsRolesUndelete
+ *  @return GTLRIamQuery_OrganizationsRolesUndelete
  */
 + (instancetype)queryWithObject:(GTLRIam_UndeleteRoleRequest *)object
                            name:(NSString *)name;
@@ -374,7 +403,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *  @param object The @c GTLRIam_QueryTestablePermissionsRequest to include in
  *    the query.
  *
- *  @returns GTLRIamQuery_PermissionsQueryTestablePermissions
+ *  @return GTLRIamQuery_PermissionsQueryTestablePermissions
  */
 + (instancetype)queryWithObject:(GTLRIam_QueryTestablePermissionsRequest *)object;
 
@@ -410,7 +439,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}`
  *    `projects/{PROJECT_ID}`
  *
- *  @returns GTLRIamQuery_ProjectsRolesCreate
+ *  @return GTLRIamQuery_ProjectsRolesCreate
  */
 + (instancetype)queryWithObject:(GTLRIam_CreateRoleRequest *)object
                          parent:(NSString *)parent;
@@ -465,7 +494,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_ProjectsRolesDelete
+ *  @return GTLRIamQuery_ProjectsRolesDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -501,7 +530,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_ProjectsRolesGet
+ *  @return GTLRIamQuery_ProjectsRolesGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -556,7 +585,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}`
  *    `projects/{PROJECT_ID}`
  *
- *  @returns GTLRIamQuery_ProjectsRolesList
+ *  @return GTLRIamQuery_ProjectsRolesList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -604,7 +633,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_ProjectsRolesPatch
+ *  @return GTLRIamQuery_ProjectsRolesPatch
  */
 + (instancetype)queryWithObject:(GTLRIam_Role *)object
                            name:(NSString *)name;
@@ -640,7 +669,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_ProjectsRolesUndelete
+ *  @return GTLRIamQuery_ProjectsRolesUndelete
  */
 + (instancetype)queryWithObject:(GTLRIam_UndeleteRoleRequest *)object
                            name:(NSString *)name;
@@ -678,7 +707,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    service
  *    accounts, such as `projects/my-project-123`.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsCreate
+ *  @return GTLRIamQuery_ProjectsServiceAccountsCreate
  */
 + (instancetype)queryWithObject:(GTLRIam_CreateServiceAccountRequest *)object
                            name:(NSString *)name;
@@ -718,7 +747,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsDelete
+ *  @return GTLRIamQuery_ProjectsServiceAccountsDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -757,7 +786,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsGet
+ *  @return GTLRIamQuery_ProjectsServiceAccountsGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -792,7 +821,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsGetIamPolicy
+ *  @return GTLRIamQuery_ProjectsServiceAccountsGetIamPolicy
  */
 + (instancetype)queryWithResource:(NSString *)resource;
 
@@ -835,7 +864,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsKeysCreate
+ *  @return GTLRIamQuery_ProjectsServiceAccountsKeysCreate
  */
 + (instancetype)queryWithObject:(GTLRIam_CreateServiceAccountKeyRequest *)object
                            name:(NSString *)name;
@@ -875,7 +904,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsKeysDelete
+ *  @return GTLRIamQuery_ProjectsServiceAccountsKeysDelete
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -927,7 +956,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsKeysGet
+ *  @return GTLRIamQuery_ProjectsServiceAccountsKeysGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -978,7 +1007,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsKeysList
+ *  @return GTLRIamQuery_ProjectsServiceAccountsKeysList
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -1025,7 +1054,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    service
  *    accounts, such as `projects/my-project-123`.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsList
+ *  @return GTLRIamQuery_ProjectsServiceAccountsList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1065,7 +1094,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    specified.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsSetIamPolicy
+ *  @return GTLRIamQuery_ProjectsServiceAccountsSetIamPolicy
  */
 + (instancetype)queryWithObject:(GTLRIam_SetIamPolicyRequest *)object
                        resource:(NSString *)resource;
@@ -1106,7 +1135,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsSignBlob
+ *  @return GTLRIamQuery_ProjectsServiceAccountsSignBlob
  */
 + (instancetype)queryWithObject:(GTLRIam_SignBlobRequest *)object
                            name:(NSString *)name;
@@ -1153,7 +1182,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    the account. The `ACCOUNT` value can be the `email` address or the
  *    `unique_id` of the service account.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsSignJwt
+ *  @return GTLRIamQuery_ProjectsServiceAccountsSignJwt
  */
 + (instancetype)queryWithObject:(GTLRIam_SignJwtRequest *)object
                            name:(NSString *)name;
@@ -1191,7 +1220,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    requested.
  *    See the operation documentation for the appropriate value for this field.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsTestIamPermissions
+ *  @return GTLRIamQuery_ProjectsServiceAccountsTestIamPermissions
  */
 + (instancetype)queryWithObject:(GTLRIam_TestIamPermissionsRequest *)object
                        resource:(NSString *)resource;
@@ -1242,7 +1271,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    In responses the resource name will always be in the format
  *    `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
  *
- *  @returns GTLRIamQuery_ProjectsServiceAccountsUpdate
+ *  @return GTLRIamQuery_ProjectsServiceAccountsUpdate
  */
 + (instancetype)queryWithObject:(GTLRIam_ServiceAccount *)object
                            name:(NSString *)name;
@@ -1279,7 +1308,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *    `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
  *    `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
  *
- *  @returns GTLRIamQuery_RolesGet
+ *  @return GTLRIamQuery_RolesGet
  */
 + (instancetype)queryWithName:(NSString *)name;
 
@@ -1328,7 +1357,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *
  *  Lists the Roles defined on a resource.
  *
- *  @returns GTLRIamQuery_RolesList
+ *  @return GTLRIamQuery_RolesList
  *
  *  @note Automatic pagination will be done when @c shouldFetchNextPages is
  *        enabled. See @c shouldFetchNextPages on @c GTLRService for more
@@ -1362,7 +1391,7 @@ GTLR_EXTERN NSString * const kGTLRIamViewFull;
  *  @param object The @c GTLRIam_QueryGrantableRolesRequest to include in the
  *    query.
  *
- *  @returns GTLRIamQuery_RolesQueryGrantableRoles
+ *  @return GTLRIamQuery_RolesQueryGrantableRoles
  */
 + (instancetype)queryWithObject:(GTLRIam_QueryGrantableRolesRequest *)object;
 

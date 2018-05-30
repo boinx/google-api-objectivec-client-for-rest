@@ -390,10 +390,10 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Transfe
  */
 @property(nonatomic, strong, nullable) NSNumber *manualRunsDisabled;
 
-/** The minimum interval between two consecutive scheduled runs. */
+/** The minimum interval for scheduler to schedule runs. */
 @property(nonatomic, strong, nullable) GTLRDuration *minimumScheduleInterval;
 
-/** Data source resource name. */
+/** Output only. Data source resource name. */
 @property(nonatomic, copy, nullable) NSString *name;
 
 /** Data source parameters. */
@@ -417,17 +417,14 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Transfe
 @property(nonatomic, strong, nullable) NSNumber *supportsCustomSchedule;
 
 /**
- *  Indicates whether the data source supports multiple transfers
- *  to different BigQuery targets.
+ *  Deprecated. This field has no effect.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *supportsMultipleTransfers;
 
 /**
- *  Transfer type. Currently supports only batch transfers,
- *  which are transfers that use the BigQuery batch APIs (load or
- *  query) to ingest the data.
+ *  Deprecated. This field has no effect.
  *
  *  Likely values:
  *    @arg @c kGTLRBigQueryDataTransfer_DataSource_TransferType_Batch Batch data
@@ -718,6 +715,12 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Transfe
  *  A resource that represents Google Cloud Platform location.
  */
 @interface GTLRBigQueryDataTransfer_Location : GTLRObject
+
+/**
+ *  The friendly name for this location, typically a nearby city name.
+ *  For example, "Tokyo".
+ */
+@property(nonatomic, copy, nullable) NSString *displayName;
 
 /**
  *  Cross-service attributes for the location. For example
@@ -1038,14 +1041,13 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Transfe
 
 /**
  *  Represents a data transfer run.
- *  Next id: 24
  */
 @interface GTLRBigQueryDataTransfer_TransferRun : GTLRObject
 
 /** Output only. Data source id. */
 @property(nonatomic, copy, nullable) NSString *dataSourceId;
 
-/** The BigQuery target dataset id. */
+/** Output only. The BigQuery target dataset id. */
 @property(nonatomic, copy, nullable) NSString *destinationDatasetId;
 
 /**
@@ -1065,7 +1067,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Transfe
  */
 @property(nonatomic, copy, nullable) NSString *name;
 
-/** Data transfer specific parameters. */
+/** Output only. Data transfer specific parameters. */
 @property(nonatomic, strong, nullable) GTLRBigQueryDataTransfer_TransferRun_Params *params;
 
 /**
@@ -1130,7 +1132,7 @@ GTLR_EXTERN NSString * const kGTLRBigQueryDataTransfer_TransferRun_State_Transfe
 
 
 /**
- *  Data transfer specific parameters.
+ *  Output only. Data transfer specific parameters.
  *
  *  @note This class is documented as having more properties of any valid JSON
  *        type. Use @c -additionalJSONKeys and @c -additionalPropertyForName: to

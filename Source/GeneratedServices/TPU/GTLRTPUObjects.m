@@ -13,6 +13,12 @@
 // ----------------------------------------------------------------------------
 // Constants
 
+// GTLRTPU_Node.health
+NSString * const kGTLRTPU_Node_Health_HealthUnspecified = @"HEALTH_UNSPECIFIED";
+NSString * const kGTLRTPU_Node_Health_Healthy           = @"HEALTHY";
+NSString * const kGTLRTPU_Node_Health_Timeout           = @"TIMEOUT";
+NSString * const kGTLRTPU_Node_Health_Unhealthy         = @"UNHEALTHY";
+
 // GTLRTPU_Node.state
 NSString * const kGTLRTPU_Node_State_Creating         = @"CREATING";
 NSString * const kGTLRTPU_Node_State_Deleting         = @"DELETING";
@@ -20,7 +26,20 @@ NSString * const kGTLRTPU_Node_State_Ready            = @"READY";
 NSString * const kGTLRTPU_Node_State_Reimaging        = @"REIMAGING";
 NSString * const kGTLRTPU_Node_State_Repairing        = @"REPAIRING";
 NSString * const kGTLRTPU_Node_State_Restarting       = @"RESTARTING";
+NSString * const kGTLRTPU_Node_State_Starting         = @"STARTING";
 NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
+NSString * const kGTLRTPU_Node_State_Stopped          = @"STOPPED";
+NSString * const kGTLRTPU_Node_State_Stopping         = @"STOPPING";
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRTPU_AcceleratorType
+//
+
+@implementation GTLRTPU_AcceleratorType
+@dynamic name, type;
+@end
+
 
 // ----------------------------------------------------------------------------
 //
@@ -28,6 +47,28 @@ NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
 //
 
 @implementation GTLRTPU_Empty
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRTPU_ListAcceleratorTypesResponse
+//
+
+@implementation GTLRTPU_ListAcceleratorTypesResponse
+@dynamic acceleratorTypes, nextPageToken;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"acceleratorTypes" : [GTLRTPU_AcceleratorType class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"acceleratorTypes";
+}
+
 @end
 
 
@@ -99,11 +140,33 @@ NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRTPU_ListTensorFlowVersionsResponse
+//
+
+@implementation GTLRTPU_ListTensorFlowVersionsResponse
+@dynamic nextPageToken, tensorflowVersions;
+
++ (NSDictionary<NSString *, Class> *)arrayPropertyToClassMap {
+  NSDictionary<NSString *, Class> *map = @{
+    @"tensorflowVersions" : [GTLRTPU_TensorFlowVersion class]
+  };
+  return map;
+}
+
++ (NSString *)collectionItemsKey {
+  return @"tensorflowVersions";
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRTPU_Location
 //
 
 @implementation GTLRTPU_Location
-@dynamic labels, locationId, metadata, name;
+@dynamic displayName, labels, locationId, metadata, name;
 @end
 
 
@@ -151,9 +214,9 @@ NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
 //
 
 @implementation GTLRTPU_Node
-@dynamic acceleratorType, cidrBlock, createTime, descriptionProperty,
-         healthDescription, ipAddress, name, network, networkEndpoints, port,
-         serviceAccount, state, tensorflowVersion;
+@dynamic acceleratorType, cidrBlock, createTime, descriptionProperty, health,
+         healthDescription, ipAddress, labels, name, network, networkEndpoints,
+         port, serviceAccount, state, tensorflowVersion;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   return @{ @"descriptionProperty" : @"description" };
@@ -164,6 +227,20 @@ NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
     @"networkEndpoints" : [GTLRTPU_NetworkEndpoint class]
   };
   return map;
+}
+
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRTPU_Node_Labels
+//
+
+@implementation GTLRTPU_Node_Labels
+
++ (Class)classForAdditionalProperties {
+  return [NSString class];
 }
 
 @end
@@ -239,6 +316,15 @@ NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
 
 // ----------------------------------------------------------------------------
 //
+//   GTLRTPU_StartNodeRequest
+//
+
+@implementation GTLRTPU_StartNodeRequest
+@end
+
+
+// ----------------------------------------------------------------------------
+//
 //   GTLRTPU_Status
 //
 
@@ -266,4 +352,23 @@ NSString * const kGTLRTPU_Node_State_StateUnspecified = @"STATE_UNSPECIFIED";
   return [NSObject class];
 }
 
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRTPU_StopNodeRequest
+//
+
+@implementation GTLRTPU_StopNodeRequest
+@end
+
+
+// ----------------------------------------------------------------------------
+//
+//   GTLRTPU_TensorFlowVersion
+//
+
+@implementation GTLRTPU_TensorFlowVersion
+@dynamic name, version;
 @end

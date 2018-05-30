@@ -2,7 +2,7 @@
 
 // ----------------------------------------------------------------------------
 // API:
-//   Google Cloud Pub/Sub API (pubsub/v1)
+//   Cloud Pub/Sub API (pubsub/v1)
 // Description:
 //   Provides reliable, many-to-many, asynchronous messaging between
 //   applications.
@@ -58,6 +58,25 @@
   query.snapshot = snapshot;
   query.expectedObjectClass = [GTLRPubsub_Empty class];
   query.loggingName = @"pubsub.projects.snapshots.delete";
+  return query;
+}
+
+@end
+
+@implementation GTLRPubsubQuery_ProjectsSnapshotsGet
+
+@dynamic snapshot;
+
++ (instancetype)queryWithSnapshot:(NSString *)snapshot {
+  NSArray *pathParams = @[ @"snapshot" ];
+  NSString *pathURITemplate = @"v1/{+snapshot}";
+  GTLRPubsubQuery_ProjectsSnapshotsGet *query =
+    [[self alloc] initWithPathURITemplate:pathURITemplate
+                               HTTPMethod:nil
+                       pathParameterNames:pathParams];
+  query.snapshot = snapshot;
+  query.expectedObjectClass = [GTLRPubsub_Snapshot class];
+  query.loggingName = @"pubsub.projects.snapshots.get";
   return query;
 }
 
