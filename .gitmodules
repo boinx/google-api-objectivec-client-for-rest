@@ -2,3 +2,9 @@
 	path = Deps/gtm-session-fetcher
 	url = https://github.com/boinx/gtm-session-fetcher.git
 	branch = master
+[submodule "Deps/GTMAppAuth"]
+	path = Deps/GTMAppAuth
+	url = https://stephangsch@github.com/boinx/GTMAppAuth
+[submodule "Deps/AppAuth-iOS"]
+	path = Deps/AppAuth-iOS
+	url = https://stephangsch@github.com/boinx/AppAuth-iOS.git
